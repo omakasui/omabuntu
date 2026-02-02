@@ -8,6 +8,7 @@ run_logged $OMAKUB_INSTALL/config/mise-work.sh
 run_logged $OMAKUB_INSTALL/config/mimetypes.sh
 run_logged $OMAKUB_INSTALL/config/terminal.sh
 run_logged $OMAKUB_INSTALL/config/localdb.sh
+run_logged $OMAKUB_INSTALL/config/omakub-ai-skill.sh
 run_logged $OMAKUB_INSTALL/config/hardware/fix-fkeys.sh
 run_logged $OMAKUB_INSTALL/config/hardware/fix-framework-text-scaling.sh
 run_logged $OMAKUB_INSTALL/config/gnome/app-grid.sh
