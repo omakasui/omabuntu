@@ -386,14 +386,23 @@ show_remove_development_menu() {
 show_update_menu() {
   local brand_name=$(omakub-brand)
 
-  case $(menu "Update" "󰟢  $brand_name\n  Config\n󰸌  Themes\n󰇅  Hardware\n  Firmware\n  Password" "--width 250 --height 280") in
+  case $(menu "Update" "󰟢  $brand_name\n󰔫  Channel\n  Config\n󰸌  Themes\n󰇅  Hardware\n  Firmware\n  Password" "--width 250 --height 320") in
   *$brand_name*) present_terminal omakub-update ;;
+  *Channel*) show_update_channel_menu ;;
   *Config*) show_update_config_menu ;;
   *Themes*) present_terminal omakub-theme-update ;;
   *Hardware*) show_update_hardware_menu ;;
   *Firmware*) present_terminal omakub-update-firmware ;;
   *Password*) show_update_password_menu ;;
   *) show_main_menu ;;
+  esac
+}
+
+show_update_channel_menu() {
+  case $(menu "Update channel" "🟢 Stable\n🔴 Dev" "--width 250 --height 130") in
+  *Stable*) present_terminal "omakub-channel-set stable" ;;
+  *Dev*) present_terminal "omakub-channel-set dev" ;;
+  *) show_update_menu ;;
   esac
 }
 
