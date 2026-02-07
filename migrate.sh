@@ -25,8 +25,8 @@ if [[ ! -d "$OMAKUB_PATH" ]]; then
 fi
 
 # Upgrade your system
-sudo apt update >/dev/null
-sudo apt upgrade -y >/dev/null
+sudo apt-get update >/dev/null
+sudo apt-get upgrade -y >/dev/null
 
 # Check for gum
 if ! command -v gum &>/dev/null; then
