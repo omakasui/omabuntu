@@ -1,26 +1,26 @@
 #!/bin/bash
-# Migrate from Omakub
+# Migrate from Omabuntu
 
 # Exit immediately if a command exits with a non-zero status
 set -eEo pipefail
 
 # Define migration variables
-export OMAKUB_REPO="${OMAKUB_REPO:-Kasui92/omakube}"
+export OMAKUB_REPO="${OMAKUB_REPO:-omakasui/omabuntu}"
 export OMAKUB_REF="${OMAKUB_REF:-main}"
-export OMAKUB_BRAND="${OMAKUB_BRAND:-Omakube}"
+export OMAKUB_BRAND="${OMAKUB_BRAND:-Omabuntu}"
 
 # Define backup location
 export BACKUP_DIR="$HOME/.local/share/omakub-backup-$(date +%Y%m%d_%H%M%S)"
 
-# Define Omakub locations
+# Define Omabuntu locations
 export OMAKUB_PATH="$HOME/.local/share/omakub"
 export OMAKUB_INSTALL="$OMAKUB_PATH/install"
 export OMAKUB_INSTALL_LOG_FILE="/var/log/omakub-install.log"
 export PATH="$OMAKUB_PATH/bin:$PATH"
 
-# Check Omakub installation
+# Check Omabuntu installation
 if [[ ! -d "$OMAKUB_PATH" ]]; then
-    echo "Error: Omakub not found in $OMAKUB_PATH"
+    echo "Error: Omabuntu not found in $OMAKUB_PATH"
     exit 1
 fi
 
@@ -38,7 +38,7 @@ if ! command -v gum &>/dev/null; then
 fi
 
 gum style --border normal --border-foreground 6 --padding "1 2" \
-  "Ready to migrate to Omakube?" \
+  "Ready to migrate to Omabuntu?" \
   "" \
   "• This migration cannot be stopped once started!" \
   "• Make sure you're connected to power or have a full battery" \
@@ -67,7 +67,7 @@ gum spin --spinner dot --title "Backing up bash configuration..." -- \
 }
 
 # Clone
-gum spin --spinner dot --title "Downloading Omakube..." -- \
+gum spin --spinner dot --title "Downloading Omabuntu..." -- \
     sh -c "rm -rf '$OMAKUB_PATH' && git clone -q https://github.com/$OMAKUB_REPO.git '$OMAKUB_PATH'" || {
     echo "Clone failed, restoring backup..."
     cp -r "$BACKUP_DIR/omakub" "$OMAKUB_PATH"
@@ -88,7 +88,7 @@ rm -rf ~/.local/share/applications/Basecamp.desktop
 rm -rf ~/.local/share/applications/Docker.desktop
 rm -rf ~/.local/share/applications/HEY.desktop
 rm -rf ~/.local/share/applications/Neovim.desktop
-rm -rf ~/.local/share/applications/Omakub.desktop
+rm -rf ~/.local/share/applications/Omabuntu.desktop
 rm -rf ~/.local/share/applications/WhatsApp.desktop
 rm -rf ~/.local/share/applications/icons
 
