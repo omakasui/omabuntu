@@ -3,7 +3,7 @@
 echo "Migrate from Omabuntu Menu Topbar Extension to Icon Launcher Extension"
 
 # Update branding
-cp ~/.local/share/omakub/logo.png ~/.config/omakub/branding/icon-launcher.png
+cp ~/.local/share/omakub/icon.png ~/.config/omakub/branding/icon-launcher.png
 
 # Install Icon Launcher extension
 gext install icon-launcher@omakasui.org

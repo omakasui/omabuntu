@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1066.86669921875" height="160" xmlns="http://www.w3.org/2000/svg">
+  <text x="20" y="20" font-family="monospace" font-size="24px" fill="#000000" xml:space="preserve">
+    <tspan x="20" dy="24"> ██████  ███    ███  █████  ██████  ██    ██ ███    ██ ████████ ██    ██ </tspan>
+    <tspan x="20" dy="24">██    ██ ████  ████ ██   ██ ██   ██ ██    ██ ████   ██    ██    ██    ██ </tspan>
+    <tspan x="20" dy="24">██    ██ ██ ████ ██ ███████ ██████  ██    ██ ██ ██  ██    ██    ██    ██ </tspan>
+    <tspan x="20" dy="24">██    ██ ██  ██  ██ ██   ██ ██   ██ ██    ██ ██  ██ ██    ██    ██    ██ </tspan>
+    <tspan x="20" dy="24"> ██████  ██      ██ ██   ██ ██████   ██████  ██   ████    ██     ██████ </tspan>
+  </text>
+</svg>
