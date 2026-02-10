@@ -68,13 +68,13 @@ omakub-keybinding-add 'Omabuntu Background Next' 'omakub-theme-bg-next' '<Super>
 omakub-keybinding-add 'Flameshot' 'sh -c -- "flameshot gui"' '<Control>Print'
 
 # Turn brightness down on Apple monitor (requires ASDControl installed)
-omakub-keybinding-add 'Apple Brightness Down (ASDControl)' "omakub-cmd-apple-display-brightness -5000" '<Control>F1'
+omakub-keybinding-add 'Apple Brightness Down (ASDControl)' "omakub-brightness-apple-display -5000" '<Control>F1'
 
 # Turn brightness up on Apple monitor (requires ASDControl installed)
-omakub-keybinding-add 'Apple Brightness Up (ASDControl)' "omakub-cmd-apple-display-brightness +5000" '<Control>F2'
+omakub-keybinding-add 'Apple Brightness Up (ASDControl)' "omakub-brightness-apple-display +5000" '<Control>F2'
 
 # Turn brightness up to max on Apple monitor (requires ASDControl installed)
-omakub-keybinding-add 'Apple Brightness Max (ASDControl)' "omakub-cmd-apple-display-brightness +60000" '<Control><Shift>F2'
+omakub-keybinding-add 'Apple Brightness Max (ASDControl)' "omakub-brightness-apple-display +60000" '<Control><Shift>F2'
 
 # Set night light toggle to Super+Control+N
 omakub-keybinding-add 'Night Light Toggle' 'omakub-toggle-nightlight' '<Super><Control>n'
