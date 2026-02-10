@@ -10,17 +10,10 @@ if ! command -v gum &> /dev/null; then
   cd -
 fi
 
-
 export LOGO_PATH="$OMAKUB_PATH/logo.txt"
 
-# Tell gum/lipgloss/termenv the terminal has a dark background (fg=15, bg=0).
-# Without this, gum sends OSC 11 queries (\033]11;?\007) to detect the
-# background color. Terminal responses leak into the input buffer and corrupt
-# subsequent gum input prompts on retry (the ^[]11;rgb:... garbage).
-export COLORFGBG="15;0"
-
 # Minimal padding for desktop terminal
-export PADDING_LEFT=2
+export PADDING_LEFT=4
 export PADDING_LEFT_SPACES=$(printf "%*s" $PADDING_LEFT "")
 
 # Tokyo Night theme for gum confirm
