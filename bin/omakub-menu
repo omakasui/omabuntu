@@ -69,8 +69,8 @@ remove() {
 
 show_learn_menu() {
   case $(menu "Learn" "  Keybindings\n  Omabuntu\n  Ubuntu\n  Neovim\n  Zellij\n󱆃  Bash" "--width 250 --height 280") in
-  *Keybindings*) omakub-launch-webapp "https://learn.omacom.io/1/read/29/hotkeys" "Omabuntu Keybindings" ;;
-  *Omabuntu*) omakub-launch-webapp "https://learn.omacom.io/1/read#leaf_40" "Omabuntu" ;;
+  *Keybindings*) omakub-launch-webapp "https://omabuntu.omakasui.org/manual/essentials/hotkeys" "Omabuntu Keybindings" ;;
+  *Omabuntu*) omakub-launch-webapp "https://omabuntu.omakasui.org/manual" "Omabuntu" ;;
   *Ubuntu*) omakub-launch-webapp "https://help.ubuntu.com/" "Ubuntu" ;;
   *Bash*) omakub-launch-webapp "https://devhints.io/bash" "Bash" ;;
   *Neovim*) omakub-launch-webapp "https://www.lazyvim.org/keymaps" "Neovim" ;;
