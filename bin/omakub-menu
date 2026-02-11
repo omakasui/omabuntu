@@ -184,7 +184,8 @@ show_setup_keybindings_menu() {
 }
 
 show_install_menu() {
-  case $(menu "Install" "  Web App\n  TUI\n  Service\n  Browser\n  Utility\n  Style\n󰵮  Development\n  Editor\n  Terminal\n󱚤  AI\n  Gaming" "--width 250 --height 470") in
+  case $(menu "Install" "  Package\n  Web App\n  TUI\n  Service\n  Browser\n  Utility\n  Style\n󰵮  Development\n  Editor\n  Terminal\n󱚤  AI\n  Gaming" "--width 250 --height 510") in
+  *Package*) present_terminal omakub-pkg-install ;;
   *Web*) present_terminal omakub-webapp-install ;;
   *TUI*) present_terminal omakub-tui-install ;;
   *Service*) show_install_service_menu ;;
@@ -355,7 +356,8 @@ show_install_gaming_menu() {
 }
 
 show_remove_menu() {
-  case $(menu "Remove" "  Web App\n  TUI\n󰀻  App\n󰸌  Theme\n󰵮  Development\n󰏓  Preinstalls" "--width 250 --height 280") in
+  case $(menu "Remove" "  Package\n  Web App\n  TUI\n󰀻  App\n󰸌  Theme\n󰵮  Development\n󰏓  Preinstalls" "--width 250 --height 320") in
+  *Package*) present_terminal omakub-pkg-remove ;;
   *Web*) present_terminal omakub-webapp-remove ;;
   *TUI*) present_terminal omakub-tui-remove ;;
   *App*) present_terminal omakub-app-remove ;;
