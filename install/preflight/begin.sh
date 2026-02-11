@@ -1,5 +1,4 @@
-clear_logo
-gum style --foreground 3 --padding "1 0 0 $PADDING_LEFT" "Installing $OMAKUB_BRAND..."
-gum style --foreground 4 "Logging to: /var/log/omakub-install.log"
-echo
+#!/bin/bash
+
+headline "Installing $OMAKUB_BRAND..."
 start_install_log

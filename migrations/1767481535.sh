@@ -1,9 +1,8 @@
-#!/bin/bash
 
-echo "Migrate from Omakub Menu Topbar Extension to Icon Launcher Extension"
+echo "Migrate from Omabuntu Menu Topbar Extension to Icon Launcher Extension"
 
 # Update branding
-cp ~/.local/share/omakub/logo.png ~/.config/omakub/branding/icon-launcher.png
+cp ~/.local/share/omakub/icon.png ~/.config/omakub/branding/icon-launcher.png
 
 # Install Icon Launcher extension
 gext install icon-launcher@omakasui.org
@@ -17,5 +16,5 @@ ICON_PATH="$HOME/.config/omakub/branding/icon-launcher.png"
 gsettings set org.gnome.shell.extensions.icon-launcher custom-icon-path "$ICON_PATH"
 gsettings set org.gnome.shell.extensions.icon-launcher custom-command 'omakub-menu'
 
-# Remove Omakub Menu Topbar extension
+# Remove Omabuntu Menu Topbar extension
 gext uninstall omakub-menu-topbar@omakasui.org

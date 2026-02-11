@@ -1,4 +1,3 @@
-#!/bin/bash
 
 echo "Copy configs for kitty so they're available as alternative terminal options"
 
@@ -10,7 +9,7 @@ fi
 echo "Fix opening in nvim from files manager"
 cp -f $OMAKUB_PATH/applications/nvim.desktop ~/.local/share/applications/nvim.desktop
 
-echo "Install Omakub theme on Obsidian vaults"
+echo "Install Omabuntu theme on Obsidian vaults"
 omakub-theme-set-obsidian
 
 echo "Copy over updated application icons"

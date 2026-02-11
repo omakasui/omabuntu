@@ -56,36 +56,37 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[
 omakub-keybinding-add 'Apps Launcher' 'omakub-apps' '<Super>space'
 
 # Set omakub menu to Alt+Super+Space
-omakub-keybinding-add 'Omakub Menu' 'omakub-menu' '<Alt><Super>space'
+omakub-keybinding-add 'Omabuntu Menu' 'omakub-menu' '<Alt><Super>space'
 
 # Set omakub theme switcher to Super+Shift+Control+Space
-omakub-keybinding-add 'Omakub Themes' 'omakub-menu theme' '<Super><Shift><Control>space'
+omakub-keybinding-add 'Omabuntu Themes' 'omakub-menu theme' '<Super><Shift><Control>space'
 
 # Set omakub next background to Super+Shift+Control
-omakub-keybinding-add 'Omakub Background Next' 'omakub-theme-bg-next' '<Super><Control>space'
+omakub-keybinding-add 'Omabuntu Background Next' 'omakub-theme-bg-next' '<Super><Control>space'
 
 # Set flameshot (with the sh fix for starting under Wayland) on alternate print screen key
 omakub-keybinding-add 'Flameshot' 'sh -c -- "flameshot gui"' '<Control>Print'
 
 # Turn brightness down on Apple monitor (requires ASDControl installed)
-omakub-keybinding-add 'Apple Brightness Down (ASDControl)' "omakub-cmd-apple-display-brightness -5000" '<Control>F1'
+omakub-keybinding-add 'Apple Brightness Down (ASDControl)' "omakub-brightness-apple-display -5000" '<Control>F1'
 
 # Turn brightness up on Apple monitor (requires ASDControl installed)
-omakub-keybinding-add 'Apple Brightness Up (ASDControl)' "omakub-cmd-apple-display-brightness +5000" '<Control>F2'
+omakub-keybinding-add 'Apple Brightness Up (ASDControl)' "omakub-brightness-apple-display +5000" '<Control>F2'
 
 # Turn brightness up to max on Apple monitor (requires ASDControl installed)
-omakub-keybinding-add 'Apple Brightness Max (ASDControl)' "omakub-cmd-apple-display-brightness +60000" '<Control><Shift>F2'
+omakub-keybinding-add 'Apple Brightness Max (ASDControl)' "omakub-brightness-apple-display +60000" '<Control><Shift>F2'
 
 # Set night light toggle to Super+Control+N
 omakub-keybinding-add 'Night Light Toggle' 'omakub-toggle-nightlight' '<Super><Control>n'
 
 # Set screen lock to Super+L
-omakub-keybinding-add 'Omakub System' 'omakub-menu system' '<Super>Escape'
+omakub-keybinding-add 'Omabuntu System' 'omakub-menu system' '<Super>Escape'
 
 # Set applications hotkeys
 omakub-keybinding-add 'Terminal' 'xdg-terminal-exec' '<Super>Return'
 omakub-keybinding-add 'Default Terminal' 'x-terminal-emulator' '<Control><Alt>t'
 omakub-keybinding-add 'Browser' 'omakub-launch-browser --new-window' '<Shift><Super>b'
+omakub-keybinding-add 'Browser (Alt)' 'omakub-launch-browser --new-window' '<Shift><Super>Return'
 omakub-keybinding-add 'Incognito Browser' 'omakub-launch-browser --private' '<Shift><Alt><Super>b'
 omakub-keybinding-add 'File Manager' 'nautilus --new-window' '<Shift><Super>f'
 omakub-keybinding-add 'Activity' 'omakub-launch-tui btop' '<Super><Shift>t'

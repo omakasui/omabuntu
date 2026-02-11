@@ -10,11 +10,10 @@ if ! command -v gum &> /dev/null; then
   cd -
 fi
 
-
 export LOGO_PATH="$OMAKUB_PATH/logo.txt"
 
 # Minimal padding for desktop terminal
-export PADDING_LEFT=2
+export PADDING_LEFT=4
 export PADDING_LEFT_SPACES=$(printf "%*s" $PADDING_LEFT "")
 
 # Tokyo Night theme for gum confirm
@@ -34,4 +33,13 @@ export GUM_CONFIRM_PADDING="$PADDING"
 clear_logo() {
   printf "\033[H\033[2J"
   gum style --foreground 2 --padding "1 0 0 $PADDING_LEFT" "$(<"$LOGO_PATH")"
+}
+
+headline() {
+  local title="$1"
+
+  clear_logo
+  gum style --foreground 3 --padding "1 0 0 $PADDING_LEFT" "$title"
+  gum style --foreground 4 "Logging to: $OMAKUB_INSTALL_LOG_FILE"
+  echo
 }
