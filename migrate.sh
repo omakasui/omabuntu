@@ -1,26 +1,33 @@
 #!/bin/bash
-# Migrate from Omabuntu
 
-# Exit immediately if a command exits with a non-zero status
-set -eEo pipefail
+set -o pipefail
+
+ascii_art='
+ ██████  ███    ███  █████  ██████  ██    ██ ███    ██ ████████ ██    ██
+██    ██ ████  ████ ██   ██ ██   ██ ██    ██ ████   ██    ██    ██    ██
+██    ██ ██ ████ ██ ███████ ██████  ██    ██ ██ ██  ██    ██    ██    ██
+██    ██ ██  ██  ██ ██   ██ ██   ██ ██    ██ ██  ██ ██    ██    ██    ██
+ ██████  ██      ██ ██   ██ ██████   ██████  ██   ████    ██     ██████
+'
+clear
+echo -e "\n$ascii_art\n"
+
+sudo apt-get update >/dev/null
+sudo apt-get install -y git >/dev/null
+
 
 # Define migration variables
 export OMAKUB_REPO="${OMAKUB_REPO:-omakasui/omabuntu}"
 export OMAKUB_REF="${OMAKUB_REF:-main}"
 export OMAKUB_BRAND="${OMAKUB_BRAND:-Omabuntu}"
+export OMAKUB_MIGRATE="$HOME/.local/share/omakub/install/migrate"
 
 # Define backup location
 export BACKUP_DIR="$HOME/.local/share/omakub-backup-$(date +%Y%m%d_%H%M%S)"
 
-# Define Omabuntu locations
-export OMAKUB_PATH="$HOME/.local/share/omakub"
-export OMAKUB_INSTALL="$OMAKUB_PATH/install"
-export OMAKUB_INSTALL_LOG_FILE="/var/log/omakub-install.log"
-export PATH="$OMAKUB_PATH/bin:$PATH"
-
 # Check Omakub installation
-if [[ ! -d "$OMAKUB_PATH" ]]; then
-    echo "Error: Omakub not found in $OMAKUB_PATH"
+if [[ ! -d "$HOME/.local/share/omakub" ]]; then
+    echo "Error: Omakub not found. Please run the installer instead."
     exit 1
 fi
 
@@ -53,53 +60,27 @@ if ! gum confirm "Continue with migration?"; then
 fi
 
 # Backup
-gum spin --spinner dot --title "Creating backup..." -- \
-    sh -c "mkdir -p '$BACKUP_DIR' && cp -r '$OMAKUB_PATH' '$BACKUP_DIR/omakub'" || {
-    echo "Backup failed"
-    exit 1
-}
-
-# Backup bashrc
-gum spin --spinner dot --title "Backing up bash configuration..." -- \
-    sh -c "cp -f ~/.bashrc '$BACKUP_DIR/bashrc.bak' 2>/dev/null || true" || {
-    echo "Bash configuration backup failed"
-    exit 1
-}
+mkdir -p "$BACKUP_DIR"
+cp -r ~/.local/share/omakub "$BACKUP_DIR/omakub" 2>/dev/null || true
+cp -f ~/.bashrc "$BACKUP_DIR/bashrc.bak" 2>/dev/null || true
 
 # Clone
-gum spin --spinner dot --title "Downloading Omabuntu..." -- \
-    sh -c "rm -rf '$OMAKUB_PATH' && git clone -q https://github.com/$OMAKUB_REPO.git '$OMAKUB_PATH'" || {
-    echo "Clone failed, restoring backup..."
-    cp -r "$BACKUP_DIR/omakub" "$OMAKUB_PATH"
-    exit 1
+echo -e "\nCloning $OMAKUB_BRAND from: https://github.com/${OMAKUB_REPO}.git"
+rm -rf ~/.local/share/omakub
+git clone https://github.com/$OMAKUB_REPO.git ~/.local/share/omakub >/dev/null 2>/dev/null || {
+     echo "Clone failed, restoring backup..."
+     rm -rf ~/.local/share/omakub
+     cp -r "$BACKUP_DIR/omakub" ~/.local/share/omakub
+     exit 1
 }
 
-# Checkout branch
-if [[ -n "$OMAKUB_REF" ]]; then
-    cd "$OMAKUB_PATH"
-    git fetch -q origin "$OMAKUB_REF" && git checkout -q "$OMAKUB_REF" 2>/dev/null || true
-    cd - >/dev/null
-fi
+# Use custom branch if instructed, otherwise default to main
+echo -e "\e[32mUsing branch: $OMAKUB_REF\e[0m"
+cd ~/.local/share/omakub
+git fetch origin "${OMAKUB_REF}" && git checkout "${OMAKUB_REF}"
+cd -
 
-# Remove old desktop entries and icons
-rm -rf ~/.local/share/applications/About.desktop
-rm -rf ~/.local/share/applications/Activity.desktop
-rm -rf ~/.local/share/applications/Basecamp.desktop
-rm -rf ~/.local/share/applications/Docker.desktop
-rm -rf ~/.local/share/applications/HEY.desktop
-rm -rf ~/.local/share/applications/Neovim.desktop
-rm -rf ~/.local/share/applications/Omabuntu.desktop
-rm -rf ~/.local/share/applications/WhatsApp.desktop
-rm -rf ~/.local/share/applications/icons
-
-# Remove inputrc
-rm -rf ~/.inputrc
-
-# Install
-source "$OMAKUB_INSTALL/helpers/all.sh"
-source "$OMAKUB_INSTALL/preflight/all.sh"
-source "$OMAKUB_INSTALL/packaging/all.sh"
-source "$OMAKUB_INSTALL/config/all.sh"
-source "$OMAKUB_INSTALL/login/all.sh"
-source "$OMAKUB_INSTALL/post-install/all.sh"
+# Migrate
+source "$OMAKUB_MIGRATE/all.sh"
+source ~/.local/share/omakub/install.sh
 
