@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Pause to assure user is ready to accept confirmations
-gum confirm "To install Gnome extensions, you need to accept some confirmations. Ready?"
-
 # Turn off default Ubuntu extensions
 gnome-extensions disable tiling-assistant@ubuntu.com
 gnome-extensions disable ubuntu-appindicators@ubuntu.com
