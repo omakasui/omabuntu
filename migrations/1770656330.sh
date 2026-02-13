@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Update Spotify GPG key if the repository is present
+if [ -f /etc/apt/sources.list.d/spotify.list ]; then
+  echo "Updating Spotify GPG key..."
+  curl -sS https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+  echo "deb [signed-by=/etc/apt/trusted.gpg.d/spotify.gpg] https://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+fi
