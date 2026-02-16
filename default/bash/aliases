@@ -8,6 +8,7 @@ fi
 
 alias fd='fdfind'
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+alias eff='$EDITOR $(ff)'
 
 if command -v zoxide &> /dev/null; then
   alias cd="zd"
