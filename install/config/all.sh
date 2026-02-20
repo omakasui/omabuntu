@@ -3,6 +3,7 @@
 run_logged $OMAKUB_INSTALL/config/config.sh
 run_logged $OMAKUB_INSTALL/config/git.sh
 run_logged $OMAKUB_INSTALL/config/branding.sh
+run_logged $OMAKUB_INSTALL/config/ssh-flakiness.sh
 run_logged $OMAKUB_INSTALL/config/increase-file-watchers.sh
 run_logged $OMAKUB_INSTALL/config/xcompose.sh
 run_logged $OMAKUB_INSTALL/config/mise-work.sh
