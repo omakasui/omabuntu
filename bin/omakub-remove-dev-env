@@ -4,7 +4,7 @@
 # Usage: omakub-remove-dev-env <ruby|node|bun|deno|go|php|laravel|symfony|python|elixir|phoenix|zig|rust|java|dotnet|ocaml|clojure>
 
 if [[ -z "$1" ]]; then
-  echo "Usage: omakub-remove-dev-env <ruby|node|bun|go|php|python|elixir|phoenix|rust|java|ocaml|dotnet>" >&2
+  echo "Usage: omakub-remove-dev-env <ruby|node|bun|deno|go|php|python|elixir|phoenix|zig|rust|java|ocaml|dotnet|clojure>" >&2
   exit 1
 fi
 
@@ -91,7 +91,7 @@ clojure)
   mise uninstall -g clojure@latest
   ;;
 *)
-  echo "Usage: omakub-remove-dev-env <ruby|node|bun|go|php|python|elixir|phoenix|rust|java|ocaml|dotnet>" >&2
+  echo "Usage: omakub-remove-dev-env <ruby|node|bun|deno|go|php|python|elixir|phoenix|zig|rust|java|ocaml|dotnet|clojure>" >&2
   exit 1
   ;;
 esac

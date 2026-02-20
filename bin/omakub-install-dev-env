@@ -3,7 +3,7 @@
 # Install one of the supported development environments. Usually called via Install > Development > * in the Omabuntu Menu.
 
 if [[ -z "$1" ]]; then
-  echo "Usage: omakub-install-dev-env <ruby|node|bun|go|php|python|elixir|phoenix|rust|java|ocaml|dotnet>" >&2
+  echo "Usage: omakub-install-dev-env <ruby|node|bun|deno|go|php|python|elixir|phoenix|rust|java|zig|ocaml|dotnet|clojure>" >&2
   exit 1
 fi
 
@@ -100,7 +100,7 @@ clojure)
   mise use --global clojure@latest
   ;;
 *)
-  echo "Usage: omakub-install-dev-env <ruby|node|bun|go|php|python|elixir|phoenix|rust|java|ocaml|dotnet>" >&2
+  echo "Usage: omakub-install-dev-env <ruby|node|bun|deno|go|php|python|elixir|phoenix|rust|java|zig|ocaml|dotnet|clojure>" >&2
   exit 1
   ;;
 esac
