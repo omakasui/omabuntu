@@ -1,7 +1,7 @@
 # Style
 
 - Two spaces for indentation, no tabs
-- Use Bash syntax for conditionals: `[[ -f $file ]]`, not `[ -f "$file" ]`
+- Use bash 5 syntax: `[[ ]]` for conditionals, not `[ ]`. Don't quote variables inside `[[ ]]` (e.g., `[[ -n $var ]]` not `[[ -n "$var" ]]`)
 
 # Command Naming
 
@@ -53,3 +53,4 @@ Migration format:
 
 - First is shebang line
 - Start with an `echo` describing what the migration does
+- Use `$OKUB_PATH` to reference the omakub directory
