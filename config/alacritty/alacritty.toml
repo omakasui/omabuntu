@@ -6,6 +6,9 @@ program = "zellij"
 [env]
 TERM = "xterm-256color"
 
+[terminal]
+osc52 = "CopyPaste"
+
 [font]
 normal = { family = "CaskaydiaMono Nerd Font", style = "Regular" }
 bold = { family = "CaskaydiaMono Nerd Font", style = "Bold" }
