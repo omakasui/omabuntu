@@ -6,6 +6,7 @@ if [ -f ~/.XCompose ]; then
 fi
 
 tee ~/.XCompose >/dev/null <<EOF
+# Run omakub-restart-xcompose to apply changes
 include "%H/.local/share/omakub/default/xcompose"
 
 # Identification
