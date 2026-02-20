@@ -17,8 +17,6 @@ apply_plymouth() {
   # Check if plymouth is already in initramfs modules
   if ! grep -q "plymouth" /etc/initramfs-tools/modules 2>/dev/null; then
     echo "plymouth" | sudo tee -a /etc/initramfs-tools/modules
-    # Update initramfs
-    sudo update-initramfs -u
   fi
 
   # Install and configure Omabuntu Plymouth theme
