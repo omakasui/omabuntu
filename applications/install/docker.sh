@@ -30,7 +30,7 @@ sudo mkdir -p /etc/systemd/resolved.conf.d
 echo -e '[Resolve]\nDNSStubListenerExtra=172.17.0.1' | sudo tee /etc/systemd/resolved.conf.d/20-docker-dns.conf >/dev/null
 sudo systemctl restart systemd-resolved
 
-# Start Docker automatically
+# Start Docker on-demand
 sudo systemctl enable docker.socket
 
 # Give this user privileged Docker access
