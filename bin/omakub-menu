@@ -266,7 +266,7 @@ show_install_font_menu() {
 }
 
 show_install_development_menu() {
-  case $(menu "Install" "  Docker\n󱘲  Databases\n󰊢  Git\n󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure" "--width 250 --height 600") in
+  case $(menu "Install" "  Docker\n󱘲  Databases\n󰊢  Git\n󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure\n  Scala" "--width 250 --height 600") in
   *Docker*) show_install_docker_menu ;;
   *Databases*) show_install_databases_menu ;;
   *Git*) show_install_git_menu ;;
@@ -282,6 +282,7 @@ show_install_development_menu() {
   *NET*) present_terminal "omakub-install-dev-env dotnet" ;;
   *OCaml*) present_terminal "omakub-install-dev-env ocaml" ;;
   *Clojure*) present_terminal "omakub-install-dev-env clojure" ;;
+  *Scala*) present_terminal "omakub-install-dev-env scala" ;;
   *) show_install_menu ;;
   esac
 }
@@ -402,7 +403,7 @@ show_remove_font_menu() {
 }
 
 show_remove_development_menu() {
-  case $(menu "Remove Development Environment" "󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure" "--width 250 --height 510") in
+  case $(menu "Remove Development Environment" "󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure\n  Scala" "--width 250 --height 510") in
   *Rails*) present_terminal "omakub-remove-dev-env ruby" ;;
   *JavaScript*) show_remove_javascript_menu ;;
   *Go*) present_terminal "omakub-remove-dev-env go" ;;
@@ -415,6 +416,7 @@ show_remove_development_menu() {
   *NET*) present_terminal "omakub-remove-dev-env dotnet" ;;
   *OCaml*) present_terminal "omakub-remove-dev-env ocaml" ;;
   *Clojure*) present_terminal "omakub-remove-dev-env clojure" ;;
+  *Scala*) present_terminal "omakub-remove-dev-env scala" ;;
   *) show_remove_menu ;;
   esac
 }
