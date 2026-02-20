@@ -14,3 +14,9 @@
 #   *) back_to show_main_menu ;;
 #   esac
 # }
+#
+# Example of overriding just the about menu action: (Using zsh instead of bash (default))
+#
+# show_about() {
+#   exec omakub-launch-or-focus-tui "zsh -c 'fastfetch; read -k 1'"
+# }
