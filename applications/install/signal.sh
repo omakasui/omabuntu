@@ -10,4 +10,4 @@ if [ ! -f /etc/apt/sources.list.d/signal-desktop.sources ]; then
 fi
 
 sudo apt update
-sudo apt install -y signal-desktop
+omakub-pkg-add signal-desktop

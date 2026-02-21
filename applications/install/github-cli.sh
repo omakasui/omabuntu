@@ -7,5 +7,5 @@ if [ ! -f /etc/apt/sources.list.d/github-cli.list ]; then
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
 fi
 
-sudo apt update &&
-sudo apt install gh -y
+sudo apt update
+omakub-pkg-add gh

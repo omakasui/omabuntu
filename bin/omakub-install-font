@@ -32,7 +32,7 @@ cascadia-mono)
   ;;
 mscore)
   echo -e "Installing Microsoft Core Fonts...\n"
-  sudo apt -y install ttf-mscorefonts-installer
+  omakub-pkg-add ttf-mscorefonts-installer
   ;;
 *)
   echo "Usage: omadeb-install-font <font>" >&2

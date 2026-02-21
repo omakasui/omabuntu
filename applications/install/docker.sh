@@ -10,7 +10,7 @@ if [ ! -f /etc/apt/sources.list.d/docker.list ]; then
 fi
 
 sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+omakub-pkg-add docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
 
 # Configure Docker daemon:
 # - limit log size to avoid running out of disk

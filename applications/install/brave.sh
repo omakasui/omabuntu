@@ -7,4 +7,4 @@ if [ ! -f /etc/apt/sources.list.d/brave-browser-release.list ]; then
 fi
 
 sudo apt update
-sudo apt install -y brave-browser
+omakub-pkg-add brave-browser

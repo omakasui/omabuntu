@@ -11,7 +11,7 @@ if [ ! -f /etc/apt/keyrings/packages.microsoft.gpg ] || [ ! -f /usr/share/keyrin
 fi
 
 sudo apt update
-sudo apt install -y code
+omakub-pkg-add code
 
 mkdir -p ~/.config/Code/User
 

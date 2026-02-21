@@ -9,7 +9,7 @@ if [ ! -f /etc/apt/sources.list.d/typora.list ]; then
 fi
 
 sudo apt update
-sudo apt install typora -y
+omakub-pkg-add typora
 
 # Add iA Typora theme
 mkdir -p ~/.config/Typora/themes
