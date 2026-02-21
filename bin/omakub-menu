@@ -481,7 +481,7 @@ show_system_menu() {
   options="$options\n  Logout\n󰜉  Restart\n󰐥  Shutdown"
 
   local height=210
-  if [[ -f ~/.local/state/omakub/toggles/suspend-on ]]; then
+  if [[ -f ~/.local/state/omakub/toggles/suspend-off ]]; then
     height=250
   fi
 
