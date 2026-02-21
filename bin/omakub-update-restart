@@ -2,7 +2,7 @@
 
 if [[ -f $HOME/.local/state/omakub/reboot-required ]]; then
   echo
-  gum confirm "Updates require reboot. Ready?" && omakub-cmd-reboot
+  gum confirm "Updates require reboot. Ready?" && omakub-system-reboot
 fi
 
 for file in "$HOME"/.local/state/omakub/restart-*-required; do

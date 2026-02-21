@@ -486,11 +486,11 @@ show_system_menu() {
   fi
 
   case $(menu "System" "$options" "--width 250 --height $height") in
-  *Lock*) omakub-cmd-lock-screen ;;
+  *Lock*) omakub-system-lock-screen ;;
   *Suspend*) systemctl suspend ;;
-  *Logout*) omakub-cmd-logout ;;
-  *Restart*) omakub-cmd-reboot ;;
-  *Shutdown*) omakub-cmd-shutdown ;;
+  *Logout*) omakub-system-logout ;;
+  *Restart*) omakub-system-reboot ;;
+  *Shutdown*) omakub-system-shutdown ;;
   *) back_to show_main_menu ;;
   esac
 }

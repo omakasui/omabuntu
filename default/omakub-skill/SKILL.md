@@ -109,7 +109,7 @@ cat $(which omakub-theme-set)
 | `omakub-theme-*`      | Theme management                          | `omakub-theme-set <name>`   |
 | `omakub-install-*`    | Install optional software                 | `omakub-install-docker-dbs` |
 | `omakub-launch-*`     | Launch apps                               | `omakub-launch-browser`     |
-| `omakub-cmd-*`        | System commands                           | `omakub-cmd-shutdown`       |
+| `omakub-cmd-*`        | System commands                           | `omakub-system-shutdown`    |
 | `omakub-app-*`        | Application management                    | `omakub-app-install <name>` |
 | `omakub-font-*`       | Font management                           | `omakub-font-set <name>`    |
 | `omakub-keybinding-*` | Keybinding management                     | `omakub-keybinding-add`     |
@@ -338,10 +338,10 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 40
 ```bash
 omakub-update                  # Full system update (Ubuntu + Omabuntu)
 omakub-state                   # Show Omabuntu state/version
-omakub-cmd-shutdown            # Shutdown
-omakub-cmd-reboot              # Reboot
-omakub-cmd-logout              # Logout
-omakub-cmd-lock-screen         # Lock screen
+omakub-system-shutdown            # Shutdown
+omakub-system-reboot              # Reboot
+omakub-system-logout              # Logout
+omakub-system-lock-screen         # Lock screen
 ```
 
 ## Troubleshooting
