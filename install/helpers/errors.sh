@@ -73,7 +73,7 @@ catch_errors() {
 exit_handler() {
   local exit_code=$?
 
-  if [[ $exit_code -ne 0 && $ERROR_HANDLING != true ]]; then
+  if (( exit_code != 0 )) && [[ $ERROR_HANDLING != true ]]; then
     catch_errors
   fi
 }

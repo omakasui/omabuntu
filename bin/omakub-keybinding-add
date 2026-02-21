@@ -3,7 +3,7 @@
 # omakub-keybinding-add: Create a custom keybinding.
 # Usage: omakub-keybinding-add <name> <command> <keybinding>
 
-if [ "$#" -lt 3 ]; then
+if (( $# < 3 )); then
   echo -e "\e[32mLet's create a new custom keybinding.\n\e[0m"
   KB_NAME=$(gum input --prompt "Name> " --placeholder "My Custom Shortcut")
   KB_COMMAND=$(gum input --prompt "Command> " --placeholder "gnome-terminal")
@@ -17,7 +17,7 @@ else
 fi
 
 # Ensure valid parameters
-if [[ -z "$KB_NAME" || -z "$KB_COMMAND" || -z "$KB_BINDING" ]]; then
+if [[ -z $KB_NAME || -z $KB_COMMAND || -z $KB_BINDING ]]; then
   echo "You must set name, command, and keybinding!"
   exit 1
 fi
@@ -26,7 +26,7 @@ fi
 CURRENT_BINDINGS=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings)
 
 # Find next available index
-if [[ "$CURRENT_BINDINGS" == "@as []" || "$CURRENT_BINDINGS" == "[]" ]]; then
+if [[ $CURRENT_BINDINGS == "@as []" || $CURRENT_BINDINGS == "[]" ]]; then
   # No existing keybindings
   NEXT_INDEX=0
   NEW_BINDINGS="['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
@@ -34,7 +34,7 @@ else
   # Extract existing indices
   INDICES=$(echo "$CURRENT_BINDINGS" | grep -oP 'custom\K[0-9]+' | sort -n)
 
-  if [[ -z "$INDICES" ]]; then
+  if [[ -z $INDICES ]]; then
     NEXT_INDEX=0
   else
     LAST_INDEX=$(echo "$INDICES" | tail -1)

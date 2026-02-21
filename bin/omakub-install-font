@@ -2,7 +2,7 @@
 
 # Install one of the supported fonts. Usually called via Install > Fonts > * in the Omadeb Menu.
 
-if [[ -z "$1" ]]; then
+if [[ -z $1 ]]; then
   echo "Usage: omadeb-install-font <font>" >&2
   exit 1
 fi
@@ -20,7 +20,7 @@ jetbrains-mono)
 iafonts)
   wget -O iafonts.zip https://github.com/iaolo/iA-Fonts/archive/refs/heads/master.zip
   unzip iafonts.zip -d iaFonts
-  cp iaFonts/iA-Fonts-master/iA\ Writer\ Mono/Static/iAWriterMonoS-*.ttf ~/.local/share/fonts
+  cp "iaFonts/iA-Fonts-master/iA Writer Mono/Static"/iAWriterMonoS-*.ttf ~/.local/share/fonts
   rm -rf iafonts.zip iaFonts
   ;;
 cascadia-mono)

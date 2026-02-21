@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Setup user theme folder
-if [ -d ~/.config/omakub/themes ]; then
+if [[ -d ~/.config/omakub/themes ]]; then
   rm -rf ~/.config/omakub/themes
 fi
 mkdir -p ~/.config/omakub/themes

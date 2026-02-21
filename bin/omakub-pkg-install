@@ -14,7 +14,7 @@ fzf_args=(
 
 pkg_names=$(apt list | awk -F/ '{print $1}' | sort -u | fzf "${fzf_args[@]}")
 
-if [[ -n "$pkg_names" ]]; then
+if [[ -n $pkg_names ]]; then
   # Convert newline-separated selections to space-separated for apt
   echo "$pkg_names" | tr '\n' ' ' | xargs sudo apt -y install
   omakub-show-done

@@ -3,7 +3,7 @@
 # omakub-launch-webapp: Launch a web application as a standalone window.
 # Usage: omakub-launch-webapp <app-url> <app-name>
 
-if [[ -z "$1" || -z "$2" ]]; then
+if [[ -z $1 || -z $2 ]]; then
   echo "Usage: omakub-launch-webapp <app-url> <app-name>" >&2
   exit 1
 fi
@@ -15,7 +15,7 @@ APP_ID=$(echo "$APP_NAME" | sed 's/[^a-zA-Z0-9]//g' | tr '[:upper:]' '[:lower:]'
 # This prevents data loss and force to open in a separate profile
 OMAKUB_DATA_DIR="$HOME/.config/omakub/webapp"
 WEBAPP_DATA_DIR="$OMAKUB_DATA_DIR/$(echo "$APP_NAME" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')"
-if [ ! -d "$WEBAPP_DATA_DIR" ]; then
+if [[ ! -d $WEBAPP_DATA_DIR ]]; then
   mkdir -p "$WEBAPP_DATA_DIR"
 fi
 

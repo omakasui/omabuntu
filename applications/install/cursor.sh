@@ -19,7 +19,7 @@ Type=Application
 Categories=Development;IDE;
 EOL
 
-if [ -f "$DESKTOP_FILE" ]; then
+if [[ -f $DESKTOP_FILE ]]; then
 	echo "cursor.desktop created successfully"
 else
 	echo "Failed to create cursor.desktop"

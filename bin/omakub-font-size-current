@@ -5,7 +5,7 @@
 
 CURRENT_TERMINAL=$(omakub-terminal-current)
 
-if [ -z "$CURRENT_TERMINAL" ]; then
+if [[ -z $CURRENT_TERMINAL ]]; then
   echo "No terminal found"
   exit 1
 fi

@@ -6,7 +6,7 @@ if ! grep -q "^deb .*\bmozillateam/ppa\b" /etc/apt/sources.list /etc/apt/sources
 fi
 
 # Create or update the APT preferences file to prioritize Mozilla packages
-if [ ! -f /etc/apt/preferences.d/mozilla ]; then
+if [[ ! -f /etc/apt/preferences.d/mozilla ]]; then
   sudo tee /etc/apt/preferences.d/mozilla > /dev/null <<EOF
 Package: *
 Pin: release o=LP-PPA-mozillateam

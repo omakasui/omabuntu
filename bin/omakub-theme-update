@@ -5,7 +5,7 @@
 omakub-refresh-theme
 
 for dir in ~/.config/omakub/themes/*/; do
-  if [[ -d $dir ]] && [[ ! -L "${dir%/}" ]] && [[ -d "$dir/.git" ]]; then
+  if [[ -d $dir ]] && [[ ! -L ${dir%/} ]] && [[ -d $dir/.git ]]; then
     echo "Updating: $(basename "$dir")"
     git -C "$dir" pull
   fi

@@ -2,7 +2,7 @@
 
 # Must not be on a LVM partition
 LVM_DETECTED=false
-if [ -f /etc/fstab ]; then
+if [[ -f /etc/fstab ]]; then
   if grep -Pq '/dev/(mapper/|disk/by-id/dm)' /etc/fstab; then
     LVM_DETECTED=true
   fi
@@ -14,7 +14,7 @@ fi
 
 apply_alt_bootloaders() {
   # Add kernel parameters for Plymouth
-  if [ -f "/etc/default/grub" ]; then # Grub
+  if [[ -f /etc/default/grub ]]; then # Grub
     # Backup GRUB config before modifying
     backup_timestamp=$(date +"%Y%m%d%H%M%S")
     sudo cp /etc/default/grub "/etc/default/grub.bak.${backup_timestamp}"
@@ -26,10 +26,10 @@ apply_alt_bootloaders() {
 
       # Add splash and quiet if not present
       new_cmdline="$current_cmdline"
-      if [[ ! "$current_cmdline" =~ splash ]]; then
+      if [[ ! $current_cmdline =~ splash ]]; then
         new_cmdline="$new_cmdline splash"
       fi
-      if [[ ! "$current_cmdline" =~ quiet ]]; then
+      if [[ ! $current_cmdline =~ quiet ]]; then
         new_cmdline="$new_cmdline quiet"
       fi
 
@@ -44,7 +44,7 @@ apply_alt_bootloaders() {
   fi
 }
 
-if [ "$LVM_DETECTED" = true ]; then
+if [[ $LVM_DETECTED == true ]]; then
   echo "Warning: LVM partition detected. Plymouth may not work properly with encrypted LVM setups. Skipping Plymouth configuration for bootloaders."
 else
   apply_alt_bootloaders

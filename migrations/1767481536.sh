@@ -5,7 +5,7 @@ echo "Migrate to new theme setup"
 OMAKUB_DIR="$HOME/.local/share/omakub"
 USER_BACKGROUNDS_DIR="$HOME/.config/omakub/backgrounds"
 
-if [[ -d "$OMAKUB_DIR/themes" ]]; then
+if [[ -d $OMAKUB_DIR/themes ]]; then
   cd "$OMAKUB_DIR"
 
   # Get list of git-tracked background files (relative to omakub dir)
@@ -16,21 +16,21 @@ if [[ -d "$OMAKUB_DIR/themes" ]]; then
     theme_name=$(basename "$theme_dir")
     backgrounds_dir="themes/$theme_name/backgrounds"
 
-    [[ -d "$backgrounds_dir" ]] || continue
+    [[ -d $backgrounds_dir ]] || continue
 
     for bg_file in "$backgrounds_dir"/*; do
-      [[ -f "$bg_file" ]] || continue
+      [[ -f $bg_file ]] || continue
 
       # Check if this file is tracked by git
       is_tracked=false
       for tracked in "${TRACKED_BACKGROUNDS[@]}"; do
-        if [[ "$tracked" == "$bg_file" ]]; then
+        if [[ $tracked == $bg_file ]]; then
           is_tracked=true
           break
         fi
       done
 
-      if [[ "$is_tracked" == "false" ]]; then
+      if [[ $is_tracked == "false" ]]; then
         # This is a user-added background, move it to user config
         user_theme_bg_dir="$USER_BACKGROUNDS_DIR/$theme_name"
         mkdir -p "$user_theme_bg_dir"
@@ -46,7 +46,7 @@ CURRENT_THEME_LINK="$HOME/.config/omakub/current/theme"
 
 # Get current theme name before removing anything
 CURRENT_THEME_NAME=""
-if [[ -f "$HOME/.config/omakub/current/theme.name" ]]; then
+if [[ -f $HOME/.config/omakub/current/theme.name ]]; then
   CURRENT_THEME_NAME=$(cat "$HOME/.config/omakub/current/theme.name")
 elif [[ -L $CURRENT_THEME_LINK ]]; then
   CURRENT_THEME_NAME=$(basename "$(readlink "$CURRENT_THEME_LINK")")

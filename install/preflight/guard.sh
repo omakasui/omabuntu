@@ -12,12 +12,12 @@ abort() {
 . /etc/os-release
 
 # Check if running on Ubuntu 24.04+
-[[ "$ID" != "ubuntu" ]] && abort "Ubuntu 24.04 or higher"
-[[ $(echo "$VERSION_ID >= 24.04" | bc) != 1 ]] && abort "Ubuntu 24.04 or higher"
+[[ $ID != "ubuntu" ]] && abort "Ubuntu 24.04 or higher"
+[[ $(echo "$VERSION_ID >= 24.04" | bc) != "1" ]] && abort "Ubuntu 24.04 or higher"
 
 # Must be x86 only to fully work
 ARCH=$(uname -m)
-if [[ "$ARCH" != "x86_64" ]] && [[ "$ARCH" != "i686" ]]; then
+if [[ $ARCH != "x86_64" ]] && [[ $ARCH != "i686" ]]; then
   abort "x86_64 CPU"
 fi
 

@@ -2,7 +2,7 @@
 
 # Must not be on a LVM partition
 LVM_DETECTED=false
-if [ -f /etc/fstab ]; then
+if [[ -f /etc/fstab ]]; then
   if grep -Pq '/dev/(mapper/|disk/by-id/dm)' /etc/fstab; then
     LVM_DETECTED=true
   fi
@@ -22,13 +22,13 @@ apply_plymouth() {
   # Install and configure Omabuntu Plymouth theme
   THEME_SOURCE_DIR="$(dirname "$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)")")/default/plymouth"
 
-  if [ -d "$THEME_SOURCE_DIR" ]; then
+  if [[ -d $THEME_SOURCE_DIR ]]; then
     sudo mkdir -p /usr/share/plymouth/themes/omakub/
     sudo cp -r "$THEME_SOURCE_DIR"/* /usr/share/plymouth/themes/omakub/
 
     # Check if the theme is already set
     current_theme=$(readlink /etc/alternatives/default.plymouth 2>/dev/null)
-    if [[ "$current_theme" != *"omakub"* ]]; then
+    if [[ $current_theme != *"omakub"* ]]; then
       # Install the theme as an alternative
       sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/omakub/omakub.plymouth 100
 
@@ -37,7 +37,7 @@ apply_plymouth() {
     fi
   fi
 
-  if [ ! -f /etc/systemd/system/plymouth-quit.service.d/wait-for-graphical.conf ]; then
+  if [[ ! -f /etc/systemd/system/plymouth-quit.service.d/wait-for-graphical.conf ]]; then
     # Make plymouth remain until graphical.target
     sudo mkdir -p /etc/systemd/system/plymouth-quit.service.d
     sudo tee /etc/systemd/system/plymouth-quit.service.d/wait-for-graphical.conf <<'EOF'
@@ -56,7 +56,7 @@ EOF
   sudo update-initramfs -u
 }
 
-if [ "$LVM_DETECTED" = true ]; then
+if [[ $LVM_DETECTED == true ]]; then
   echo "Warning: LVM partition detected. Plymouth may not work properly with encrypted LVM setups. Skipping Plymouth installation."
 else
   apply_plymouth
