@@ -476,9 +476,9 @@ show_about() {
 }
 
 show_system_menu() {
-  local options="  Lock\n  Logout"
+  local options="  Lock"
   [[ ! -f ~/.local/state/omakub/toggles/suspend-off ]] && options="$options\n󰒲  Suspend"
-  options="$options\n󰜉  Restart\n󰐥  Shutdown"
+  options="$options\n  Logout\n󰜉  Restart\n󰐥  Shutdown"
 
   local height=210
   if [[ -f ~/.local/state/omakub/toggles/suspend-on ]]; then
@@ -487,8 +487,8 @@ show_system_menu() {
 
   case $(menu "System" "$options" "--width 250 --height $height") in
   *Lock*) omakub-cmd-lock-screen ;;
-  *Logout*) omakub-cmd-logout ;;
   *Suspend*) systemctl suspend ;;
+  *Logout*) omakub-cmd-logout ;;
   *Restart*) omakub-cmd-reboot ;;
   *Shutdown*) omakub-cmd-shutdown ;;
   *) back_to show_main_menu ;;
