@@ -7,6 +7,8 @@ fi
 
 tee ~/.XCompose >/dev/null <<EOF
 # Run omakub-restart-xcompose to apply changes
+
+# Include fast emoji access
 include "%H/.local/share/omakub/default/xcompose"
 
 # Identification
