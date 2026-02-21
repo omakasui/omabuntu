@@ -379,7 +379,7 @@ show_remove_menu() {
   *App*) present_terminal omakub-app-remove ;;
   *Style*) show_remove_style_menu ;;
   *Development*) show_remove_development_menu ;;
-  *Preinstalls*) present_terminal omakub-remove-all ;;
+  *Preinstalls*) present_terminal omakub-remove-preinstalls ;;
   *) show_main_menu ;;
   esac
 }
