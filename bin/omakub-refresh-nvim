@@ -1,19 +1,23 @@
 #!/bin/bash
 
 OMAKUB_PATH="$HOME/.local/share/omakub"
+CONFIG_DIR="${HOME}/.config/nvim"
 
 # Create a backup of the existing nvim config if it exists.
-if [[ -d ~/.config/nvim ]]; then
+if [[ -d "$CONFIG_DIR" ]]; then
   timestamp=$(date +%Y%m%d%H%M%S)
-  mv ~/.config/nvim ~/.config/nvim.bak.$timestamp
-  echo -e "\e[31mBacked up existing nvim config to ~/.config/nvim.bak.$timestamp\e[0m"
+  mv "$CONFIG_DIR" "$CONFIG_DIR.bak.$timestamp"
+  echo -e "\e[31mBacked up existing nvim config to $CONFIG_DIR.bak.$timestamp\e[0m"
 fi
 
+
 # Clone the LazyVim starter config and copy over the default nvim config from Omabuntu.
-rm -rf ~/.config/nvim
-git clone https://github.com/LazyVim/starter ~/.config/nvim
-cp -R ~/.local/share/omakub/config/nvim/* ~/.config/nvim/
-rm -rf ~/.config/nvim/.git
-echo "vim.opt.relativenumber = false" >>~/.config/nvim/lua/config/options.lua
+rm -rf "$CONFIG_DIR"
+git clone https://github.com/LazyVim/starter "$CONFIG_DIR"
+cp -R "$OMAKUB_PATH/config/nvim/"* "$CONFIG_DIR/"
+rm -rf "$CONFIG_DIR/.git"
+echo "vim.opt.relativenumber = false" >>"$CONFIG_DIR/lua/config/options.lua"
+
+ln -snf "${HOME}/.config/omakub/current/theme/neovim.lua" "${CONFIG_DIR}/lua/plugins/theme.lua"
 
 echo -e "\e[31mNeovim config refreshed with Omabuntu defaults and LazyVim starter template.\e[0m"
