@@ -1,4 +1,3 @@
-
 echo "Add default Ctrl+P binding for imv; backup existing config if present"
 
 if [[ -f ~/.config/imv/config ]]; then

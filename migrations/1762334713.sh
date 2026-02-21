@@ -1,4 +1,3 @@
-
 echo "Setting up xdg-terminal-exec for gtk-launch terminal support"
 
 # Remove old symlink if it exists -- if someone ran the previous migration early

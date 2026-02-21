@@ -1,4 +1,3 @@
-
 echo "Migrate to new theme setup"
 
 # Move user-added backgrounds from Omabuntu theme folders to user config

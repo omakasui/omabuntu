@@ -1,4 +1,3 @@
-
 # Update Gum
 echo -e "\e[32m\nUpdating gum...\e[0m"
 echo

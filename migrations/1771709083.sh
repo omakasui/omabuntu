@@ -1,5 +1,3 @@
-#!/bin/bash
-
 echo "Fix colored gutter in nvim by making line numbers transparent"
 
 TRANSPARENCY_FILE="$HOME/.config/nvim/plugin/after/transparency.lua"

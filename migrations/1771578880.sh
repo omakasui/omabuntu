@@ -1,5 +1,3 @@
-#!/bin/bash
-
 echo "Add full OSC 52 support to Alacritty"
 
 ALACRITTY_CONFIG=~/.config/alacritty/alacritty.toml
