@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+# Reinstall the Omabuntu configuration directory from the git source.
+
+git clone "https://github.com/omakasui/omabuntu.git" ~/.local/share/omakub-new >/dev/null
+mv $OMAKUB_PATH ~/.local/share/omakub-old
+mv ~/.local/share/omakub-new $OMAKUB_PATH

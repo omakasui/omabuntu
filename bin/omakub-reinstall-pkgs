@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+# Reinstall all default Omabuntu packages from the stable channel and downgrade any packages that are too new.
+
+# Ensure all packages are installed
+mapfile -t packages < <(grep -v '^#' "$OMAKUB_PATH/install/omakub-base.packages" | grep -v '^$')
+omakub-pkg-add "${packages[@]}"

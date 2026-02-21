@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+
+# Overwrite all user configs with the Omabuntu defaults.
+
+if (( EUID == 0 )); then
+  echo "Error: This script should not be run as root"
+  exit 1
+fi
+
+echo "Resetting all Omabuntu configs"
+cp -R ~/.local/share/omakub/config/* ~/.config/
+cp ~/.local/share/omakub/default/bashrc ~/.bashrc
+echo '[[ -f ~/.bashrc ]] && . ~/.bashrc' | tee ~/.bash_profile >/dev/null
+
+$(bash $OMAKUB_PATH/install/config/theme.sh)
+
+omakub-refresh-gnome
+omakub-refresh-keybindings
+omakub-refresh-gdm
+omakub-refresh-plymouth
+omakub-refresh-nvim
