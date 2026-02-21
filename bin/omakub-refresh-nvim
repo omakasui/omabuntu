@@ -1,0 +1,19 @@
+#!/bin/bash
+
+OMAKUB_PATH="$HOME/.local/share/omakub"
+
+# Create a backup of the existing nvim config if it exists.
+if [[ -d ~/.config/nvim ]]; then
+  timestamp=$(date +%Y%m%d%H%M%S)
+  mv ~/.config/nvim ~/.config/nvim.bak.$timestamp
+  echo -e "\e[31mBacked up existing nvim config to ~/.config/nvim.bak.$timestamp\e[0m"
+fi
+
+# Clone the LazyVim starter config and copy over the default nvim config from Omabuntu.
+rm -rf ~/.config/nvim
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+cp -R ~/.local/share/omakub/config/nvim/* ~/.config/nvim/
+rm -rf ~/.config/nvim/.git
+echo "vim.opt.relativenumber = false" >>~/.config/nvim/lua/config/options.lua
+
+echo -e "\e[31mNeovim config refreshed with Omabuntu defaults and LazyVim starter template.\e[0m"

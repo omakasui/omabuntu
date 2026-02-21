@@ -32,7 +32,7 @@ xdg-mime default mpv.desktop video/x-ogm+ogg
 xdg-mime default mpv.desktop video/x-theora+ogg
 xdg-mime default mpv.desktop application/ogg
 
-# Open text files with nvim
+# Set nvim.desktop as default so it takes priority in Nautilus
 xdg-mime default nvim.desktop text/plain
 xdg-mime default nvim.desktop text/english
 xdg-mime default nvim.desktop text/x-makefile
