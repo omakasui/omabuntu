@@ -3,23 +3,30 @@
 # Set GNOME theme according to Omabuntu current theme.
 
 # Change gnome modes
-GNOME_THEME=~/.config/omakub/current/theme/gnome.theme
-GNOME_LIGHT_MODE=~/.config/omakub/current/theme/light.mode
+GTK_THEME=~/.config/omakub/current/theme/gtk.theme
+GTK_LIGHT_MODE=~/.config/omakub/current/theme/light.mode
 
-if [[ -f $GNOME_THEME ]]; then
-  OMAKUB_THEME_COLOR=$(<$GNOME_THEME)
+if [[ -f $GTK_THEME ]]; then
+  OMAKUB_GTK_THEME=$(<$GTK_THEME)
 else
-  OMAKUB_THEME_COLOR="blue"
+  OMAKUB_GTK_THEME="Yaru-blue"
 fi
 
-if [[ -f $GNOME_LIGHT_MODE ]]; then
+if [[ -f $GTK_LIGHT_MODE ]]; then
   gsettings set org.gnome.desktop.interface color-scheme "prefer-light"
-  gsettings set org.gnome.desktop.interface gtk-theme "Yaru-$OMAKUB_THEME_COLOR"
+  gsettings set org.gnome.desktop.interface gtk-theme "$OMAKUB_GTK_THEME"
 else
   gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
-  gsettings set org.gnome.desktop.interface gtk-theme "Yaru-$OMAKUB_THEME_COLOR-dark"
+  gsettings set org.gnome.desktop.interface gtk-theme "${OMAKUB_GTK_THEME}-dark"
 fi
-gsettings set org.gnome.desktop.interface accent-color "$OMAKUB_THEME_COLOR" 2>/dev/null || true
+
+# Change gnome accent color
+GNOME_ACCENT_THEME=~/.config/omakub/current/theme/accent.theme
+if [[ -f $GNOME_ACCENT_THEME ]]; then
+  gsettings set org.gnome.desktop.interface accent-color "$(<$GNOME_ACCENT_THEME)" 2>/dev/null || true
+else
+  gsettings set org.gnome.desktop.interface accent-color "orange" 2>/dev/null || true
+fi
 
 # Change gnome cursor theme color
 GNOME_CURSOR_THEME=~/.config/omakub/current/theme/cursor.theme
@@ -34,7 +41,7 @@ GNOME_ICONS_THEME=~/.config/omakub/current/theme/icons.theme
 if [[ -f $GNOME_ICONS_THEME ]]; then
   gsettings set org.gnome.desktop.interface icon-theme "$(<$GNOME_ICONS_THEME)"
 else
-  gsettings set org.gnome.desktop.interface icon-theme "Yaru-$OMAKUB_THEME_COLOR"
+  gsettings set org.gnome.desktop.interface icon-theme "${OMAKUB_GTK_THEME}"
 fi
 
 # Change gnome extensions theme
