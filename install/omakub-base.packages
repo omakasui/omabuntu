@@ -37,7 +37,7 @@ libreadline-dev
 libreadline-dev
 libsqlite3-0
 libssl-dev
-libvips
+libvips42t64
 libyaml-dev
 mpv
 mupdf
