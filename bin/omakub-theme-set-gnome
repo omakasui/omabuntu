@@ -17,7 +17,11 @@ if [[ -f $GTK_LIGHT_MODE ]]; then
   gsettings set org.gnome.desktop.interface gtk-theme "$OMAKUB_GTK_THEME"
 else
   gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
-  gsettings set org.gnome.desktop.interface gtk-theme "${OMAKUB_GTK_THEME}-dark"
+  if [[ -d "/usr/share/themes/${OMAKUB_GTK_THEME}-dark" ]]; then
+    gsettings set org.gnome.desktop.interface gtk-theme "${OMAKUB_GTK_THEME}-dark"
+  else
+    gsettings set org.gnome.desktop.interface gtk-theme "$OMAKUB_GTK_THEME"
+  fi
 fi
 
 # Change gnome accent color
