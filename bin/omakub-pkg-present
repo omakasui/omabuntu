@@ -3,7 +3,7 @@
 # Returns true if all of the named packages are installed on the system (or false if any of them are missing).
 
 for pkg in "$@"; do
-  dpkg -l | grep -q "$pkg" &>/dev/null || exit 1
+  dpkg-query -W -f='${Status}' "$pkg" 2>/dev/null | grep -q "^install ok installed" &>/dev/null || exit 1
 done
 
 exit 0

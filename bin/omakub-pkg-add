@@ -8,7 +8,7 @@ fi
 
 for pkg in "$@"; do
   # Secondary check to handle states where dpkg doesn't actually register an error
-  if ! dpkg -l | grep -q "$pkg"; then
+  if ! dpkg-query -W -f='${Status}' "$pkg" 2>/dev/null | grep -q "^install ok installed"; then
     echo -e "\033[31mError: Package '$pkg' did not install\033[0m" >&2
     exit 1
   fi
