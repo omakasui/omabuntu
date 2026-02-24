@@ -2,4 +2,4 @@
 
 # Restart IBus to apply any configuration changes.
 
-ibus restart
+ibus restart || ibus start
