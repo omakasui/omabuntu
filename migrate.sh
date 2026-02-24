@@ -26,7 +26,7 @@ export OMAKUB_MIGRATE="$HOME/.local/share/omakub/install/migrate"
 export BACKUP_DIR="$HOME/.local/share/omakub-backup-$(date +%Y%m%d_%H%M%S)"
 
 # Check Omakub installation
-if [[ ! -d "$HOME/.local/share/omakub" ]]; then
+if [[ ! -d $HOME/.local/share/omakub ]]; then
     echo "Error: Omakub not found. Please run the installer instead."
     exit 1
 fi

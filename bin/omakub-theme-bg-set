@@ -6,7 +6,7 @@ BACKGROUND_LINK=$1
 ZOOM_FLAG=${2:-'zoom'}
 DEFAULT_BACKGROUND='file:///usr/share/backgrounds/warty-final-ubuntu.png'
 
-if [[ -z "$BACKGROUND_LINK" ]]; then
+if [[ -z $BACKGROUND_LINK ]]; then
   BACKGROUND_LINK="$DEFAULT_BACKGROUND"
 fi
 

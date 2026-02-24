@@ -5,17 +5,17 @@ remove_snaps() {
     local max_attempts=5
     local attempt=0
 
-    while [ $attempt -lt $max_attempts ]; do
+    while (( attempt < max_attempts )); do
         # Get current snap packages (excluding header line and snapd initially)
         local snap_pkgs=$(snap list 2>/dev/null | awk 'NR>1 && $1!="snapd" {print $1}')
 
         # If no packages found, try to remove snapd itself
-        if [ -z "$snap_pkgs" ]; then
+        if [[ -z $snap_pkgs ]]; then
             snap_pkgs=$(snap list 2>/dev/null | awk 'NR>1 && $1=="snapd" {print $1}')
         fi
 
         # If no packages left, we're done
-        if [ -z "$snap_pkgs" ]; then
+        if [[ -z $snap_pkgs ]]; then
             break
         fi
 

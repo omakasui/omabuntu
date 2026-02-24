@@ -1,35 +1,41 @@
 ---
 name: omabuntu
 description: >
-  REQUIRED for ANY changes to Ubuntu desktop, GNOME settings, or system config.
+  REQUIRED for end-user customization of Linux desktop, window manager, or system config.
   Use when editing ~/.config/alacritty/, ~/.config/kitty/, ~/.config/wofi/,
   ~/.config/omakub/, or working with GNOME settings. Triggers: GNOME extensions,
   keybindings, themes, wallpaper, terminal config, night light, dock settings,
-  workspace configuration, display config, or any omakub-* commands.
+  settings, display config, and user-facing omabuntu commands. Excludes Omabuntu
+  source development in ~/.local/share/omakub/ and omakub-dev-* workflows.
 ---
 
 # Omabuntu Skill
 
 Manage [Omabuntu](https://omabuntu.omakasui.org/) Linux systems - an opinionated Ubuntu 24.04+ development environment.
 
+This skill is for end-user customization on installed systems.
+It is not for contributing to Omabuntu source code.
+
 ## When This Skill MUST Be Used
 
-**ALWAYS invoke this skill when the user's request involves ANY of these:**
+**ALWAYS invoke this skill for end-user requests involving ANY of these:**
 
 - Editing ANY file in `~/.config/omakub/`
 - Editing terminal configs (alacritty, kitty)
 - Working with GNOME settings (gsettings)
 - GNOME extensions, dock, keybindings, appearance
 - Themes, wallpapers, fonts, appearance changes
-- Any `omakub-*` command
+- User-facing `omakub-*` commands (`omakub-theme-*`, `omakub-refresh-*`, `omakub-restart-*`, etc.)
 - Night light, workspace settings, display configuration
 - Application installation or removal
 
 **If you're about to edit a config file in ~/.config/ on this Ubuntu system, STOP and use this skill first.**
 
+**Do NOT use this skill for Omabuntu development tasks** (editing files in `~/.local/share/omakub/`, creating migrations, or running `omakub-dev-*` workflows).
+
 ## Critical Safety Rules
 
-**NEVER modify anything in `~/.local/share/omakub/`** - but READING is safe and encouraged.
+**For end-user customization tasks, NEVER modify anything in `~/.local/share/omakub/`** - but READING is safe and encouraged.
 
 This directory contains Omabuntu's source files managed by git. Any changes will be:
 
@@ -60,6 +66,8 @@ This directory contains Omabuntu's source files managed by git. Any changes will
 - `~/.config/` - User configuration (safe to edit)
 - `~/.config/omakub/themes/<custom-name>/` - Custom themes (must be real directories)
 - `~/.config/omakub/hooks/` - Custom automation hooks
+
+If the request is to develop Omabuntu itself, this skill is out of scope. Follow repository development instructions instead of this skill.
 
 ## System Architecture
 
@@ -101,7 +109,7 @@ cat $(which omakub-theme-set)
 | `omakub-theme-*`      | Theme management                          | `omakub-theme-set <name>`   |
 | `omakub-install-*`    | Install optional software                 | `omakub-install-docker-dbs` |
 | `omakub-launch-*`     | Launch apps                               | `omakub-launch-browser`     |
-| `omakub-cmd-*`        | System commands                           | `omakub-cmd-shutdown`       |
+| `omakub-cmd-*`        | System commands                           | `omakub-system-shutdown`    |
 | `omakub-app-*`        | Application management                    | `omakub-app-install <name>` |
 | `omakub-font-*`       | Font management                           | `omakub-font-set <name>`    |
 | `omakub-keybinding-*` | Keybinding management                     | `omakub-keybinding-add`     |
@@ -330,10 +338,10 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 40
 ```bash
 omakub-update                  # Full system update (Ubuntu + Omabuntu)
 omakub-state                   # Show Omabuntu state/version
-omakub-cmd-shutdown            # Shutdown
-omakub-cmd-reboot              # Reboot
-omakub-cmd-logout              # Logout
-omakub-cmd-lock-screen         # Lock screen
+omakub-system-shutdown            # Shutdown
+omakub-system-reboot              # Reboot
+omakub-system-logout              # Logout
+omakub-system-lock-screen         # Lock screen
 ```
 
 ## Troubleshooting
@@ -363,27 +371,16 @@ When user requests system changes:
 3. **Is it a config edit?** Edit in `~/.config/`, never `~/.local/share/omakub/`
 4. **Is it a theme customization?** Create a NEW custom theme directory
 5. **Is it automation?** Use hooks in `~/.config/omakub/hooks/`
-6. **Is it a package install?** Check if available via `omakub-app-install`, otherwise use `apt`
+6. **Is it a package install?** Check if available via `omakub-app-install`, otherwise use `omakub-pkg-add`
 7. **Unsure if command exists?** Search with `compgen -c | grep omakub`
 
-## Development (AI Agents)
+## Out of Scope
 
-When contributing to Omabuntu itself (e.g., fixing bugs, adding features), migrations are used to apply changes to existing installations.
+This skill intentionally does not cover Omabuntu source development. Do not use this skill for:
 
-### Creating Migrations
-
-```bash
-omakub-dev-add-migration
-```
-
-This creates a new migration file in `~/.local/share/omakub/migrations/`. The migration filename is based on the git commit timestamp.
-
-**Migration files** are shell scripts in `~/.local/share/omakub/migrations/` that run once per system during `omakub-update`. Use them for:
-
-- Updating user configs with new defaults
-- Installing new dependencies
-- Running one-time setup tasks
-- Applying GNOME settings changes
+- Editing files in `~/.local/share/omakub/` (`bin/`, `config/`, `default/`, `themes/`, `migrations/`, etc.)
+- Creating or editing migrations
+- Running `omakub-dev-*` commands
 
 ## Example Requests
 

@@ -17,11 +17,7 @@ THEME_NAME=$(echo "$1" | sed -E 's/<[^>]+>//g' | tr '[:upper:]' '[:lower:]' | tr
 THEME_PATH="$THEMES_DIR/$THEME_NAME"
 
 # Check if the theme entered exists
-if [[ -d "$USER_THEMES_PATH/$THEME_NAME" ]]; then
-  THEME_PATH="$USER_THEMES_PATH/$THEME_NAME"
-elif [[ -d "$OMAKUB_THEMES_PATH/$THEME_NAME" ]]; then
-  THEME_PATH="$OMAKUB_THEMES_PATH/$THEME_NAME"
-else
+if [[ ! -d $OMAKUB_THEMES_PATH/$THEME_NAME ]] && [[ ! -d $USER_THEMES_PATH/$THEME_NAME ]]; then
   echo "Theme '$THEME_NAME' does not exist"
   exit 1
 fi
@@ -30,8 +26,9 @@ fi
 rm -rf "$NEXT_THEME_PATH"
 mkdir -p "$NEXT_THEME_PATH"
 
-# Copy static configs
-cp -r "$THEME_PATH/"* "$NEXT_THEME_PATH/" 2>/dev/null
+# Copy official theme first, then overlay user customizations on top
+cp -r "$OMAKUB_THEMES_PATH/$THEME_NAME/"* "$NEXT_THEME_PATH/" 2>/dev/null
+cp -r "$USER_THEMES_PATH/$THEME_NAME/"* "$NEXT_THEME_PATH/" 2>/dev/null
 
 # Generate dynamic configs
 omakub-theme-set-templates

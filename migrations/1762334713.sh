@@ -1,8 +1,7 @@
-
 echo "Setting up xdg-terminal-exec for gtk-launch terminal support"
 
 # Remove old symlink if it exists -- if someone ran the previous migration early
-if [ -L /usr/local/bin/xdg-terminal-exec ]; then
+if [[ -L /usr/local/bin/xdg-terminal-exec ]]; then
   sudo rm /usr/local/bin/xdg-terminal-exec
 fi
 
@@ -13,8 +12,8 @@ omakub-env-set TERMINAL "xdg-terminal-exec"
 
 # Set up xdg-terminals.list based on current $TERMINAL (if not set, then set to alacritty later)
 TERMINAL=${TERMINAL:-alacritty}
-if [ -n "$TERMINAL" ]; then
-  case "$TERMINAL" in
+if [[ -n $TERMINAL ]]; then
+  case $TERMINAL in
     alacritty)
       desktop_id="Alacritty.desktop"
       ;;
@@ -23,7 +22,7 @@ if [ -n "$TERMINAL" ]; then
       ;;
   esac
 
-  if [ -n "$desktop_id" ]; then
+  if [[ -n $desktop_id ]]; then
     mkdir -p ~/.config
 
     # Delete existing config file if it exists

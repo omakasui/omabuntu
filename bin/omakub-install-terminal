@@ -38,7 +38,7 @@ $desktop_id
 EOF
 
   # Copy custom desktop entries with proper X-TerminalArg* keys
-  if [ "$package" == "alacritty" ]; then
+  if [[ $package == "alacritty" ]]; then
     mkdir -p ~/.local/share/xdg-terminals ~/.local/share/applications
     cp /usr/share/applications/Alacritty.desktop "$HOME/.local/share/xdg-terminals/Alacritty.desktop"
     cp /usr/share/applications/Alacritty.desktop "$HOME/.local/share/applications/Alacritty.desktop"

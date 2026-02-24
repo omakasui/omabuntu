@@ -1,4 +1,3 @@
-
 echo "Set nvim as default via xdg-mime"
 
 rm ~/.local/share/applications/nvim.desktop || true

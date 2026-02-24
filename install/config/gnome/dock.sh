@@ -29,7 +29,7 @@ desktop_dirs=(
 # Check if a .desktop file exists for each app
 for app in "${apps[@]}"; do
 	for dir in "${desktop_dirs[@]}"; do
-		if [ -f "$dir/$app" ]; then
+		if [[ -f $dir/$app ]]; then
 			installed_apps+=("$app")
 			break
 		fi

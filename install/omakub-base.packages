@@ -21,7 +21,7 @@ gir1.2-gtop-2.0
 gnome-shell-extension-manager
 gnome-software-plugin-flatpak
 gnome-sushi
-gnome-tweak-tool
+gnome-tweaks
 gpg
 imagemagick
 imv
@@ -31,13 +31,13 @@ libgdbm-dev
 libjemalloc2
 libmagickwand-dev
 libmysqlclient-dev
-libncurses5-dev
+libncurses-dev
 libpq-dev
 libreadline-dev
 libreadline-dev
 libsqlite3-0
 libssl-dev
-libvips
+libvips42t64
 libyaml-dev
 mpv
 mupdf

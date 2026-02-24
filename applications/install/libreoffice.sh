@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo apt install -y libreoffice
+omakub-pkg-add libreoffice

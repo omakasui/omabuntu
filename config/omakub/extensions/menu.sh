@@ -10,7 +10,13 @@
 # show_system_menu() {
 #   case $(menu "System" "  Lock\n󰐥  Shutdown") in
 #   *Lock*) omakub-lock-screen ;;
-#   *Shutdown*) omakub-cmd-shutdown ;;
+#   *Shutdown*) omakub-system-shutdown ;;
 #   *) back_to show_main_menu ;;
 #   esac
+# }
+#
+# Example of overriding just the about menu action: (Using zsh instead of bash (default))
+#
+# show_about() {
+#   exec omakub-launch-or-focus-tui "zsh -c 'fastfetch; read -k 1'"
 # }

@@ -7,7 +7,7 @@ gext update --dry-run &>/dev/null
 exit_code=$?
 
 # Exit code 17 means updates are available
-if [ $exit_code -eq 17 ]; then
+if (( exit_code == 17 )); then
   gext update --yes
   omakub-state set logout-required
 else

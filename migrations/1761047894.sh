@@ -1,4 +1,3 @@
-
 echo "Copy configs for kitty so they're available as alternative terminal options"
 
 if [[ ! -f ~/.config/kitty/kitty.conf ]]; then

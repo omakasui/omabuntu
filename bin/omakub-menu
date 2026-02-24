@@ -10,9 +10,9 @@ BACK_TO_EXIT=false
 back_to() {
   local parent_menu="$1"
 
-  if [[ "$BACK_TO_EXIT" == "true" ]]; then
+  if [[ $BACK_TO_EXIT == "true" ]]; then
     exit 0
-  elif [[ -n "$parent_menu" ]]; then
+  elif [[ -n $parent_menu ]]; then
     "$parent_menu"
   else
     show_main_menu
@@ -27,12 +27,12 @@ menu() {
 
   read -r -a args <<<"$extra"
 
-  if [[ -n "$preselect" ]]; then
+  if [[ -n $preselect ]]; then
     options=$(echo -e "$options" | sed "s|^$preselect$|<i>$preselect</i>|")
   fi
 
   # Show Wofi menu (with markup support)
-  selection=$(echo -e "$options" | omakub-wofi \
+  selection=$(echo -e "$options" | omakub-launch-wofi \
     --show dmenu \
     --allow-markup \
     --prompt "$prompt..." \
@@ -57,6 +57,10 @@ open_in_editor() {
 
 install() {
   present_terminal "echo 'Installing $1...'; omakub-app-install $2"
+}
+
+install_font() {
+  present_terminal "echo 'Installing $1...'; omakub-font-install $2 && sleep 2 && omakub-font-set '$3'"
 }
 
 install_terminal() {
@@ -115,7 +119,7 @@ show_style_menu() {
 
 show_theme_menu() {
   theme=$(menu "Theme" "$(omakub-theme-list)" "--width 250 --height 470 -O alphabetical" "$(omakub-theme-current)")
-  if [[ "$theme" == "CNCLD" || -z "$theme" ]]; then
+  if [[ $theme == "CNCLD" || -z $theme ]]; then
     back_to show_style_menu
   else
     omakub-theme-set "$theme"
@@ -132,7 +136,7 @@ show_font_menu() {
 
 show_font_family_menu() {
   font=$(menu "Font" "$(omakub-font-list)" "--width 350" "$(omakub-font-current)")
-  if [[ "$font" == "CNCLD" || -z "$font" ]]; then
+  if [[ $font == "CNCLD" || -z $font ]]; then
     back_to show_style_menu
   else
     omakub-font-set "$font"
@@ -155,10 +159,10 @@ show_setup_menu() {
 show_setup_system_menu() {
   local options=""
 
-  if [ -f ~/.local/state/omakub/toggles/suspend-on ]; then
-    options="$options󰒲  Disable Suspend"
-  else
+ if [[ -f ~/.local/state/omakub/toggles/suspend-off ]]; then
     options="$options󰒲  Enable Suspend"
+  else
+    options="$options󰒲  Disable Suspend"
   fi
 
   case $(menu "System" "$options" "--width 250 --height 80") in
@@ -243,15 +247,26 @@ show_install_utility_menu() {
 }
 
 show_install_style_menu() {
-  case $(menu "Install" "󰸌  Theme\n  Background" "--width 250 --height 130") in
+  case $(menu "Install" "󰸌  Theme\n  Background\n  Font" "--width 250 --height 170") in
   *Theme*) present_terminal omakub-theme-install ;;
   *Background*) omakub-theme-bg-install ;;
+  *Font*) present_terminal omakub-font-install ;;
+  *) show_install_menu ;;
+  esac
+}
+
+show_install_font_menu() {
+  case $(menu "Install" "  Cascadia Mono\n  JetBrains Mono\n  iA Fonts\n  Microsoft Core Fonts" "--width 350 --height 210") in
+  *Cascadia*) install_font "Cascadia Mono" "cascadia-mono" "Cascadia Mono Nerd Font" ;;
+  *JetBrains*) install_font "JetBrains Mono" "jetbrains-mono" "JetBrains Mono Nerd Font" ;;
+  *iA*) install_font "iA Fonts" "iafonts" "iA Fonts Nerd Font" ;;
+  *Microsoft*) install_font "Microsoft Core Fonts" "mscore" "Microsoft Core Fonts" ;;
   *) show_install_menu ;;
   esac
 }
 
 show_install_development_menu() {
-  case $(menu "Install" "  Docker\n󱘲  Databases\n󰊢  Git\n󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure" "--width 250 --height 600") in
+  case $(menu "Install" "  Docker\n󱘲  Databases\n󰊢  Git\n󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure\n  Scala" "--width 250 --height 600") in
   *Docker*) show_install_docker_menu ;;
   *Databases*) show_install_databases_menu ;;
   *Git*) show_install_git_menu ;;
@@ -267,6 +282,7 @@ show_install_development_menu() {
   *NET*) present_terminal "omakub-install-dev-env dotnet" ;;
   *OCaml*) present_terminal "omakub-install-dev-env ocaml" ;;
   *Clojure*) present_terminal "omakub-install-dev-env clojure" ;;
+  *Scala*) present_terminal "omakub-install-dev-env scala" ;;
   *) show_install_menu ;;
   esac
 }
@@ -356,20 +372,38 @@ show_install_gaming_menu() {
 }
 
 show_remove_menu() {
-  case $(menu "Remove" "  Package\n  Web App\n  TUI\n󰀻  App\n󰸌  Theme\n󰵮  Development\n󰏓  Preinstalls" "--width 250 --height 320") in
+  case $(menu "Remove" "  Package\n  Web App\n  TUI\n󰀻  App\n  Style\n󰵮  Development\n󰏓  Preinstalls" "--width 250 --height 320") in
   *Package*) present_terminal omakub-pkg-remove ;;
   *Web*) present_terminal omakub-webapp-remove ;;
   *TUI*) present_terminal omakub-tui-remove ;;
   *App*) present_terminal omakub-app-remove ;;
-  *Theme*) present_terminal omakub-theme-remove ;;
+  *Style*) show_remove_style_menu ;;
   *Development*) show_remove_development_menu ;;
-  *Preinstalls*) present_terminal omakub-remove-all ;;
+  *Preinstalls*) present_terminal omakub-remove-preinstalls ;;
   *) show_main_menu ;;
   esac
 }
 
+show_remove_style_menu() {
+  case $(menu "Remove" "󰸌  Theme\n  Font" "--width 250 --height 130") in
+  *Theme*) present_terminal omakub-theme-remove ;;
+  *Font*) show_remove_font_menu ;;
+  *) show_remove_menu ;;
+  esac
+}
+
+show_remove_font_menu() {
+  case $(menu "Remove Font" "  Cascadia Mono\n  JetBrains Mono\n  iA Fonts\n  Microsoft Core Fonts" "--width 350 --height 210") in
+  *Cascadia*) present_terminal "omakub-remove-font cascadia-mono" ;;
+  *JetBrains*) present_terminal "omakub-remove-font jetbrains-mono" ;;
+  *iA*) present_terminal "omakub-remove-font iafonts" ;;
+  *Microsoft*) present_terminal "omakub-remove-font mscore" ;;
+  *) show_remove_menu ;;
+  esac
+}
+
 show_remove_development_menu() {
-  case $(menu "Remove Development Environment" "󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure" "--width 250 --height 510") in
+  case $(menu "Remove Development Environment" "󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure\n  Scala" "--width 250 --height 510") in
   *Rails*) present_terminal "omakub-remove-dev-env ruby" ;;
   *JavaScript*) show_remove_javascript_menu ;;
   *Go*) present_terminal "omakub-remove-dev-env go" ;;
@@ -382,6 +416,7 @@ show_remove_development_menu() {
   *NET*) present_terminal "omakub-remove-dev-env dotnet" ;;
   *OCaml*) present_terminal "omakub-remove-dev-env ocaml" ;;
   *Clojure*) present_terminal "omakub-remove-dev-env clojure" ;;
+  *Scala*) present_terminal "omakub-remove-dev-env scala" ;;
   *) show_remove_menu ;;
   esac
 }
@@ -441,21 +476,21 @@ show_about() {
 }
 
 show_system_menu() {
-  local options="  Lock\n  Logout"
-  [ -f ~/.local/state/omakub/toggles/suspend-on ] && options="$options\n󰒲  Suspend"
-  options="$options\n󰜉  Restart\n󰐥  Shutdown"
+  local options="  Lock"
+  [[ ! -f ~/.local/state/omakub/toggles/suspend-off ]] && options="$options\n󰒲  Suspend"
+  options="$options\n  Logout\n󰜉  Restart\n󰐥  Shutdown"
 
-  local height=210
-  if [ -f ~/.local/state/omakub/toggles/suspend-on ]; then
-    height=250
+  local height=250
+  if [[ -f ~/.local/state/omakub/toggles/suspend-off ]]; then
+    height=210
   fi
 
   case $(menu "System" "$options" "--width 250 --height $height") in
-  *Lock*) omakub-cmd-lock-screen ;;
-  *Logout*) omakub-cmd-logout ;;
+  *Lock*) omakub-system-lock-screen ;;
   *Suspend*) systemctl suspend ;;
-  *Restart*) omakub-cmd-reboot ;;
-  *Shutdown*) omakub-cmd-shutdown ;;
+  *Logout*) omakub-system-logout ;;
+  *Restart*) omakub-system-reboot ;;
+  *Shutdown*) omakub-system-shutdown ;;
   *) back_to show_main_menu ;;
   esac
 }

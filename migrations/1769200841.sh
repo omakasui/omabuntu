@@ -1,4 +1,3 @@
-
 echo "Fix TUI launchers to use xdg-terminal-exec"
 
 find "$HOME/.local/share/applications" -name "*.desktop" | while read -r desktop_file; do

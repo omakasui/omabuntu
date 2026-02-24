@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo apt install -y nautilus-dropbox >/dev/null
+omakub-pkg-add nautilus-dropbox >/dev/null

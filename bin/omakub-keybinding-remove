@@ -10,21 +10,21 @@ readonly CUSTOM_KB_PATH="/org/gnome/settings-daemon/plugins/media-keys/custom-ke
 CURRENT_BINDINGS=$(gsettings get "$BASE_SCHEMA" custom-keybindings)
 
 # Check if there are any keybindings
-if [[ "$CURRENT_BINDINGS" == "@as []" || "$CURRENT_BINDINGS" == "[]" ]]; then
+if [[ $CURRENT_BINDINGS == "@as []" || $CURRENT_BINDINGS == "[]" ]]; then
   echo "No custom keybindings found."
   exit 1
 fi
 
 # Extract all custom indices
 INDICES=$(echo "$CURRENT_BINDINGS" | grep -oP 'custom\K[0-9]+' | sort -n)
-if [[ -z "$INDICES" ]]; then
+if [[ -z $INDICES ]]; then
   echo "No custom keybindings found."
   exit 1
 fi
 
 SELECTED_INDICES=()
 
-if [[ $# -eq 0 ]]; then
+if (( $# == 0 )); then
   # Interactive mode - build array of keybindings with their details
   KB_OPTIONS=()
 
@@ -33,12 +33,12 @@ if [[ $# -eq 0 ]]; then
     KB_NAME=$(gsettings get "$SCHEMA_PATH" name 2>/dev/null | tr -d "'")
     KB_BINDING=$(gsettings get "$SCHEMA_PATH" binding 2>/dev/null | tr -d "'")
 
-    if [[ -n "$KB_NAME" ]]; then
+    if [[ -n $KB_NAME ]]; then
       KB_OPTIONS+=("${index}|${KB_NAME} (${KB_BINDING})")
     fi
   done <<< "$INDICES"
 
-  if [[ ${#KB_OPTIONS[@]} -eq 0 ]]; then
+  if (( ${#KB_OPTIONS[@]} == 0 )); then
     echo "No keybindings found."
     exit 1
   fi
@@ -58,9 +58,9 @@ if [[ $# -eq 0 ]]; then
 
   # Extract indices from selected options
   while IFS= read -r line; do
-    if [[ -n "$line" ]]; then
+    if [[ -n $line ]]; then
       for option in "${SORTED_OPTIONS[@]}"; do
-        if [[ "${option#*|}" == "$line" ]]; then
+        if [[ ${option#*|} == $line ]]; then
           SELECTED_INDICES+=("${option%%|*}")
           break
         fi
@@ -75,18 +75,18 @@ else
     SCHEMA_PATH="${BASE_SCHEMA}.custom-keybinding:${CUSTOM_KB_PATH}/custom${index}/"
     KB_NAME=$(gsettings get "$SCHEMA_PATH" name 2>/dev/null | tr -d "'")
 
-    if [[ "$KB_NAME" == "$SEARCH_NAME" ]]; then
+    if [[ $KB_NAME == $SEARCH_NAME ]]; then
       SELECTED_INDICES+=("$index")
     fi
   done <<< "$INDICES"
 
-  if [[ ${#SELECTED_INDICES[@]} -eq 0 ]]; then
+  if (( ${#SELECTED_INDICES[@]} == 0 )); then
     echo "No keybinding found with name: $SEARCH_NAME"
     exit 1
   fi
 fi
 
-if [[ ${#SELECTED_INDICES[@]} -eq 0 ]]; then
+if (( ${#SELECTED_INDICES[@]} == 0 )); then
   echo "No keybindings selected."
   exit 1
 fi
@@ -110,19 +110,19 @@ while IFS= read -r index; do
   should_keep=true
 
   for selected in "${SELECTED_INDICES[@]}"; do
-    if [[ "$index" == "$selected" ]]; then
+    if [[ $index == $selected ]]; then
       should_keep=false
       break
     fi
   done
 
-  if [[ "$should_keep" == true ]]; then
+  if [[ $should_keep == true ]]; then
     NEW_PATHS+=("'${CUSTOM_KB_PATH}/custom${index}/'")
   fi
 done <<< "$INDICES"
 
 # Update the custom-keybindings array
-if [[ ${#NEW_PATHS[@]} -eq 0 ]]; then
+if (( ${#NEW_PATHS[@]} == 0 )); then
   gsettings set "$BASE_SCHEMA" custom-keybindings "[]"
 else
   gsettings set "$BASE_SCHEMA" custom-keybindings "[$(IFS=,; echo "${NEW_PATHS[*]}")]"

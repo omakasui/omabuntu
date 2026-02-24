@@ -1,4 +1,3 @@
-
 echo "Fix Apple Brightness Control Keybinding"
 
 omakub-keybinding-remove 'Apple Brightness Down (ASDControl)'

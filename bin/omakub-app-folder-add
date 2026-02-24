@@ -5,7 +5,7 @@
 
 DESKTOP_DIR="$HOME/.local/share/applications"
 
-if [ "$#" -ne 2 ]; then
+if (( $# != 2 )); then
   echo -e "\e[32mLet's add an app to a folder in the app grid!\n\e[0m"
   DESKTOP_FILE=$(gum input --prompt "Name> " --placeholder "A desktop file app (e.g., Spotify.desktop, no full path!)")
   FOLDER_NAME=$(gum input --prompt "Folder> " --placeholder "The folder name (e.g., Utilities)")
@@ -14,12 +14,12 @@ else
   FOLDER_NAME="$2"
 fi
 
-if [[ -z "$DESKTOP_FILE" || -z "$FOLDER_NAME" ]]; then
+if [[ -z $DESKTOP_FILE || -z $FOLDER_NAME ]]; then
   echo "You must set app name and folder name!"
   exit 1
 fi
 
-if [ ! -f "$DESKTOP_DIR/$DESKTOP_FILE" ]; then
+if [[ ! -f $DESKTOP_DIR/$DESKTOP_FILE ]]; then
   echo "Desktop file '$DESKTOP_FILE' not found!"
   exit 1
 fi
@@ -33,15 +33,15 @@ FOLDER_CAMELCASE=$(echo "$FOLDER_NAME" | tr -d ' ')
 
 # Check if folder exists (try exact name, camelcase, then lowercase)
 EXISTING_FOLDER=""
-if [[ "$CURRENT_FOLDERS" == *"'$FOLDER_NAME'"* ]]; then
+if [[ $CURRENT_FOLDERS == *"'$FOLDER_NAME'"* ]]; then
   # Exact name match - use original name for schema
   EXISTING_FOLDER="$FOLDER_NAME"
   FOLDER="$FOLDER_NAME"
-elif [[ "$CURRENT_FOLDERS" == *"'$FOLDER_CAMELCASE'"* ]]; then
+elif [[ $CURRENT_FOLDERS == *"'$FOLDER_CAMELCASE'"* ]]; then
   # CamelCase match (like "WebApps") - use camelcase for schema
   EXISTING_FOLDER="$FOLDER_CAMELCASE"
   FOLDER="$FOLDER_CAMELCASE"
-elif [[ "$CURRENT_FOLDERS" == *"'$FOLDER_LOWERCASE'"* ]]; then
+elif [[ $CURRENT_FOLDERS == *"'$FOLDER_LOWERCASE'"* ]]; then
   # Lowercase match - use lowercase for schema
   EXISTING_FOLDER="$FOLDER_LOWERCASE"
   FOLDER="$FOLDER_LOWERCASE"
@@ -51,7 +51,7 @@ else
 fi
 
 # Set schema and display name based on whether folder exists
-if [ -n "$EXISTING_FOLDER" ]; then
+if [[ -n $EXISTING_FOLDER ]]; then
   # Use existing folder
   SCHEMA="org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/$FOLDER/"
   FOLDER_DISPLAY_NAME=$(gsettings get "$SCHEMA" name | sed 's/^.\(.*\).$/\1/')
@@ -62,11 +62,11 @@ else
 fi
 
 # Check if we need to create a new folder
-if [ -z "$EXISTING_FOLDER" ]; then
+if [[ -z $EXISTING_FOLDER ]]; then
   # Create new folder
   TRIMMED_FOLDERS=$(echo "$CURRENT_FOLDERS" | sed "s/^\[//;s/\]$//")
 
-  if [ -n "$TRIMMED_FOLDERS" ]; then
+  if [[ -n $TRIMMED_FOLDERS ]]; then
     gsettings set org.gnome.desktop.app-folders folder-children "[$TRIMMED_FOLDERS, '$FOLDER']"
   else
     gsettings set org.gnome.desktop.app-folders folder-children "['$FOLDER']"
@@ -78,9 +78,9 @@ else
   # Add app to existing folder
   CURRENT_APPS=$(gsettings get "$SCHEMA" apps)
 
-  if [[ "$CURRENT_APPS" != *"$DESKTOP_FILE"* ]]; then
+  if [[ $CURRENT_APPS != *$DESKTOP_FILE* ]]; then
     TRIMMED=$(echo "$CURRENT_APPS" | sed "s/^\[//;s/\]$//")
-    if [ -n "$TRIMMED" ]; then
+    if [[ -n $TRIMMED ]]; then
       gsettings set "$SCHEMA" apps "[$TRIMMED, '$DESKTOP_FILE']"
     else
       gsettings set "$SCHEMA" apps "['$DESKTOP_FILE']"

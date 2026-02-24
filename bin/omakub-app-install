@@ -4,7 +4,7 @@
 
 APP_DIR="$HOME/.local/share/omakub/applications/install"
 
-if [ "$#" -eq 0 ]; then
+if (( $# == 0 )); then
   # Find all installable apps
   APPS=()
   while IFS= read -r path; do
@@ -19,7 +19,7 @@ if [ "$#" -eq 0 ]; then
     # Convert newline-separated string to array
     APP_NAMES=()
     while IFS= read -r line; do
-      [[ -n "$line" ]] && APP_NAMES+=("$line")
+      [[ -n $line ]] && APP_NAMES+=("$line")
     done <<< "$APP_NAMES_STRING"
   else
     echo "No apps to install."
@@ -30,7 +30,7 @@ else
   APP_NAMES=("$@")
 fi
 
-if [[ ${#APP_NAMES[@]} -eq 0 ]]; then
+if (( ${#APP_NAMES[@]} == 0 )); then
   echo "You must provide app names."
   exit 1
 fi
@@ -39,7 +39,7 @@ for APP_NAME in "${APP_NAMES[@]}"; do
   APP_NAME=$(echo "$APP_NAME" | sed -E 's/<[^>]+>//g' | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
 
   # If APP_NAME exists in $APP_DIR, source it to install the app
-  if [[ -f "$APP_DIR/$APP_NAME.sh" ]]; then
+  if [[ -f $APP_DIR/$APP_NAME.sh ]]; then
     source "$APP_DIR/$APP_NAME.sh"
   # If the app is not recognized, print an error message
   else

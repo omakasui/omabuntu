@@ -16,7 +16,7 @@ echo
 if [[ -f $OMAKUB_INSTALL_LOG_FILE ]] && grep -q "Total:" "$OMAKUB_INSTALL_LOG_FILE" 2>/dev/null; then
   echo
   TOTAL_TIME=$(tail -n 20 "$OMAKUB_INSTALL_LOG_FILE" | grep "^Total:" | sed 's/^Total:[[:space:]]*//')
-  if [ -n "$TOTAL_TIME" ]; then
+  if [[ -n $TOTAL_TIME ]]; then
     echo_in_style "Installed in $TOTAL_TIME"
   fi
 else

@@ -2,8 +2,8 @@
 
 # Install one of the supported development environments. Usually called via Install > Development > * in the Omabuntu Menu.
 
-if [[ -z "$1" ]]; then
-  echo "Usage: omakub-install-dev-env <ruby|node|bun|go|php|python|elixir|phoenix|rust|java|ocaml|dotnet>" >&2
+if [[ -z $1 ]]; then
+  echo "Usage: omakub-install-dev-env <ruby|node|bun|deno|go|php|python|elixir|phoenix|rust|java|zig|ocaml|dotnet|clojure|scala>" >&2
   exit 1
 fi
 
@@ -96,11 +96,17 @@ dotnet)
   ;;
 clojure)
   echo -e "Installing Clojure...\n"
-  sudo apt install -y rlwrap
+  omakub-pkg-add rlwrap
   mise use --global clojure@latest
   ;;
+scala)
+  echo -e "Installing Scala...\n"
+  mise use --global java@latest
+  mise use --global scala@latest
+  mise use --global scala-cli@latest
+  ;;
 *)
-  echo "Usage: omakub-install-dev-env <ruby|node|bun|go|php|python|elixir|phoenix|rust|java|ocaml|dotnet>" >&2
+  echo "Usage: omakub-install-dev-env <ruby|node|bun|deno|go|php|python|elixir|phoenix|rust|java|zig|ocaml|dotnet|clojure|scala>" >&2
   exit 1
   ;;
 esac

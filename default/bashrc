@@ -6,6 +6,7 @@ source ~/.local/share/omakub/default/bash/rc
 #
 # Make an alias for invoking commands you use constantly
 # alias p='python'
+# alias cx="claude --permission-mode=plan --allow-dangerously-skip-permissions"
 #
 # Use VSCode instead of neovim as your default editor
 # export EDITOR="code"
