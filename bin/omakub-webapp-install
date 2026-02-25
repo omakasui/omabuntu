@@ -53,26 +53,17 @@ if [[ -z $ICON_REF ]]; then
 fi
 
 if [[ $ICON_REF =~ ^https?:// ]]; then
-  ICON_FILE_NAME="$(echo "$APP_NAME" | tr -d ' ').png"
-  ICON_PATH="$ICON_DIR/$ICON_FILE_NAME"
+  ICON_PATH="$ICON_DIR/$APP_NAME.png"
   if ! curl -fsSL -o "$ICON_PATH" "$ICON_REF" || [[ ! -s $ICON_PATH ]]; then
     echo "Error: Failed to download icon."
     exit 1
   fi
 else
-  # If it's a local file, copy it to the standard location
-  if [[ -f $ICON_REF ]]; then
-    ICON_FILE_NAME="$(echo "$APP_NAME" | tr -d ' ').png"
-    ICON_PATH="$ICON_DIR/$ICON_FILE_NAME"
-    cp "$ICON_REF" "$ICON_PATH"
-  else
-    # Assume it's already in the correct location or is a theme icon name
-    ICON_PATH="$ICON_REF"
-  fi
+  ICON_PATH="$ICON_DIR/$ICON_REF"
 fi
 
 # Use custom exec if provided, otherwise default behavior
-EXEC_COMMAND="${CUSTOM_EXEC:-omakub-launch-webapp $APP_URL}"
+EXEC_COMMAND="${CUSTOM_EXEC:-omadeb-launch-webapp $APP_URL $APP_NAME}"
 
 # Create application .desktop file
 DESKTOP_FILE="$HOME/.local/share/applications/$APP_NAME.desktop"
