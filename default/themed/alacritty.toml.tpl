@@ -1,3 +1,6 @@
+[window]
+opacity = 0.98
+
 [colors.primary]
 background = "{{ background }}"
 foreground = "{{ foreground }}"
