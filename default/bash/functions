@@ -1,2 +1,1 @@
-
-for f in ~/.local/share/omakub/default/bash/fns/*; do source "$f"; done
+for f in $OMAKUB_PATH/default/bash/fns/*; do source "$f"; done
