@@ -11,4 +11,4 @@ export TERMINAL=xdg-terminal-exec
 
 # Omabuntu
 export OMAKUB_PATH=$HOME/.local/share/omakub
-export PATH=$OMAKUB_PATH/bin:$PATH
+export PATH=$OMAKUB_PATH/bin:$PATH:$HOME/.local/bin
