@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo
+
 if [[ -f $HOME/.local/state/omakub/reboot-required ]]; then
   echo
   gum confirm "Updates require reboot. Ready?" && omakub-system-reboot
