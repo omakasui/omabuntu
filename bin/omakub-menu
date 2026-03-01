@@ -103,7 +103,7 @@ show_share_menu() {
 show_toggle_menu() {
   case $(menu "Toggle" "󰔎  Nightlight" "--width 250 --height 80") in
   *Nightlight*) omakub-toggle-nightlight ;;
-  *) show_trigger_menu ;;
+  *) back_to show_trigger_menu ;;
   esac
 }
 
@@ -504,6 +504,7 @@ go_to_menu() {
   *apps*) omakub-apps ;;
   *learn*) show_learn_menu ;;
   *trigger*) show_trigger_menu ;;
+  *toggle*) show_toggle_menu ;;
   *style*) show_style_menu ;;
   *theme*) show_theme_menu ;;
   *setup*) show_setup_menu ;;
