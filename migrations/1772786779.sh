@@ -1,3 +1,9 @@
+echo "Fix nvim transparency to preserve highlight foreground colors"
+
+TRANSPARENCY_FILE="$HOME/.config/nvim/plugin/after/transparency.lua"
+
+if [[ -f "$TRANSPARENCY_FILE" ]]; then
+  cat > "$TRANSPARENCY_FILE" << 'EOF'
 -- Make highlight groups transparent while preserving their other attributes
 local function make_transparent(name)
 	local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = name, link = false })
@@ -57,3 +63,5 @@ local groups = {
 for _, name in ipairs(groups) do
 	make_transparent(name)
 end
+EOF
+fi
