@@ -1,20 +1,7 @@
 #!/bin/bash
 
-cd /tmp
-wget -O nvim.tar.gz "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz"
-tar -xf nvim.tar.gz
-sudo install nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
-sudo cp -R nvim-linux-x86_64/lib /usr/local/
-sudo cp -R nvim-linux-x86_64/share /usr/local/
-rm -rf nvim-linux-x86_64 nvim.tar.gz
-cd -
+# Install omakasui-nvim, which includes lazyvim and the themes
+omakub-pkg-add omakasui-nvim
 
-# Install luarocks and tree-sitter-cli to resolve lazyvim :checkhealth warnings
-omakub-pkg-add luarocks tree-sitter-cli
-
-# Use LazyVim
-rm -rf ~/.config/nvim
-git clone https://github.com/LazyVim/starter ~/.config/nvim
-cp -R ~/.local/share/omakub/config/nvim/* ~/.config/nvim/
-rm -rf ~/.config/nvim/.git
-echo "vim.opt.relativenumber = false" >>~/.config/nvim/lua/config/options.lua
+# Setup all the configs and plugins
+omakasui-nvim-setup
