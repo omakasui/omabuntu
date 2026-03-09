@@ -1,5 +1,7 @@
 echo "Nautilus now handles all terminals..."
-omakub-pkg-remove nautilus-extension-gnome-terminal
+if omakub-pkg-present nautilus-extension-gnome-terminal; then
+    omakub-pkg-remove nautilus-extension-gnome-terminal
+fi
 omakub-pkg-add omakasui-nautilus-open-any-terminal
 
 # Set the default terminal for the nautilus-open-any-terminal extension
