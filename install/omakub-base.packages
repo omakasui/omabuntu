@@ -42,6 +42,8 @@ libyaml-dev
 mpv
 mupdf
 mupdf-tools
+omakasui-lazydocker
+omakasui-lazygit
 pipx
 pkg-config
 plocate

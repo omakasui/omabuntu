@@ -274,7 +274,7 @@ show_install_font_menu() {
 
 show_install_development_menu() {
   case $(menu "Install" "  Docker\n󱘲  Databases\n󰊢  Git\n󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure\n  Scala" "--width 250 --height 600") in
-  *Docker*) show_install_docker_menu ;;
+  *Docker*) install "Docker" "docker" ;;
   *Databases*) show_install_databases_menu ;;
   *Git*) show_install_git_menu ;;
   *Rails*) present_terminal "omakub-install-dev-env ruby" ;;
@@ -294,14 +294,6 @@ show_install_development_menu() {
   esac
 }
 
-show_install_docker_menu() {
-  case $(menu "Install Docker" "  Engine\n  LazyDocker" "--width 250 --height 130") in
-  *Engine*) install "Docker Engine" "docker" ;;
-  *LazyDocker*) install "LazyDocker" "lazydocker" ;;
-  *) show_install_development_menu ;;
-  esac
-}
-
 show_install_databases_menu() {
   case $(menu "Install Databases" "  MySQL\n  PostgreSQL\n  MariaDB\n  Redis\n  MongoDB\n󱘲  MSSQL" "--width 250 --height 280") in
   *MySQL*) present_terminal "omakub-install-docker-dbs mysql" ;;
@@ -315,10 +307,9 @@ show_install_databases_menu() {
 }
 
 show_install_git_menu() {
-  case $(menu "Install Git" "  Github CLI\n  Gitlab CLI\n  Lazygit" "--width 250 --height 170") in
+  case $(menu "Install Git" "  Github CLI\n  Gitlab CLI" "--width 250 --height 130") in
   *Github*) install "Github CLI" "github-cli" ;;
   *Gitlab*) install "Gitlab CLI" "gitlab-cli" ;;
-  *Lazygit*) install "Lazygit" "lazygit" ;;
   *) show_install_development_menu ;;
   esac
 }
