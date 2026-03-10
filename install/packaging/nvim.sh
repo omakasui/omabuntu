@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# Install Neovim + LazyVim
-source ~/.local/share/omakub/applications/install/neovim.sh
+# Setup all the configs and plugins
+omakasui-nvim-setup

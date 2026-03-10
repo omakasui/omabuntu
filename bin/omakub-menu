@@ -63,6 +63,10 @@ open_in_editor() {
 }
 
 install() {
+  present_terminal "echo 'Installing $1...'; omakub-pkg-add $2"
+}
+
+install_app() {
   present_terminal "echo 'Installing $1...'; omakub-app-install $2"
 }
 
@@ -75,6 +79,10 @@ install_terminal() {
 }
 
 remove() {
+  present_terminal "echo 'Removing $1...'; omakub-pkg-drop $2"
+}
+
+remove_app() {
   present_terminal "echo 'Removing $1...'; omakub-app-remove $2"
 }
 
@@ -214,39 +222,39 @@ show_install_menu() {
 
 show_install_service_menu() {
   case $(menu "Install" "  1password\n  Bitwarden\n  Discord\n  Dropbox\n  LibreOffice\n  LocalSend\n  ObsStudio\n  Obsidian\n  Signal\n  Spotify\n  Typora\n  Tailscale\n  Zoom" "--width 250 --height 550") in
-  *1password*) install "1password" "1password" ;;
-  *Bitwarden*) install "Bitwarden" "bitwarden" ;;
-  *Discord*) install "Discord" "discord" ;;
-  *Dropbox*) install "Dropbox" "dropbox" ;;
+  *1password*) install_app "1password" "1password" ;;
+  *Bitwarden*) install_app "Bitwarden" "bitwarden" ;;
+  *Discord*) install_app "Discord" "discord" ;;
+  *Dropbox*) install_app "Dropbox" "dropbox" ;;
   *LibreOffice*) install "LibreOffice" "libreoffice" ;;
-  *LocalSend*) install "LocalSend" "localsend" ;;
+  *LocalSend*) install_app "LocalSend" "localsend" ;;
   *ObsStudio*) install "ObsStudio" "obs-studio" ;;
-  *Obsidian*) install "Obsidian" "obsidian" ;;
-  *Signal*) install "Signal" "signal" ;;
-  *Spotify*) install "Spotify" "spotify" ;;
-  *Typora*) install "Typora" "typora" ;;
-  *Tailscale*) install "Tailscale" "tailscale" ;;
-  *Zoom*) install "Zoom" "zoom" ;;
+  *Obsidian*) install_app "Obsidian" "obsidian" ;;
+  *Signal*) install_app "Signal" "signal" ;;
+  *Spotify*) install_app "Spotify" "spotify" ;;
+  *Typora*) install_app "Typora" "typora" ;;
+  *Tailscale*) install_app "Tailscale" "tailscale" ;;
+  *Zoom*) install_app "Zoom" "zoom" ;;
   *) show_install_menu ;;
   esac
 }
 
 show_install_browser_menu() {
   case $(menu "Install" "  Brave\n  Chromium\n  Firefox\n  Zen" "--width 250 --height 210") in
-  *Brave*) install "Brave" "brave" ;;
-  *Chromium*) install "Chromium" "chromium" ;;
-  *Firefox*) install "Firefox" "firefox" ;;
-  *Zen*) install "Zen Browser" "zen" ;;
+  *Brave*) install_app "Brave" "brave" ;;
+  *Chromium*) install_app "Chromium" "chromium" ;;
+  *Firefox*) install_app "Firefox" "firefox" ;;
+  *Zen*) install_app "Zen Browser" "zen" ;;
   *) show_install_menu ;;
   esac
 }
 
 show_install_utility_menu() {
   case $(menu "Install" "  ASDControl\n  Flameshot\n  Pinta\n  Starship\n  Xournalpp" "--width 250 --height 245") in
-  *ASDControl*) install "ASDControl" "asdcontrol" ;;
+  *ASDControl*) install_app "ASDControl" "asdcontrol" ;;
   *Flameshot*) install "Flameshot" "flameshot" ;;
-  *Pinta*) install "Pinta" "pinta" ;;
-  *Starship*) install "Starship" "starship" ;;
+  *Pinta*) install_app "Pinta" "pinta" ;;
+  *Starship*) install_app "Starship" "starship" ;;
   *Xournalpp*) install "Xournalpp" "xournalpp" ;;
   *) show_install_menu ;;
   esac
@@ -307,8 +315,8 @@ show_install_databases_menu() {
 
 show_install_git_menu() {
   case $(menu "Install Git" "  Github CLI\n  Gitlab CLI" "--width 250 --height 130") in
-  *Github*) install "Github CLI" "github-cli" ;;
-  *Gitlab*) install "Gitlab CLI" "gitlab-cli" ;;
+  *Github*) install_app "Github CLI" "github-cli" ;;
+  *Gitlab*) install_app "Gitlab CLI" "gitlab-cli" ;;
   *) show_install_development_menu ;;
   esac
 }
@@ -332,11 +340,10 @@ show_install_elixir_menu() {
 
 show_install_editor_menu() {
   case $(menu "Install" "  NeoVim\n  VSCode\n  Cursor\n  Zed\n  Emacs" "--width 250 --height 245") in
-  *VSCode*) install "Visual Studio Code" "visual-studio-code" ;;
-  *NeoVim*) install "NeoVim" "neovim" ;;
-  *Cursor*) install "Cursor" "cursor" ;;
-  *Zed*) install "Zed" "zed" ;;
-  *Emacs*) install "Doom Emacs" "doom-emacs" ;;
+  *VSCode*) install_app "Visual Studio Code" "visual-studio-code" ;;
+  *Cursor*) install_app "Cursor" "cursor" ;;
+  *Zed*) install_app "Zed" "zed" ;;
+  *Emacs*) install_app "Doom Emacs" "doom-emacs" ;;
   *) show_install_menu ;;
   esac
 }
@@ -351,19 +358,19 @@ show_install_terminal_menu() {
 
 show_install_ai_menu() {
   case $(menu "Install" "󱚤  Claude Code\n󱚤  Copilot CLI\n󱚤  Ollama\n󱚤  OpenCode" "--width 250 --height 210") in
-  *Claude*) install "Claude Code" "claude-code" ;;
-  *Copilot*) install "Github Copilot CLI" "github-copilot-cli" ;;
-  *Ollama*) install "Ollama" "ollama" ;;
-  *OpenCode*) install "OpenCode" "opencode" ;;
+  *Claude*) install_app "Claude Code" "claude-code" ;;
+  *Copilot*) install_app "Github Copilot CLI" "github-copilot-cli" ;;
+  *Ollama*) install_app "Ollama" "ollama" ;;
+  *OpenCode*) install_app "OpenCode" "opencode" ;;
   *) show_install_menu ;;
   esac
 }
 
 show_install_gaming_menu() {
   case $(menu "Install" "  Steam\n  RetroArch\n󰍳  Minecraft" "--width 250 --height 170") in
-  *Steam*) install "Steam" "steam" ;;
-  *RetroArch*) install "RetroArch" "retroarch" ;;
-  *Minecraft*) install "Minecraft" "minecraft" ;;
+  *Steam*) install_app "Steam" "steam" ;;
+  *RetroArch*) install_app "RetroArch" "retroarch" ;;
+  *Minecraft*) install_app "Minecraft" "minecraft" ;;
   *) show_install_menu ;;
   esac
 }

@@ -14,6 +14,7 @@ eza
 fd-find
 ffmpeg
 ffmpegthumbnailer
+flameshot
 flatpak
 fzf
 gir1.2-clutter-1.0
@@ -35,6 +36,7 @@ libncurses-dev
 libpq-dev
 libreadline-dev
 libreadline-dev
+libreoffice
 libsqlite3-0
 libssl-dev
 libvips42t64
@@ -46,6 +48,7 @@ omakasui-fastfetch
 omakasui-font-cascadia-mono-nf
 omakasui-lazydocker
 omakasui-lazygit
+omakasui-nvim
 omakasui-zellij
 pipx
 pkg-config
@@ -62,6 +65,7 @@ systemd-container
 ufw
 unzip
 xdg-terminal-exec
+xournalpp
 wget
 wl-clipboard
 wofi
