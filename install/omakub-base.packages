@@ -44,6 +44,7 @@ mupdf
 mupdf-tools
 omakasui-lazydocker
 omakasui-lazygit
+omakasui-zellij
 pipx
 pkg-config
 plocate

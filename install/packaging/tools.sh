@@ -11,9 +11,6 @@ omakub-pkg-add fastfetch
 # Install mise
 source ~/.local/share/omakub/applications/install/mise.sh
 
-# Install Zellij
-source ~/.local/share/omakub/applications/install/zellij.sh
-
 # Install Docker
 source ~/.local/share/omakub/applications/install/docker.sh
 
