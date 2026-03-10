@@ -339,7 +339,7 @@ show_install_elixir_menu() {
 }
 
 show_install_editor_menu() {
-  case $(menu "Install" "  NeoVim\n  VSCode\n  Cursor\n  Zed\n  Emacs" "--width 250 --height 245") in
+  case $(menu "Install" "  VSCode\n  Cursor\n  Zed\n  Emacs" "--width 250 --height 210") in
   *VSCode*) install_app "Visual Studio Code" "visual-studio-code" ;;
   *Cursor*) install_app "Cursor" "cursor" ;;
   *Zed*) install_app "Zed" "zed" ;;
