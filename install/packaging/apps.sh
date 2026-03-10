@@ -5,11 +5,8 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 # Base Apps
 apps=(
 	"Chromium"
-	"Flameshot"
 	"LocalSend"
-	"LibreOffice"
 	"Pinta"
-	"Xournalpp"
 )
 
 # Install optional apps

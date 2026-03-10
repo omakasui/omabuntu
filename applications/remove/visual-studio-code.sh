@@ -1,4 +1,4 @@
 #!/bin/bash
 
-sudo apt remove --purge -y code
+omakub-pkg-drop code
 rm -rf ~/.config/Code/User

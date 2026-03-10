@@ -1,4 +1,4 @@
 #!/bin/bash
 
-sudo apt remove typora -y
+omakub-pkg-drop typora
 rm -rf ~/.config/Typora

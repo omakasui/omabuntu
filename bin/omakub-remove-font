@@ -10,21 +10,16 @@ fi
 
 case "$1" in
 jetbrains-mono)
-  echo -e "Removing JetBrains Mono...\n"
-  rm -f ~/.local/share/fonts/JetBrainsMono-*.ttf
+  omakub-pkg-remove omakasui-font-jetbrains-mono
   ;;
 iafonts)
-  echo -e "Removing iA Fonts...\n"
-  rm -f ~/.local/share/fonts/iAWriterMonoS-*.ttf
+  omakub-pkg-remove omakasui-font-ia-writer-mono
   ;;
 cascadia-mono)
-  echo -e "Removing Cascadia Mono...\n"
-  rm -f ~/.local/share/fonts/CascadiaMono-*.ttf
-  rm -rf CascadiaMono.zip CascadiaFont
+  omakub-pkg-remove omakasui-font-cascadia-mono-nf
   ;;
 mscore)
-  echo -e "Removing Microsoft Core Fonts...\n"
-  sudo apt -y remove ttf-mscorefonts-installer
+  omakub-pkg-remove ttf-mscorefonts-installer
   ;;
 *)
   echo "Usage: omadeb-remove-font <font>" >&2
