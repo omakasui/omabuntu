@@ -11,21 +11,15 @@ mkdir -p ~/.local/share/fonts
 
 case "$1" in
 jetbrains-mono)
-  echo -e "Installing JetBrains Mono...\n"
   omakub-pkg-add omakasui-font-jetbrains-mono
   ;;
 iafonts)
-  wget -O iafonts.zip https://github.com/iaolo/iA-Fonts/archive/refs/heads/master.zip
-  unzip iafonts.zip -d iaFonts
-  cp "iaFonts/iA-Fonts-master/iA Writer Mono/Static"/iAWriterMonoS-*.ttf ~/.local/share/fonts
-  rm -rf iafonts.zip iaFonts
+  omakub-pkg-add omakasui-font-ia-writer-mono
   ;;
 cascadia-mono)
-  echo -e "Installing Cascadia Mono NF...\n"
   omakub-pkg-add omakasui-font-cascadia-mono-nf
   ;;
 mscore)
-  echo -e "Installing Microsoft Core Fonts...\n"
   omakub-pkg-add ttf-mscorefonts-installer
   ;;
 *)
