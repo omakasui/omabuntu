@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Overwrite the user configs for the Walker application launcher (which also powers the Omakub Menu) and restart the services.
+
+# Ensure walker is set to autostart
+mkdir -p ~/.config/autostart/
+cp $OMAKUB_PATH/default/walker/walker.desktop ~/.config/autostart/
+
+# And restarts if it crashes or is killed
+mkdir -p ~/.config/systemd/user/app-walker@autostart.service.d/
+cp $OMAKUB_PATH/default/walker/restart.conf ~/.config/systemd/user/app-walker@autostart.service.d/restart.conf
+
+systemctl --user daemon-reload
+
+# Refresh configs
+omakub-refresh-config walker/config.toml
+omakub-refresh-config elephant/calc.toml
+omakub-refresh-config elephant/desktopapplications.toml
+
+# Restart service
+omakub-restart-walker
