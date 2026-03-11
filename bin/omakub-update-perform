@@ -6,6 +6,7 @@ set -e
 export CLICOLOR_FORCE=1
 exec > >(tee "/tmp/omakub-update.log") 2>&1
 
+omakub-update-keyring
 omakub-update-system-pkgs
 omakub-update-gnome-extensions
 omakub-migrate

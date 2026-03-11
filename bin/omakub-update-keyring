@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Before updating the system, we need to make sure the Omakasui APT repository keyring is up to date. This is required to avoid "NO_PUBKEY" errors during the update.
+echo -e "\e[32m\nUpdate Omakasui APT repository keyring\e[0m"
+curl -fsSL https://keyrings.omakasui.org/omakasui-packages.gpg.key \
+  | gpg --dearmor \
+  | sudo tee /usr/share/keyrings/omakasui-packages.gpg > /dev/null
