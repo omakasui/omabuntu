@@ -1,0 +1,94 @@
+echo -e "\e[32m\nRefresh Omakasui APT repository with new keyring and source list\e[0m"
+
+if [[ -f /usr/share/keyrings/omakasui-apt.gpg ]]; then
+  sudo rm -f /usr/share/keyrings/omakasui-apt.gpg
+fi
+
+if [[ -f /etc/apt/sources.list.d/omakasui.list ]]; then
+  sudo rm -f /etc/apt/sources.list.d/omakasui.list
+fi
+
+curl -fsSL https://keyrings.omakasui.org/omakasui-packages.gpg.key \
+  | gpg --dearmor \
+  | sudo tee /usr/share/keyrings/omakasui-packages.gpg > /dev/null
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/omakasui-packages.gpg] \
+  https://packages.omakasui.org $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") main" \
+  | sudo tee /etc/apt/sources.list.d/omakasui.list > /dev/null
+
+sudo apt update
+
+echo -e "\e[32m\nRefresh Omakasui packages\e[0m"
+
+# Gum
+omakub-pkg-add gum
+
+# Lazygit, Lazydocker, Zellij, Fastfetch
+if omakub-pkg-present omakasui-lazygit; then
+  omakub-pkg-drop omakasui-lazygit
+fi
+omakub-pkg-add lazygit
+
+if omakub-pkg-present omakasui-lazydocker; then
+  omakub-pkg-drop omakasui-lazydocker
+fi
+omakub-pkg-add lazydocker
+
+if omakub-pkg-present omakasui-zellij; then
+  omakub-pkg-drop omakasui-zellij
+fi
+omakub-pkg-add zellij
+
+sudo add-apt-repository --remove -y ppa:zhangsongcui3371/fastfetch
+if omakub-pkg-present omakasui-fastfetch; then
+  omakub-pkg-drop omakasui-fastfetch
+fi
+omakub-pkg-add fastfetch
+
+# Fonts
+if omakub-pkg-present omakasui-font-cascadia-mono-nf; then
+  omakub-pkg-drop omakasui-font-cascadia-mono-nf
+  omakub-pkg-add font-cascadia-mono-nf
+fi
+
+if omakub-pkg-present omakasui-font-jetbrains-mono; then
+  omakub-pkg-drop omakasui-font-jetbrains-mono
+  omakub-pkg-add font-jetbrains-mono
+fi
+
+if omakub-pkg-present omakasui-ia-writer-mono; then
+  omakub-pkg-drop omakasui-ia-writer-mono
+  omakub-pkg-add font-ia-writer-mono
+fi
+
+# NVim
+echo -e "\e[32m\nChange to omakasui-nvim package\e[0m"
+if omakub-pkg-present omakasui-nvim; then
+  omakub-pkg-add omakasui-nvim
+else
+  omakub-pkg-add omakasui-nvim
+  # Will trigger to overwrite configs or not to pickup new hot-reload themes
+  omakasui-nvim-setup
+fi
+
+# Nautilus
+echo -e "\e[32m\nNautilus now handles all terminals...\e[0m"
+if omakub-pkg-present nautilus-extension-gnome-terminal; then
+    omakub-pkg-drop nautilus-extension-gnome-terminal
+fi
+
+if omakub-pkg-present omakasui-nautilus-open-any-terminal; then
+    omakub-pkg-drop omakasui-nautilus-open-any-terminal
+fi
+omakub-pkg-add nautilus-open-any-terminal
+
+# Set the default terminal for the nautilus-open-any-terminal extension
+DEFAULT_TERMINAL=$(omakub-terminal-current)
+DEFAULT_TERMINAL=${DEFAULT_TERMINAL,,}
+
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal "${DEFAULT_TERMINAL}"
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal keybindings '<Ctrl><Alt>t'
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal new-tab true
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal flatpak system
+
+

@@ -10,13 +10,13 @@ fi
 
 case "$1" in
 jetbrains-mono)
-  omakub-pkg-remove omakasui-font-jetbrains-mono
+  omakub-pkg-remove font-jetbrains-mono
   ;;
 iafonts)
-  omakub-pkg-remove omakasui-font-ia-writer-mono
+  omakub-pkg-remove font-ia-writer-mono
   ;;
 cascadia-mono)
-  omakub-pkg-remove omakasui-font-cascadia-mono-nf
+  omakub-pkg-remove font-cascadia-mono-nf
   ;;
 mscore)
   omakub-pkg-remove ttf-mscorefonts-installer

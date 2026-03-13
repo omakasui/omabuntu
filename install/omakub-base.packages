@@ -11,11 +11,13 @@ clang
 cmake
 curl
 eza
+fastfetch
 fd-find
 ffmpeg
 ffmpegthumbnailer
 flameshot
 flatpak
+font-cascadia-mono-nf
 fzf
 gir1.2-clutter-1.0
 gir1.2-gtop-2.0
@@ -27,6 +29,8 @@ gpg
 imagemagick
 imv
 jq
+lazydocker
+lazygit
 libffi-dev
 libgdbm-dev
 libjemalloc2
@@ -44,12 +48,7 @@ libyaml-dev
 mpv
 mupdf
 mupdf-tools
-omakasui-fastfetch
-omakasui-font-cascadia-mono-nf
-omakasui-lazydocker
-omakasui-lazygit
 omakasui-nvim
-omakasui-zellij
 pipx
 pkg-config
 plocate
@@ -69,5 +68,6 @@ xournalpp
 wget
 wl-clipboard
 wofi
+zellij
 zlib1g-dev
 zoxide
