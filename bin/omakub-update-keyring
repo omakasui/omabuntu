@@ -5,3 +5,9 @@ echo -e "\e[32m\nUpdate Omakasui APT repository keyring\e[0m"
 curl -fsSL https://keyrings.omakasui.org/omakasui-packages.gpg.key \
   | gpg --dearmor \
   | sudo tee /usr/share/keyrings/omakasui-packages.gpg > /dev/null
+
+if [ ! -f /etc/apt/sources.list.d/omakasui.list ]; then
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/omakasui-packages.gpg] \
+  https://packages.omakasui.org $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") main" \
+  | sudo tee /etc/apt/sources.list.d/omakasui.list > /dev/null
+fi

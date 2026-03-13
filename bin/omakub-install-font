@@ -11,13 +11,13 @@ mkdir -p ~/.local/share/fonts
 
 case "$1" in
 jetbrains-mono)
-  omakub-pkg-add omakasui-font-jetbrains-mono
+  omakub-pkg-add font-jetbrains-mono
   ;;
 iafonts)
-  omakub-pkg-add omakasui-font-ia-writer-mono
+  omakub-pkg-add font-ia-writer-mono
   ;;
 cascadia-mono)
-  omakub-pkg-add omakasui-font-cascadia-mono-nf
+  omakub-pkg-add font-cascadia-mono-nf
   ;;
 mscore)
   omakub-pkg-add ttf-mscorefonts-installer

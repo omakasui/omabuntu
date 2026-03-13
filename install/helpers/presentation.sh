@@ -2,7 +2,7 @@
 
 # Ensure we have gum available
 if ! command -v gum &> /dev/null; then
-  omakub-pkg-add omakasui-gum
+  omakub-pkg-add gum
 fi
 
 export LOGO_PATH="$OMAKUB_PATH/logo.txt"
