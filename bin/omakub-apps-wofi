@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Launch an application using omakub-launch-wofi.
+
+omakub-launch-wofi --show drun --sort-order=alphabetical --width 600 --height 350 --prompt "Launch…"

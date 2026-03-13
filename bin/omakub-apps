@@ -1,5 +1,5 @@
 #!/bin/bash
 
-# Launch an application using omakub-launch-wofi.
+# Launch an application using omakub-launch-walker.
 
-omakub-launch-wofi --show drun --sort-order=alphabetical --width 600 --height 350 --prompt "Launch…"
+omakub-launch-walker
