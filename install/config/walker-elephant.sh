@@ -10,9 +10,9 @@ cp $OMAKUB_PATH/default/walker/restart.conf ~/.config/systemd/user/app-walker@au
 
 # Create apt hook to restart walker after updates
 sudo mkdir -p /etc/apt/apt.conf.d
-sudo tee /etc/apt/apt.conf.d/99restart-walker << 'EOF'
+sudo tee /etc/apt/apt.conf.d/99restart-walker << EOF
 DPkg::Post-Invoke {
-    "if dpkg -l walker 2>/dev/null | grep -q '^ii'; then /usr/local/bin/omakub-restart-walker; fi";
+    "if dpkg -l walker 2>/dev/null | grep -q '^ii'; then $OMAKUB_PATH/bin/omakub-restart-walker; fi";
 };
 EOF
 
