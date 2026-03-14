@@ -3,7 +3,7 @@
 # Add the named packages to the system if they're missing. Returns false if it couldn't be done.
 
 if omakub-pkg-missing "$@"; then
-  sudo apt -y install "$@" || exit 1
+  sudo apt-get -y install "$@" || exit 1
 fi
 
 for pkg in "$@"; do

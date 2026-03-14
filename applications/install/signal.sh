@@ -9,5 +9,5 @@ if [[ ! -f /etc/apt/sources.list.d/signal-desktop.sources ]]; then
   rm signal-desktop-keyring.gpg signal-desktop.sources
 fi
 
-sudo apt update
+sudo apt-get update
 omakub-pkg-add signal-desktop

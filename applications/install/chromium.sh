@@ -2,5 +2,5 @@
 
 # Browse the web with the most popular browser. See https://www.google.com/chromium/
 sudo add-apt-repository -y ppa:xtradeb/apps
-sudo apt update -y
+sudo apt-get update
 omakub-pkg-add chromium

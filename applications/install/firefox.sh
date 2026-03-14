@@ -14,5 +14,5 @@ Pin-Priority: 1001
 EOF
 fi
 
-sudo apt update
+sudo apt-get update
 omakub-pkg-add firefox
