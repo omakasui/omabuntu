@@ -9,6 +9,7 @@ FIRST_RUN_MODE=~/.local/state/omakub/first-run.mode
 
 if [[ -f $FIRST_RUN_MODE ]]; then
   bash "$OMAKUB_PATH/install/first-run/firewall.sh"
+  bash "$OMAKUB_PATH/install/first-run/elephant.sh"
   sudo rm -f /etc/sudoers.d/first-run
 
   bash "$OMAKUB_PATH/install/first-run/welcome.sh"
