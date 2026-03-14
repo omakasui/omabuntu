@@ -272,7 +272,7 @@ show_install_style_menu() {
 show_install_font_menu() {
   case $(menu "Install" "  Cascadia Mono\n  JetBrains Mono\n  iA Fonts\n  Microsoft Core Fonts" "--width 350 --height 210") in
   *Cascadia*) install_font "Cascadia Mono" "cascadia-mono" "Cascadia Mono Nerd Font" ;;
-  *JetBrains*) install_font "JetBrains Mono" "jetbrains-mono" "JetBrains Mono Nerd Font" ;;
+  *JetBrains*) install_font "JetBrains Mono" "jetbrains-mono" "JetBrains Mono" ;;
   *iA*) install_font "iA Fonts" "iafonts" "iA Fonts Nerd Font" ;;
   *Microsoft*) install_font "Microsoft Core Fonts" "mscore" "Microsoft Core Fonts" ;;
   *) show_install_menu ;;
