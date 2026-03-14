@@ -156,7 +156,7 @@ show_font_family_menu() {
 }
 
 show_setup_menu() {
-  case $(menu "Setup" "  System Sleep\n  Folders\n  Keybindings\n  Starship\n  Zellij\n󰌧  Walker\n󰞅  XCompose") in
+  case $(menu "Setup" "󰤆  System Sleep\n  Folders\n  Keybindings\n  Starship\n  Zellij\n󰌧  Walker\n󰞅  XCompose") in
   *System*) show_setup_system_menu ;;
   *Folders*) show_setup_folders_menu ;;
   *Keybindings*) show_setup_keybindings_menu ;;
@@ -485,9 +485,9 @@ show_about() {
 }
 
 show_system_menu() {
-  local options="  Lock"
+  local options="󰌾  Lock"
   [[ ! -f ~/.local/state/omakub/toggles/suspend-off ]] && options="$options\n󰒲  Suspend"
-  options="$options\n  Logout\n󰜉  Restart\n󰐥  Shutdown"
+  options="$options\n󰌾  Logout\n󰜉  Restart\n󰐥  Shutdown"
 
   case $(menu "System" "$options") in
   *Lock*) omakub-system-lock-screen ;;
@@ -500,7 +500,7 @@ show_system_menu() {
 }
 
 show_main_menu() {
-  go_to_menu "$(menu "Go" "󰀻  Apps\n󰧑  Learn\n󱓞  Trigger\n  Style\n  Setup\n󰉉  Install\n󰭌  Remove\n  Update\n  About\n  System")"
+  go_to_menu "$(menu "Go" "󰀻  Apps\n󰧑  Learn\n󱓞  Trigger\n  Style\n  Setup\n󰉉  Install\n󰭌  Remove\n󰑐  Update\n  About\n󰤆  System")"
 }
 
 go_to_menu() {
