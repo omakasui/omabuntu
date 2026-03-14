@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Ensure we have curl available
+if ! command -v curl &> /dev/null; then
+  omakub-pkg-add curl
+fi
+
 # Add Omakasui APT repository
 curl -fsSL https://keyrings.omakasui.org/omakasui-packages.gpg.key \
   | gpg --dearmor \
