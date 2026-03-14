@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Finish the installation of Omabuntu with items that can only be done after logging in.
+
+set -e
+
+FIRST_RUN_MODE=~/.local/state/omakub/first-run.mode
+
+if [[ -f $FIRST_RUN_MODE ]]; then
+  rm -f "$FIRST_RUN_MODE"
+
+  bash "$OMAKUB_PATH/install/first-run/firewall.sh"
+  sudo rm -f /etc/sudoers.d/first-run
+
+  bash "$OMAKUB_PATH/install/first-run/welcome.sh"
+fi

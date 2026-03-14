@@ -62,6 +62,7 @@ rustc
 sqlite3
 systemd-container
 ufw
+ufw-docker
 unzip
 xdg-terminal-exec
 xournalpp
