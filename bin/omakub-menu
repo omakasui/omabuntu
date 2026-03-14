@@ -156,13 +156,13 @@ show_font_family_menu() {
 }
 
 show_setup_menu() {
-  case $(menu "Setup" "  System Sleep\n  Folders\n  Keybindings\n  Starship\n  Zellij\n󰌧  Wofi\n󰞅  XCompose") in
+  case $(menu "Setup" "  System Sleep\n  Folders\n  Keybindings\n  Starship\n  Zellij\n󰌧  Walker\n󰞅  XCompose") in
   *System*) show_setup_system_menu ;;
   *Folders*) show_setup_folders_menu ;;
   *Keybindings*) show_setup_keybindings_menu ;;
   *Starship*) edit_in_nvim ~/.config/starship.toml ;;
   *Zellij*) edit_in_nvim ~/.config/zellij/config.kdl ;;
-  *Wofi*) edit_in_nvim ~/.config/wofi/config ;;
+  *Walker*) open_in_editor ~/.config/walker/config.toml && omakub-restart-walker ;;
   *XCompose*) open_in_editor ~/.XCompose && omakub-restart-xcompose ;;
   *) show_main_menu ;;
   esac
@@ -425,11 +425,12 @@ show_remove_development_menu() {
 show_update_menu() {
   local brand_name=$(omakub-brand)
 
-  case $(menu "Update" "󰟢  $brand_name\n󰔫  Channel\n  Config\n󰸌  Themes\n󰇅  Hardware\n  Firmware\n  Password") in
+  case $(menu "Update" "󰟢  $brand_name\n󰔫  Channel\n  Config\n󰸌  Themes\n  Process\n󰇅  Hardware\n  Firmware\n  Password") in
   *$brand_name*) present_terminal omakub-update ;;
   *Channel*) show_update_channel_menu ;;
   *Config*) show_update_config_menu ;;
   *Themes*) present_terminal omakub-theme-update ;;
+  *Process*) show_update_process_menu ;;
   *Hardware*) show_update_hardware_menu ;;
   *Firmware*) present_terminal omakub-update-firmware ;;
   *Password*) show_update_password_menu ;;
@@ -446,14 +447,21 @@ show_update_channel_menu() {
 }
 
 show_update_config_menu() {
-  case $(menu "Use default config" "  Gnome\n󰍂  GDM\n  Keybindings\n󱣴  Plymouth\n󰌧  Wofi\n  Starship\n  Zellij") in
+  case $(menu "Use default config" "  Gnome\n󰍂  GDM\n  Keybindings\n󱣴  Plymouth\n󰌧  Walker\n  Starship\n  Zellij") in
   *Gnome*) present_terminal omakub-refresh-gnome ;;
   *GDM*) present_terminal omakub-refresh-gdm ;;
   *Keybindings*) present_terminal omakub-refresh-keybindings ;;
   *Plymouth*) present_terminal omakub-refresh-plymouth ;;
-  *Wofi*) present_terminal omakub-refresh-wofi ;;
+  *Walker*) present_terminal omakub-refresh-walker ;;
   *Starship*) present_terminal omakub-refresh-config starship.toml ;;
   *Zellij*) present_terminal omakub-refresh-config zellij/config.kdl ;;
+  *) show_update_menu ;;
+  esac
+}
+
+show_update_process_menu() {
+  case $(menu "Restart" "󰌧  Walker") in
+  *Walker*) omakub-restart-walker ;;
   *) show_update_menu ;;
   esac
 }

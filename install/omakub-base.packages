@@ -49,6 +49,7 @@ mpv
 mupdf
 mupdf-tools
 omakasui-nvim
+omakasui-walker
 pipx
 pkg-config
 plocate
@@ -68,7 +69,6 @@ xdg-terminal-exec
 xournalpp
 wget
 wl-clipboard
-wofi
 zellij
 zlib1g-dev
 zoxide
