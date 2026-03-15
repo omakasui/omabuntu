@@ -124,7 +124,7 @@ show_style_menu() {
   case $(menu "Style" "󰸌  Theme\n  Font\n  Background") in
   *Theme*) show_theme_menu ;;
   *Font*) show_font_menu ;;
-  *Background*) omakub-theme-bg-next ;;
+  *Background*) show_background_menu ;;
   *) show_main_menu ;;
   esac
 }
@@ -153,6 +153,10 @@ show_font_family_menu() {
   else
     omakub-font-set "$font"
   fi
+}
+
+show_background_menu() {
+  omakub-launch-walker -m menus:omakubBackgroundSelector --width 800 --minheight 400 -p "Select.."
 }
 
 show_setup_menu() {
@@ -510,6 +514,7 @@ go_to_menu() {
   *trigger*) show_trigger_menu ;;
   *toggle*) show_toggle_menu ;;
   *style*) show_style_menu ;;
+  *background*) show_background_menu ;;
   *theme*) show_theme_menu ;;
   *setup*) show_setup_menu ;;
   *install*) show_install_menu ;;
