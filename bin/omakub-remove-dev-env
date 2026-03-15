@@ -10,8 +10,8 @@ fi
 
 remove_php() {
   echo -e "Removing PHP...\n"
-  sudo apt remove -y php php-* composer
-  sudo apt autoremove -y
+  sudo apt-get remove -y php php-* composer
+  sudo apt-get autoremove -y
   sudo rm -f /usr/local/bin/composer
 }
 
@@ -87,7 +87,7 @@ dotnet)
   ;;
 clojure)
   echo -e "Removing Clojure...\n"
-  sudo apt remove -y rlwrap
+  sudo apt-get remove -y rlwrap
   mise uninstall clojure --all
   mise rm -g clojure
   ;;

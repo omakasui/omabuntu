@@ -35,8 +35,8 @@ if command -v snap >/dev/null 2>&1; then
     remove_snaps >/dev/null
 
     # Remove snapd and gnome-software-plugin-snap
-    sudo apt remove --purge snapd gnome-software-plugin-snap -y >/dev/null 2>&1
-    sudo apt clean
+    sudo apt-get remove --purge snapd gnome-software-plugin-snap -y >/dev/null 2>&1
+    sudo apt-get clean
     sudo rm -rf /var/cache/snapd/ /var/lib/snapd/ /var/snap/ /snap /etc/snap >/dev/null 2>&1
     rm -rf ~/snap >/dev/null 2>&1
 

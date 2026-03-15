@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Ensure we have curl available
+if ! command -v curl &> /dev/null; then
+  omakub-pkg-add curl
+fi
+
 # Add Omakasui APT repository
 curl -fsSL https://keyrings.omakasui.org/omakasui-packages.gpg.key \
   | gpg --dearmor \
@@ -9,4 +14,4 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/omaka
   https://packages.omakasui.org $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") main" \
   | sudo tee /etc/apt/sources.list.d/omakasui.list
 
-sudo apt update
+sudo apt-get update

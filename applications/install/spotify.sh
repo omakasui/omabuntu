@@ -6,7 +6,7 @@ if [[ ! -f /etc/apt/sources.list.d/spotify.list ]]; then
   echo "deb [signed-by=/etc/apt/trusted.gpg.d/spotify.gpg] https://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 fi
 
-sudo apt update
+sudo apt-get update
 omakub-pkg-add spotify-client
 
 # Create a desktop entry if it doesn't exist

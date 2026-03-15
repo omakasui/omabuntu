@@ -8,7 +8,7 @@ if [[ ! -f /etc/apt/sources.list.d/typora.list ]]; then
   echo "deb [signed-by=/etc/apt/keyrings/typora.gpg] https://downloads.typora.io/linux ./" | sudo tee /etc/apt/sources.list.d/typora.list
 fi
 
-sudo apt update
+sudo apt-get update
 omakub-pkg-add typora
 
 # Add iA Typora theme

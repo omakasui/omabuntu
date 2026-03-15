@@ -6,5 +6,5 @@ if [[ ! -f /etc/apt/sources.list.d/mise.list ]]; then
   echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.asc] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list
 fi
 
-sudo apt update
+sudo apt-get update
 omakub-pkg-add mise

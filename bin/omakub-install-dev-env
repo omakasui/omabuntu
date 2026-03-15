@@ -9,7 +9,7 @@ fi
 
 install_php() {
   echo -e "Installing PHP...\n"
-  sudo apt -y install php php-{curl,apcu,intl,mbstring,opcache,pgsql,mysql,sqlite3,redis,xml,zip} --no-install-recommends
+  sudo apt-get -y install php php-{curl,apcu,intl,mbstring,opcache,pgsql,mysql,sqlite3,redis,xml,zip} --no-install-recommends
   php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
   php composer-setup.php --quiet && sudo mv composer.phar /usr/local/bin/composer
   rm composer-setup.php

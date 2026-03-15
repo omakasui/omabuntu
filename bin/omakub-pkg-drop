@@ -4,6 +4,6 @@
 
 for pkg in "$@"; do
   if dpkg -l | grep -q "$pkg"; then
-    sudo apt -y remove --purge "$pkg"
+    sudo apt-get -y remove --purge "$pkg"
   fi
 done
