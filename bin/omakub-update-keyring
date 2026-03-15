@@ -1,13 +1,40 @@
 #!/bin/bash
 
 # Before updating the system, we need to make sure the Omakasui APT repository keyring is up to date. This is required to avoid "NO_PUBKEY" errors during the update.
-echo -e "\e[32m\nUpdate Omakasui APT repository keyring\e[0m"
-curl -fsSL https://keyrings.omakasui.org/omakasui-packages.gpg.key \
-  | gpg --dearmor \
-  | sudo tee /usr/share/keyrings/omakasui-packages.gpg > /dev/null
 
-if [ ! -f /etc/apt/sources.list.d/omakasui.list ]; then
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/omakasui-packages.gpg] \
+KEYRING_URL="https://keyrings.omakasui.org/omakasui-packages.gpg.key"
+KEYRING_PATH="/usr/share/keyrings/omakasui-packages.gpg"
+SOURCES_PATH="/etc/apt/sources.list.d/omakasui.list"
+
+_install_sources() {
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=$KEYRING_PATH] \
   https://packages.omakasui.org $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") main" \
-  | sudo tee /etc/apt/sources.list.d/omakasui.list > /dev/null
+  | sudo tee "$SOURCES_PATH" > /dev/null
+}
+
+echo -e "\e[32m\nChecking Omakasui APT repository...\e[0m"
+
+if [ ! -f "$KEYRING_PATH" ]; then
+  echo "Keyring missing, installing..."
+  curl -fsSL "$KEYRING_URL" | gpg --dearmor 2>/dev/null | sudo tee "$KEYRING_PATH" > /dev/null
+else
+  remote_hash=$(curl -fsSL "$KEYRING_URL" | gpg --dearmor 2>/dev/null | sha256sum | cut -d' ' -f1)
+
+  if [ -z "$remote_hash" ]; then
+    echo "Warning: failed to fetch remote keyring, skipping update."
+  else
+    local_hash=$(sha256sum "$KEYRING_PATH" | cut -d' ' -f1)
+
+    if [ "$remote_hash" != "$local_hash" ]; then
+      echo "Keyring changed, updating..."
+      curl -fsSL "$KEYRING_URL" | gpg --dearmor 2>/dev/null | sudo tee "$KEYRING_PATH" > /dev/null
+    else
+      echo "Keyring up to date, skipping."
+    fi
+  fi
+fi
+
+if [ ! -f "$SOURCES_PATH" ]; then
+  echo "Sources list missing, installing..."
+  _install_sources
 fi
