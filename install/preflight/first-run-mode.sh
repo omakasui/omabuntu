@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Set first-run mode marker so we can install stuff post-installation
 mkdir -p ~/.local/state/omakub
 touch ~/.local/state/omakub/first-run.mode
@@ -11,6 +13,8 @@ After=default.target
 
 [Service]
 Type=oneshot
+Environment=DISPLAY=:0
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/bus
 ExecStart=/bin/bash $OMAKUB_PATH/bin/omakub-cmd-first-run
 ExecStartPost=systemctl --user disable omakub-first-run.service
 RemainAfterExit=no
@@ -24,10 +28,12 @@ systemctl --user enable omakub-first-run.service
 
 # Setup sudo-less access for first-run
 sudo tee /etc/sudoers.d/first-run >/dev/null <<EOF
-Cmnd_Alias FIRST_RUN_CLEANUP = /bin/rm -f /etc/sudoers.d/first-run
-$USER ALL=(ALL) NOPASSWD: /usr/bin/systemctl
-$USER ALL=(ALL) NOPASSWD: /usr/bin/ufw
-$USER ALL=(ALL) NOPASSWD: /usr/bin/ufw-docker
+Defaults:$USER !use_pty
+Cmnd_Alias FIRST_RUN_CLEANUP = /usr/bin/rm -f /etc/sudoers.d/first-run
+$USER ALL=(ALL) NOPASSWD: /usr/bin/systemctl *
+$USER ALL=(ALL) NOPASSWD: /usr/bin/ufw *
+$USER ALL=(ALL) NOPASSWD: /usr/sbin/ufw *
+$USER ALL=(ALL) NOPASSWD: /usr/local/bin/ufw-docker *
 $USER ALL=(ALL) NOPASSWD: FIRST_RUN_CLEANUP
 EOF
 sudo chmod 440 /etc/sudoers.d/first-run
