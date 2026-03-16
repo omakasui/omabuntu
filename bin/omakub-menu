@@ -357,11 +357,14 @@ show_install_terminal_menu() {
 }
 
 show_install_ai_menu() {
-  case $(menu "Install" "󱚤  Claude Code\n󱚤  Copilot CLI\n󱚤  Ollama\n󱚤  OpenCode") in
-  *Claude*) install_app "Claude Code" "claude-code" ;;
-  *Copilot*) install_app "Github Copilot CLI" "github-copilot-cli" ;;
+  case $(menu "Install" "󱚤  Claude Code\n󱚤  Codex\n󱚤  Copilot CLI\n󱚤  Gemini CLI\n󱚤  Ollama\n󱚤  OpenCode\n󱚤  Playwright") in
+  *Claude*) present_terminal "omakub-npx-install @anthropic-ai/claude-code claude" ;;
+  *Codex*) present_terminal "omakub-npx-install @openai/codex codex" ;;
+  *Copilot*) present_terminal "omakub-npx-install @github/copilot copilot" ;;
+  *Gemini*) present_terminal "omakub-npx-install @google/gemini-cli gemini" ;;
   *Ollama*) install_app "Ollama" "ollama" ;;
-  *OpenCode*) install_app "OpenCode" "opencode" ;;
+  *OpenCode*) present_terminal "omakub-npx-install opencode-ai opencode" ;;
+  *Playwright*) present_terminal "omakub-npx-install playwright-cli" ;;
   *) show_install_menu ;;
   esac
 }
