@@ -52,7 +52,7 @@ gsettings set org.gnome.desktop.wm.keybindings switch-input-source "@as []"
 # Empty the custom keybindings to start fresh
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[]"
 
-# Set apps launcher (wofi) to Super+Space
+# Set apps launcher (walker) to Super+Space
 omakub-keybinding-add 'Apps Launcher' 'omakub-apps' '<Super>space'
 
 # Set omakub menu to Alt+Super+Space
