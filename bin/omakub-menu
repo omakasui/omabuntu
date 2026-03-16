@@ -130,12 +130,7 @@ show_style_menu() {
 }
 
 show_theme_menu() {
-  theme=$(menu "Theme" "$(omakub-theme-list)" "" "$(omakub-theme-current)")
-  if [[ "$theme" == "CNCLD" || -z "$theme" ]]; then
-    back_to show_style_menu
-  else
-    omakub-theme-set "$theme"
-  fi
+  omakub-launch-walker -m menus:omakubthemes --width 800 --minheight 400
 }
 
 show_font_menu() {
@@ -156,7 +151,7 @@ show_font_family_menu() {
 }
 
 show_background_menu() {
-  omakub-launch-walker -m menus:omakubBackgroundSelector --width 800 --minheight 400 -p "Select.."
+  omakub-launch-walker -m menus:omakubBackgroundSelector --width 800 --minheight 400
 }
 
 show_setup_menu() {
