@@ -364,7 +364,7 @@ show_install_ai_menu() {
   *Gemini*) present_terminal "omakub-npx-install @google/gemini-cli gemini" ;;
   *Ollama*) install_app "Ollama" "ollama" ;;
   *OpenCode*) present_terminal "omakub-npx-install opencode-ai opencode" ;;
-  *Playwright*) present_terminal "omakub-npx-install playwright-cli" ;;
+  *Playwright*) present_terminal "omakub-npx-install playwright playwright-cli" ;;
   *) show_install_menu ;;
   esac
 }
