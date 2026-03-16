@@ -83,6 +83,10 @@ remove_app() {
   present_terminal "echo 'Removing $1...'; omakub-app-remove $2"
 }
 
+remove_font() {
+  present_terminal "echo 'Removing $1...'; omakub-remove-font $2"
+}
+
 show_learn_menu() {
   case $(menu "Learn" "  Keybindings\n  Omabuntu\n  Ubuntu\n  Neovim\n  Zellij\n󱆃  Bash") in
   *Keybindings*) omakub-launch-webapp "https://omabuntu.omakasui.org/manual/essentials/hotkeys" "Omabuntu Keybindings" ;;
@@ -394,10 +398,10 @@ show_remove_style_menu() {
 
 show_remove_font_menu() {
   case $(menu "Remove Font" "  Cascadia Mono\n  JetBrains Mono\n  iA Fonts\n  Microsoft Core Fonts" "--width 350") in
-  *Cascadia*) present_terminal "omakub-remove-font cascadia-mono" ;;
-  *JetBrains*) present_terminal "omakub-remove-font jetbrains-mono" ;;
-  *iA*) present_terminal "omakub-remove-font iafonts" ;;
-  *Microsoft*) present_terminal "omakub-remove-font mscore" ;;
+  *Cascadia*) remove_font "Cascadia Mono" "cascadia-mono" ;;
+  *JetBrains*) remove_font "JetBrains Mono" "jetbrains-mono" ;;
+  *iA*) remove_font "iA Fonts" "iafonts" ;;
+  *Microsoft*) remove_font "Microsoft Core Fonts" "mscore" ;;
   *) show_remove_menu ;;
   esac
 }
