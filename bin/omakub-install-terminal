@@ -32,7 +32,8 @@ if omakub-app-install "$package"; then
     rm -f ~/.config/GNOME-xdg-terminals.list
 
     # Create the current config file with only the selected terminal
-    cat > "~/.config/ubuntu-xdg-terminals.list" << EOF
+    touch ~/.config/xdg-terminals.list
+    cat > "~/.config/xdg-terminals.list" << EOF
 # Terminal emulator preference order for xdg-terminal-exec
 # The first found and valid terminal will be used
 $desktop_id
