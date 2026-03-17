@@ -62,7 +62,7 @@ omakub-keybinding-add 'Omabuntu Menu' 'omakub-menu' '<Alt><Super>space'
 omakub-keybinding-add 'Omabuntu Themes' 'omakub-menu theme' '<Super><Shift><Control>space'
 
 # Set omakub next background to Super+Shift+Control
-omakub-keybinding-add 'Omabuntu Background Next' 'omakub-theme-bg-next' '<Super><Control>space'
+omakub-keybinding-add 'Omabuntu Background Next' 'omakub-menu background' '<Super><Control>space'
 
 # Set flameshot (with the sh fix for starting under Wayland) on alternate print screen key
 omakub-keybinding-add 'Flameshot' 'sh -c -- "flameshot gui"' '<Control>Print'
