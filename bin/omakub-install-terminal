@@ -40,11 +40,9 @@ $desktop_id
 EOF
 
   # Copy custom desktop entries with proper X-TerminalArg* keys
-  if [[ $package == "alacritty" ]]; then
-    mkdir -p ~/.local/share/xdg-terminals ~/.local/share/applications
-    cp /usr/share/applications/Alacritty.desktop "$HOME/.local/share/xdg-terminals/Alacritty.desktop"
-    cp /usr/share/applications/Alacritty.desktop "$HOME/.local/share/applications/Alacritty.desktop"
-  fi
+  mkdir -p ~/.local/share/xdg-terminals ~/.local/share/applications
+  cp /usr/share/applications/$desktop_id "$HOME/.local/share/xdg-terminals/$desktop_id"
+  cp /usr/share/applications/$desktop_id "$HOME/.local/share/applications/$desktop_id"
 
   # Set the default terminal for Nautilus
   omakub-terminal-set-nautilus "$package"
