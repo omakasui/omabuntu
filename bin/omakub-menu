@@ -45,7 +45,6 @@ menu() {
   echo -e "$options" | omakub-launch-walker --dmenu --width 295 --minheight 1 --maxheight 630 -p "$prompt…" "${args[@]}" 2>/dev/null
 }
 
-
 terminal() {
   xdg-terminal-exec "$@"
 }
