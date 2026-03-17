@@ -48,6 +48,7 @@ libyaml-dev
 mpv
 mupdf
 mupdf-tools
+nautilus-open-any-terminal
 omakasui-nvim
 omakasui-walker
 pipx
