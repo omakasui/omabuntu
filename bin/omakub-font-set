@@ -16,6 +16,15 @@ if [[ -n $font_name && $font_name != "CNCLD" ]]; then
       pkill -USR1 kitty
     fi
 
+    if [[ -f ~/.config/ghostty/config ]]; then
+      sed -i "s/font-family = \".*\"/font-family = \"$font_name\"/g" ~/.config/ghostty/config
+      pkill -SIGUSR2 ghostty
+    fi
+
+    if pgrep -x ghostty; then
+      omakub-notify "    You must restart Ghostty to see font change"
+    fi
+
     omakub-hook font-set "$font_name"
   else
     echo "Font '$font_name' not found."

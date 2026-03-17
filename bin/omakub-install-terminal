@@ -3,7 +3,7 @@
 # Install one of the approved terminals and set it as the default for Omabuntu (Super + Return etc).
 
 if (($# == 0)); then
-  echo "Usage: omakub-install-terminal [alacritty|kitty]"
+  echo "Usage: omakub-install-terminal [alacritty|ghostty|kitty]"
   exit 1
 fi
 
@@ -12,6 +12,7 @@ package="$1"
 # Map package name to desktop entry ID
 case "$package" in
 alacritty) desktop_id="Alacritty.desktop" ;;
+ghostty) desktop_id="com.mitchellh.ghostty.desktop" ;;
 kitty) desktop_id="kitty.desktop" ;;
 *)
   echo "Unknown terminal: $package"
