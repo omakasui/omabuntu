@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Install Alacritty
-source ~/.local/share/omakub/applications/install/alacritty.sh
-
 # Install mise
 source ~/.local/share/omakub/applications/install/mise.sh
 
