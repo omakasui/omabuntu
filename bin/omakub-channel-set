@@ -16,9 +16,7 @@ else
 fi
 
 case "$channel" in
-"stable") omakub-branch-set "main" ;;
-"dev") omakub-branch-set "dev" ;;
+"stable") omakub-branch-set "main" && omakub-refresh-apt "stable" ;;
+"dev") omakub-branch-set "dev" && omakub-refresh-apt "dev" ;;
 *) echo "Unknown channel: $channel"; exit 1; ;;
 esac
-
-omakub-update -y

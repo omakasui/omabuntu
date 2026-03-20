@@ -32,5 +32,12 @@ cd ~/.local/share/omakub
 git fetch origin "${OMAKUB_REF}" && git checkout "${OMAKUB_REF}"
 cd -
 
+# Set channel based on branch (dev branch uses dev channel, everything else uses stable)
+if [[ $OMAKUB_REF == "dev" ]]; then
+  export OMAKUB_CHANNEL=dev
+else
+  export OMAKUB_CHANNEL=stable
+fi
+
 echo -e "\nInstallation starting..."
 source ~/.local/share/omakub/install.sh
