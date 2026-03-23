@@ -69,10 +69,10 @@ systemd-container
 ufw
 ufw-docker
 unzip
-xdg-terminal-exec
-xournalpp
 wget
 wl-clipboard
+xdg-terminal-exec
+xournalpp
 zellij
 zlib1g-dev
 zoxide
