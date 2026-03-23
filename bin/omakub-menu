@@ -315,7 +315,7 @@ show_install_databases_menu() {
 show_install_git_menu() {
   case $(menu "Install Git" "  Github CLI\n  Gitlab CLI") in
   *Github*) install_app "Github CLI" "github-cli" ;;
-  *Gitlab*) install_app "Gitlab CLI" "gitlab-cli" ;;
+  *Gitlab*) install "Gitlab CLI" "glab" ;;
   *) show_install_development_menu ;;
   esac
 }
