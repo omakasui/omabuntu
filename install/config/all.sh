@@ -9,7 +9,7 @@ run_logged $OMAKUB_INSTALL/config/xcompose.sh
 run_logged $OMAKUB_INSTALL/config/mise-work.sh
 run_logged $OMAKUB_INSTALL/config/mimetypes.sh
 run_logged $OMAKUB_INSTALL/config/docker.sh
-run_logged $OMAKUB_INSTALL/config/terminal.sh
+run_logged $OMAKUB_INSTALL/config/zellij.sh
 run_logged $OMAKUB_INSTALL/config/localdb.sh
 run_logged $OMAKUB_INSTALL/config/walker-elephant.sh
 run_logged $OMAKUB_INSTALL/config/fast-shutdown.sh
