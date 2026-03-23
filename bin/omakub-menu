@@ -253,7 +253,7 @@ show_install_utility_menu() {
   *ASDControl*) install_app "ASDControl" "asdcontrol" ;;
   *Flameshot*) install "Flameshot" "flameshot" ;;
   *Pinta*) install_app "Pinta" "pinta" ;;
-  *Starship*) install_app "Starship" "starship" ;;
+  *Starship*) install "Starship" "starship" ;;
   *Xournalpp*) install "Xournalpp" "xournalpp" ;;
   *) show_install_menu ;;
   esac

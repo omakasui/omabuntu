@@ -8,6 +8,3 @@ source ~/.local/share/omakub/applications/install/docker.sh
 
 # Install GitHub CLI
 source ~/.local/share/omakub/applications/install/github-cli.sh
-
-# Install Starship
-source ~/.local/share/omakub/applications/install/starship.sh

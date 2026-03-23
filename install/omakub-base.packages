@@ -63,6 +63,7 @@ redis-tools
 ripgrep
 rustc
 sqlite3
+starship
 systemd-container
 ufw
 ufw-docker
