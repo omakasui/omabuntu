@@ -51,8 +51,8 @@ mupdf
 mupdf-tools
 nautilus-open-any-terminal
 omakub-nvim
+omakub-walker
 omakub-zellij
-omakasui-walker
 pipx
 pkg-config
 plocate
