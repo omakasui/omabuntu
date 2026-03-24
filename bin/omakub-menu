@@ -54,7 +54,7 @@ present_terminal() {
 }
 
 open_in_editor() {
-  omakub-notify "Editing config file" "$1"
+  omakub-notify -u low "Editing config file" "$1"
   omakub-launch-editor "$1"
 }
 
