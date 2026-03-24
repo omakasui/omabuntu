@@ -66,6 +66,7 @@ rustc
 sqlite3
 starship
 systemd-container
+tmux
 ufw
 ufw-docker
 unzip
