@@ -87,13 +87,13 @@ remove_font() {
 }
 
 show_learn_menu() {
-  case $(menu "Learn" "  Keybindings\n  Omabuntu\n  Ubuntu\n  Neovim\n  Zellij\n󱆃  Bash") in
+  case $(menu "Learn" "  Keybindings\n  Omabuntu\n  Ubuntu\n󰊬  GNOME\n  Neovim\n󱆃  Bash") in
   *Keybindings*) omakub-launch-webapp "https://omabuntu.omakasui.org/manual/essentials/hotkeys" "Omabuntu Keybindings" ;;
   *Omabuntu*) omakub-launch-webapp "https://omabuntu.omakasui.org/manual" "Omabuntu" ;;
   *Ubuntu*) omakub-launch-webapp "https://help.ubuntu.com/" "Ubuntu" ;;
+  *GNOME*) omakub-launch-webapp "https://help.gnome.org/" "GNOME" ;;
   *Bash*) omakub-launch-webapp "https://devhints.io/bash" "Bash" ;;
   *Neovim*) omakub-launch-webapp "https://www.lazyvim.org/keymaps" "Neovim" ;;
-  *Zellij*) omakub-launch-webapp "https://zellij.dev/documentation/keybindings.html" "Zellij" ;;
   *) show_main_menu ;;
   esac
 }
@@ -158,12 +158,11 @@ show_background_menu() {
 }
 
 show_setup_menu() {
-  case $(menu "Setup" "󰤆  System Sleep\n  Folders\n  Keybindings\n  Starship\n  Zellij\n󰌧  Walker\n󰞅  XCompose") in
+  case $(menu "Setup" "󰤆  System Sleep\n  Folders\n  Keybindings\n  Starship\n󰌧  Walker\n󰞅  XCompose") in
   *System*) show_setup_system_menu ;;
   *Folders*) show_setup_folders_menu ;;
   *Keybindings*) show_setup_keybindings_menu ;;
   *Starship*) edit_in_nvim ~/.config/starship.toml ;;
-  *Zellij*) edit_in_nvim ~/.config/zellij/config.kdl ;;
   *Walker*) open_in_editor ~/.config/walker/config.toml && omakub-restart-walker ;;
   *XCompose*) open_in_editor ~/.XCompose && omakub-restart-xcompose ;;
   *) show_main_menu ;;
@@ -447,14 +446,14 @@ show_update_channel_menu() {
 }
 
 show_update_config_menu() {
-  case $(menu "Use default config" "  Gnome\n󰍂  GDM\n  Keybindings\n󱣴  Plymouth\n󰌧  Walker\n  Starship\n  Zellij") in
+  case $(menu "Use default config" "  Gnome\n󰍂  GDM\n  Keybindings\n󱣴  Plymouth\n  Starship\n  Tmux\n󰌧  Walker") in
   *Gnome*) present_terminal omakub-refresh-gnome ;;
   *GDM*) present_terminal omakub-refresh-gdm ;;
   *Keybindings*) present_terminal omakub-refresh-keybindings ;;
   *Plymouth*) present_terminal omakub-refresh-plymouth ;;
-  *Walker*) present_terminal omakub-refresh-walker ;;
   *Starship*) present_terminal omakub-refresh-config starship.toml ;;
-  *Zellij*) present_terminal omakub-refresh-config zellij/config.kdl ;;
+  *Tmux*) present_terminal omakub-refresh-tmux ;;
+  *Walker*) present_terminal omakub-refresh-walker ;;
   *) show_update_menu ;;
   esac
 }
