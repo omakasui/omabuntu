@@ -9,5 +9,4 @@ if [[ ! -f ~/.config/tmux/tmux.conf ]]; then
 fi
 
 echo "Add Tmux binding (Super+Alt+Return)"
-
-omakub-keybinding-add 'Tmux (Alt)' 'xdg-terminal-exec bash -c "tmux attach || tmux new -s Work"' '<Super><Alt>Return'
+omakub-keybinding-add 'Terminal (Tmux)' 'xdg-terminal-exec bash -c "tmux attach || tmux new -s Work"' '<Super><Alt>Return'

@@ -85,6 +85,7 @@ omakub-keybinding-add 'Omabuntu System' 'omakub-menu system' '<Super>Escape'
 # Set applications hotkeys
 omakub-keybinding-add 'Terminal' 'xdg-terminal-exec' '<Super>Return'
 omakub-keybinding-add 'Default Terminal' 'xdg-terminal-exec' '<Control><Alt>t'
+omakub-keybinding-add 'Terminal (Tmux)' 'xdg-terminal-exec bash -c "tmux attach || tmux new -s Work"' '<Super><Alt>Return'
 omakub-keybinding-add 'Browser' 'omakub-launch-browser --new-window' '<Shift><Super>b'
 omakub-keybinding-add 'Browser (Alt)' 'omakub-launch-browser --new-window' '<Shift><Super>Return'
 omakub-keybinding-add 'Incognito Browser' 'omakub-launch-browser --private' '<Shift><Alt><Super>b'
