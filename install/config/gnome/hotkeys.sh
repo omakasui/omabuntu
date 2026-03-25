@@ -47,8 +47,8 @@ gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Super>5
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-6 "['<Super>6']"
 
 # Reserve slots for input source switching
-gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Shift><Super>space', '<Super>space']"
-gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<Shift><Super><Alt>space', '<Super><Alt>space']"
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Shift><Super>space']"
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<Shift><Super><Alt>space']"
 
 # Empty the custom keybindings to start fresh
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[]"
