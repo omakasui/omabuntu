@@ -1,7 +1,7 @@
 #!/bin/bash
 
 packages=(
-  google-chrome
+  google-chrome-stable
   tldr
   ulauncher
 )
