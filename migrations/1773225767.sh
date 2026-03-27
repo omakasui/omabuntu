@@ -63,7 +63,7 @@ if omakub-pkg-present omakub-nvim; then
 else
   omakub-pkg-add omakub-nvim
   # Will trigger to overwrite configs or not to pickup new hot-reload themes
-  omakub-nvim-setup
+  omakub-setup-nvim
 fi
 
 # Nautilus

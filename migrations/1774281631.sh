@@ -8,5 +8,5 @@ if omakub-cmd-present zellij; then
   fi
   omakub-pkg-add zellij omakub-zellij
   # Set up the configuration for zellij
-  omakub-zellij-setup
+  omakub-setup-zellij
 fi
