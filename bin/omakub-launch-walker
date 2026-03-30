@@ -12,4 +12,11 @@ if ! pgrep -f "walker --gapplication-service" > /dev/null; then
   walker --gapplication-service &
 fi
 
-exec walker --width 644 --maxheight 300 --minheight 300 "$@"
+# Apply default dimensions only when not explicitly overridden by caller
+defaults=()
+args="$*"
+[[ $args != *--width* ]] && defaults+=(--width 644)
+[[ $args != *--maxheight* ]] && defaults+=(--maxheight 300)
+[[ $args != *--minheight* ]] && defaults+=(--minheight 300)
+
+exec walker "${defaults[@]}" "$@"
