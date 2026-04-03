@@ -50,6 +50,9 @@ gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-6 "['<Super>6
 gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Shift><Super>space']"
 gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<Shift><Super><Alt>space']"
 
+# Set some utility hotkeys
+gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "['<Shift><Super>Escape']"
+
 # Empty the custom keybindings to start fresh
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[]"
 
