@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Launch Walker, ensuring its data provider (elephant) and gapplication-service are running.
+# Launch the Walker application launcher while ensuring that it's data provider (called elephant) is running first.
 
 # Walker bug: window dimensions are cached on first gapplication-service activation; subsequent
 # calls with different sizes are silently capped. Restart the service when dimensions change.
