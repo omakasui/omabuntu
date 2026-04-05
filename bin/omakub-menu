@@ -24,8 +24,6 @@ toggle_existing_menu() {
     walker --close >/dev/null 2>&1
     exit 0
   fi
-  # Close any existing instance of walker to preserve menu dimensions
-  pkill -x walker >/dev/null 2>&1
 }
 
 menu() {
@@ -43,6 +41,10 @@ menu() {
       args+=("-c" "$index")
     fi
   fi
+
+  # Close any existing instance of walker to preserve menu dimensions
+  # This is a workaround for this issue: https://github.com/abenz1267/walker/pull/708
+  pkill -x walker >/dev/null 2>&1
 
   echo -e "$options" | omakub-launch-walker --dmenu --width 295 --minheight 1 --maxheight 630 -p "$prompt…" "${args[@]}" 2>/dev/null
 }
