@@ -24,6 +24,8 @@ toggle_existing_menu() {
     walker --close >/dev/null 2>&1
     exit 0
   fi
+  # Close any existing instance of walker to preserve menu dimensions
+  pkill -x walker >/dev/null 2>&1
 }
 
 menu() {
