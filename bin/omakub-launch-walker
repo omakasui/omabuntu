@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Launch the Walker application launcher while ensuring that it's data provider (called elephant) is running first.
+
+# Walker bug: window dimensions are cached on first gapplication-service activation; subsequent
+# calls with different sizes are silently capped.
+# See: https://github.com/abenz1267/walker/pull/708
+
+DIMS_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/omakub/walker-service-dims"
+
+# Ensure elephant (Walker data provider) is running
+pgrep -x elephant > /dev/null || elephant &
+
+# Resolve effective dimensions: defaults, overridden by caller args
+width=644; minheight=300; maxheight=300
+args=("$@")
+for i in "${!args[@]}"; do
+  case "${args[i]}" in
+    --width)     width="${args[i+1]}" ;;
+    --minheight) minheight="${args[i+1]}" ;;
+    --maxheight) maxheight="${args[i+1]}" ;;
+  esac
+done
+
+# Kill ALL walker processes (client + service) when dimensions change.
+# Not killing on dim change causes the service to cap new windows to its initially-cached size.
+dims_key="w${width}x${minheight}-${maxheight}"
+mkdir -p "$(dirname "$DIMS_FILE")"
+if [[ $(cat "$DIMS_FILE" 2>/dev/null) != $dims_key ]] && pgrep -x walker > /dev/null; then
+  pkill -x walker
+  while pgrep -x walker > /dev/null; do sleep 0.05; done
+fi
+echo "$dims_key" > "$DIMS_FILE"
+
+# Inject defaults only for dimensions not explicitly passed by the caller.
+defaults=()
+[[ $* != *--width*     ]] && defaults+=(--width     $width)
+[[ $* != *--minheight* ]] && defaults+=(--minheight $minheight)
+[[ $* != *--maxheight* && $* != *--minheight* ]] && defaults+=(--maxheight $maxheight)
+
+exec walker "${defaults[@]}" "$@"

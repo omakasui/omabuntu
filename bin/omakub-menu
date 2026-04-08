@@ -20,8 +20,8 @@ back_to() {
 }
 
 toggle_existing_menu() {
-  if pgrep -x "wofi" > /dev/null; then
-    pkill -x "wofi"
+  if pgrep -f "walker.*--dmenu" >/dev/null; then
+    walker --close >/dev/null 2>&1
     exit 0
   fi
 }
@@ -35,18 +35,14 @@ menu() {
   read -r -a args <<<"$extra"
 
   if [[ -n $preselect ]]; then
-    options=$(echo -e "$options" | sed "s|^$preselect$|<i>$preselect</i>|")
+    local index
+    index=$(echo -e "$options" | grep -nxF "$preselect" | cut -d: -f1)
+    if [[ -n $index ]]; then
+      args+=("-c" "$index")
+    fi
   fi
 
-  # Show Wofi menu (with markup support)
-  selection=$(echo -e "$options" | omakub-launch-wofi \
-    --show dmenu \
-    --allow-markup \
-    --prompt "$prompt..." \
-    "${args[@]}" \
-    "$wofi_options" 2>>/dev/null)
-
-  echo -e "$selection"
+  echo -e "$options" | omakub-launch-walker --dmenu --width 295 --minheight 1 --maxheight 630 -p "$prompt…" "${args[@]}" 2>/dev/null
 }
 
 terminal() {
@@ -58,7 +54,7 @@ present_terminal() {
 }
 
 open_in_editor() {
-  omakub-notify "Editing config file" "$1"
+  omakub-notify -u low "Editing config file" "$1"
   omakub-launch-editor "$1"
 }
 
@@ -86,20 +82,24 @@ remove_app() {
   present_terminal "echo 'Removing $1...'; omakub-app-remove $2"
 }
 
+remove_font() {
+  present_terminal "echo 'Removing $1...'; omakub-remove-font $2"
+}
+
 show_learn_menu() {
-  case $(menu "Learn" "  Keybindings\n  Omabuntu\n  Ubuntu\n  Neovim\n  Zellij\n󱆃  Bash" "--width 250 --height 280") in
+  case $(menu "Learn" "  Keybindings\n  Omabuntu\n  Ubuntu\n󰊬  GNOME\n  Neovim\n󱆃  Bash") in
   *Keybindings*) omakub-launch-webapp "https://omabuntu.omakasui.org/manual/essentials/hotkeys" "Omabuntu Keybindings" ;;
   *Omabuntu*) omakub-launch-webapp "https://omabuntu.omakasui.org/manual" "Omabuntu" ;;
   *Ubuntu*) omakub-launch-webapp "https://help.ubuntu.com/" "Ubuntu" ;;
+  *GNOME*) omakub-launch-webapp "https://help.gnome.org/" "GNOME" ;;
   *Bash*) omakub-launch-webapp "https://devhints.io/bash" "Bash" ;;
   *Neovim*) omakub-launch-webapp "https://www.lazyvim.org/keymaps" "Neovim" ;;
-  *Zellij*) omakub-launch-webapp "https://zellij.dev/documentation/keybindings.html" "Zellij" ;;
   *) show_main_menu ;;
   esac
 }
 
 show_trigger_menu() {
-  case $(menu "Trigger" "  Share\n󰔎  Toggle" "--width 250 --height 130") in
+  case $(menu "Trigger" "  Share\n󰔎  Toggle") in
   *Share*) show_share_menu ;;
   *Toggle*) show_toggle_menu ;;
   *) show_main_menu ;;
@@ -107,7 +107,7 @@ show_trigger_menu() {
 }
 
 show_share_menu() {
-  case $(menu "Share" "  Clipboard\n  File \n  Folder" "--width 250 --height 170") in
+  case $(menu "Share" "  Clipboard\n  File \n  Folder") in
   *Clipboard*) omakub-cmd-share clipboard ;;
   *File*) terminal bash -c "omakub-cmd-share file" ;;
   *Folder*) terminal bash -c "omakub-cmd-share folder" ;;
@@ -116,7 +116,7 @@ show_share_menu() {
 }
 
 show_toggle_menu() {
-  case $(menu "Toggle" "󰔎  Nightlight" "--width 250 --height 80") in
+  case $(menu "Toggle" "󰔎  Nightlight") in
   *Nightlight*) omakub-toggle-nightlight ;;
   *) back_to show_trigger_menu ;;
   esac
@@ -124,25 +124,20 @@ show_toggle_menu() {
 
 
 show_style_menu() {
-  case $(menu "Style" "󰸌  Theme\n  Font\n  Background" "--width 250 --height 180") in
+  case $(menu "Style" "󰸌  Theme\n  Font\n  Background") in
   *Theme*) show_theme_menu ;;
   *Font*) show_font_menu ;;
-  *Background*) omakub-theme-bg-next ;;
+  *Background*) show_background_menu ;;
   *) show_main_menu ;;
   esac
 }
 
 show_theme_menu() {
-  theme=$(menu "Theme" "$(omakub-theme-list)" "--width 250 --height 470 -O alphabetical" "$(omakub-theme-current)")
-  if [[ $theme == "CNCLD" || -z $theme ]]; then
-    back_to show_style_menu
-  else
-    omakub-theme-set "$theme"
-  fi
+  omakub-launch-walker -m menus:omakubthemes --width 800 --minheight 400
 }
 
 show_font_menu() {
-  case $(menu "Font" "  Family\n󰧴  Size" "--width 250 --height 130") in
+  case $(menu "Font" "  Family\n󰧴  Size") in
   *Family*) show_font_family_menu ;;
   *Size*) present_terminal omakub-font-size-set ;;
   *) show_main_menu ;;
@@ -158,14 +153,17 @@ show_font_family_menu() {
   fi
 }
 
+show_background_menu() {
+  omakub-launch-walker -m menus:omakubBackgroundSelector --width 800 --minheight 400
+}
+
 show_setup_menu() {
-  case $(menu "Setup" "  System Sleep\n  Folders\n  Keybindings\n  Starship\n  Zellij\n󰌧  Wofi\n󰞅  XCompose" "--width 250 --height 320") in
+  case $(menu "Setup" "󰤆  System Sleep\n  Folders\n  Keybindings\n  Starship\n󰌧  Walker\n󰞅  XCompose") in
   *System*) show_setup_system_menu ;;
   *Folders*) show_setup_folders_menu ;;
   *Keybindings*) show_setup_keybindings_menu ;;
   *Starship*) edit_in_nvim ~/.config/starship.toml ;;
-  *Zellij*) edit_in_nvim ~/.config/zellij/config.kdl ;;
-  *Wofi*) edit_in_nvim ~/.config/wofi/config ;;
+  *Walker*) open_in_editor ~/.config/walker/config.toml && omakub-restart-walker ;;
   *XCompose*) open_in_editor ~/.XCompose && omakub-restart-xcompose ;;
   *) show_main_menu ;;
   esac
@@ -180,14 +178,14 @@ show_setup_system_menu() {
     options="$options󰒲  Disable Suspend"
   fi
 
-  case $(menu "System" "$options" "--width 250 --height 80") in
+  case $(menu "System" "$options") in
   *Suspend*) omakub-toggle-suspend ;;
   *) show_setup_menu ;;
   esac
 }
 
 show_setup_folders_menu() {
-  case $(menu "Folders" "󰮝  Add\n󰮞  Remove" "--width 250 --height 130") in
+  case $(menu "Folders" "󰮝  Add\n󰮞  Remove") in
   *Add*) present_terminal omakub-app-folder-add ;;
   *Remove*) present_terminal omakub-app-folder-remove ;;
   *) show_setup_menu ;;
@@ -195,7 +193,7 @@ show_setup_folders_menu() {
 }
 
 show_setup_keybindings_menu() {
-  case $(menu "Keybindings" "   Add\n   Remove" "--width 250 --height 130") in
+  case $(menu "Keybindings" "   Add\n   Remove") in
   *Add*) present_terminal omakub-keybinding-add ;;
   *Remove*) present_terminal omakub-keybinding-remove ;;
   *) show_setup_menu ;;
@@ -203,8 +201,8 @@ show_setup_keybindings_menu() {
 }
 
 show_install_menu() {
-  case $(menu "Install" "  Package\n  Web App\n  TUI\n  Service\n  Browser\n  Utility\n  Style\n󰵮  Development\n  Editor\n  Terminal\n󱚤  AI\n  Gaming" "--width 250 --height 510") in
-  *Package*) present_terminal omakub-pkg-install ;;
+  case $(menu "Install" "  Package\n  Web App\n  TUI\n  Service\n  Browser\n  Utility\n  Style\n󰵮  Development\n  Editor\n  Terminal\n󱚤  AI\n  Gaming") in
+  *Package*) terminal omakub-pkg-install ;;
   *Web*) present_terminal omakub-webapp-install ;;
   *TUI*) present_terminal omakub-tui-install ;;
   *Service*) show_install_service_menu ;;
@@ -221,7 +219,7 @@ show_install_menu() {
 }
 
 show_install_service_menu() {
-  case $(menu "Install" "  1password\n  Bitwarden\n  Discord\n  Dropbox\n  LibreOffice\n  LocalSend\n  ObsStudio\n  Obsidian\n  Signal\n  Spotify\n  Typora\n  Tailscale\n  Zoom" "--width 250 --height 550") in
+  case $(menu "Install" "  1password\n  Bitwarden\n  Discord\n  Dropbox\n  LibreOffice\n  LocalSend\n  ObsStudio\n  Obsidian\n  Signal\n  Spotify\n  Typora\n  Tailscale\n  Zoom") in
   *1password*) install_app "1password" "1password" ;;
   *Bitwarden*) install_app "Bitwarden" "bitwarden" ;;
   *Discord*) install_app "Discord" "discord" ;;
@@ -240,7 +238,7 @@ show_install_service_menu() {
 }
 
 show_install_browser_menu() {
-  case $(menu "Install" "  Brave\n  Chromium\n  Firefox\n  Zen" "--width 250 --height 210") in
+  case $(menu "Install" "  Brave\n  Chromium\n  Firefox\n  Zen") in
   *Brave*) install_app "Brave" "brave" ;;
   *Chromium*) install_app "Chromium" "chromium" ;;
   *Firefox*) install_app "Firefox" "firefox" ;;
@@ -250,18 +248,18 @@ show_install_browser_menu() {
 }
 
 show_install_utility_menu() {
-  case $(menu "Install" "  ASDControl\n  Flameshot\n  Pinta\n  Starship\n  Xournalpp" "--width 250 --height 245") in
+  case $(menu "Install" "  ASDControl\n  Flameshot\n  Pinta\n  Starship\n  Xournalpp") in
   *ASDControl*) install_app "ASDControl" "asdcontrol" ;;
   *Flameshot*) install "Flameshot" "flameshot" ;;
   *Pinta*) install_app "Pinta" "pinta" ;;
-  *Starship*) install_app "Starship" "starship" ;;
+  *Starship*) install "Starship" "starship" ;;
   *Xournalpp*) install "Xournalpp" "xournalpp" ;;
   *) show_install_menu ;;
   esac
 }
 
 show_install_style_menu() {
-  case $(menu "Install" "󰸌  Theme\n  Background\n  Font" "--width 250 --height 170") in
+  case $(menu "Install" "󰸌  Theme\n  Background\n  Font") in
   *Theme*) present_terminal omakub-theme-install ;;
   *Background*) omakub-theme-bg-install ;;
   *Font*) show_install_font_menu ;;
@@ -270,7 +268,7 @@ show_install_style_menu() {
 }
 
 show_install_font_menu() {
-  case $(menu "Install" "  Cascadia Mono\n  JetBrains Mono\n  iA Fonts\n  Microsoft Core Fonts" "--width 350 --height 210") in
+  case $(menu "Install" "  Cascadia Mono\n  JetBrains Mono\n  iA Fonts\n  Microsoft Core Fonts" "--width 350") in
   *Cascadia*) install_font "Cascadia Mono" "cascadia-mono" "Cascadia Mono Nerd Font" ;;
   *JetBrains*) install_font "JetBrains Mono" "jetbrains-mono" "JetBrains Mono" ;;
   *iA*) install_font "iA Fonts" "iafonts" "iA Fonts Nerd Font" ;;
@@ -280,7 +278,7 @@ show_install_font_menu() {
 }
 
 show_install_development_menu() {
-  case $(menu "Install" "  Docker\n󱘲  Databases\n󰊢  Git\n󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure\n  Scala" "--width 250 --height 600") in
+  case $(menu "Install" "  Docker\n󱘲  Databases\n󰊢  Git\n󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure\n  Scala") in
   *Docker*) install "Docker" "docker" ;;
   *Databases*) show_install_databases_menu ;;
   *Git*) show_install_git_menu ;;
@@ -302,7 +300,7 @@ show_install_development_menu() {
 }
 
 show_install_databases_menu() {
-  case $(menu "Install Databases" "  MySQL\n  PostgreSQL\n  MariaDB\n  Redis\n  MongoDB\n󱘲  MSSQL" "--width 250 --height 280") in
+  case $(menu "Install Databases" "  MySQL\n  PostgreSQL\n  MariaDB\n  Redis\n  MongoDB\n󱘲  MSSQL") in
   *MySQL*) present_terminal "omakub-install-docker-dbs mysql" ;;
   *PostgreSQL*) present_terminal "omakub-install-docker-dbs postgresql" ;;
   *MariaDB*) present_terminal "omakub-install-docker-dbs mariadb" ;;
@@ -314,15 +312,15 @@ show_install_databases_menu() {
 }
 
 show_install_git_menu() {
-  case $(menu "Install Git" "  Github CLI\n  Gitlab CLI" "--width 250 --height 130") in
+  case $(menu "Install Git" "  Github CLI\n  Gitlab CLI") in
   *Github*) install_app "Github CLI" "github-cli" ;;
-  *Gitlab*) install_app "Gitlab CLI" "gitlab-cli" ;;
+  *Gitlab*) install "Gitlab CLI" "glab" ;;
   *) show_install_development_menu ;;
   esac
 }
 
 show_install_javascript_menu() {
-  case $(menu "Install" "  Node.js\n  Bun\n  Deno" "--width 250 --height 170") in
+  case $(menu "Install" "  Node.js\n  Bun\n  Deno") in
   *Node*) present_terminal "omakub-install-dev-env node" ;;
   *Bun*) present_terminal "omakub-install-dev-env bun" ;;
   *Deno*) present_terminal "omakub-install-dev-env deno" ;;
@@ -331,7 +329,7 @@ show_install_javascript_menu() {
 }
 
 show_install_elixir_menu() {
-  case $(menu "Install" "  Elixir\n  Phoenix" "--width 250 --height 130") in
+  case $(menu "Install" "  Elixir\n  Phoenix") in
   *Elixir*) present_terminal "omakub-install-dev-env elixir" ;;
   *Phoenix*) present_terminal "omakub-install-dev-env phoenix" ;;
   *) show_install_development_menu ;;
@@ -339,7 +337,7 @@ show_install_elixir_menu() {
 }
 
 show_install_editor_menu() {
-  case $(menu "Install" "  VSCode\n  Cursor\n  Zed\n  Emacs" "--width 250 --height 210") in
+  case $(menu "Install" "  VSCode\n  Cursor\n  Zed\n  Emacs") in
   *VSCode*) install_app "Visual Studio Code" "visual-studio-code" ;;
   *Cursor*) install_app "Cursor" "cursor" ;;
   *Zed*) install_app "Zed" "zed" ;;
@@ -349,25 +347,23 @@ show_install_editor_menu() {
 }
 
 show_install_terminal_menu() {
-  case $(menu "Install" "  Alacritty\n  Kitty" "--width 250 --height 130") in
+  case $(menu "Install" "  Alacritty\n  Ghostty\n  Kitty") in
   *Alacritty*) install_terminal "alacritty" ;;
+  *Ghostty*) install_terminal "ghostty" ;;
   *Kitty*) install_terminal "kitty" ;;
   *) show_install_menu ;;
   esac
 }
 
 show_install_ai_menu() {
-  case $(menu "Install" "󱚤  Claude Code\n󱚤  Copilot CLI\n󱚤  Ollama\n󱚤  OpenCode" "--width 250 --height 210") in
-  *Claude*) install_app "Claude Code" "claude-code" ;;
-  *Copilot*) install_app "Github Copilot CLI" "github-copilot-cli" ;;
+  case $(menu "Install" "󱚤  Ollama") in
   *Ollama*) install_app "Ollama" "ollama" ;;
-  *OpenCode*) install_app "OpenCode" "opencode" ;;
   *) show_install_menu ;;
   esac
 }
 
 show_install_gaming_menu() {
-  case $(menu "Install" "  Steam\n  RetroArch\n󰍳  Minecraft" "--width 250 --height 170") in
+  case $(menu "Install" "  Steam\n  RetroArch\n󰍳  Minecraft") in
   *Steam*) install_app "Steam" "steam" ;;
   *RetroArch*) install_app "RetroArch" "retroarch" ;;
   *Minecraft*) install_app "Minecraft" "minecraft" ;;
@@ -376,8 +372,8 @@ show_install_gaming_menu() {
 }
 
 show_remove_menu() {
-  case $(menu "Remove" "  Package\n  Web App\n  TUI\n󰀻  App\n  Style\n󰵮  Development\n󰏓  Preinstalls" "--width 250 --height 320") in
-  *Package*) present_terminal omakub-pkg-remove ;;
+  case $(menu "Remove" "  Package\n  Web App\n  TUI\n󰀻  App\n  Style\n󰵮  Development\n󰏓  Preinstalls") in
+  *Package*) terminal omakub-pkg-remove ;;
   *Web*) present_terminal omakub-webapp-remove ;;
   *TUI*) present_terminal omakub-tui-remove ;;
   *App*) present_terminal omakub-app-remove ;;
@@ -389,7 +385,7 @@ show_remove_menu() {
 }
 
 show_remove_style_menu() {
-  case $(menu "Remove" "󰸌  Theme\n  Font" "--width 250 --height 130") in
+  case $(menu "Remove" "󰸌  Theme\n  Font") in
   *Theme*) present_terminal omakub-theme-remove ;;
   *Font*) show_remove_font_menu ;;
   *) show_remove_menu ;;
@@ -397,17 +393,17 @@ show_remove_style_menu() {
 }
 
 show_remove_font_menu() {
-  case $(menu "Remove Font" "  Cascadia Mono\n  JetBrains Mono\n  iA Fonts\n  Microsoft Core Fonts" "--width 350 --height 210") in
-  *Cascadia*) present_terminal "omakub-remove-font cascadia-mono" ;;
-  *JetBrains*) present_terminal "omakub-remove-font jetbrains-mono" ;;
-  *iA*) present_terminal "omakub-remove-font iafonts" ;;
-  *Microsoft*) present_terminal "omakub-remove-font mscore" ;;
+  case $(menu "Remove Font" "  Cascadia Mono\n  JetBrains Mono\n  iA Fonts\n  Microsoft Core Fonts" "--width 350") in
+  *Cascadia*) remove_font "Cascadia Mono" "cascadia-mono" ;;
+  *JetBrains*) remove_font "JetBrains Mono" "jetbrains-mono" ;;
+  *iA*) remove_font "iA Fonts" "iafonts" ;;
+  *Microsoft*) remove_font "Microsoft Core Fonts" "mscore" ;;
   *) show_remove_menu ;;
   esac
 }
 
 show_remove_development_menu() {
-  case $(menu "Remove Development Environment" "󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure\n  Scala" "--width 250 --height 510") in
+  case $(menu "Remove Development Environment" "󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure\n  Scala") in
   *Rails*) present_terminal "omakub-remove-dev-env ruby" ;;
   *JavaScript*) show_remove_javascript_menu ;;
   *Go*) present_terminal "omakub-remove-dev-env go" ;;
@@ -428,11 +424,12 @@ show_remove_development_menu() {
 show_update_menu() {
   local brand_name=$(omakub-brand)
 
-  case $(menu "Update" "󰟢  $brand_name\n󰔫  Channel\n  Config\n󰸌  Themes\n󰇅  Hardware\n  Firmware\n  Password" "--width 250 --height 320") in
+  case $(menu "Update" "󰟢  $brand_name\n󰔫  Channel\n  Config\n󰸌  Themes\n  Process\n󰇅  Hardware\n  Firmware\n  Password") in
   *$brand_name*) present_terminal omakub-update ;;
   *Channel*) show_update_channel_menu ;;
   *Config*) show_update_config_menu ;;
   *Themes*) present_terminal omakub-theme-update ;;
+  *Process*) show_update_process_menu ;;
   *Hardware*) show_update_hardware_menu ;;
   *Firmware*) present_terminal omakub-update-firmware ;;
   *Password*) show_update_password_menu ;;
@@ -441,7 +438,7 @@ show_update_menu() {
 }
 
 show_update_channel_menu() {
-  case $(menu "Update channel" "🟢 Stable\n🔴 Dev" "--width 250 --height 130") in
+  case $(menu "Update channel" "🟢 Stable\n🔴 Dev") in
   *Stable*) present_terminal "omakub-channel-set stable" ;;
   *Dev*) present_terminal "omakub-channel-set dev" ;;
   *) show_update_menu ;;
@@ -449,27 +446,34 @@ show_update_channel_menu() {
 }
 
 show_update_config_menu() {
-  case $(menu "Use default config" "  Gnome\n󰍂  GDM\n  Keybindings\n󱣴  Plymouth\n󰌧  Wofi\n  Starship\n  Zellij" "--width 250 --height 320") in
+  case $(menu "Use default config" "  Gnome\n󰍂  GDM\n  Keybindings\n󱣴  Plymouth\n  Starship\n  Tmux\n󰌧  Walker") in
   *Gnome*) present_terminal omakub-refresh-gnome ;;
   *GDM*) present_terminal omakub-refresh-gdm ;;
   *Keybindings*) present_terminal omakub-refresh-keybindings ;;
   *Plymouth*) present_terminal omakub-refresh-plymouth ;;
-  *Wofi*) present_terminal omakub-refresh-wofi ;;
   *Starship*) present_terminal omakub-refresh-config starship.toml ;;
-  *Zellij*) present_terminal omakub-refresh-config zellij/config.kdl ;;
+  *Tmux*) present_terminal omakub-refresh-tmux ;;
+  *Walker*) present_terminal omakub-refresh-walker ;;
+  *) show_update_menu ;;
+  esac
+}
+
+show_update_process_menu() {
+  case $(menu "Restart" "󰌧  Walker") in
+  *Walker*) omakub-restart-walker ;;
   *) show_update_menu ;;
   esac
 }
 
 show_update_hardware_menu() {
-  case $(menu "Restart" "  Audio" "--width 250 --height 80") in
+  case $(menu "Restart" "  Audio") in
   *Audio*) present_terminal omakub-restart-pipewire ;;
   *) show_update_menu ;;
   esac
 }
 
 show_update_password_menu() {
-  case $(menu "Update Password" "  User" "--width 250 --height 80") in
+  case $(menu "Update Password" "  User") in
   *User*) present_terminal passwd ;;
   *) show_update_menu ;;
   esac
@@ -480,16 +484,11 @@ show_about() {
 }
 
 show_system_menu() {
-  local options="  Lock"
+  local options="󰌾  Lock"
   [[ ! -f ~/.local/state/omakub/toggles/suspend-off ]] && options="$options\n󰒲  Suspend"
-  options="$options\n  Logout\n󰜉  Restart\n󰐥  Shutdown"
+  options="$options\n󰌾  Logout\n󰜉  Restart\n󰐥  Shutdown"
 
-  local height=250
-  if [[ -f ~/.local/state/omakub/toggles/suspend-off ]]; then
-    height=210
-  fi
-
-  case $(menu "System" "$options" "--width 250 --height $height") in
+  case $(menu "System" "$options") in
   *Lock*) omakub-system-lock-screen ;;
   *Suspend*) systemctl suspend ;;
   *Logout*) omakub-system-logout ;;
@@ -500,7 +499,7 @@ show_system_menu() {
 }
 
 show_main_menu() {
-  go_to_menu "$(menu "Go" "󰀻  Apps\n󰧑  Learn\n󱓞  Trigger\n  Style\n  Setup\n󰉉  Install\n󰭌  Remove\n  Update\n  About\n  System" "--width 250 --height 440")"
+  go_to_menu "$(menu "Go" "󰀻  Apps\n󰧑  Learn\n󱓞  Trigger\n  Style\n  Setup\n󰉉  Install\n󰭌  Remove\n󰑐  Update\n  About\n󰤆  System")"
 }
 
 go_to_menu() {
@@ -510,6 +509,7 @@ go_to_menu() {
   *trigger*) show_trigger_menu ;;
   *toggle*) show_toggle_menu ;;
   *style*) show_style_menu ;;
+  *background*) show_background_menu ;;
   *theme*) show_theme_menu ;;
   *setup*) show_setup_menu ;;
   *install*) show_install_menu ;;

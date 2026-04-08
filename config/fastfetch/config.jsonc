@@ -71,6 +71,11 @@
       "text": "branch=$(omakub-version-branch); echo \"$branch\"",
     },
     {
+      "type": "os",
+      "key": "│ ├",
+      "keyColor": "blue",
+    },
+    {
       "type": "kernel",
       "key": "│ ├",
       "keyColor": "blue",

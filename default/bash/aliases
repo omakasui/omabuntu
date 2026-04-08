@@ -39,6 +39,9 @@ alias r='rails'
 alias bat='batcat'
 alias lzg='lazygit'
 alias lzd='lazydocker'
+if command -v tmux &> /dev/null; then
+  alias t='tmux attach || tmux new -s Work'
+fi
 n() { if [ "$#" -eq 0 ]; then command nvim . ; else command nvim "$@"; fi; }
 
 # Browser

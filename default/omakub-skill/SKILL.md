@@ -2,7 +2,7 @@
 name: omabuntu
 description: >
   REQUIRED for end-user customization of Linux desktop, window manager, or system config.
-  Use when editing ~/.config/alacritty/, ~/.config/kitty/, ~/.config/wofi/,
+  Use when editing ~/.config/alacritty/, ~/.config/kitty/, , ~/.config/ghostty/, ~/.config/walker/,
   ~/.config/omakub/, or working with GNOME settings. Triggers: GNOME extensions,
   keybindings, themes, wallpaper, terminal config, night light, dock settings,
   settings, display config, and user-facing omabuntu commands. Excludes Omabuntu
@@ -21,7 +21,7 @@ It is not for contributing to Omabuntu source code.
 **ALWAYS invoke this skill for end-user requests involving ANY of these:**
 
 - Editing ANY file in `~/.config/omakub/`
-- Editing terminal configs (alacritty, kitty)
+- Editing terminal configs (alacritty, kitty, ghostty)
 - Working with GNOME settings (gsettings)
 - GNOME extensions, dock, keybindings, appearance
 - Themes, wallpapers, fonts, appearance changes
@@ -73,15 +73,15 @@ If the request is to develop Omabuntu itself, this skill is out of scope. Follow
 
 Omabuntu is built on:
 
-| Component           | Purpose              | Config Location            |
-| ------------------- | -------------------- | -------------------------- |
-| **Ubuntu 24.04+**   | Base OS              | `/etc/`, `~/.config/`      |
-| **GNOME**           | Desktop environment  | GNOME settings (gsettings) |
-| **Alacritty/Kitty** | Terminals            | `~/.config/<terminal>/`    |
-| **Wofi**            | Application launcher | `~/.config/wofi/`          |
-| **Neovim/LazyVim**  | Text editor          | `~/.config/nvim/`          |
-| **Zellij**          | Terminal multiplexer | `~/.config/zellij/`        |
-| **Starship**        | Shell prompt         | `~/.config/starship.toml`  |
+| Component                   | Purpose              | Config Location            |
+| --------------------------- | -------------------- | -------------------------- |
+| **Ubuntu 24.04+**           | Base OS              | `/etc/`, `~/.config/`      |
+| **GNOME**                   | Desktop environment  | GNOME settings (gsettings) |
+| **Alacritty/Kitty/Ghostty** | Terminals            | `~/.config/<terminal>/`    |
+| **Walker**                  | Application launcher | `~/.config/walker/`        |
+| **Neovim/LazyVim**          | Text editor          | `~/.config/nvim/`          |
+| **Zellij**                  | Terminal multiplexer | `~/.config/zellij/`        |
+| **Starship**                | Shell prompt         | `~/.config/starship.toml`  |
 
 ## Command Discovery
 
@@ -151,6 +151,7 @@ gsettings set org.gnome.desktop.wm.keybindings close "['<Super>w']"
 ```
 ~/.config/alacritty/alacritty.toml
 ~/.config/kitty/kitty.conf
+~/.config/ghostty/config
 ```
 
 **Commands:** `omakub-restart-terminal`, `omakub-install-terminal alacritty|kitty`
@@ -158,13 +159,11 @@ gsettings set org.gnome.desktop.wm.keybindings close "['<Super>w']"
 ### Wofi (Application Launcher)
 
 ```
-~/.config/wofi/
-├── config           # Main configuration
-├── style.css        # Styling
-└── search.css       # Search-specific styles
+~/.config/walker/
+├── config.toml      # Main configuration
 ```
 
-**Commands:** `omakub-apps` (launches wofi), `omakub-refresh-wofi`
+**Commands:** `omakub-apps` (launches walker), `omakub-refresh-walker`
 
 ### Other Configs
 
@@ -240,7 +239,7 @@ When customizations go wrong:
 # Reset specific config (creates backup automatically)
 omakub-refresh-gnome
 omakub-refresh-alacritty
-omakub-refresh-wofi
+omakub-refresh-walker
 
 # The refresh command:
 # 1. Backs up current config with timestamp

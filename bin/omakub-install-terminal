@@ -3,7 +3,7 @@
 # Install one of the approved terminals and set it as the default for Omabuntu (Super + Return etc).
 
 if (($# == 0)); then
-  echo "Usage: omakub-install-terminal [alacritty|kitty]"
+  echo "Usage: omakub-install-terminal [alacritty|ghostty|kitty]"
   exit 1
 fi
 
@@ -12,6 +12,7 @@ package="$1"
 # Map package name to desktop entry ID
 case "$package" in
 alacritty) desktop_id="Alacritty.desktop" ;;
+ghostty) desktop_id="com.mitchellh.ghostty.desktop" ;;
 kitty) desktop_id="kitty.desktop" ;;
 *)
   echo "Unknown terminal: $package"
@@ -19,30 +20,39 @@ kitty) desktop_id="kitty.desktop" ;;
   ;;
 esac
 
+desktop_path="/usr/share/applications/$desktop_id"
+
 # Install package
-if omakub-app-install "$package"; then
+if omakub-pkg-add "$package"; then
   # Set as default terminal
   echo "Setting $package as new default terminal..."
   omakub-env-set TERMINAL "$package"
 
-    # Delete existing config file if it exists
-    rm -f ~/.config/xdg-terminals.list
-    rm -f ~/.config/ubuntu-xdg-terminals.list
-    rm -f ~/.config/GNOME-xdg-terminals.list
+  # Copy custom desktop entry for alacritty with X-TerminalArg* keys
+  if [[ $package == "alacritty" ]]; then
+    desktop_path="$OMAKUB_PATH/applications/desktop/Alacritty.desktop"
 
-    # Create the current config file with only the selected terminal
-    cat > "~/.config/ubuntu-xdg-terminals.list" << EOF
+    mkdir -p ~/.local/share/applications
+    cp "$desktop_path" ~/.local/share/applications/
+  fi
+
+  # Copy custom desktop entries with proper X-TerminalArg* keys
+  mkdir -p ~/.local/share/xdg-terminals ~/.local/share/applications
+  cp "$desktop_path" "$HOME/.local/share/xdg-terminals/$desktop_id"
+  cp "$desktop_path" "$HOME/.local/share/applications/$desktop_id"
+
+  # Delete existing config file if it exists
+  rm -f ~/.config/xdg-terminals.list
+  rm -f ~/.config/ubuntu-xdg-terminals.list
+  rm -f ~/.config/GNOME-xdg-terminals.list
+
+  # Create the current config file with only the selected terminal
+  touch ~/.config/xdg-terminals.list
+  cat >~/.config/xdg-terminals.list <<EOF
 # Terminal emulator preference order for xdg-terminal-exec
 # The first found and valid terminal will be used
 $desktop_id
 EOF
-
-  # Copy custom desktop entries with proper X-TerminalArg* keys
-  if [[ $package == "alacritty" ]]; then
-    mkdir -p ~/.local/share/xdg-terminals ~/.local/share/applications
-    cp /usr/share/applications/Alacritty.desktop "$HOME/.local/share/xdg-terminals/Alacritty.desktop"
-    cp /usr/share/applications/Alacritty.desktop "$HOME/.local/share/applications/Alacritty.desktop"
-  fi
 
   # Set the default terminal for Nautilus
   omakub-terminal-set-nautilus "$package"

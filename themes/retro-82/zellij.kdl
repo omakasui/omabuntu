@@ -1,0 +1,138 @@
+// 8"""8                              eeeee  eeee
+// 8   8  eeee eeeee eeeee  eeeee     8   8     8
+// 82ee8e 8      8   8   8  8  82     82ee8     8
+// 82   8 82ee   82  8eee8e 8   8    82   82 eee8
+// 82   8 82     82  82   8 8   8    82   82 82
+// 82   8 82ee   82  82   8 82ee8    82eee82 82ee
+//
+// background  #00172e →   0  23  46
+// foreground  #f6dcac → 246 220 172
+// accent      #faa968 → 250 169 104
+// orange      #e97b3c → 233 123 60
+// red         #f85525 → 248  85  37
+// teal        #028391 →   2 131 145
+// teal mid    #3f8f8a →  63 143 138
+// cyan        #8cbfb8 → 140 191 184
+// white       #a7c9c6 → 167 201 198
+// dark teal   #134e5a →  19  78  90
+
+themes {
+    current {
+        text_unselected {
+            base 246 220 172
+            background 0 23 46
+            emphasis_0 250 169 104
+            emphasis_1 140 191 184
+            emphasis_2 63 143 138
+            emphasis_3 19 78 90
+        }
+        text_selected {
+            base 0 23 46
+            background 250 169 104
+            emphasis_0 246 220 172
+            emphasis_1 167 201 198
+            emphasis_2 140 191 184
+            emphasis_3 63 143 138
+        }
+        ribbon_selected {
+            base 0 23 46
+            background 250 169 104
+            emphasis_0 233 123 60
+            emphasis_1 246 220 172
+            emphasis_2 167 201 198
+            emphasis_3 140 191 184
+        }
+        ribbon_unselected {
+            base 246 220 172
+            background 0 23 46
+            emphasis_0 250 169 104
+            emphasis_1 140 191 184
+            emphasis_2 63 143 138
+            emphasis_3 19 78 90
+        }
+        table_title {
+            base 246 220 172
+            background 0 23 46
+            emphasis_0 250 169 104
+            emphasis_1 140 191 184
+            emphasis_2 63 143 138
+            emphasis_3 19 78 90
+        }
+        table_cell_selected {
+            base 0 23 46
+            background 250 169 104
+            emphasis_0 246 220 172
+            emphasis_1 167 201 198
+            emphasis_2 140 191 184
+            emphasis_3 63 143 138
+        }
+        table_cell_unselected {
+            base 246 220 172
+            background 0 23 46
+            emphasis_0 250 169 104
+            emphasis_1 140 191 184
+            emphasis_2 63 143 138
+            emphasis_3 19 78 90
+        }
+        list_selected {
+            base 0 23 46
+            background 250 169 104
+            emphasis_0 246 220 172
+            emphasis_1 167 201 198
+            emphasis_2 140 191 184
+            emphasis_3 63 143 138
+        }
+        list_unselected {
+            base 246 220 172
+            background 0 23 46
+            emphasis_0 250 169 104
+            emphasis_1 140 191 184
+            emphasis_2 63 143 138
+            emphasis_3 19 78 90
+        }
+        frame_selected {
+            base 250 169 104
+            background 0 23 46
+            emphasis_0 233 123 60
+            emphasis_1 246 220 172
+            emphasis_2 167 201 198
+            emphasis_3 140 191 184
+        }
+        frame_highlight {
+            base 246 220 172
+            background 0 23 46
+            emphasis_0 250 169 104
+            emphasis_1 140 191 184
+            emphasis_2 63 143 138
+            emphasis_3 19 78 90
+        }
+        exit_code_success {
+            base 2 131 145
+            background 0 23 46
+            emphasis_0 246 220 172
+            emphasis_1 167 201 198
+            emphasis_2 140 191 184
+            emphasis_3 63 143 138
+        }
+        exit_code_error {
+            base 248 85 37
+            background 0 23 46
+            emphasis_0 250 169 104
+            emphasis_1 233 123 60
+            emphasis_2 246 220 172
+            emphasis_3 140 191 184
+        }
+        multiplayer_user_colors {
+            player_1 248 85 37
+            player_2 2 131 145
+            player_3 233 123 60
+            player_4 250 169 104
+            player_5 63 143 138
+            player_6 140 191 184
+            player_7 167 201 198
+            player_8 246 220 172
+            player_9 19 78 90
+            player_10 248 85 37
+        }
+    }
+}

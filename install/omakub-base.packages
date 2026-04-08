@@ -1,5 +1,6 @@
 # Omabuntu core package list installed via install/packaging/base.sh
 
+alacritty
 apache2-utils
 autoconf
 bat
@@ -48,7 +49,10 @@ libyaml-dev
 mpv
 mupdf
 mupdf-tools
+nautilus-open-any-terminal
 omakub-nvim
+omakub-walker
+omakub-zellij
 pipx
 pkg-config
 plocate
@@ -60,15 +64,16 @@ redis-tools
 ripgrep
 rustc
 sqlite3
+starship
 systemd-container
+tmux
 ufw
 ufw-docker
 unzip
-xdg-terminal-exec
-xournalpp
 wget
 wl-clipboard
-wofi
+xdg-terminal-exec
+xournalpp
 zellij
 zlib1g-dev
 zoxide

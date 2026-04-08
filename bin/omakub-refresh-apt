@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Overwrite the APT sources list to point to the correct Omakasui package channel, then update.
+# This is used after switching between release channels to ensure the right packages are available.
+
+channel="${1:-stable}"
+
+if [[ $channel != "stable" && $channel != "dev" ]]; then
+  echo "Error: Invalid channel '$channel'. Must be one of: stable, dev"
+  exit 1
+fi
+
+codename=$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+
+if [[ $channel == "dev" ]]; then
+  suite="${codename}-dev"
+else
+  suite="$codename"
+fi
+
+echo "Setting APT channel to $channel ($suite)"
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/omakasui-packages.gpg] \
+  https://packages.omakasui.org $suite main" \
+  | sudo tee /etc/apt/sources.list.d/omakasui.list > /dev/null
+
+sudo apt-get update

@@ -47,12 +47,16 @@ gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Super>5
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-6 "['<Super>6']"
 
 # Reserve slots for input source switching
-gsettings set org.gnome.desktop.wm.keybindings switch-input-source "@as []"
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Shift><Super>space']"
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<Shift><Super><Alt>space']"
+
+# Set some utility hotkeys
+gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "['<Shift><Super>Escape']"
 
 # Empty the custom keybindings to start fresh
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[]"
 
-# Set apps launcher (wofi) to Super+Space
+# Set apps launcher (walker) to Super+Space
 omakub-keybinding-add 'Apps Launcher' 'omakub-apps' '<Super>space'
 
 # Set omakub menu to Alt+Super+Space
@@ -61,8 +65,8 @@ omakub-keybinding-add 'Omabuntu Menu' 'omakub-menu' '<Alt><Super>space'
 # Set omakub theme switcher to Super+Shift+Control+Space
 omakub-keybinding-add 'Omabuntu Themes' 'omakub-menu theme' '<Super><Shift><Control>space'
 
-# Set omakub next background to Super+Shift+Control
-omakub-keybinding-add 'Omabuntu Background Next' 'omakub-theme-bg-next' '<Super><Control>space'
+# Set omakub next background to Super+Control+Space
+omakub-keybinding-add 'Omabuntu Background Next' 'omakub-menu background' '<Super><Control>space'
 
 # Set flameshot (with the sh fix for starting under Wayland) on alternate print screen key
 omakub-keybinding-add 'Flameshot' 'sh -c -- "flameshot gui"' '<Control>Print'
@@ -85,6 +89,7 @@ omakub-keybinding-add 'Omabuntu System' 'omakub-menu system' '<Super>Escape'
 # Set applications hotkeys
 omakub-keybinding-add 'Terminal' 'xdg-terminal-exec' '<Super>Return'
 omakub-keybinding-add 'Default Terminal' 'xdg-terminal-exec' '<Control><Alt>t'
+omakub-keybinding-add 'Terminal (Tmux)' 'xdg-terminal-exec bash -c "tmux attach || tmux new -s Work"' '<Super><Alt>Return'
 omakub-keybinding-add 'Browser' 'omakub-launch-browser --new-window' '<Shift><Super>b'
 omakub-keybinding-add 'Browser (Alt)' 'omakub-launch-browser --new-window' '<Shift><Super>Return'
 omakub-keybinding-add 'Incognito Browser' 'omakub-launch-browser --private' '<Shift><Alt><Super>b'
