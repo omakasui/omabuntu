@@ -225,7 +225,7 @@ show_install_service_menu() {
   *Discord*) install_app "Discord" "discord" ;;
   *Dropbox*) install_app "Dropbox" "dropbox" ;;
   *LibreOffice*) install "LibreOffice" "libreoffice" ;;
-  *LocalSend*) install_app "LocalSend" "localsend" ;;
+  *LocalSend*) install "LocalSend" "localsend" ;;
   *ObsStudio*) install "ObsStudio" "obs-studio" ;;
   *Obsidian*) install_app "Obsidian" "obsidian" ;;
   *Signal*) install_app "Signal" "signal" ;;

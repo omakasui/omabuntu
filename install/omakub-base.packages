@@ -46,6 +46,7 @@ libsqlite3-0
 libssl-dev
 libvips42t64
 libyaml-dev
+localsend
 mpv
 mupdf
 mupdf-tools

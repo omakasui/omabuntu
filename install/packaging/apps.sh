@@ -5,7 +5,6 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 # Base Apps
 apps=(
 	"Chromium"
-	"LocalSend"
 	"Pinta"
 )
 
