@@ -242,7 +242,7 @@ show_install_browser_menu() {
   *Brave*) install_app "Brave" "brave" ;;
   *Chromium*) install_app "Chromium" "chromium" ;;
   *Firefox*) install_app "Firefox" "firefox" ;;
-  *Zen*) install_app "Zen Browser" "zen" ;;
+  *Zen*) install "Zen Browser" "zen-browser" ;;
   *) show_install_menu ;;
   esac
 }
