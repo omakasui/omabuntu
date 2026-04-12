@@ -251,7 +251,7 @@ show_install_utility_menu() {
   case $(menu "Install" "  ASDControl\n  Flameshot\n  Pinta\n  Starship\n  Xournalpp") in
   *ASDControl*) install_app "ASDControl" "asdcontrol" ;;
   *Flameshot*) install "Flameshot" "flameshot" ;;
-  *Pinta*) install_app "Pinta" "pinta" ;;
+  *Pinta*) install "Pinta" "pinta" ;;
   *Starship*) install "Starship" "starship" ;;
   *Xournalpp*) install "Xournalpp" "xournalpp" ;;
   *) show_install_menu ;;
