@@ -13,7 +13,7 @@ if gum confirm "Are you sure you want to remove all preinstalled web apps, TUI w
   rm -f ~/.local/bin/codex ~/.local/bin/gemini ~/.local/bin/copilot ~/.local/bin/claude \
        ~/.local/bin/opencode ~/.local/bin/playwright-cli ~/.local/bin/pi
 
-  omakub-app-remove \
+  omakub-pkg-drop \
     spotify \
     libreoffice \
     xournalpp \

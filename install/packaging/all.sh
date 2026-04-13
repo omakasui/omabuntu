@@ -1,6 +1,7 @@
 #!/bin/bash
 
 run_logged $OMAKUB_INSTALL/packaging/base.sh
+run_logged $OMAKUB_INSTALL/packaging/flathub.sh
 run_logged $OMAKUB_INSTALL/packaging/remove-snap.sh
 run_logged $OMAKUB_INSTALL/packaging/pipx.sh
 run_logged $OMAKUB_INSTALL/packaging/fonts.sh

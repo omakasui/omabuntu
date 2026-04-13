@@ -225,7 +225,7 @@ show_install_service_menu() {
   *Discord*) install_app "Discord" "discord" ;;
   *Dropbox*) install_app "Dropbox" "dropbox" ;;
   *LibreOffice*) install "LibreOffice" "libreoffice" ;;
-  *LocalSend*) install_app "LocalSend" "localsend" ;;
+  *LocalSend*) install "LocalSend" "localsend" ;;
   *ObsStudio*) install "ObsStudio" "obs-studio" ;;
   *Obsidian*) install_app "Obsidian" "obsidian" ;;
   *Signal*) install_app "Signal" "signal" ;;
@@ -242,7 +242,7 @@ show_install_browser_menu() {
   *Brave*) install_app "Brave" "brave" ;;
   *Chromium*) install_app "Chromium" "chromium" ;;
   *Firefox*) install_app "Firefox" "firefox" ;;
-  *Zen*) install_app "Zen Browser" "zen" ;;
+  *Zen*) install "Zen Browser" "zen-browser" ;;
   *) show_install_menu ;;
   esac
 }
@@ -251,7 +251,7 @@ show_install_utility_menu() {
   case $(menu "Install" "  ASDControl\n  Flameshot\n  Pinta\n  Starship\n  Xournalpp") in
   *ASDControl*) install_app "ASDControl" "asdcontrol" ;;
   *Flameshot*) install "Flameshot" "flameshot" ;;
-  *Pinta*) install_app "Pinta" "pinta" ;;
+  *Pinta*) install "Pinta" "pinta" ;;
   *Starship*) install "Starship" "starship" ;;
   *Xournalpp*) install "Xournalpp" "xournalpp" ;;
   *) show_install_menu ;;

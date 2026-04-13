@@ -46,6 +46,7 @@ libsqlite3-0
 libssl-dev
 libvips42t64
 libyaml-dev
+localsend
 mpv
 mupdf
 mupdf-tools
@@ -53,6 +54,7 @@ nautilus-open-any-terminal
 omakub-nvim
 omakub-walker
 omakub-zellij
+pinta
 pipx
 pkg-config
 plocate

@@ -1,12 +1,8 @@
 #!/bin/bash
 
-sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
 # Base Apps
 apps=(
 	"Chromium"
-	"LocalSend"
-	"Pinta"
 )
 
 # Install optional apps
