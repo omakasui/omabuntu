@@ -1,6 +1,7 @@
 # Omabuntu core package list installed via install/packaging/base.sh
 
 alacritty
+asdcontrol
 apache2-utils
 autoconf
 bat
