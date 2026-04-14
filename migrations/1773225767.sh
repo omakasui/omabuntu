@@ -41,19 +41,19 @@ fi
 omakub-pkg-add fastfetch
 
 # Fonts
-if omakub-pkg-present omakasui-font-cascadia-mono-nf; then
-  omakub-pkg-drop omakasui-font-cascadia-mono-nf
-  omakub-pkg-add font-cascadia-mono-nf
+if omakub-pkg-present omakasui-fonts-cascadia-mono-nf; then
+  omakub-pkg-drop omakasui-fonts-cascadia-mono-nf
+  omakub-pkg-add fonts-cascadia-mono-nf
 fi
 
-if omakub-pkg-present omakasui-font-jetbrains-mono; then
-  omakub-pkg-drop omakasui-font-jetbrains-mono
-  omakub-pkg-add font-jetbrains-mono
+if omakub-pkg-present omakasui-fonts-jetbrains-mono; then
+  omakub-pkg-drop omakasui-fonts-jetbrains-mono
+  omakub-pkg-add fonts-jetbrains-mono
 fi
 
-if omakub-pkg-present omakasui-ia-writer-mono; then
-  omakub-pkg-drop omakasui-ia-writer-mono
-  omakub-pkg-add font-ia-writer-mono
+if omakub-pkg-present omakasui-fonts-ia-writer-mono; then
+  omakub-pkg-drop omakasui-fonts-ia-writer-mono
+  omakub-pkg-add fonts-ia-writer-mono
 fi
 
 # NVim
