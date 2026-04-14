@@ -2,7 +2,6 @@
 
 alacritty
 asdcontrol
-apache2-utils
 autoconf
 bat
 bison
@@ -41,7 +40,6 @@ libmysqlclient-dev
 libncurses-dev
 libpq-dev
 libreadline-dev
-libreadline-dev
 libreoffice
 libsqlite3-0
 libssl-dev
@@ -49,8 +47,6 @@ libvips42t64
 libyaml-dev
 localsend
 mpv
-mupdf
-mupdf-tools
 nautilus-open-any-terminal
 omakub-nvim
 omakub-walker
@@ -63,12 +59,10 @@ postgresql-client
 postgresql-client-common
 python3-nautilus
 python3-pip
-redis-tools
 ripgrep
 rustc
 sqlite3
 starship
-systemd-container
 tmux
 ufw
 ufw-docker
