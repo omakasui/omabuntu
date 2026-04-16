@@ -248,8 +248,7 @@ show_install_browser_menu() {
 }
 
 show_install_utility_menu() {
-  case $(menu "Install" "  ASDControl\n  Flameshot\n  Pinta\n  Starship\n  Xournalpp") in
-  *ASDControl*) install_app "ASDControl" "asdcontrol" ;;
+  case $(menu "Install" "  Flameshot\n  Pinta\n  Starship\n  Xournalpp") in
   *Flameshot*) install "Flameshot" "flameshot" ;;
   *Pinta*) install "Pinta" "pinta" ;;
   *Starship*) install "Starship" "starship" ;;
