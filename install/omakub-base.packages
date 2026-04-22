@@ -78,6 +78,7 @@ rustc
 sqlite3
 starship
 
+tlp
 tmux
 
 ufw
