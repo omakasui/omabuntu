@@ -20,9 +20,9 @@ FLAG="$HOME/.local/state/omakub/toggles/$FLAG_NAME"
 
 if [[ -f $FLAG ]]; then
   rm $FLAG
-  [[ -n $DISABLED_NOTIFICATION ]] && notify-send -u low "$NOTIFICATION_SUMMARY" "$DISABLED_NOTIFICATION"
+  [[ -n $DISABLED_NOTIFICATION ]] && omakub-notify "$NOTIFICATION_SUMMARY" "$DISABLED_NOTIFICATION"
 else
   mkdir -p "$(dirname $FLAG)"
   touch $FLAG
-  [[ -n $ENABLED_NOTIFICATION ]] && notify-send -u low "$NOTIFICATION_SUMMARY" "$ENABLED_NOTIFICATION"
+  [[ -n $ENABLED_NOTIFICATION ]] && omakub-notify "$NOTIFICATION_SUMMARY" "$ENABLED_NOTIFICATION"
 fi
