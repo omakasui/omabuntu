@@ -51,6 +51,7 @@ omakub-restart-opencode
 
 # Change app specific themes
 omakub-theme-set-gnome
+omakub-theme-set-gnome-extensions
 omakub-theme-set-vscode
 omakub-theme-set-obsidian
 

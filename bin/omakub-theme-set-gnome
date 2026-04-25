@@ -47,15 +47,3 @@ if [[ -f $GNOME_ICONS_THEME ]]; then
 else
   gsettings set org.gnome.desktop.interface icon-theme "${OMAKUB_GTK_THEME}"
 fi
-
-# Change gnome extensions theme
-GNOME_TOPHAT_THEME=~/.config/omakub/current/theme/tophat.theme
-if [[ -f $GNOME_TOPHAT_THEME ]]; then
-  gsettings set org.gnome.shell.extensions.tophat meter-fg-color "$(<$GNOME_TOPHAT_THEME)"
-else
-  if [[ -f ~/.config/omakub/current/theme/light.mode ]]; then
-    gsettings set org.gnome.shell.extensions.tophat meter-fg-color "#e92020"
-  else
-    gsettings set org.gnome.shell.extensions.tophat meter-fg-color "#33ccff"
-  fi
-fi
