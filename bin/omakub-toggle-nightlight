@@ -1,14 +1,13 @@
 #!/bin/bash
 
-# Toggle night light feature in GNOME
-current_state=$(gsettings get org.gnome.settings-daemon.plugins.color night-light-enabled)
+omakub-toggle \
+  --notification-summary "Night Light" \
+  --enabled-notification "  Nightlight screen temperature" \
+  --disabled-notification "   Daylight screen temperature" \
+  night-light
 
-if [[ $current_state == "true" ]]; then
-  gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled false
-  sleep 0.5 # Wait for the setting to apply
-  omakub-notify -u low "Night Light" "   Daylight screen temperature"
-else
+if omakub-toggle-enable night-light; then
   gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
-  sleep 0.5 # Wait for the setting to apply
-  omakub-notify -u low "Night Light" "  Nightlight screen temperature"
+else
+  gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled false
 fi

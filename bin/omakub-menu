@@ -122,7 +122,6 @@ show_toggle_menu() {
   esac
 }
 
-
 show_style_menu() {
   case $(menu "Style" "󰸌  Theme\n  Font\n  Background") in
   *Theme*) show_theme_menu ;;
@@ -172,7 +171,7 @@ show_setup_menu() {
 show_setup_system_menu() {
   local options=""
 
- if [[ -f ~/.local/state/omakub/toggles/suspend-off ]]; then
+ if omakub-toggle-enable suspend-off; then
     options="$options󰒲  Enable Suspend"
   else
     options="$options󰒲  Disable Suspend"

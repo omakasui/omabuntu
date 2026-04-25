@@ -1,14 +1,14 @@
 :root {
   --accent-color: #aeb1b5; /* #'s before H1-3 */
   --background-color: white;
-  --border-color: #ddd; 
-  --code-bg-color: #f8f8f8; 
+  --border-color: #ddd;
+  --code-bg-color: #f8f8f8;
   --font-color: #42464c;
   --header-color: #222324;
   --link-color: #2077b2;
   --control-text-color: #667176;
   --side-bar-bg-color: #fafafa;
-  --body-font: iAWriterMonoS-Regular, monospace, Roboto;
+  --body-font: "iA Writer Mono S";
   --border-radius: 2px;
   --document-horizontal-margin: 80px;
   --document-padding-x: 10ch;
@@ -21,7 +21,7 @@
   --main-content-margin: 0 auto;
   --main-content-max-width: 85ch;
   --monospace-font-size: 20px;
-  --monospace-font: iAWriterMonoS-Regular, monospace;
+  --monospace-font: "iA Writer Mono S";
   --monospace-line-height: 1.6;
   --monospace: var(--monospace-font); /* Fixes source code mode */
   --nav-width: 200px;

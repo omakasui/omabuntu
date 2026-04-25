@@ -56,47 +56,39 @@ gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "['<Shift><
 # Empty the custom keybindings to start fresh
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[]"
 
-# Set apps launcher (walker) to Super+Space
-omakub-keybinding-add 'Apps Launcher' 'omakub-apps' '<Super>space'
+# Menus
+omakub-keybinding-add 'Launch apps' 'omakub-apps' '<Super>space'
+omakub-keybinding-add 'Omabuntu menu' 'omakub-menu' '<Alt><Super>space'
+omakub-keybinding-add 'System menu' 'omakub-menu system' '<Super>Escape'
 
-# Set omakub menu to Alt+Super+Space
-omakub-keybinding-add 'Omabuntu Menu' 'omakub-menu' '<Alt><Super>space'
+# Aesthetics
+omakub-keybinding-add 'Theme menu' 'omakub-menu theme' '<Super><Shift><Control>space'
+omakub-keybinding-add 'Background menu' 'omakub-menu background' '<Super><Control>space'
 
-# Set omakub theme switcher to Super+Shift+Control+Space
-omakub-keybinding-add 'Omabuntu Themes' 'omakub-menu theme' '<Super><Shift><Control>space'
+# Control panels
+omakub-keybinding-add 'Activity' 'omakub-launch-tui btop' '<Super><Shift>t'
 
-# Set omakub next background to Super+Control+Space
-omakub-keybinding-add 'Omabuntu Background Next' 'omakub-menu background' '<Super><Control>space'
+# Control Apple Display brightness
+omakub-keybinding-add 'Apple Brightness down' "omakub-brightness-apple-display -5000" '<Control>F1'
+omakub-keybinding-add 'Apple Brightness up' "omakub-brightness-apple-display +5000" '<Control>F2'
+omakub-keybinding-add 'Apple Brightness max' "omakub-brightness-apple-display +60000" '<Control><Shift>F2'
 
-# Set flameshot (with the sh fix for starting under Wayland) on alternate print screen key
+# Toggles
+omakub-keybinding-add 'Nightlight toggle' 'omakub-toggle-nightlight' '<Super><Control>n'
+
+# Screenshots
 omakub-keybinding-add 'Flameshot' 'sh -c -- "flameshot gui"' '<Control>Print'
 
-# Turn brightness down on Apple monitor (requires ASDControl installed)
-omakub-keybinding-add 'Apple Brightness Down (ASDControl)' "omakub-brightness-apple-display -5000" '<Control>F1'
-
-# Turn brightness up on Apple monitor (requires ASDControl installed)
-omakub-keybinding-add 'Apple Brightness Up (ASDControl)' "omakub-brightness-apple-display +5000" '<Control>F2'
-
-# Turn brightness up to max on Apple monitor (requires ASDControl installed)
-omakub-keybinding-add 'Apple Brightness Max (ASDControl)' "omakub-brightness-apple-display +60000" '<Control><Shift>F2'
-
-# Set night light toggle to Super+Control+N
-omakub-keybinding-add 'Night Light Toggle' 'omakub-toggle-nightlight' '<Super><Control>n'
-
-# Set screen lock to Super+L
-omakub-keybinding-add 'Omabuntu System' 'omakub-menu system' '<Super>Escape'
-
-# Set applications hotkeys
+# Application bindings
 omakub-keybinding-add 'Terminal' 'xdg-terminal-exec' '<Super>Return'
-omakub-keybinding-add 'Default Terminal' 'xdg-terminal-exec' '<Control><Alt>t'
-omakub-keybinding-add 'Terminal (Tmux)' 'xdg-terminal-exec bash -c "tmux attach || tmux new -s Work"' '<Super><Alt>Return'
+omakub-keybinding-add 'Terminal' 'xdg-terminal-exec' '<Control><Alt>t'
+omakub-keybinding-add 'Tmux' 'xdg-terminal-exec bash -c "tmux attach || tmux new -s Work"' '<Super><Alt>Return'
 omakub-keybinding-add 'Browser' 'omakub-launch-browser --new-window' '<Shift><Super>b'
-omakub-keybinding-add 'Browser (Alt)' 'omakub-launch-browser --new-window' '<Shift><Super>Return'
-omakub-keybinding-add 'Incognito Browser' 'omakub-launch-browser --private' '<Shift><Alt><Super>b'
-omakub-keybinding-add 'File Manager' 'nautilus --new-window' '<Shift><Super>f'
-omakub-keybinding-add 'Activity' 'omakub-launch-tui btop' '<Super><Shift>t'
+omakub-keybinding-add 'Browser' 'omakub-launch-browser --new-window' '<Shift><Super>Return'
+omakub-keybinding-add 'Browser (private)' 'omakub-launch-browser --private' '<Shift><Alt><Super>b'
+omakub-keybinding-add 'File manager' 'nautilus --new-window' '<Shift><Super>f'
 omakub-keybinding-add 'Docker' 'omakub-launch-tui lazydocker' '<Super><Shift>d'
-omakub-keybinding-add 'Spotify' 'spotify' '<Super><Shift>m'
+omakub-keybinding-add 'Music' 'spotify' '<Super><Shift>m'
 omakub-keybinding-add 'Editor' 'omakub-launch-editor' '<Super><Shift>n'
 
 # Set webapps hotkeys
