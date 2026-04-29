@@ -1,0 +1,14 @@
+#!/bin/bash
+
+pkgs_suite=$(grep -oP 'https://packages\.omakasui\.org\s+\K\S+' /etc/apt/sources.list.d/omakasui.list 2>/dev/null)
+core_suite=$(grep -oP 'https://core\.omakasui\.org\s+\K\S+' /etc/apt/sources.list.d/omakasui-core.list 2>/dev/null)
+
+if [[ $pkgs_suite == $core_suite ]]; then
+  if [[ $pkgs_suite == *-dev ]]; then
+    echo "dev"
+  else
+    echo "stable"
+  fi
+else
+  echo "$core_suite / $pkgs_suite"
+fi
