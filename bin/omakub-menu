@@ -220,7 +220,7 @@ show_install_menu() {
 show_install_service_menu() {
   case $(menu "Install" "  1password\n  Bitwarden\n  Discord\n  Dropbox\n  LibreOffice\n  LocalSend\n  ObsStudio\n  Obsidian\n  Signal\n  Spotify\n  Typora\n  Tailscale\n  Zoom") in
   *1password*) install_app "1password" "1password" ;;
-  *Bitwarden*) install_app "Bitwarden" "bitwarden" ;;
+  *Bitwarden*) install "Bitwarden" "bitwarden" ;;
   *Discord*) install_app "Discord" "discord" ;;
   *Dropbox*) install_app "Dropbox" "dropbox" ;;
   *LibreOffice*) install "LibreOffice" "libreoffice" ;;
