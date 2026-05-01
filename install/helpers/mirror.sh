@@ -7,7 +7,7 @@ fi
 
 # Add Omakasui APT repositories
 curl -fsSL https://keyrings.omakasui.org/omakasui-core.gpg.key \
-  | gpg --dearmor
+  | gpg --dearmor \
   | sudo tee /usr/share/keyrings/omakasui-core.gpg > /dev/null
 
 curl -fsSL https://keyrings.omakasui.org/omakasui-packages.gpg.key \
