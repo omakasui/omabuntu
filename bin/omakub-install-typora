@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Typora is a markdown editor and reader. See https://typora.io/
+echo "Installing Typora..."
+
 if [[ ! -f /etc/apt/sources.list.d/typora.list ]]; then
   [[ -f /etc/apt/keyrings/typora.gpg ]] && sudo rm /etc/apt/keyrings/typora.gpg
   sudo mkdir -p /etc/apt/keyrings

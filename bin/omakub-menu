@@ -219,18 +219,18 @@ show_install_menu() {
 
 show_install_service_menu() {
   case $(menu "Install" "  1password\n  Bitwarden\n  Discord\n  Dropbox\n  LibreOffice\n  LocalSend\n  ObsStudio\n  Obsidian\n  Signal\n  Spotify\n  Typora\n  Tailscale") in
-  *1password*) install_app "1password" "1password" ;;
+  *1password*) present_terminal omakub-install-1password ;;
   *Bitwarden*) install "Bitwarden" "bitwarden" ;;
-  *Discord*) install_app "Discord" "discord" ;;
+  *Discord*) present_terminal omakub-install-discord ;;
   *Dropbox*) install "Dropbox" "nautilus-dropbox" ;;
   *LibreOffice*) install "LibreOffice" "libreoffice" ;;
   *LocalSend*) install "LocalSend" "localsend" ;;
   *ObsStudio*) install "ObsStudio" "obs-studio" ;;
   *Obsidian*) install "Obsidian" "obsidian" ;;
-  *Signal*) install_app "Signal" "signal" ;;
-  *Spotify*) install_app "Spotify" "spotify" ;;
-  *Typora*) install_app "Typora" "typora" ;;
-  *Tailscale*) install_app "Tailscale" "tailscale" ;;
+  *Signal*) present_terminal omakub-install-signal ;;
+  *Spotify*) present_terminal omakub-install-spotify ;;
+  *Typora*) present_terminal omakub-install-typora ;;
+  *Tailscale*) present_terminal omakub-install-tailscale ;;
   *) show_install_menu ;;
   esac
 }
