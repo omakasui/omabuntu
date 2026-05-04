@@ -163,7 +163,7 @@ gsettings set org.gnome.desktop.wm.keybindings close "['<Super>w']"
 ├── config.toml      # Main configuration
 ```
 
-**Commands:** `omakub-launch-apps` (launches walker), `omakub-refresh-walker`
+**Commands:** `omakub-menu-app` (launches walker), `omakub-refresh-walker`
 
 ### Other Configs
 
