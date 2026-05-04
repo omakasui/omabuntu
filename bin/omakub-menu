@@ -502,7 +502,7 @@ show_main_menu() {
 
 go_to_menu() {
   case "${1,,}" in
-  *apps*) omakub-apps ;;
+  *apps*) omakub-launch-apps ;;
   *learn*) show_learn_menu ;;
   *trigger*) show_trigger_menu ;;
   *toggle*) show_toggle_menu ;;
