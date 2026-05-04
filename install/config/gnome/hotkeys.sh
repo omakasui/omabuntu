@@ -57,7 +57,7 @@ gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "['<Shift><
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[]"
 
 # Menus
-omakub-keybinding-add 'Launch apps' 'omakub-apps' '<Super>space'
+omakub-keybinding-add 'Launch apps' 'omakub-launch-apps' '<Super>space'
 omakub-keybinding-add 'Omabuntu menu' 'omakub-menu' '<Alt><Super>space'
 omakub-keybinding-add 'System menu' 'omakub-menu system' '<Super>Escape'
 
