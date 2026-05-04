@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Installing Firefox..."
+
 # Check if the Mozilla PPA is already added
 if ! grep -q "^deb .*\bmozillateam/ppa\b" /etc/apt/sources.list /etc/apt/sources.list.d/* 2>/dev/null; then
   sudo add-apt-repository -y ppa:mozillateam/ppa
