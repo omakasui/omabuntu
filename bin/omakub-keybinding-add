@@ -22,6 +22,52 @@ if [[ -z $KB_NAME || -z $KB_COMMAND || -z $KB_BINDING ]]; then
   exit 1
 fi
 
+# Remove any existing keybindings with the same binding sequence
+DUP_CHECK_BINDINGS=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings)
+if [[ $DUP_CHECK_BINDINGS != "@as []" && $DUP_CHECK_BINDINGS != "[]" ]]; then
+  KB_BASE_SCHEMA="org.gnome.settings-daemon.plugins.media-keys"
+  KB_CUSTOM_PATH="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+  DUP_INDICES=$(echo "$DUP_CHECK_BINDINGS" | grep -oP 'custom\K[0-9]+' | sort -n)
+  DUPLICATE_INDICES=()
+
+  while IFS= read -r index; do
+    SCHEMA_PATH="${KB_BASE_SCHEMA}.custom-keybinding:${KB_CUSTOM_PATH}/custom${index}/"
+    EXISTING_BINDING=$(gsettings get "$SCHEMA_PATH" binding 2>/dev/null | tr -d "'")
+    if [[ $EXISTING_BINDING == $KB_BINDING ]]; then
+      DUPLICATE_INDICES+=("$index")
+    fi
+  done <<< "$DUP_INDICES"
+
+  if (( ${#DUPLICATE_INDICES[@]} > 0 )); then
+    for index in "${DUPLICATE_INDICES[@]}"; do
+      SCHEMA_PATH="${KB_BASE_SCHEMA}.custom-keybinding:${KB_CUSTOM_PATH}/custom${index}/"
+      gsettings reset "$SCHEMA_PATH" name 2>/dev/null
+      gsettings reset "$SCHEMA_PATH" command 2>/dev/null
+      gsettings reset "$SCHEMA_PATH" binding 2>/dev/null
+    done
+
+    KEEP_PATHS=()
+    while IFS= read -r index; do
+      should_keep=true
+      for dup in "${DUPLICATE_INDICES[@]}"; do
+        if [[ $index == $dup ]]; then
+          should_keep=false
+          break
+        fi
+      done
+      if [[ $should_keep == true ]]; then
+        KEEP_PATHS+=("'${KB_CUSTOM_PATH}/custom${index}/'")
+      fi
+    done <<< "$DUP_INDICES"
+
+    if (( ${#KEEP_PATHS[@]} == 0 )); then
+      gsettings set "$KB_BASE_SCHEMA" custom-keybindings "[]"
+    else
+      gsettings set "$KB_BASE_SCHEMA" custom-keybindings "[$(IFS=,; echo "${KEEP_PATHS[*]}")]"
+    fi
+  fi
+fi
+
 # Get current custom keybindings
 CURRENT_BINDINGS=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings)
 
