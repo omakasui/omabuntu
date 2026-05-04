@@ -3,6 +3,9 @@
 # Exit immediately if a command exits with a non-zero status
 set -eEo pipefail
 
+# Set default brand if not already set
+export OMAKUB_BRAND="${OMAKUB_BRAND:-Omabuntu}"
+
 # Define Omabuntu locations
 export OMAKUB_PATH="$HOME/.local/share/omakub"
 export OMAKUB_INSTALL="$OMAKUB_PATH/install"
