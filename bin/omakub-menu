@@ -222,7 +222,7 @@ show_install_service_menu() {
   *1password*) install_app "1password" "1password" ;;
   *Bitwarden*) install "Bitwarden" "bitwarden" ;;
   *Discord*) install_app "Discord" "discord" ;;
-  *Dropbox*) install_app "Dropbox" "dropbox" ;;
+  *Dropbox*) install "Dropbox" "nautilus-dropbox" ;;
   *LibreOffice*) install "LibreOffice" "libreoffice" ;;
   *LocalSend*) install "LocalSend" "localsend" ;;
   *ObsStudio*) install "ObsStudio" "obs-studio" ;;
