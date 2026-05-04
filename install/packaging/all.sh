@@ -7,6 +7,7 @@ run_logged $OMAKUB_INSTALL/packaging/pipx.sh
 run_logged $OMAKUB_INSTALL/packaging/fonts.sh
 run_logged $OMAKUB_INSTALL/packaging/nvim.sh
 run_logged $OMAKUB_INSTALL/packaging/docker.sh
+run_logged $OMAKUB_INSTALL/packaging/mise.sh
 run_logged $OMAKUB_INSTALL/packaging/tools.sh
 run_logged $OMAKUB_INSTALL/packaging/icons.sh
 run_logged $OMAKUB_INSTALL/packaging/chromium.sh
