@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Installing Docker and related tools..."
-
 if [[ ! -f /etc/apt/sources.list.d/docker.list ]]; then
     [[ -f /etc/apt/keyrings/docker.asc ]] && sudo rm /etc/apt/keyrings/docker.asc
     sudo install -m 0755 -d /etc/apt/keyrings
@@ -12,4 +10,3 @@ fi
 
 sudo apt-get update
 omakub-pkg-add docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
-
