@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# omakub-app-folder-add: Move a .desktop file to a specified app folder.
-# Usage: omakub-app-folder-add <desktop_file.desktop> <folder_name>
+# omakub-gnome-app-folder-add: Move a .desktop file to a specified app folder.
+# Usage: omakub-gnome-app-folder-add <desktop_file.desktop> <folder_name>
 
 DESKTOP_DIR="$HOME/.local/share/applications"
 

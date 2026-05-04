@@ -317,8 +317,8 @@ omakub-install-terminal <name> # Install and set default terminal
 # And many more...
 
 # Application folder management (for GNOME app grid)
-omakub-app-folder-add <app.desktop> <folder-name>
-omakub-app-folder-remove <app.desktop> <folder-name>
+omakub-gnome-app-folder-add <app.desktop> <folder-name>
+omakub-gnome-app-folder-remove <app.desktop> <folder-name>
 ```
 
 ### Night Light
