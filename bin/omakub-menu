@@ -218,7 +218,7 @@ show_install_menu() {
 }
 
 show_install_service_menu() {
-  case $(menu "Install" "  1password\n  Bitwarden\n  Discord\n  Dropbox\n  LibreOffice\n  LocalSend\n  ObsStudio\n  Obsidian\n  Signal\n  Spotify\n  Typora\n  Tailscale\n  Zoom") in
+  case $(menu "Install" "  1password\n  Bitwarden\n  Discord\n  Dropbox\n  LibreOffice\n  LocalSend\n  ObsStudio\n  Obsidian\n  Signal\n  Spotify\n  Typora\n  Tailscale") in
   *1password*) install_app "1password" "1password" ;;
   *Bitwarden*) install "Bitwarden" "bitwarden" ;;
   *Discord*) install_app "Discord" "discord" ;;
@@ -231,7 +231,6 @@ show_install_service_menu() {
   *Spotify*) install_app "Spotify" "spotify" ;;
   *Typora*) install_app "Typora" "typora" ;;
   *Tailscale*) install_app "Tailscale" "tailscale" ;;
-  *Zoom*) install_app "Zoom" "zoom" ;;
   *) show_install_menu ;;
   esac
 }
