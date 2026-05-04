@@ -275,7 +275,7 @@ show_install_font_menu() {
 
 show_install_development_menu() {
   case $(menu "Install" "  Docker\n󱘲  Databases\n󰊢  Git\n󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure\n  Scala") in
-  *Docker*) install "Docker" "docker" ;;
+  *Docker*) present_terminal "omakub-install-docker" ;;
   *Databases*) show_install_databases_menu ;;
   *Git*) show_install_git_menu ;;
   *Rails*) present_terminal "omakub-install-dev-env ruby" ;;
@@ -399,7 +399,8 @@ show_remove_font_menu() {
 }
 
 show_remove_development_menu() {
-  case $(menu "Remove Development Environment" "󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure\n  Scala") in
+  case $(menu "Remove Development Environment" "  Docker\n󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure\n  Scala") in
+  *Docker*) present_terminal "omakub-remove-docker" ;;
   *Rails*) present_terminal "omakub-remove-dev-env ruby" ;;
   *JavaScript*) show_remove_javascript_menu ;;
   *Go*) present_terminal "omakub-remove-dev-env go" ;;
