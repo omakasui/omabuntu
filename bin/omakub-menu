@@ -108,9 +108,9 @@ show_trigger_menu() {
 
 show_share_menu() {
   case $(menu "Share" "  Clipboard\n  File \n  Folder") in
-  *Clipboard*) omakub-cmd-share clipboard ;;
-  *File*) terminal bash -c "omakub-cmd-share file" ;;
-  *Folder*) terminal bash -c "omakub-cmd-share folder" ;;
+  *Clipboard*) omakub-menu-share clipboard ;;
+  *File*) terminal bash -c "omakub-menu-share file" ;;
+  *Folder*) terminal bash -c "omakub-menu-share folder" ;;
   *) back_to show_trigger_menu ;;
   esac
 }
