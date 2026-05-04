@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Installing Signal..."
+
 if [[ ! -f /etc/apt/sources.list.d/signal-desktop.sources ]]; then
   [[ -f /usr/share/keyrings/signal-desktop-keyring.gpg ]] && sudo rm /usr/share/keyrings/signal-desktop-keyring.gpg
   wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg;
