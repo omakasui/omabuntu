@@ -338,7 +338,7 @@ show_install_editor_menu() {
   case $(menu "Install" "  VSCode\n  Cursor\n  Zed\n  Emacs") in
   *VSCode*) install_app "Visual Studio Code" "visual-studio-code" ;;
   *Cursor*) install_app "Cursor" "cursor" ;;
-  *Zed*) install_app "Zed" "zed" ;;
+  *Zed*) install "Zed" "zed" ;;
   *Emacs*) install_app "Doom Emacs" "doom-emacs" ;;
   *) show_install_menu ;;
   esac
