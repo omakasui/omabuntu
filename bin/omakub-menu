@@ -274,9 +274,8 @@ show_install_font_menu() {
 }
 
 show_install_development_menu() {
-  case $(menu "Install" "󱘲  Databases\n󰊢  Git\n󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure\n  Scala") in
+  case $(menu "Install" "󱘲  Databases\n󰫏  Ruby on Rails\n  JavaScript\n  Go\n  PHP\n  Python\n  Elixir\n  Zig\n  Rust\n  Java\n  .NET\n  OCaml\n  Clojure\n  Scala") in
   *Databases*) show_install_databases_menu ;;
-  *Git*) show_install_git_menu ;;
   *Rails*) present_terminal "omakub-install-dev-env ruby" ;;
   *JavaScript*) show_install_javascript_menu ;;
   *Go*) present_terminal "omakub-install-dev-env go" ;;
@@ -302,14 +301,6 @@ show_install_databases_menu() {
   *Redis*) present_terminal "omakub-install-docker-dbs redis" ;;
   *MongoDB*) present_terminal "omakub-install-docker-dbs mongodb" ;;
   *MSSQL*) present_terminal "omakub-install-docker-dbs mssql" ;;
-  *) show_install_development_menu ;;
-  esac
-}
-
-show_install_git_menu() {
-  case $(menu "Install Git" "  Github CLI\n  Gitlab CLI") in
-  *Github*) install_app "Github CLI" "github-cli" ;;
-  *Gitlab*) install "Gitlab CLI" "glab" ;;
   *) show_install_development_menu ;;
   esac
 }
