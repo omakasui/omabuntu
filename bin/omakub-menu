@@ -236,10 +236,9 @@ show_install_service_menu() {
 }
 
 show_install_browser_menu() {
-  case $(menu "Install" "  Brave\n  Chromium\n  Firefox\n  Zen") in
-  *Brave*) install_app "Brave" "brave" ;;
-  *Chromium*) install_app "Chromium" "chromium" ;;
-  *Firefox*) install_app "Firefox" "firefox" ;;
+  case $(menu "Install" "  Brave\n  Firefox\n  Zen") in
+  *Brave*) present_terminal omakub-install-brave ;;
+  *Firefox*) present_terminal omakub-install-firefox ;;
   *Zen*) install "Zen Browser" "zen-browser" ;;
   *) show_install_menu ;;
   esac
