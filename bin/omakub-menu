@@ -324,10 +324,10 @@ show_install_elixir_menu() {
 
 show_install_editor_menu() {
   case $(menu "Install" "  VSCode\n  Cursor\n  Zed\n  Emacs") in
-  *VSCode*) install_app "Visual Studio Code" "visual-studio-code" ;;
-  *Cursor*) install_app "Cursor" "cursor" ;;
+  *VSCode*) present_terminal omakub-install-vscode ;;
+  *Cursor*) present_terminal "omakub-install-cursor" ;;
   *Zed*) install "Zed" "zed" ;;
-  *Emacs*) install_app "Doom Emacs" "doom-emacs" ;;
+  *Emacs*) present_terminal "omakub-install-doom-emacs" ;;
   *) show_install_menu ;;
   esac
 }
