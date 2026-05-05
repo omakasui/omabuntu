@@ -17,6 +17,9 @@ case "${CURRENT_TERMINAL,,}" in
   kitty)
     grep -oP '^font_size\s+\K.*' ~/.config/kitty/kitty.conf | head -n1
     ;;
+  ghostty)
+    grep -oP '^font-size\s*=\s*\K[0-9]+' ~/.config/ghostty/config | head -n1
+    ;;
   *)
     echo "Unsupported terminal: $CURRENT_TERMINAL"
     exit 1
