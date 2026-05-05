@@ -35,7 +35,7 @@ install_php() {
   # Install Composer globally
   php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
   php composer-setup.php --quiet && sudo mv composer.phar /usr/local/bin/composer && sudo chmod +x /usr/local/bin/composer
-  rm composer-setup.php
+  rm -f composer-setup.php
 }
 
 case "$1" in
