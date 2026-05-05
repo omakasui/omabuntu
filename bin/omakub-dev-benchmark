@@ -106,6 +106,6 @@ run_case "omakub commands" "$CLI" commands
 run_case "omakub commands --json" "$CLI" commands --json
 run_case "omakub commands --all --json" "$CLI" commands --all --json
 run_case "omakub theme set --help" "$CLI" theme set --help
-run_case "omakub screenshot --help" "$CLI" screenshot --help
+run_case "omakub system reboot --help" "$CLI" system reboot --help
 run_case "omakub restart --help" "$CLI" restart --help
 run_case "omakub theme current" "$CLI" theme current
