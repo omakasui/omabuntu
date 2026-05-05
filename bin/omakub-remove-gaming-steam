@@ -1,4 +1,5 @@
 #!/bin/bash
 
-# Remove Steam from Flatpak
+echo "Removing Steam..."
+
 flatpak uninstall -y com.valvesoftware.Steam

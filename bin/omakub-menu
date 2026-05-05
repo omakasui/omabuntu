@@ -350,21 +350,21 @@ show_install_ai_menu() {
 
 show_install_gaming_menu() {
   case $(menu "Install" "  Steam\n  RetroArch\n󰍳  Minecraft") in
-  *Steam*) install_app "Steam" "steam" ;;
-  *RetroArch*) install_app "RetroArch" "retroarch" ;;
-  *Minecraft*) install_app "Minecraft" "minecraft" ;;
+  *Steam*) present_terminal "omakub-install-gaming-steam" ;;
+  *RetroArch*) present_terminal "omakub-install-gaming-retroarch" ;;
+  *Minecraft*) present_terminal "omakub-install-gaming-minecraft" ;;
   *) show_install_menu ;;
   esac
 }
 
 show_remove_menu() {
-  case $(menu "Remove" "  Package\n  Web App\n  TUI\n󰀻  App\n  Style\n󰵮  Development\n󰏓  Preinstalls") in
+  case $(menu "Remove" "  Package\n  Web App\n  TUI\n  Style\n󰵮  Development\n  Gaming\n󰏓  Preinstalls") in
   *Package*) terminal omakub-pkg-remove ;;
   *Web*) present_terminal omakub-webapp-remove ;;
   *TUI*) present_terminal omakub-tui-remove ;;
-  *App*) present_terminal omakub-app-remove ;;
   *Style*) show_remove_style_menu ;;
   *Development*) show_remove_development_menu ;;
+  *Gaming*) show_remove_gaming_menu ;;
   *Preinstalls*) present_terminal omakub-remove-preinstalls ;;
   *) show_main_menu ;;
   esac
@@ -403,6 +403,15 @@ show_remove_development_menu() {
   *OCaml*) present_terminal "omakub-remove-dev-env ocaml" ;;
   *Clojure*) present_terminal "omakub-remove-dev-env clojure" ;;
   *Scala*) present_terminal "omakub-remove-dev-env scala" ;;
+  *) show_remove_menu ;;
+  esac
+}
+
+show_remove_gaming_menu() {
+  case $(menu "Remove Gaming" "  Steam\n  RetroArch\n󰍳  Minecraft") in
+  *Steam*) present_terminal "omakub-remove-gaming-steam" ;;
+  *RetroArch*) present_terminal "omakub-remove-gaming-retroarch" ;;
+  *Minecraft*) present_terminal "omakub-remove-gaming-minecraft" ;;
   *) show_remove_menu ;;
   esac
 }

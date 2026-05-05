@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Installing Minecraft..."
+
 omakub-pkg-add openjdk-8-jdk
 
 cd /tmp
