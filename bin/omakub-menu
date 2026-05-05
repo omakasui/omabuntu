@@ -178,7 +178,7 @@ show_setup_system_menu() {
 show_setup_folders_menu() {
   case $(menu "Folders" "󰮝  Add\n󰮞  Remove") in
   *Add*) present_terminal omakub-gnome-app-folder-add ;;
-  *Remove*) present_terminal omakub-gnome-app-folder-remove ;;
+  *Remove*) present_terminal omakub-gnome-app-folder-drop ;;
   *) show_setup_menu ;;
   esac
 }
@@ -186,7 +186,7 @@ show_setup_folders_menu() {
 show_setup_keybindings_menu() {
   case $(menu "Keybindings" "   Add\n   Remove") in
   *Add*) present_terminal omakub-gnome-keybinding-add ;;
-  *Remove*) present_terminal omakub-gnome-keybinding-remove ;;
+  *Remove*) present_terminal omakub-gnome-keybinding-drop ;;
   *) show_setup_menu ;;
   esac
 }

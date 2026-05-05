@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# omakub-gnome-app-folder-remove: Remove an app from a specified folder.
-# Usage: omakub-gnome-app-folder-remove <desktop_file.desktop> <folder_name>
+# omakub-gnome-app-folder-drop: Remove an app from a specified folder.
+# Usage: omakub-gnome-app-folder-drop <desktop_file.desktop> <folder_name>
 
 DESKTOP_DIR="$HOME/.local/share/applications"
 

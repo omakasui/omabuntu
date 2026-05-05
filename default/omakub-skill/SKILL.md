@@ -267,14 +267,14 @@ Theme files affect:
 
 ### Keybindings
 
-Use `omakub-gnome-keybinding-add` and `omakub-gnome-keybinding-remove` commands:
+Use `omakub-gnome-keybinding-add` and `omakub-gnome-keybinding-drop` commands:
 
 ```bash
 # Add a custom keybinding
 omakub-gnome-keybinding-add "Open Terminal" "xdg-terminal-exec" "<Primary><Alt>t"
 
 # Remove a keybinding
-omakub-gnome-keybinding-remove "Open Terminal"
+omakub-gnome-keybinding-drop "Open Terminal"
 
 # View current custom keybindings
 gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings
@@ -317,7 +317,7 @@ omakub-install-terminal <name> # Install and set default terminal
 
 # Application folder management (for GNOME app grid)
 omakub-gnome-app-folder-add <app.desktop> <folder-name>
-omakub-gnome-app-folder-remove <app.desktop> <folder-name>
+omakub-gnome-app-folder-drop <app.desktop> <folder-name>
 ```
 
 ### Night Light

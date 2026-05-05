@@ -25,7 +25,7 @@ fi
 for file in "${webapp_desktop_files[@]}"; do
   app_name=$(basename "$file" .desktop)
   echo "Removing web app: $app_name"
-  omakub-gnome-app-folder-remove "$app_name.desktop" "Web Apps"
+  omakub-gnome-app-folder-drop "$app_name.desktop" "Web Apps"
   rm -f "$file"
   rm -f "$ICON_DIR/$app_name.png"
   rm -rf "$HOME/.config/omakub/webapp/$(echo "$app_name" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')"
