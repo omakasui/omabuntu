@@ -30,7 +30,7 @@ if omakub-pkg-add "$package"; then
 
   # Copy custom desktop entry for alacritty with X-TerminalArg* keys
   if [[ $package == "alacritty" ]]; then
-    desktop_path="$OMAKUB_PATH/applications/desktop/Alacritty.desktop"
+    desktop_path="$OMAKUB_PATH/applications/Alacritty.desktop"
 
     mkdir -p ~/.local/share/applications
     cp "$desktop_path" ~/.local/share/applications/

@@ -4,13 +4,13 @@
 
 # Copy and sync icon files
 mkdir -p ~/.local/share/icons/hicolor/48x48/apps/
-cp ~/.local/share/omakub/applications/desktop/icons/*.png ~/.local/share/icons/hicolor/48x48/apps/
+cp ~/.local/share/omakub/applications/icons/*.png ~/.local/share/icons/hicolor/48x48/apps/
 gtk-update-icon-cache ~/.local/share/icons/hicolor &>/dev/null
 
 # Copy .desktop declarations
 mkdir -p ~/.local/share/applications
-cp ~/.local/share/omakub/applications/desktop/*.desktop ~/.local/share/applications/
-cp ~/.local/share/omakub/applications/desktop/hidden/*.desktop ~/.local/share/applications/
+cp ~/.local/share/omakub/applications/*.desktop ~/.local/share/applications/
+cp ~/.local/share/omakub/applications/hidden/*.desktop ~/.local/share/applications/
 
 # Refresh the webapps and TUI
 bash $OMAKUB_PATH/install/packaging/icons.sh
