@@ -9,7 +9,7 @@ fi
 
 install_php() {
   echo -e "Installing PHP...\n"
-  sudo apt -y install php --no-install-recommends
+  sudo apt-get -y install php --no-install-recommends
 
   # Install commonly used PHP extensions if available
   local extensions_to_install=(
@@ -28,7 +28,7 @@ install_php() {
 
   for extension in "${extensions_to_install[@]}"; do
     if apt-cache show "php-$extension" &>/dev/null; then
-        apt-get install -y "php-$extension" --no-install-recommends
+        sudo apt-get install -y "php-$extension" --no-install-recommends
     fi
   done
 
