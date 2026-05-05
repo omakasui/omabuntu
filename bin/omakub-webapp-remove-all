@@ -35,4 +35,6 @@ if command -v update-desktop-database &>/dev/null; then
   update-desktop-database "$APP_DIR" &>/dev/null || true
 fi
 
+omakub-restart-walker
+
 echo "Web apps removed successfully."
