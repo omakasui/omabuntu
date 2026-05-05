@@ -17,7 +17,7 @@ hex_to_rgb() {
 if [[ -f $COLORS_FILE ]]; then
   sed_script=$(mktemp)
 
-  while IFS='=' read -r key value; do
+  while IFS='=' read -r key value || [[ -n $key ]]; do
     key="${key//[\"\' ]/}"                # strip quotes and spaces from key
     [[ $key && $key != \#* ]] || continue # skip empty lines and comments
     value="${value#*[\"\']}"
