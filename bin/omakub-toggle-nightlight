@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Toggle nightlight screen temperature.
+# omakub:examples=omakub toggle nightlight
+
 omakub-toggle \
   --notification-summary "Night Light" \
   --enabled-notification "  Nightlight screen temperature" \

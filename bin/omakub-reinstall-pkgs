@@ -1,8 +1,9 @@
 #!/bin/bash
 
-set -e
+# omakub:summary=Reinstall all default Omakub packages from the stable channel.
+# omakub:requires-sudo=true
 
-# Reinstall all default Omabuntu packages from the stable channel and downgrade any packages that are too new.
+set -e
 
 # Set the package repository to the stable mirrors
 omakub-refresh-apt

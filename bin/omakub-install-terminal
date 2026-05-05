@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Install one of the approved terminals and set it as the default for Omabuntu (Super + Return etc).
+# omakub:summary=Install one of the approved terminals and set it as the default for Omakub (Super + Return etc).
+# omakub:args=<alacritty|ghostty|kitty>
+# omakub:requires-sudo=true
 
 if (($# == 0)); then
   echo "Usage: omakub-install-terminal [alacritty|ghostty|kitty]"

@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# omakub-theme-set: Set a theme, specified by its name.
-# Usage: omakub-theme-set <theme-name>
+# omakub:summary=Apply an Omakub theme.
+# omakub:args=<theme-name>
+# omakub:examples=omakub theme list | omakub theme set "Tokyo Night"
 
 if [[ -z $1 ]]; then
   echo "Usage: omakub-theme-set <theme-name>" >&2

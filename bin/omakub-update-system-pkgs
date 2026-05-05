@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Update system packages with APT and Flatpak.
+# omakub:requires-sudo=true
+
 set -e
 
 echo -e "\e[32m\nUpdate system packages\e[0m"

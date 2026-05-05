@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Install the Tailscale mesh VPN service and a web app for the Tailscale Admin Console.
+# omakub:requires-sudo=true
+
 echo "Installing Tailscale..."
 
 CODENAME=$(. /etc/os-release; echo "$VERSION_CODENAME")

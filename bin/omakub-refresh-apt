@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Overwrite the APT sources list to point to the correct Omakasui package channel, then update.
-# This is used after switching between release channels to ensure the right packages are available.
+# omakub:summary=Overwrite the APT sources list to the Omakasui package channel, then update.
+# omakub:args=[stable|dev]
+# omakub:requires-sudo=true
 
 channel="${1:-stable}"
 

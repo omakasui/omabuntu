@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Run a named hook, like post-update (available in ~/.config/omakub/hooks/post-update).
+# omakub:summary=Run a named hook, like post-update (available in ~/.config/omakub/hooks/post-update).
+# omakub:args=[name] [args...]
 
 set -e
 

@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# Share clipboard, file, or folder using LocalSend.
+# omakub:summary=Share clipboard, files, or folders with LocalSend.
+# omakub:group=share
+# omakub:name=
+# omakub:args=<clipboard|file|folder> [path...]
+# omakub:examples=omakub share clipboard | omakub share file ~/Downloads/example.txt
 
 if (($# == 0)); then
   echo "Usage: omakub-menu-share [clipboard|file|folder]"

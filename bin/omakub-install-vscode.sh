@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Install VS Code and apply the current Omakub theme.
+# omakub:requires-sudo=true
+
 echo "Installing Visual Studio Code..."
 
 if [[ ! -f /etc/apt/keyrings/packages.microsoft.gpg || ! -f /usr/share/keyrings/microsoft.gpg ]]; then

@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Set the system-wide terminal font size.
-# If no size is provided as an argument, an interactive prompt will be shown.
+# omakub:summary=Set the terminal font size
+# omakub:args=<font-size>
+# omakub:examples=omakub font size set 12
 
 if (( $# != 1 )); then
   echo -e "\e[32mLet's customize your terminal font size.\n\e[0m"

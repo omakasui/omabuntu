@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Restart PipeWire audio service to apply any configuration changes.
+# omakub:summary=Restart the PipeWire audio service to fix audio issues or apply new configuration.
 
 echo -e "Restarting pipewire audio service...\n"
 systemctl --user restart pipewire.service

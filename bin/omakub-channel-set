@@ -1,12 +1,8 @@
 #!/bin/bash
 
-# Set the Omabuntu channel, which dictates what git branch is used.
-#
-# Stable uses the main branch, which only sees updates on official releases.
-#
-# Dev tracks the active development dev branch, which may include partial or broken updates.
-# This should only be used by Omabuntu developers and people with a lot of experience managing
-# Linux systems.
+# omakub:summary=Set the Omakub channel, which dictates what git branch and package repository is used.
+# omakub:args=<stable|dev>
+# omakub:requires-sudo=true
 
 if (($# == 0)); then
   echo "Usage: omakub-channel-set [stable|dev]"

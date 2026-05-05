@@ -1,9 +1,9 @@
 #!/bin/bash
 
-set -e
+# omakub:summary=Remove web app desktop launchers.
+# omakub:args=[name...]
 
-# omakub-gnome-app-folder-drop: Remove a .desktop file from a specified app folder.
-# Usage: omakub-gnome-app-folder-drop <desktop_file.desktop> <folder_name>
+set -e
 
 ICON_DIR="$HOME/.local/share/applications/icons"
 DESKTOP_DIR="$HOME/.local/share/applications/"

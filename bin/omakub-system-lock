@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# Lock the screen and ensure 1password is locked as well.
+# omakub:summary=Lock the screen.
+# omakub:group=system
+# omakub:name=lock
+# omakub:examples=omakub system lock
 
 # Ensure 1password is locked
 if pgrep -x "1password" >/dev/null; then

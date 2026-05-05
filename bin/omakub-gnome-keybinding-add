@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# omakub-gnome-keybinding-add: Create a custom keybinding.
-# Usage: omakub-gnome-keybinding-add <name> <command> <keybinding>
+# omakub:summary=Add a custom keybinding to GNOME.
+# omakub:args=<name> <command> <keybinding>
+# omakub:examples=omakub-gnome-keybinding-add "Open Terminal" "gnome-terminal" "<Super>t"
 
 if (( $# < 3 )); then
   echo -e "\e[32mLet's create a new custom keybinding.\n\e[0m"

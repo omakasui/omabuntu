@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Install the Discord desktop app.
+# omakub:requires-sudo=true
+
 echo "Installing Discord..."
 
 cd /tmp

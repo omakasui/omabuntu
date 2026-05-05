@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Overwrite the GDM theme with the Omakub default.
+# omakub:requires-sudo=true
+
 OMAKUB_PATH="$HOME/.local/share/omakub"
 
 sudo mkdir -p /usr/share/pixmaps/omakub
