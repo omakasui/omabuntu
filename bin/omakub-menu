@@ -62,10 +62,6 @@ install() {
   present_terminal "echo 'Installing $1...'; omakub-pkg-add $2"
 }
 
-install_app() {
-  present_terminal "echo 'Installing $1...'; omakub-app-install $2"
-}
-
 install_font() {
   present_terminal "echo 'Installing $1...'; omakub-install-font $2 && sleep 2 && omakub-font-set '$3'"
 }
@@ -76,10 +72,6 @@ install_terminal() {
 
 remove() {
   present_terminal "echo 'Removing $1...'; omakub-pkg-drop $2"
-}
-
-remove_app() {
-  present_terminal "echo 'Removing $1...'; omakub-app-remove $2"
 }
 
 remove_font() {
@@ -343,7 +335,7 @@ show_install_terminal_menu() {
 
 show_install_ai_menu() {
   case $(menu "Install" "󱚤  Ollama") in
-  *Ollama*) install_app "Ollama" "ollama" ;;
+  *Ollama*) present_terminal "omakub-install-ollama" ;;
   *) show_install_menu ;;
   esac
 }
@@ -358,12 +350,13 @@ show_install_gaming_menu() {
 }
 
 show_remove_menu() {
-  case $(menu "Remove" "  Package\n  Web App\n  TUI\n  Style\n󰵮  Development\n  Gaming\n󰏓  Preinstalls") in
+  case $(menu "Remove" "  Package\n  Web App\n  TUI\n  Style\n󰵮  Development\n󱚤  AI\n  Gaming\n󰏓  Preinstalls") in
   *Package*) terminal omakub-pkg-remove ;;
   *Web*) present_terminal omakub-webapp-remove ;;
   *TUI*) present_terminal omakub-tui-remove ;;
   *Style*) show_remove_style_menu ;;
   *Development*) show_remove_development_menu ;;
+  *AI*) show_remove_ai_menu ;;
   *Gaming*) show_remove_gaming_menu ;;
   *Preinstalls*) present_terminal omakub-remove-preinstalls ;;
   *) show_main_menu ;;
@@ -403,6 +396,30 @@ show_remove_development_menu() {
   *OCaml*) present_terminal "omakub-remove-dev-env ocaml" ;;
   *Clojure*) present_terminal "omakub-remove-dev-env clojure" ;;
   *Scala*) present_terminal "omakub-remove-dev-env scala" ;;
+  *) show_remove_menu ;;
+  esac
+}
+
+show_remove_javascript_menu() {
+  case $(menu "Remove JavaScript Environment" "  Node.js\n  Bun\n  Deno") in
+  *Node*) present_terminal "omakub-remove-dev-env node" ;;
+  *Bun*) present_terminal "omakub-remove-dev-env bun" ;;
+  *Deno*) present_terminal "omakub-remove-dev-env deno" ;;
+  *) show_remove_development_menu ;;
+  esac
+}
+
+show_remove_elixir_menu() {
+  case $(menu "Remove Elixir Environment" "  Elixir\n  Phoenix") in
+  *Elixir*) present_terminal "omakub-remove-dev-env elixir" ;;
+  *Phoenix*) present_terminal "omakub-remove-dev-env phoenix" ;;
+  *) show_remove_development_menu ;;
+  esac
+}
+
+show_remove_ai_menu() {
+  case $(menu "Remove AI" "󱚤  Ollama") in
+  *Ollama*) present_terminal "omakub-remove-ollama" ;;
   *) show_remove_menu ;;
   esac
 }
