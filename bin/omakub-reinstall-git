@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -e
 
 # Reinstall the Omabuntu configuration directory from the git source.
@@ -10,7 +11,7 @@ set -e
 
 git clone --depth=1 "https://github.com/omakasui/omabuntu.git" ~/.local/share/omakub-new >/dev/null
 DEFAULT_URL="https://github.com/omakasui/omabuntu.git"
-DEFAULT_BRANCH="master"
+DEFAULT_BRANCH="main"
 
 REMOTE_URL=$(git -C "$OMAKUB_PATH" remote get-url origin 2>/dev/null || echo "$DEFAULT_URL")
 BRANCH=$(git -C "$OMAKUB_PATH" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "$DEFAULT_BRANCH")
