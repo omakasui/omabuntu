@@ -5,6 +5,10 @@ export SUDO_EDITOR="$EDITOR"
 # Fix BAT theme
 export BAT_THEME=ansi
 
+# Color man pages with bat
+export MANROFFOPT="-c"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 # Fix Alacritty cursor display issues
 export XCURSOR_THEME="Yaru"
 
