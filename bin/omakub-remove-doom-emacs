@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Removing Doom Emacs..."
+
 omakub-pkg-drop emacs emacs-gtk
 sudo rm -rf ~/.config/emacs
 sudo rm -rf ~/.emacs.d
