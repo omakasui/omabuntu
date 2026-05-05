@@ -14,8 +14,8 @@ cp -f $OMAKUB_PATH/config/elephant/symbols.toml ~/.config/elephant/symbols.toml
 bash $OMAKUB_PATH/install/config/walker-elephant.sh
 
 # Set omakub next background to Super+Shift+Control
-omakub-gnome-keybinding-remove 'Omakub Background Next'
-omakub-gnome-keybinding-remove 'Omabuntu Background Next'
+omakub-gnome-keybinding-drop 'Omakub Background Next'
+omakub-gnome-keybinding-drop 'Omabuntu Background Next'
 omakub-gnome-keybinding-add 'Omabuntu Background Next' 'omakub-menu background' '<Super><Control>space'
 
 bash $OMAKUB_PATH/install/first-run/elephant.sh
