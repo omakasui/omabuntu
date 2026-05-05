@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Set first-run mode marker so we can install stuff post-installation
 mkdir -p ~/.local/state/omakub
 touch ~/.local/state/omakub/first-run.mode

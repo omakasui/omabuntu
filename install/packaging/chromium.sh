@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Check if the XTraDeb PPA is already added
 if ! grep -q "xtradeb/apps" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
   sudo add-apt-repository -y ppa:xtradeb/apps

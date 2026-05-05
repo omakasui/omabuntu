@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Ensure Walker service is started automatically on boot
 mkdir -p ~/.config/autostart/
 cp $OMAKUB_PATH/default/walker/walker.desktop ~/.config/autostart/

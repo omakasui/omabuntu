@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Ensure we have curl available
 if ! command -v curl &> /dev/null; then
   omakub-pkg-add curl

@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Favorite apps for dock
 apps=(
 	"chromium.desktop"

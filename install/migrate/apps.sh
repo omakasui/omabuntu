@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Remove old desktop entries and icons
 rm -rf ~/.local/share/applications/About.desktop
 rm -rf ~/.local/share/applications/Activity.desktop

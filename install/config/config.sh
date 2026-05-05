@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Copy over Omabuntu configs
 mkdir -p ~/.config
 cp -R ~/.local/share/omakub/config/* ~/.config/

@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Allow the user to change the branding
 mkdir -p ~/.config/omakub/branding
 cp ~/.local/share/omakub/brand ~/.config/omakub/branding/brand

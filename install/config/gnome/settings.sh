@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Center new windows in the middle of the screen
 gsettings set org.gnome.mutter center-new-windows true
 

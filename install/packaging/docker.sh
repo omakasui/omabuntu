@@ -1,5 +1,3 @@
-#!/bin/bash
-
 if [[ ! -f /etc/apt/sources.list.d/docker.list ]]; then
     [[ -f /etc/apt/keyrings/docker.asc ]] && sudo rm /etc/apt/keyrings/docker.asc
     sudo install -m 0755 -d /etc/apt/keyrings

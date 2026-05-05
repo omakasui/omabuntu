@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Must not be on a LVM partition
 LVM_DETECTED=false
 if [[ -f /etc/fstab ]]; then

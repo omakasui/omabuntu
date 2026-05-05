@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Ensure we have gum available
 if ! command -v gum &> /dev/null; then
   omakub-pkg-add gum

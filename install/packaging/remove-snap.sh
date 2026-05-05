@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Remove snap packages if they exist
 remove_snaps() {
     local max_attempts=5

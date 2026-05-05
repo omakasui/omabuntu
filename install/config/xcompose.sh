@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Set XCompose
 if [[ -f ~/.XCompose ]]; then
   rm ~/.XCompose

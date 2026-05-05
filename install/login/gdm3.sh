@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Use Wayland by default
 sudo sed -i 's/^#WaylandEnable=false/WaylandEnable=true/' /etc/gdm3/custom.conf
 

@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Install terminaltexteffects
 pipx install terminaltexteffects
 

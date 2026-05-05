@@ -1,5 +1,3 @@
-#!/bin/bash
-
 run_logged $OMAKUB_INSTALL/config/config.sh
 run_logged $OMAKUB_INSTALL/config/git.sh
 run_logged $OMAKUB_INSTALL/config/branding.sh
