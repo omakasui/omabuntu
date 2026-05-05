@@ -149,13 +149,12 @@ show_background_menu() {
 }
 
 show_setup_menu() {
-  case $(menu "Setup" "󰤆  System Sleep\n  Folders\n  Keybindings\n  Starship\n󰌧  Walker\n󰞅  XCompose") in
+  case $(menu "Setup" "󰤆  System Sleep\n  Folders\n  Keybindings\n  Starship\n󰱔  DNS\n  Config") in
   *System*) show_setup_system_menu ;;
   *Folders*) show_setup_folders_menu ;;
   *Keybindings*) show_setup_keybindings_menu ;;
-  *Starship*) edit_in_nvim ~/.config/starship.toml ;;
-  *Walker*) open_in_editor ~/.config/walker/config.toml && omakub-restart-walker ;;
-  *XCompose*) open_in_editor ~/.XCompose && omakub-restart-xcompose ;;
+  *DNS*) present_terminal omakub-setup-dns ;;
+  *Config*) show_setup_config_menu ;;
   *) show_main_menu ;;
   esac
 }
@@ -187,6 +186,14 @@ show_setup_keybindings_menu() {
   case $(menu "Keybindings" "   Add\n   Remove") in
   *Add*) present_terminal omakub-gnome-keybinding-add ;;
   *Remove*) present_terminal omakub-gnome-keybinding-drop ;;
+  *) show_setup_menu ;;
+  esac
+}
+
+show_setup_config_menu() {
+  case $(menu "Setup" "󰌧  Walker\n󰞅  XCompose") in
+  *Walker*) open_in_editor ~/.config/walker/config.toml && omakub-restart-walker ;;
+  *XCompose*) open_in_editor ~/.XCompose && omakub-restart-xcompose ;;
   *) show_setup_menu ;;
   esac
 }
