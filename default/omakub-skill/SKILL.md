@@ -338,7 +338,7 @@ omakub-state                   # Show Omabuntu state/version
 omakub-system-shutdown            # Shutdown
 omakub-system-reboot              # Reboot
 omakub-system-logout              # Logout
-omakub-system-lock-screen         # Lock screen
+omakub-system-lock         # Lock screen
 ```
 
 ## Troubleshooting
