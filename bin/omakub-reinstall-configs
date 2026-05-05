@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -e
 
 # Overwrite all user configs with the Omabuntu defaults.

@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -e
 
 # Attempt to reinstall all default Omabuntu packages and reset all the default configs.
