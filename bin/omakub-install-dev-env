@@ -38,11 +38,6 @@ install_php() {
   rm composer-setup.php
 }
 
-install_node() {
-  echo -e "Installing Node.js...\n"
-  mise use --global node
-}
-
 case "$1" in
 ruby)
   echo -e "Installing Ruby on Rails...\n"
@@ -54,7 +49,8 @@ ruby)
   echo -e "\nYou can now run: rails new myproject"
   ;;
 node)
-  install_node
+  echo -e "Installing Node.js...\n"
+  mise use --global node
   ;;
 bun)
   echo -e "Installing Bun...\n"
@@ -106,6 +102,7 @@ java)
 zig)
   echo -e "Installing Zig...\n"
   mise use --global zig@latest
+  mise use -g zls@latest
   ;;
 ocaml)
   echo -e "Installing OCaml...\n"

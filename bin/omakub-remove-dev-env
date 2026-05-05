@@ -10,14 +10,14 @@ fi
 
 remove_php() {
   echo -e "Removing PHP...\n"
-  sudo apt-get remove -y php php-* composer
+  mapfile -t php_packages < <(dpkg-query -W -f='${binary:Package}\n' 'php-*' 2>/dev/null || true)
+  if ((${#php_packages[@]})); then
+    sudo apt-get remove -y php "${php_packages[@]}" composer
+  else
+    sudo apt-get remove -y php composer
+  fi
   sudo apt-get autoremove -y
   sudo rm -f /usr/local/bin/composer
-}
-
-remove_node() {
-  echo -e "Removing Node.js...\n"
-  mise uninstall -g node@lts
 }
 
 case "$1" in
@@ -28,62 +28,67 @@ ruby)
   rm -f ~/.gemrc
   ;;
 node)
-  remove_node
+  echo -e "Removing Node.js...\n"
+  mise uninstall node --all
+  mise rm -g node
   ;;
 bun)
   echo -e "Removing Bun...\n"
-  mise uninstall -g bun@latest
+  mise uninstall bun --all
+  mise rm -g bun
   ;;
 deno)
   echo -e "Removing Deno...\n"
-  mise uninstall -g deno@latest
+  mise uninstall deno --all
+  mise rm -g deno
   ;;
 go)
   echo -e "Removing Go...\n"
-  mise uninstall -g go@latest
+  mise uninstall go --all
+  mise rm -g go
   ;;
 php)
   remove_php
   ;;
 python)
   echo -e "Removing Python...\n"
-  mise uninstall -g python@latest
+  mise uninstall python --all
+  mise rm -g python
+  rm -rf ~/.local/bin/uv ~/.local/bin/uvx ~/.cargo/bin/uv 2>/dev/null || true
   ;;
-elixir)
-  echo -e "Removing Elixir...\n"
-  mise uninstall elixir@latest
-  mise uninstall erlang@latest
-  ;;
-phoenix)
-  echo -e "Removing Phoenix Framework...\n"
-  mise uninstall -g erlang@latest
-  mise uninstall -g elixir@latest
-  # Remove Hex and Phoenix
-  mise x elixir -- mix archive.uninstall phx_new --force
-  mise x elixir -- mix hex.uninstall --force
-  ;;
-rust)
-  echo -e "Removing Rust...\n"
-  rustup self uninstall -y
-  ;;
-java)
-  echo -e "Removing Java...\n"
-  mise uninstall -g java@latest
+elixir|phoenix)
+  echo -e "Removing Elixir/Erlang...\n"
+  mise uninstall elixir --all
+  mise uninstall erlang --all
+  mise rm -g elixir
+  mise rm -g erlang
   ;;
 zig)
   echo -e "Removing Zig...\n"
-  mise uninstall -g zig@latest
+  mise uninstall zig --all
+  mise uninstall zls --all
+  mise rm -g zig
+  mise rm -g zls
   ;;
-ocaml)
-  echo -e "Removing OCaml...\n"
-  bash -c "$(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
-  opam init --yes
-  eval "$(opam env)"
-  opam install ocaml-lsp-server odoc ocamlformat utop --yes
+rust)
+  echo -e "Removing Rust...\n"
+  rustup self uninstall -y 2>/dev/null || true
+  ;;
+java)
+  echo -e "Removing Java...\n"
+  mise uninstall java --all
+  mise rm -g java
   ;;
 dotnet)
   echo -e "Removing .NET...\n"
-  mise uninstall -g dotnet@latest
+  mise uninstall dotnet --all
+  mise rm -g dotnet
+  ;;
+ocaml)
+  echo -e "Removing OCaml...\n"
+  opam switch remove default -y 2>/dev/null || true
+  rm -rf ~/.opam 2>/dev/null || true
+  sudo rm -f /usr/local/bin/opam 2>/dev/null || true
   ;;
 clojure)
   echo -e "Removing Clojure...\n"
