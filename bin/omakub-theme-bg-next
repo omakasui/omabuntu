@@ -45,5 +45,6 @@ else
   ln -nsf "$NEW_BACKGROUND" "$CURRENT_BACKGROUND_LINK"
 
   # Update GNOME background settings
-  omakub-theme-bg-set "$CURRENT_BACKGROUND_LINK"
+  gsettings set org.gnome.desktop.background picture-uri $CURRENT_BACKGROUND_LINK
+  gsettings set org.gnome.desktop.background picture-uri-dark $CURRENT_BACKGROUND_LINK
 fi
