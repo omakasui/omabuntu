@@ -65,6 +65,18 @@ omakub-gnome-keybinding-add 'System menu' 'omakub-menu system' '<Super>Escape'
 omakub-gnome-keybinding-add 'Theme menu' 'omakub-menu theme' '<Super><Shift><Control>space'
 omakub-gnome-keybinding-add 'Background menu' 'omakub-menu background' '<Super><Control>space'
 
+# Toggles
+omakub-gnome-keybinding-add 'Nightlight toggle' 'omakub-toggle-nightlight' '<Super><Control>n'
+
+# Screenshots
+omakub-gnome-keybinding-add 'Flameshot' 'sh -c -- "flameshot gui"' '<Control>Print'
+
+# File sharing
+omakub-gnome-keybinding-add 'Share menu' 'omakub-menu share' '<Super><Control>s'
+
+# Transcoding
+omakub-gnome-keybinding-add 'Transcode menu' 'omakub-menu transcode' '<Super><Control>r'
+
 # Control panels
 omakub-gnome-keybinding-add 'Activity' 'omakub-launch-tui btop' '<Super><Shift>t'
 
@@ -72,12 +84,6 @@ omakub-gnome-keybinding-add 'Activity' 'omakub-launch-tui btop' '<Super><Shift>t
 omakub-gnome-keybinding-add 'Apple Brightness down' "omakub-brightness-apple-display -5000" '<Control>F1'
 omakub-gnome-keybinding-add 'Apple Brightness up' "omakub-brightness-apple-display +5000" '<Control>F2'
 omakub-gnome-keybinding-add 'Apple Brightness max' "omakub-brightness-apple-display +60000" '<Control><Shift>F2'
-
-# Toggles
-omakub-gnome-keybinding-add 'Nightlight toggle' 'omakub-toggle-nightlight' '<Super><Control>n'
-
-# Screenshots
-omakub-gnome-keybinding-add 'Flameshot' 'sh -c -- "flameshot gui"' '<Control>Print'
 
 # Application bindings
 omakub-gnome-keybinding-add 'Terminal' 'xdg-terminal-exec' '<Super>Return'

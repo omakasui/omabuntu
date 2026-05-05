@@ -91,10 +91,19 @@ show_learn_menu() {
 }
 
 show_trigger_menu() {
-  case $(menu "Trigger" "  Share\n󰔎  Toggle") in
+  case $(menu "Trigger" "󰧸  Transcode\n  Share\n󰔎  Toggle") in
+  *Transcode*) show_transcode_menu ;;
   *Share*) show_share_menu ;;
   *Toggle*) show_toggle_menu ;;
   *) show_main_menu ;;
+  esac
+}
+
+show_transcode_menu() {
+  case $(menu "Transcode" "  Picture\n  Video") in
+  *Picture*) present_terminal "omakub-transcode --path '$HOME/Pictures'" ;;
+  *Video*) present_terminal "omakub-transcode --path '$HOME/Videos'" ;;
+  *) back_to show_trigger_menu ;;
   esac
 }
 
@@ -528,6 +537,8 @@ go_to_menu() {
   *trigger*) show_trigger_menu ;;
   *toggle*) show_toggle_menu ;;
   *style*) show_style_menu ;;
+  *share*) show_share_menu ;;
+  *transcode*) show_transcode_menu ;;
   *background*) show_background_menu ;;
   *theme*) show_theme_menu ;;
   *setup*) show_setup_menu ;;
