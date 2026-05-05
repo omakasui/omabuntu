@@ -55,7 +55,7 @@ $desktop_id
 EOF
 
   # Set the default terminal for Nautilus
-  omakub-terminal-set-nautilus "$package"
+  omakub-gnome-nautilus-set-terminal "$package"
 else
   echo "Failed to install $package."
   exit 1
