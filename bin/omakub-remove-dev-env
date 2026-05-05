@@ -23,9 +23,9 @@ remove_node() {
 case "$1" in
 ruby)
   echo -e "Removing Ruby on Rails...\n"
-  mise uninstall -g ruby@latest
-  mise settings remove idiomatic_version_file_enable_tools ruby
-  mise x ruby -- gem uninstall rails --all --ignore-dependencies --no-document
+  mise uninstall ruby --all
+  mise rm -g ruby
+  rm -f ~/.gemrc
   ;;
 node)
   remove_node
