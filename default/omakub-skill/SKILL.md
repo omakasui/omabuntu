@@ -237,7 +237,6 @@ When customizations go wrong:
 ```bash
 # Reset specific config (creates backup automatically)
 omakub-refresh-gnome
-omakub-refresh-alacritty
 omakub-refresh-walker
 
 # The refresh command:
