@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Cycles through the background images available
+# omakub:summary=Cycle to the next background for the current theme.
+# omakub:examples=omakub theme bg next
 
 THEME_NAME=$(cat "$HOME/.config/omakub/current/theme.name" 2>/dev/null)
 THEME_BACKGROUNDS_PATH="$HOME/.config/omakub/current/theme/backgrounds/"

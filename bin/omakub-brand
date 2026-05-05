@@ -1,2 +1,5 @@
 #!/bin/bash
+
+# omakub:summary=Display the current Omakub branding.
+
 cat $HOME/.config/omakub/branding/brand

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# omakub:summary=Open the current theme's user background folder.
 
 CURRENT_THEME_NAME=$(cat "$HOME/.config/omakub/current/theme.name")
 THEME_USER_BACKGROUNDS="$HOME/.config/omakub/backgrounds/$CURRENT_THEME_NAME"

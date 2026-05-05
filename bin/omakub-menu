@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Launch the Omabuntu Menu or takes a parameter to jump straight to a submenu.
+# omakub:summary=Launch the Omakub Menu or takes a parameter to jump straight to a submenu.
 
 export PATH="$HOME/.local/share/omakub/bin:$PATH"
 

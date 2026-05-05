@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo
+# omakub:summary=Prompt for required reboot or service restarts after updates.
 
 if [[ -f $HOME/.local/state/omakub/reboot-required ]]; then
   echo

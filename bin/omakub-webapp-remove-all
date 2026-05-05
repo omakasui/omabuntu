@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Remove all web apps installed via omakub-webapp-install.
-# Identifies web apps by their Exec pattern (omakub-launch-webapp or omakub-webapp-handler).
+# omakub:summary=Remove all web apps installed via omakub-webapp-install.
 
 set -e
 

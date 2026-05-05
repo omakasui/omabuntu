@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Reload opencode configuration (used by the Omabuntu theme switching).
+# omakub:summary=Reload opencode configuration (used by the Omakub theme switching).
 
 if pgrep -x opencode >/dev/null; then
   killall -SIGUSR2 opencode

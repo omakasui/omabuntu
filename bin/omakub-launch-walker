@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Launch the Walker application launcher while ensuring that it's data provider (called elephant) is running first.
+# omakub:summary=Launch Walker and ensure its Elephant data provider is running.
 
 # Walker bug: window dimensions are cached on first gapplication-service activation; subsequent
 # calls with different sizes are silently capped.

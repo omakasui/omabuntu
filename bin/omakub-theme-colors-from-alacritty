@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Generate a theme's colors.toml from its alacritty.toml palette.
+# omakub:args=<theme-dir>
+
 set -e
 
 THEME_SOURCE="${1:-}"

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Remove one of the supported fonts. Usually called via Remove > Styles > Fonts > * in the Omadeb Menu.
+# omakub:summary=Remove one of the supported fonts.
+# omakub:args=<jetbrains-mono|iafonts|cascadia-mono|mscore>
 
 if [[ -z "$1" ]]; then
   echo "Usage: omadeb-remove-font <font>" >&2

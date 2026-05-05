@@ -1,13 +1,10 @@
 #!/bin/bash
 
+# omakub:summary=Reinstall the Omakub source directory from git.
+
 set -e
 
-# Reinstall the Omabuntu configuration directory from the git source.
-#
-# URL and branch are derived from the existing $OMAKUB_PATH checkout so
-# any fork (arm ports, personal customizations, etc.) reinstalls from
-# the same remote it was running on. Falls back to upstream only if the
-# existing install has no usable git metadata.
+# Reinstall the Omarchy configuration directory from the git source.
 
 git clone --depth=1 "https://github.com/omakasui/omabuntu.git" ~/.local/share/omakub-new >/dev/null
 DEFAULT_URL="https://github.com/omakasui/omabuntu.git"

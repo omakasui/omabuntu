@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Install Cursor, the AI-powered code editor.
+# omakub:requires-sudo=true
+
 echo "Installing Cursor..."
 
 cd /tmp

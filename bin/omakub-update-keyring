@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Ensure the Omakasui APT repository keyrings are installed and up to date.
+# omakub:requires-sudo=true
+
 # Before updating the system, we need to make sure the Omakasui APT repository keyrings are up to date.
 
 codename=$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")

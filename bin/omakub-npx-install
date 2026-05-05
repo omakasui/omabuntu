@@ -1,10 +1,8 @@
 #!/bin/bash
 
-# Install an npx wrapper for a given npm package.
-# Usage: omakub-npx-install <package> [command-name]
-#
-# If command-name is omitted, it defaults to the package name.
-# Example: omakub-npx-install opencode-ai opencode
+# omakub:summary=Install an npx wrapper for a given npm package.
+# omakub:args=<package> [command-name]
+# omakub:examples=omakub-npx-install opencode-ai opencode
 
 if [[ -z $1 ]]; then
   echo "Usage: omakub-npx-install <package> [command-name]"
