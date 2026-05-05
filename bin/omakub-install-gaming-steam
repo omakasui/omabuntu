@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Installing Steam..."
+
+flatpak install -y flathub com.valvesoftware.Steam
