@@ -101,18 +101,18 @@ cat $(which omakub-theme-set)
 
 ### Command Categories
 
-| Prefix                | Purpose                                   | Example                     |
-| --------------------- | ----------------------------------------- | --------------------------- |
-| `omakub-refresh-*`    | Reset config to defaults (backs up first) | `omakub-refresh-gnome`      |
-| `omakub-restart-*`    | Restart a service/app                     | `omakub-restart-terminal`   |
-| `omakub-toggle-*`     | Toggle feature on/off                     | `omakub-toggle-nightlight`  |
-| `omakub-theme-*`      | Theme management                          | `omakub-theme-set <name>`   |
-| `omakub-install-*`    | Install optional software                 | `omakub-install-docker-dbs` |
-| `omakub-launch-*`     | Launch apps                               | `omakub-launch-browser`     |
-| `omakub-cmd-*`        | System commands                           | `omakub-system-shutdown`    |
-| `omakub-font-*`       | Font management                           | `omakub-font-set <name>`    |
-| `omakub-keybinding-*` | Keybinding management                     | `omakub-keybinding-add`     |
-| `omakub-update`       | System update                             | `omakub-update`             |
+| Prefix                      | Purpose                                   | Example                       |
+| --------------------------- | ----------------------------------------- | ----------------------------- |
+| `omakub-refresh-*`          | Reset config to defaults (backs up first) | `omakub-refresh-gnome`        |
+| `omakub-restart-*`          | Restart a service/app                     | `omakub-restart-terminal`     |
+| `omakub-toggle-*`           | Toggle feature on/off                     | `omakub-toggle-nightlight`    |
+| `omakub-theme-*`            | Theme management                          | `omakub-theme-set <name>`     |
+| `omakub-install-*`          | Install optional software                 | `omakub-install-docker-dbs`   |
+| `omakub-launch-*`           | Launch apps                               | `omakub-launch-browser`       |
+| `omakub-cmd-*`              | System commands                           | `omakub-system-shutdown`      |
+| `omakub-font-*`             | Font management                           | `omakub-font-set <name>`      |
+| `omakub-gnome-keybinding-*` | Keybinding management                     | `omakub-gnome-keybinding-add` |
+| `omakub-update`             | System update                             | `omakub-update`               |
 
 ## Configuration Locations
 
@@ -267,14 +267,14 @@ Theme files affect:
 
 ### Keybindings
 
-Use `omakub-keybinding-add` and `omakub-keybinding-remove` commands:
+Use `omakub-gnome-keybinding-add` and `omakub-gnome-keybinding-remove` commands:
 
 ```bash
 # Add a custom keybinding
-omakub-keybinding-add "Open Terminal" "xdg-terminal-exec" "<Primary><Alt>t"
+omakub-gnome-keybinding-add "Open Terminal" "xdg-terminal-exec" "<Primary><Alt>t"
 
 # Remove a keybinding
-omakub-keybinding-remove "Open Terminal"
+omakub-gnome-keybinding-remove "Open Terminal"
 
 # View current custom keybindings
 gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings
@@ -383,7 +383,7 @@ This skill intentionally does not cover Omabuntu source development. Do not use 
 ## Example Requests
 
 - "Change my theme to catppuccin" -> `omakub-theme-set catppuccin`
-- "Add a keybinding for Ctrl+Alt+E to open file manager" -> `omakub-keybinding-add "File Manager" "nautilus" "<Primary><Alt>e"`
+- "Add a keybinding for Ctrl+Alt+E to open file manager" -> `omakub-gnome-keybinding-add "File Manager" "nautilus" "<Primary><Alt>e"`
 - "Install Visual Studio Code" -> `omakub-install-vscode`
 - "Make the terminal font bigger" -> `omakub-font-size-set 12`
 - "Set up night light to turn on automatically" -> `gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true; gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true`

@@ -185,8 +185,8 @@ show_setup_folders_menu() {
 
 show_setup_keybindings_menu() {
   case $(menu "Keybindings" "   Add\n   Remove") in
-  *Add*) present_terminal omakub-keybinding-add ;;
-  *Remove*) present_terminal omakub-keybinding-remove ;;
+  *Add*) present_terminal omakub-gnome-keybinding-add ;;
+  *Remove*) present_terminal omakub-gnome-keybinding-remove ;;
   *) show_setup_menu ;;
   esac
 }

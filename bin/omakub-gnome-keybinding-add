@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# omakub-keybinding-add: Create a custom keybinding.
-# Usage: omakub-keybinding-add <name> <command> <keybinding>
+# omakub-gnome-keybinding-add: Create a custom keybinding.
+# Usage: omakub-gnome-keybinding-add <name> <command> <keybinding>
 
 if (( $# < 3 )); then
   echo -e "\e[32mLet's create a new custom keybinding.\n\e[0m"
