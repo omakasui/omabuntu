@@ -47,7 +47,9 @@ mv "$NEXT_THEME_PATH" "$CURRENT_THEME_PATH"
 echo "$THEME_NAME" > "$HOME/.config/omakub/current/theme.name"
 
 # Change background with theme
-omakub-theme-bg-next
+if [[ $OMAKUB_THEME_SKIP_BACKGROUND != "1" ]]; then
+  omakub-theme-bg-next
+fi
 
 # Restart components to apply new theme
 omakub-restart-btop
