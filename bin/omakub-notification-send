@@ -1,5 +1,6 @@
 #!/bin/bash
 
-# Send a desktop notification using Omabuntu branding.
+# omakub:summary=Send a desktop notification using Omakub branding.
+# omakub:args=[options] <summary> [body]
 
 notify-send -i ~/.config/omakub/branding/notify.png -a "Omabuntu" "$@"

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Install the Firefox web browser.
+# omakub:requires-sudo=true
+
 echo "Installing Firefox..."
 
 # Check if the Mozilla PPA is already added

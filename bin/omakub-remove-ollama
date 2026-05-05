@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Remove the Ollama service and all installed models.
+# omakub:requires-sudo=true
+
 echo "Removing Ollama..."
 
 # Remove service

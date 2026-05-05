@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Set GNOME extensions according to Omabuntu current theme.
+# omakub:summary=Apply the current theme to GNOME extensions (TopHat, Rounded Window Corners).
 
 # Change TopHat meter color
 GNOME_TOPHAT_THEME=~/.config/omakub/current/theme/tophat.theme

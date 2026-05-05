@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# omakub-gnome-keybinding-drop: Remove a custom keybinding.
-# Usage: omakub-gnome-keybinding-drop <name>
+# omakub:summary=Remove a custom keybinding from GNOME.
+# omakub:args=<name>
+# omakub:examples=omakub-gnome-keybinding-drop "Open Terminal"
 
 readonly BASE_SCHEMA="org.gnome.settings-daemon.plugins.media-keys"
 readonly CUSTOM_KB_PATH="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"

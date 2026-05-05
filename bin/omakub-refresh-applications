@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Ensure all default .desktop, web apps, and TUIs are installed.
+# omakub:summary=Ensure all default .desktop, web apps, and TUIs are installed.
 
 # Copy and sync icon files
 mkdir -p ~/.local/share/icons/hicolor/48x48/apps/

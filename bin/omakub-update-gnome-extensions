@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# omakub:summary=Check for and install updates to GNOME extensions.
+
 # Check if there are updates available for GNOME extensions
 echo -e "\e[32m\nUpdate GNOME extensions\e[0m"
 

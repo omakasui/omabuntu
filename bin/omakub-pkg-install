@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Show a fuzzy-finder TUI for picking new APT packages to install.
+# omakub:requires-sudo=true
+
 fzf_args=(
   --multi
   --preview 'apt-cache show {1}'

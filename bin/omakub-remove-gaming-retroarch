@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# omakub:summary=Remove RetroArch via Flatpak.
+
 echo "Removing RetroArch..."
 
 flatpak uninstall -y flathub org.libretro.RetroArch

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# omakub:summary=Install the Signal desktop app.
+
 echo "Installing Signal..."
 
 if [[ ! -f /etc/apt/sources.list.d/signal-desktop.sources ]]; then

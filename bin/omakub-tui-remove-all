@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Remove all TUIs installed via omakub-tui-install.
-# Identifies TUIs by their Exec pattern (xdg-terminal-exec).
+# omakub:summary=Remove all TUIs installed via omakub-tui-install.
 
 set -e
 

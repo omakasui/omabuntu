@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Overwrite the user configs for the Walker application launcher (which also powers the Omakub Menu) and restart the services.
+# omakub:summary=Overwrite the user configs for Walker (app launcher and Omakub Menu) and restart the services.
 
 mkdir -p ~/.config/autostart/
 cp $OMAKUB_PATH/default/walker/walker.desktop ~/.config/autostart/

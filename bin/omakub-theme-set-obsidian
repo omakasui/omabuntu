@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Sync Omabuntu theme to all Obsidian vaults
+# omakub:summary=Sync Omakub theme to all Obsidian vaults.
 
 CURRENT_THEME_DIR="$HOME/.config/omakub/current/theme"
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# omakub:summary=Install the Spotify desktop app.
+
 echo "Installing Spotify..."
 
 if [[ ! -f /etc/apt/sources.list.d/spotify.list ]]; then

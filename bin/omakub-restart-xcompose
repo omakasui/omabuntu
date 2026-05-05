@@ -1,5 +1,5 @@
 #!/bin/bash
 
-# Restart IBus to apply any configuration changes.
+# omakub:summary=Restart the IBus input method service to apply XCompose configuration changes.
 
 timeout 5 ibus restart || ibus start

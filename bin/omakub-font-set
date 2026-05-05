@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Set the system-wide monospace font that should be used by the terminal/console.
-# The font name must be one of the ones returned by omakub-font-list.
+# omakub:summary=Set the system monospace font
+# omakub:args=<font-name>
+# omakub:examples=omakub font list | omakub font set "CaskaydiaMono Nerd Font"
 
 font_name="$1"
 

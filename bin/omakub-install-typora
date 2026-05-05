@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Install the Typora markdown editor.
+# omakub:requires-sudo=true
+
 echo "Installing Typora..."
 
 if [[ ! -f /etc/apt/sources.list.d/typora.list ]]; then

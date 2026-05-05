@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# omakub:summary=Install the Minecraft desktop app.
+
 echo "Installing Minecraft..."
 
 omakub-pkg-add openjdk-8-jdk

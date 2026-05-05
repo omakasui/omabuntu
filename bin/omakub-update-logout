@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# omakub:summary=Prompt for logout if updates require it.
+
 if [[ -f $HOME/.local/state/omakub/logout-required ]]; then
   echo
   gum confirm "Updates require logout. Ready?" && omakub-system-logout

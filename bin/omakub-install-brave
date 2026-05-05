@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Install the Brave web browser
+# omakub:requires-sudo=true
+
 echo "Installing Brave browser..."
 
 if [[ ! -f /etc/apt/sources.list.d/brave-browser-release.list ]]; then

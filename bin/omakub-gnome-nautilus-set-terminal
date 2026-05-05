@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Set the default terminal emulator for Nautilus to match the one set for Omabuntu.
+# omakub:summary=Set the terminal emulator to open from Nautilus.
+# omakub:args=<terminal-emulator>
+# omakub:examples=omakub-gnome-nautilus-set-terminal gnome-terminal
 
 if [[ -z $1 ]]; then
   echo "Usage: omakub-gnome-nautilus-set-terminal [terminal-emulator]"
