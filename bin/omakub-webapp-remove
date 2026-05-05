@@ -46,3 +46,5 @@ for APP_NAME in "${APP_NAMES[@]}"; do
   rm -rf "$HOME/.config/omakub/webapp/$(echo "$APP_NAME" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')"
   echo "Removed $APP_NAME"
 done
+
+omakub-restart-walker
