@@ -110,7 +110,6 @@ cat $(which omakub-theme-set)
 | `omakub-install-*`    | Install optional software                 | `omakub-install-docker-dbs` |
 | `omakub-launch-*`     | Launch apps                               | `omakub-launch-browser`     |
 | `omakub-cmd-*`        | System commands                           | `omakub-system-shutdown`    |
-| `omakub-app-*`        | Application management                    | `omakub-app-install <name>` |
 | `omakub-font-*`       | Font management                           | `omakub-font-set <name>`    |
 | `omakub-keybinding-*` | Keybinding management                     | `omakub-keybinding-add`     |
 | `omakub-update`       | System update                             | `omakub-update`             |
@@ -306,7 +305,7 @@ Default font: **CaskaydiaMono Nerd Font**
 
 ```bash
 # Install applications
-omakub-app-install <name>      # Install a single app
+omakub-pkg-add <package-name> # Install via apt
 omakub-install-terminal <name> # Install and set default terminal
 
 # Available applications (in ~/.local/share/omakub/applications/install/):
@@ -370,7 +369,7 @@ When user requests system changes:
 3. **Is it a config edit?** Edit in `~/.config/`, never `~/.local/share/omakub/`
 4. **Is it a theme customization?** Create a NEW custom theme directory
 5. **Is it automation?** Use hooks in `~/.config/omakub/hooks/`
-6. **Is it a package install?** Check if available via `omakub-app-install`, otherwise use `omakub-pkg-add`
+6. **Is it a package install?** Check if available via `omakub-install-*`, otherwise use `omakub-pkg-add`
 7. **Unsure if command exists?** Search with `compgen -c | grep omakub`
 
 ## Out of Scope
@@ -385,7 +384,7 @@ This skill intentionally does not cover Omabuntu source development. Do not use 
 
 - "Change my theme to catppuccin" -> `omakub-theme-set catppuccin`
 - "Add a keybinding for Ctrl+Alt+E to open file manager" -> `omakub-keybinding-add "File Manager" "nautilus" "<Primary><Alt>e"`
-- "Install Visual Studio Code" -> `omakub-app-install visual-studio-code`
+- "Install Visual Studio Code" -> `omakub-install-vscode`
 - "Make the terminal font bigger" -> `omakub-font-size-set 12`
 - "Set up night light to turn on automatically" -> `gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true; gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true`
 - "Customize the tokyo-night theme colors" -> Create `~/.config/omakub/themes/tokyo-night-custom/` by copying from stock, then edit
