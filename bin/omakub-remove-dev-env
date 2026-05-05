@@ -17,7 +17,6 @@ remove_php() {
     sudo apt-get remove -y php composer
   fi
   sudo apt-get autoremove -y
-  sudo rm -f /usr/local/bin/composer
 }
 
 case "$1" in
