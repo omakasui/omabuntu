@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# omakub-keybinding-remove: Remove a custom keybinding.
-# Usage: omakub-keybinding-remove <name>
+# omakub-gnome-keybinding-remove: Remove a custom keybinding.
+# Usage: omakub-gnome-keybinding-remove <name>
 
 readonly BASE_SCHEMA="org.gnome.settings-daemon.plugins.media-keys"
 readonly CUSTOM_KB_PATH="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
