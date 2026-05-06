@@ -16,7 +16,9 @@ export XCURSOR_THEME="Yaru"
 export TERMINAL=xdg-terminal-exec
 
 # Gum
-source $HOME/.config/omakub/current/theme/gum.env
+if [ -f "$HOME/.config/omakub/current/theme/gum.env" ]; then
+  source $HOME/.config/omakub/current/theme/gum.env
+fi
 
 # Omabuntu
 export OMAKUB_PATH=$HOME/.local/share/omakub
