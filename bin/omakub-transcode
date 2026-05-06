@@ -134,9 +134,6 @@ transcode_video() {
       ffmpeg -i "$input" -vf "$scale" -c:v libx264 -preset fast -crf 23 -c:a copy "$output"
     fi
     ;;
-  webm2mp4)
-    ffmpeg -i "$input" -vf "$scale:flags=lanczos" -c:v libx264 -preset slow -crf 22 -c:a aac -b:a 192k "$output"
-    ;;
   gif)
     ffmpeg -i "$input" -vf "fps=10,$scale:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" "$output"
     ;;

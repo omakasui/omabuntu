@@ -31,7 +31,3 @@ img2jpg-large() {
 img2png() {
   omakub-transcode "$1" png high
 }
-
-webm2mp4() {
-  omakub-transcode "$1" webm2mp4 1080p
-}
