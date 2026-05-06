@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Ensure all default .desktop, web apps, and TUIs are installed.
+# omakub:summary=Ensure all default .desktop, web apps, TUIs, and npx wrappers are installed.
 
 # Copy and sync icon files
 mkdir -p ~/.local/share/icons/hicolor/48x48/apps/
@@ -12,9 +12,10 @@ mkdir -p ~/.local/share/applications
 cp ~/.local/share/omakub/applications/*.desktop ~/.local/share/applications/
 cp ~/.local/share/omakub/applications/hidden/*.desktop ~/.local/share/applications/
 
-# Refresh the webapps and TUI
+# Refresh the webapps, TUIs, and npx wrappers
 bash $OMAKUB_PATH/install/packaging/icons.sh
 bash $OMAKUB_PATH/install/packaging/webapps.sh
 bash $OMAKUB_PATH/install/packaging/tuis.sh
+bash $OMAKUB_PATH/install/packaging/npx.sh
 
 update-desktop-database ~/.local/share/applications
