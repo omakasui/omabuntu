@@ -64,4 +64,4 @@ omakub-theme-set-vscode
 omakub-theme-set-obsidian
 
 # Call hook on theme set
-omakub-hook theme-set "$THEME_NAME"
+omakub-hook theme-set "$THEME_NAME" >/dev/null
