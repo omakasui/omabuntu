@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # omakub:summary=Apply the current theme to GNOME extensions (TopHat, Rounded Window Corners).
+# omakub:hidden=true
 
 # Change TopHat meter color
 GNOME_TOPHAT_THEME=~/.config/omakub/current/theme/tophat.theme

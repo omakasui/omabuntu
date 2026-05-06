@@ -2,6 +2,7 @@
 
 # omakub:summary=Generate a theme's colors.toml from its alacritty.toml palette.
 # omakub:args=<theme-dir>
+# omakub:hidden=true
 
 set -e
 

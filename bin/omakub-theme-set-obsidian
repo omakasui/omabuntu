@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # omakub:summary=Sync Omakub theme to all Obsidian vaults.
+# omakub:hidden=true
 
 CURRENT_THEME_DIR="$HOME/.config/omakub/current/theme"
 

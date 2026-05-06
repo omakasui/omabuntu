@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# omakub:summary=Install APT packages if they are missing.
-# omakub:group=install
-# omakub:name=package
+# omakub:summary=Install Arch packages if they are missing
 # omakub:args=<packages...>
-# omakub:examples=omakub install package jq ripgrep
+# omakub:examples=omakub pkg add jq ripgrep
+# omakub:requires-sudo=true
 
 if omakub-pkg-missing "$@"; then
   sudo apt-get -y install "$@" || exit 1

@@ -2,6 +2,7 @@
 
 # omakub:summary=Manage persistent state files for Omakub toggles and settings.
 # omakub:args=<set|clear> <state-name-or-pattern>
+# omakub:hidden=true
 
 STATE_DIR="$HOME/.local/state/omakub"
 mkdir -p "$STATE_DIR"
