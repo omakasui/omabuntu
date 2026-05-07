@@ -40,7 +40,7 @@ if (( ${#APP_NAMES[@]} == 0 )); then
 fi
 
 for APP_NAME in "${APP_NAMES[@]}"; do
-  omakub-gnome-app-folder-drop "$APP_NAME.desktop" "Web Apps"
+  omakub-gnome-grid-folder-drop "$APP_NAME.desktop" "Web Apps"
   rm -f "$DESKTOP_DIR/$APP_NAME.desktop"
   rm -f "$ICON_DIR/$APP_NAME.png"
   rm -rf "$HOME/.config/omakub/webapp/$(echo "$APP_NAME" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')"

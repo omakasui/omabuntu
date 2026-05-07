@@ -90,7 +90,7 @@ fi
 chmod +x "$DESKTOP_FILE"
 
 # Add to Web Apps folder in app grid
-omakub-gnome-app-folder-add "$APP_NAME.desktop" "Web Apps"
+omakub-gnome-grid-folder-add "$APP_NAME.desktop" "Web Apps"
 
 if [[ $INTERACTIVE_MODE == true ]]; then
   echo -e "You can now find $APP_NAME using the app launcher (SUPER + SPACE)\n"

@@ -185,8 +185,8 @@ show_setup_system_menu() {
 
 show_setup_folders_menu() {
   case $(menu "Folders" "󰮝  Add\n󰮞  Remove") in
-  *Add*) present_terminal omakub-gnome-app-folder-add ;;
-  *Remove*) present_terminal omakub-gnome-app-folder-drop ;;
+  *Add*) present_terminal omakub-gnome-grid-folder-add ;;
+  *Remove*) present_terminal omakub-gnome-grid-folder-drop ;;
   *) show_setup_menu ;;
   esac
 }
