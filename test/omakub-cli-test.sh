@@ -69,8 +69,8 @@ pass "dev commands are discoverable and documented"
 "$CLI" commands --all --json | jq -e '.commands[] | select(.route == "omakub dev benchmark")' >/dev/null
 pass "benchmark command is discoverable in all commands"
 
-"$CLI" commands --json | jq -e '.commands[] | select(.binary == "omakub-pkg-add" and .route == "omakub install package" and .filename_route == "omakub pkg add" and (.routes | index("omakub pkg add")))' >/dev/null
-pass "JSON exposes canonical and filename-derived routes"
+"$CLI" commands --json | jq -e '.commands[] | select(.binary == "omakub-pkg-add" and .route == "omakub pkg add" and .filename_route == "omakub pkg add" and (.routes | index("omakub pkg add")))' >/dev/null
+pass "JSON exposes direct pkg add route"
 
 "$CLI" commands --json | jq -e '.commands[] | select(.binary == "omakub-refresh-apt" and .requires_sudo == true)' >/dev/null
 pass "sudo metadata marks sudo commands"
@@ -79,18 +79,21 @@ output=$("$CLI" theme --help)
 assert_output_contains "group help renders" "$output" "Theme commands"
 
 output=$("$CLI" install --help)
-assert_output_contains "install group help renders" "$output" "omakub install package <packages...>"
+assert_output_contains "install group help renders" "$output" "Install commands"
+assert_output_contains "install group includes browser route" "$output" "omakub install browser"
 
 output=$("$CLI" install)
 assert_output_contains "bare group renders help instead of picker" "$output" "Install commands"
 assert_output_contains "bare group includes package route" "$output" "omakub install package <packages...>"
+assert_output_contains "bare group includes browser route" "$output" "omakub install browser"
 
 output=$("$CLI" toggle)
 assert_output_contains "bare root command with children renders help" "$output" "Toggle commands"
 assert_output_contains "bare toggle help includes child route" "$output" "omakub toggle nightlight"
 
 output=$("$CLI" pkg --help)
-assert_output_contains "package group includes pkg add fallback route" "$output" "omakub pkg add <packages...>"
+assert_output_contains "pkg add help resolves" "$output" "omakub-pkg-add"
+assert_output_contains "pkg add help shows direct route" "$output" "omakub pkg add <packages...>"
 
 output=$("$CLI" restart --help)
 assert_output_contains "restart group includes inferred commands" "$output" "omakub restart btop"
