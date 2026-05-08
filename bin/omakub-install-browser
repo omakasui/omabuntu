@@ -1,0 +1,78 @@
+#!/bin/bash
+
+# omakub:summary=Install a supported browser
+# omakub:args=<chrome|brave|edge|firefox|zen>
+# omakub:examples=omakub install browser firefox | omakub install browser brave
+
+setup_policy_directory() {
+  sudo mkdir -p "$1"
+  sudo chmod a+rw "$1"
+}
+
+announce_browser_installed() {
+  echo ""
+  echo "$1 browser installed. Make it the default via Setup > Defaults > Browser."
+}
+
+copy_chromium_flags() {
+  mkdir -p ~/.config
+  cp -f "${OMAKUB_PATH:-$HOME/.local/share/omakub}/config/chromium-flags.conf" "$1"
+}
+
+setup_firefox_preferences() {
+  local distribution_dir="$1"
+
+  setup_policy_directory "$distribution_dir"
+  sudo cp -f "$OMAKUB_PATH/default/firefox/policies.json" "$distribution_dir/policies.json"
+}
+
+setup_firefox_wayland() {
+  mkdir -p ~/.config/environment.d
+  echo "MOZ_ENABLE_WAYLAND=1" > ~/.config/environment.d/omakub-firefox-wayland.conf
+}
+
+case $1 in
+chrome)
+  omakub-install-browser-chrome || exit 1
+
+  setup_policy_directory /etc/opt/chrome/policies/managed
+  copy_chromium_flags ~/.config/chrome-flags.conf
+  omakub-theme-set-browser
+  announce_browser_installed "Chrome"
+  ;;
+edge)
+  omakub-install-browser-edge || exit 1
+
+  setup_policy_directory /etc/opt/edge/policies/managed
+  copy_chromium_flags ~/.config/microsoft-edge-stable-flags.conf
+  omakub-theme-set-browser
+  announce_browser_installed "Edge"
+  ;;
+brave)
+  omakub-install-browser-brave || exit 1
+
+  setup_policy_directory /etc/brave/policies/managed
+  copy_chromium_flags ~/.config/brave-flags.conf
+  omakub-theme-set-browser
+  announce_browser_installed "Brave"
+  ;;
+firefox)
+  omakub-install-browser-firefox || exit 1
+
+  setup_firefox_preferences /usr/lib/firefox/distribution
+  setup_firefox_wayland
+  announce_browser_installed "Firefox"
+  ;;
+zen)
+  echo "Installing Zen..."
+  omakub-pkg-add zen-browser || exit 1
+
+  setup_firefox_preferences /opt/zen-browser/distribution
+  setup_firefox_wayland
+  announce_browser_installed "Zen"
+  ;;
+*)
+  echo "Usage: omakub-install-browser <chrome|brave|edge|firefox|zen>"
+  exit 1
+  ;;
+esac
