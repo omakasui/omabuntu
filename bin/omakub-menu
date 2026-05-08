@@ -91,20 +91,48 @@ show_learn_menu() {
 }
 
 show_trigger_menu() {
-  case $(menu "Trigger" "󰧸  Transcode\n  Share\n󰔎  Toggle") in
-  *Transcode*) show_transcode_menu ;;
+  case $(menu "Trigger" "󰔛  Reminder\n󰧸  Transcode\n  Share\n󰔎  Toggle") in
+  *Reminder*) show_reminder_menu ;;
+  *Transcode*) omakub-transcode || back_to show_trigger_menu ;;
   *Share*) show_share_menu ;;
   *Toggle*) show_toggle_menu ;;
   *) show_main_menu ;;
   esac
 }
 
-show_transcode_menu() {
-  case $(menu "Transcode" "  Picture\n  Video") in
-  *Picture*) present_terminal "omakub-transcode --path '$HOME/Pictures'" ;;
-  *Video*) present_terminal "omakub-transcode --path '$HOME/Videos'" ;;
+show_reminder_menu() {
+  case $(menu "Reminder" "󰔛  Set one\n󰔛  Show all\n󰔛  Clear all") in
+  *Set*) show_custom_reminder_input ;;
+  *"Show all"*) omakub-reminder show ;;
+  *"Clear all"*) omakub-reminder clear ;;
   *) back_to show_trigger_menu ;;
   esac
+}
+
+show_custom_reminder_input() {
+  local minutes
+  minutes=$(omakub-menu-input "Remind in minutes")
+
+  if [[ $minutes =~ ^[0-9]+$ ]] && ((minutes > 0)); then
+    show_reminder_message_input "$minutes"
+  elif [[ -n $minutes ]]; then
+    omakub-notification-send "󰔛" "Invalid reminder" "Enter the number of minutes" -u critical
+    show_custom_reminder_input
+  else
+    back_to show_reminder_menu
+  fi
+}
+
+show_reminder_message_input() {
+  local minutes="$1"
+  local message
+  message=$(omakub-menu-input "Reminder message")
+
+  if [[ -n $message ]]; then
+    omakub-reminder "$minutes" "$message"
+  else
+    omakub-reminder "$minutes"
+  fi
 }
 
 show_share_menu() {
@@ -124,10 +152,11 @@ show_toggle_menu() {
 }
 
 show_style_menu() {
-  case $(menu "Style" "󰸌  Theme\n  Font\n  Background") in
+  case $(menu "Style" "󰸌  Theme\n  Font\n  Background\n  About") in
   *Theme*) show_theme_menu ;;
   *Font*) show_font_menu ;;
   *Background*) show_background_menu ;;
+  *About*) show_about_menu ;;
   *) show_main_menu ;;
   esac
 }
@@ -157,11 +186,21 @@ show_background_menu() {
   omakub-launch-walker -m menus:omakubBackgroundSelector --width 800 --minheight 400
 }
 
+show_about_menu() {
+  case $(menu "About" "  Edit Text\n  Set From Image\n  Restore Default") in
+  *Text*) omakub-branding-about text ;;
+  *Image*) omakub-branding-about image ;;
+  *Default*) omakub-branding-about reset ;;
+  *) show_style_menu ;;
+  esac
+}
+
 show_setup_menu() {
-  case $(menu "Setup" "󰤆  System Sleep\n  Folders\n  Keybindings\n  Starship\n󰱔  DNS\n  Config") in
+  case $(menu "Setup" "󰤆  System Sleep\n  Folders\n  Keybindings\n  Defaults\n󰱔  DNS\n  Config") in
   *System*) show_setup_system_menu ;;
   *Folders*) show_setup_folders_menu ;;
   *Keybindings*) show_setup_keybindings_menu ;;
+  *Defaults*) show_setup_default_menu ;;
   *DNS*) present_terminal omakub-setup-dns ;;
   *Config*) show_setup_config_menu ;;
   *) show_main_menu ;;
@@ -196,6 +235,100 @@ show_setup_keybindings_menu() {
   *Add*) present_terminal omakub-gnome-keybinding-add ;;
   *Remove*) present_terminal omakub-gnome-keybinding-drop ;;
   *) show_setup_menu ;;
+  esac
+}
+
+show_setup_default_menu() {
+  case $(menu "Default" "  Browser\n  Terminal\n  Editor") in
+  *Browser*) show_setup_default_browser_menu ;;
+  *Terminal*) show_setup_default_terminal_menu ;;
+  *Editor*) show_setup_default_editor_menu ;;
+  *) show_setup_menu ;;
+  esac
+}
+
+browser_desktop_exists() {
+  [[ -f ~/.local/share/applications/$1 || -f ~/.nix-profile/share/applications/$1 || -f /usr/share/applications/$1 ]]
+}
+
+show_setup_default_browser_menu() {
+  local options=""
+  browser_desktop_exists chromium.desktop && options="$options  Chromium"
+  browser_desktop_exists google-chrome.desktop && options="${options:+$options\n}󰊯  Chrome"
+  browser_desktop_exists brave-browser.desktop && options="${options:+$options\n}󰖟  Brave"
+  browser_desktop_exists microsoft-edge.desktop && options="${options:+$options\n}󰇩  Edge"
+  browser_desktop_exists firefox.desktop && options="${options:+$options\n}󰈹  Firefox"
+  browser_desktop_exists zen.desktop && options="${options:+$options\n}󰖟  Zen"
+
+  local current=""
+  case "$(omakub-default-browser)" in
+  chromium) current="  Chromium" ;;
+  chrome) current="󰊯  Chrome" ;;
+  brave) current="󰖟  Brave" ;;
+  edge) current="󰇩  Edge" ;;
+  firefox) current="󰈹  Firefox" ;;
+  zen) current="󰖟  Zen" ;;
+  esac
+
+  case $(menu "Default Browser" "$options" "" "$current") in
+  *Chromium*) omakub-default-browser chromium ;;
+  *Chrome*) omakub-default-browser chrome ;;
+  *Brave*) omakub-default-browser brave ;;
+  *Edge*) omakub-default-browser edge ;;
+  *Firefox*) omakub-default-browser firefox ;;
+  *Zen*) omakub-default-browser zen ;;
+  *) show_setup_default_menu ;;
+  esac
+}
+
+show_setup_default_terminal_menu() {
+  local options=""
+  omakub-cmd-present alacritty && options="$options  Alacritty"
+  omakub-cmd-present ghostty && options="${options:+$options\n}  Ghostty"
+  omakub-cmd-present kitty && options="${options:+$options\n}  Kitty"
+
+  local current=""
+  case "$(omakub-default-terminal)" in
+  alacritty) current="  Alacritty" ;;
+  ghostty) current="  Ghostty" ;;
+  kitty) current="  Kitty" ;;
+  esac
+
+  case $(menu "Default Terminal" "$options" "" "$current") in
+  *Alacritty*) omakub-default-terminal alacritty ;;
+  *Ghostty*) omakub-default-terminal ghostty ;;
+  *Kitty*) omakub-default-terminal kitty ;;
+  *) show_setup_default_menu ;;
+  esac
+}
+
+show_setup_default_editor_menu() {
+  local options=""
+  omakub-cmd-present nvim && options="$options  Neovim"
+  omakub-cmd-present code && options="${options:+$options\n}  VSCode"
+  omakub-cmd-present cursor && options="${options:+$options\n}  Cursor"
+  omakub-cmd-present zeditor && options="${options:+$options\n}  Zed"
+  omakub-cmd-present vim && options="${options:+$options\n}  Vim"
+  omakub-cmd-present emacs && options="${options:+$options\n}  Emacs"
+
+  local current=""
+  case "$(omakub-default-editor)" in
+  nvim) current="  Neovim" ;;
+  code) current="  VSCode" ;;
+  cursor) current="  Cursor" ;;
+  zed | zeditor) current="  Zed" ;;
+  vim) current="  Vim" ;;
+  emacs) current="  Emacs" ;;
+  esac
+
+  case $(menu "Default Editor" "$options" "" "$current") in
+  *Neovim*) omakub-default-editor nvim ;;
+  *VSCode*) omakub-default-editor code ;;
+  *Cursor*) omakub-default-editor cursor ;;
+  *Zed*) omakub-default-editor zed ;;
+  *Vim*) omakub-default-editor vim ;;
+  *Emacs*) omakub-default-editor emacs ;;
+  *) show_setup_default_menu ;;
   esac
 }
 
@@ -244,10 +377,12 @@ show_install_service_menu() {
 }
 
 show_install_browser_menu() {
-  case $(menu "Install" "  Brave\n  Firefox\n  Zen") in
-  *Brave*) present_terminal omakub-install-brave ;;
-  *Firefox*) present_terminal omakub-install-firefox ;;
-  *Zen*) install "Zen Browser" "zen-browser" ;;
+  case $(menu "Install" "  Chrome\n  Edge\n  Brave\n  Firefox\n󰖟  Zen") in
+  *Chrome*) present_terminal "omakub-install-browser chrome" ;;
+  *Edge*) present_terminal "omakub-install-browser edge" ;;
+  *Brave*) present_terminal "omakub-install-browser brave" ;;
+  *Firefox*) present_terminal "omakub-install-browser firefox" ;;
+  *Zen*) present_terminal "omakub-install-browser zen" ;;
   *) show_install_menu ;;
   esac
 }
@@ -366,11 +501,12 @@ show_install_gaming_menu() {
 }
 
 show_remove_menu() {
-  case $(menu "Remove" "  Package\n  Web App\n  TUI\n  Style\n󰵮  Development\n󱚤  AI\n  Gaming\n󰏓  Preinstalls") in
+  case $(menu "Remove" "  Package\n  Web App\n  TUI\n  Style\n  Browser\n󰵮  Development\n󱚤  AI\n  Gaming\n󰏓  Preinstalls") in
   *Package*) terminal omakub-pkg-remove ;;
   *Web*) present_terminal omakub-webapp-remove ;;
   *TUI*) present_terminal omakub-tui-remove ;;
   *Style*) show_remove_style_menu ;;
+  *Browser*) show_remove_browser_menu ;;
   *Development*) show_remove_development_menu ;;
   *AI*) show_remove_ai_menu ;;
   *Gaming*) show_remove_gaming_menu ;;
@@ -393,6 +529,17 @@ show_remove_font_menu() {
   *JetBrains*) remove_font "JetBrains Mono" "jetbrains-mono" ;;
   *iA*) remove_font "iA Fonts" "iafonts" ;;
   *Microsoft*) remove_font "Microsoft Core Fonts" "mscore" ;;
+  *) show_remove_menu ;;
+  esac
+}
+
+show_remove_browser_menu() {
+  case $(menu "Remove" "  Chrome\n  Edge\n  Brave\n  Firefox\n  Zen") in
+  *Chrome*) present_terminal "omakub-remove-browser chrome" ;;
+  *Edge*) present_terminal "omakub-remove-browser edge" ;;
+  *Brave*) present_terminal "omakub-remove-browser brave" ;;
+  *Firefox*) present_terminal "omakub-remove-browser firefox" ;;
+  *Zen*) present_terminal "omakub-remove-browser zen" ;;
   *) show_remove_menu ;;
   esac
 }
@@ -538,7 +685,8 @@ go_to_menu() {
   *toggle*) show_toggle_menu ;;
   *style*) show_style_menu ;;
   *share*) show_share_menu ;;
-  *transcode*) show_transcode_menu ;;
+  *reminder-set*) show_custom_reminder_input ;;
+  *reminder*) show_reminder_menu ;;
   *background*) show_background_menu ;;
   *theme*) show_theme_menu ;;
   *setup*) show_setup_menu ;;
