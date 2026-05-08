@@ -12,7 +12,7 @@ mapfile -d '' -t BACKGROUNDS < <(find -L "$USER_BACKGROUNDS_PATH" "$THEME_BACKGR
 TOTAL=${#BACKGROUNDS[@]}
 
 if (( TOTAL == 0 )); then
-  omakub-notification-send "No background was found for theme" -t 2000
+  omakub-notification-send "󰍹" "No background was found for theme" -t 2000
   omakub-theme-bg-set
 else
   # Get current background from symlink
