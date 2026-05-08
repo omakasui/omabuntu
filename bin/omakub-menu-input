@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# omakub:summary=Prompt for text input with Walker
+# omakub:group=menu
+# omakub:name=input
+# omakub:args=prompt [walker args...]
+# omakub:examples=omakub menu input Reminder|omakub-menu-input "Reminder in minutes" --width 400
+
+set -euo pipefail
+
+prompt="${1:-Input}"
+if (( $# > 0 )); then
+  shift
+fi
+
+omakub-launch-walker --dmenu --inputonly --width 295 --minheight 1 --maxheight 1 -p "$prompt…" "$@" 2>/dev/null
