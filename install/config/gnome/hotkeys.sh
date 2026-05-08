@@ -73,7 +73,12 @@ omakub-gnome-keybinding-add 'Flameshot' 'sh -c -- "flameshot gui"' '<Control>Pri
 omakub-gnome-keybinding-add 'Share menu' 'omakub-menu share' '<Super><Control>s'
 
 # Transcoding
-omakub-gnome-keybinding-add 'Transcode menu' 'omakub-menu transcode' '<Super><Control>r'
+omakub-gnome-keybinding-add 'Transcode' 'omakub-transcode' '<Super><Control>period'
+
+# Reminders
+omakub-gnome-keybinding-add 'Set reminder' 'omakub-menu reminder-set' '<Super><Control>r'
+omakub-gnome-keybinding-add 'Show reminders' 'omakub-reminder show' '<Super><Control><Alt>r'
+omakub-gnome-keybinding-add 'Clear reminders' 'omakub-reminder clear' '<Super><Shift><Control>r'
 
 # Control panels
 omakub-gnome-keybinding-add 'Activity' 'omakub-launch-tui btop' '<Super><Shift>t'
