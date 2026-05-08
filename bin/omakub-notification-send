@@ -1,6 +1,32 @@
 #!/bin/bash
 
-# omakub:summary=Send a desktop notification using Omakub branding.
-# omakub:args=[options] <summary> [body]
+# omakub:summary=Send a desktop notification with Omakub glyph and body spacing
+# omakub:args=<glyph> <headline> [description] [notify-send options]
+# omakub:examples=omakub notification send "󰔛" "Reminder" "5 minutes are up" -u critical
 
-notify-send -i ~/.config/omakub/branding/notify.png -a "Omabuntu" "$@"
+set -euo pipefail
+
+if (($# < 2)); then
+  echo "Usage: omakub-notification-send <glyph> <headline> [description] [notify-send options]"
+  exit 1
+fi
+
+glyph=$1
+headline=$2
+description=${3:-}
+shift 2
+
+if (($# > 0)) && [[ $1 != -* ]]; then
+  shift
+else
+  description=""
+fi
+
+summary="$glyph    $headline"
+
+if [[ -n $description ]]; then
+  description=$(sed 's/^/      /' <<<"$description")
+  notify-send -i ~/.config/omakub/branding/notify.png -a "Omakub" "$@" "$summary" "$description"
+else
+  notify-send -i ~/.config/omakub/branding/notify.png -a "Omakub" "$@" "$summary"
+fi
