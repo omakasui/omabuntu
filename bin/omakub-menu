@@ -152,8 +152,9 @@ show_toggle_menu() {
 }
 
 show_style_menu() {
-  case $(menu "Style" "󰸌  Theme\n  Font\n  Background\n  About") in
+  case $(menu "Style" "󰸌  Theme\n󱣴  Plymouth\n  Font\n  Background\n  About") in
   *Theme*) show_theme_menu ;;
+  *Plymouth*) omakub-launch-walker -m menus:omakubunlocks --width 800 --minheight 400 ;;
   *Font*) show_font_menu ;;
   *Background*) show_background_menu ;;
   *About*) show_about_menu ;;
