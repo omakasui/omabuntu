@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Display the Omakub logo in the terminal using green color.
+# omakub:summary=Display the Omabuntu logo in the terminal using green color.
 
 clear
 echo -e "\033[32m"

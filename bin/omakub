@@ -461,7 +461,7 @@ show_group_list() {
 
 show_main_help() {
   cat <<'EOF'
-Omakub command center
+Omabuntu command center
 
 Usage:
   omakub <command> [args...]
@@ -470,7 +470,7 @@ Usage:
   omakub <group> <command> --help
 
 Common commands:
-  omakub update              Update Omakub and system packages
+  omakub update              Update Omabuntu and system packages
   omakub theme list          List available themes
   omakub theme set <name>    Apply a theme
   omakub font list           List available fonts
@@ -494,7 +494,7 @@ show_commands_help() {
 Usage:
   omakub commands [--all] [--json] [--markdown] [--check]
 
-List commands known to the Omakub command center.
+List commands known to the Omabuntu command center.
 
 Options:
   --all       Include commands explicitly marked hidden
@@ -534,9 +534,9 @@ show_commands() {
   local alias_rows=""
 
   if [[ $include_all == "true" ]]; then
-    echo "Omakub commands (all):"
+    echo "Omabuntu commands (all):"
   else
-    echo "Omakub commands:"
+    echo "Omabuntu commands:"
   fi
 
   while IFS= read -r key; do
@@ -1014,7 +1014,7 @@ dispatch_or_help() {
     return 0
   fi
 
-  echo "Unknown Omakub command: omakub ${args[*]}" >&2
+  echo "Unknown Omabuntu command: omakub ${args[*]}" >&2
   suggestion=$(suggest_command "${args[0]}")
   if [[ -n $suggestion ]]; then
     echo "Did you mean: omakub $suggestion ?" >&2

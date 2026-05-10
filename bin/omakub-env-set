@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Set an environment variable for Omakub in bashrc.
+# omakub:summary=Set an environment variable for Omabuntu in bashrc.
 # omakub:args=<VAR_NAME> <VAR_VALUE>
 
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Remove a supported browser and clean up Omakub browser defaults
+# omakub:summary=Remove a supported browser and clean up Omabuntu browser defaults
 # omakub:args=<chrome|brave|edge|firefox|zen>
 # omakub:examples=omakub remove browser firefox | omakub remove browser brave
 # omakub:requires-sudo=true

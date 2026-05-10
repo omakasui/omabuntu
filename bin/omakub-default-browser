@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Set the default browser for Omakub and XDG handlers
+# omakub:summary=Set the default browser for Omabuntu and XDG handlers
 # omakub:args=[chromium|chrome|brave|edge|firefox|zen]
 # omakub:examples=omakub default browser firefox | omakub default browser brave
 

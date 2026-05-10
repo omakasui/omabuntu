@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Measure Omakub CLI response times
+# omakub:summary=Measure Omabuntu CLI response times
 # omakub:args=[--repeat=<count>]
 # omakub:examples=omakub dev benchmark | omakub dev benchmark --repeat=10
 
@@ -15,7 +15,7 @@ show_help() {
 Usage:
   omakub dev benchmark [--repeat=<count>]
 
-Measure response times for common Omakub CLI surfaces.
+Measure response times for common Omabuntu CLI surfaces.
 
 Options:
   --repeat=<count>  Number of times to run each case (default: 5)
@@ -99,7 +99,7 @@ if [[ ! $REPEAT =~ ^[0-9]+$ ]] || (( REPEAT < 1 )); then
   exit 2
 fi
 
-printf 'Omakub CLI benchmark (%d runs each)\n\n' "$REPEAT"
+printf 'Omabuntu CLI benchmark (%d runs each)\n\n' "$REPEAT"
 run_case "omakub" "$CLI"
 run_case "omakub --help" "$CLI" --help
 run_case "omakub commands" "$CLI" commands

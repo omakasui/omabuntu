@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Overwrite the user tmux config with the Omakub default and reload tmux.
+# omakub:summary=Overwrite the user tmux config with the Omabuntu default and reload tmux.
 
 omakub-refresh-config tmux/tmux.conf
 omakub-restart-tmux

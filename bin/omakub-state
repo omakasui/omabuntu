@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Manage persistent state files for Omakub toggles and settings.
+# omakub:summary=Manage persistent state files for Omabuntu toggles and settings.
 # omakub:args=<set|clear> <state-name-or-pattern>
 # omakub:hidden=true
 

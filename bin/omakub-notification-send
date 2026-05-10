@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Send a desktop notification with Omakub glyph and body spacing
+# omakub:summary=Send a desktop notification with Omabuntu glyph and body spacing
 # omakub:args=<glyph> <headline> [description] [notify-send options]
 # omakub:examples=omakub notification send "󰔛" "Reminder" "5 minutes are up" -u critical
 
@@ -26,7 +26,7 @@ summary="$glyph    $headline"
 
 if [[ -n $description ]]; then
   description=$(sed 's/^/      /' <<<"$description")
-  notify-send -i ~/.config/omakub/branding/notify.png -a "Omakub" "$@" "$summary" "$description"
+  notify-send -i ~/.config/omakub/branding/notify.png -a "Omabuntu" "$@" "$summary" "$description"
 else
-  notify-send -i ~/.config/omakub/branding/notify.png -a "Omakub" "$@" "$summary"
+  notify-send -i ~/.config/omakub/branding/notify.png -a "Omabuntu" "$@" "$summary"
 fi

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Generate themed config files from Omakub templates.
+# omakub:summary=Generate themed config files from Omabuntu templates.
 # omakub:hidden=true
 
 TEMPLATES_DIR="$OMAKUB_PATH/default/themed"

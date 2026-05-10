@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Overwrite the user config for Plymouth boot sequence with the Omakub default and rebuild it.
+# omakub:summary=Overwrite the user config for Plymouth boot sequence with the Omabuntu default and rebuild it.
 # omakub:requires-sudo=true
 
 sudo cp ~/.local/share/omakub/default/plymouth/* /usr/share/plymouth/themes/omakub/

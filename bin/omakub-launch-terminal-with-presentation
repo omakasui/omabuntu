@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Launch a floating terminal with the Omakub presentation wrapper.
+# omakub:summary=Launch a floating terminal with the Omabuntu presentation wrapper.
 # omakub:args=<command>
 
 cmd="$*"

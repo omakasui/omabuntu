@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Toggle Omakub features between enabled and disabled.
+# omakub:summary=Toggle Omabuntu features between enabled and disabled.
 # omakub:args=[--enabled-notification <text>] [--disabled-notification <text>] <flag-name>
 
 ENABLED_NOTIFICATION=""

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Install VS Code and apply the current Omakub theme.
+# omakub:summary=Install VS Code and apply the current Omabuntu theme.
 # omakub:requires-sudo=true
 
 echo "Installing Visual Studio Code..."

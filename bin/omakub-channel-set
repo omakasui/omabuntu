@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Set the Omakub channel, which dictates what git branch and package repository is used.
+# omakub:summary=Set the Omabuntu channel, which dictates what git branch and package repository is used.
 # omakub:args=<stable|dev>
 # omakub:requires-sudo=true
 

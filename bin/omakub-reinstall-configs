@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Reset all Omakub user configs to the defaults.
+# omakub:summary=Reset all Omabuntu user configs to the defaults.
 # omakub:requires-sudo=true
 
 set -e

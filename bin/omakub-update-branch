@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Switch Omakub branches and update from the selected branch.
+# omakub:summary=Switch Omabuntu branches and update from the selected branch.
 # omakub:args=<branch>
 
 set -e

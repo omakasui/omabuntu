@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Reinstall the Omakub source directory from git.
+# omakub:summary=Reinstall the Omabuntutu source directory from git.
 
 set -e
 

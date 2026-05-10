@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Reapply the current Omakub theme.
+# omakub:summary=Reapply the current Omabuntu theme.
 
 THEME_NAME_PATH="$HOME/.config/omakub/current/theme.name"
 

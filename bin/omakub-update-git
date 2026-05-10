@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Pull the latest Omakub git changes.
+# omakub:summary=Pull the latest Omabuntu git changes.
 
 set -e
 

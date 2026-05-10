@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Finish the installation of Omakub with items that can only be done after logging in.
+# omakub:summary=Finish the installation of Omabuntu with items that can only be done after logging in.
 # omakub:requires-sudo=true
 
 set -e

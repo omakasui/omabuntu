@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Reinstall Omakub packages and reset default configs.
+# omakub:summary=Reinstall Omabuntu packages and reset default configs.
 # omakub:requires-sudo=true
 
 set -e

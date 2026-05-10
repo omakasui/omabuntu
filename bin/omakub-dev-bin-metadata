@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Show Omakub bin metadata fields and defaults
+# omakub:summary=Show Omabuntu bin metadata fields and defaults
 # omakub:args=[--json]
 
 set -euo pipefail
@@ -30,7 +30,7 @@ show_json() {
 
 show_help() {
   cat <<'EOF'
-Omakub bin metadata
+Omabuntu bin metadata
 
 Metadata lives in the top comment block of each executable bin/omakub-* file.
 Keep it slim: define only fields that are required or override defaults.

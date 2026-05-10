@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Run the full Omakub update pipeline.
+# omakub:summary=Run the full Omabuntu update pipeline.
 # omakub:requires-sudo=true
 
 set -e

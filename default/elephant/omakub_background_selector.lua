@@ -1,5 +1,5 @@
 Name = "omakubBackgroundSelector"
-NamePretty = "Omakub Background Selector"
+NamePretty = "Omabuntu Background Selector"
 Cache = false
 HideFromProviderlist = true
 SearchName = true
