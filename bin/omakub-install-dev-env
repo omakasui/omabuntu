@@ -29,12 +29,20 @@ install_php() {
     xml
     zip
   )
+  local available_extensions=()
 
   for extension in "${extensions_to_install[@]}"; do
-    if apt-cache show "php-$extension" &>/dev/null; then
-        sudo apt-get install -y "php-$extension" --no-install-recommends
+    local candidate
+    candidate=$(apt-cache policy "php-$extension" 2>/dev/null | awk '/Candidate:/ {print $2}')
+
+    if [[ -n "$candidate" && "$candidate" != "(none)" ]]; then
+      available_extensions+=("php-$extension")
     fi
   done
+
+  if [[ ${#available_extensions[@]} -gt 0 ]]; then
+    sudo apt-get install -y --no-install-recommends "${available_extensions[@]}"
+  fi
 }
 
 case "$1" in
