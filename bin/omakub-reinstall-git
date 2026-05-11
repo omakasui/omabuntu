@@ -4,7 +4,7 @@
 
 set -e
 
-# Reinstall the Omarchy configuration directory from the git source.
+# Reinstall the Omakub configuration directory from the git source.
 
 git clone --depth=1 "https://github.com/omakasui/omabuntu.git" ~/.local/share/omakub-new >/dev/null
 DEFAULT_URL="https://github.com/omakasui/omabuntu.git"
