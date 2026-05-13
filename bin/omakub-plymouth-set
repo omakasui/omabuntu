@@ -50,7 +50,7 @@ sed -i \
   -e "s/^Window.SetBackgroundBottomColor.*/Window.SetBackgroundBottomColor($bg_r, $bg_g, $bg_b);/" \
   "$staging_dir/omakub.script"
 
-for asset in bullet.png entry.png lock.png progress_bar.png; do
+for asset in progress_bar.png; do
   convert "$staging_dir/$asset" -channel RGB +level-colors "#$text_hex","#$text_hex" "$staging_dir/$asset"
 done
 
