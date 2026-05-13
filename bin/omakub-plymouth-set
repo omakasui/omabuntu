@@ -7,8 +7,8 @@
 
 # Configure the Plymouth boot theme with a custom background color, text color, and logo.
 # Stages the change in a temp dir, then commits the staged files to /usr/share and
-# rebuilds the initramfs. Also syncs the SDDM login screen (the post-logout
-# screen) with the same colors and logo so boot/login stay visually unified.
+# rebuilds the initramfs. Also syncs the GDM3 login screen with the same colors
+# and logo for visual consistency.
 
 if [[ $# -ne 3 ]]; then
   echo "Usage: omakub-plymouth-set <background-hex> <text-hex> <path-to-logo.png>" >&2
@@ -59,3 +59,6 @@ sudo cp -a "$staging_dir/." "$theme_dir/"
 sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/omakub/omakub.plymouth 100
 sudo update-alternatives --set default.plymouth /usr/share/plymouth/themes/omakub/omakub.plymouth
 sudo update-initramfs -u
+
+# Sync the GDM3 login screen with the same colors and logo for visual consistency.
+omakub-gdm-set "#$bg_hex" "$logo_path"

@@ -5,9 +5,8 @@
 # omakub:examples=omakub gdm set-by-theme gruvbox
 # omakub:requires-sudo=true
 
-# Resolve a theme by name and apply its background and logo to the GDM login
-# screen. Generates a solid-color background from colors.toml's background
-# value and uses the theme's unlock.png as the logo.
+# Resolve a theme by name and pass its background color and unlock.png to
+# omakub-gdm-set, which handles solid-color generation and installation.
 
 if [[ $# -ne 1 ]]; then
   echo "Usage: omakub-gdm-set-by-theme <theme-name>" >&2
@@ -37,10 +36,4 @@ if [[ -z $bg_color ]]; then
   exit 1
 fi
 
-staging_dir=$(mktemp -d)
-trap 'rm -rf "$staging_dir"' EXIT
-
-bg_path="$staging_dir/gdm-background.png"
-convert -size 3840x2160 "xc:$bg_color" "$bg_path"
-
-omakub-gdm-set "$bg_path" "$logo_path"
+omakub-gdm-set "$bg_color" "$logo_path"

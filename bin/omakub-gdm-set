@@ -1,25 +1,36 @@
 #!/bin/bash
 
 # omakub:summary=Set the GDM login screen background and logo
-# omakub:args=<background-path> <logo-path>
-# omakub:examples=omakub gdm set /tmp/bg.png ~/.local/share/omakub/default/gdm/logo.png
+# omakub:args=<background-hex-or-path> <logo-path>
+# omakub:examples=omakub gdm set '#1e1e2e' ~/.local/share/omakub/default/gdm/logo.png | omakub gdm set /tmp/bg.png ~/.local/share/omakub/default/gdm/logo.png
 # omakub:requires-sudo=true
 
 # Copy a background image and logo to /usr/share/pixmaps/omakub/ and write
 # /etc/dconf/db/gdm.d/96-omakub-theme (priority 96 > 95-gdm-settings) so GDM
 # picks them up on the next login.
+# The background can be a #RRGGBB hex color (generates a solid-color image)
+# or a path to an existing image file.
 
 if [[ $# -ne 2 ]]; then
-  echo "Usage: omakub-gdm-set <background-path> <logo-path>" >&2
+  echo "Usage: omakub-gdm-set <background-hex-or-path> <logo-path>" >&2
   exit 1
 fi
 
-bg_path="$1"
+bg_arg="${1#\#}"
 logo_path="$2"
 
-if [[ ! -f $bg_path ]]; then
-  echo "Background file not found: $bg_path" >&2
-  exit 1
+staging_dir=$(mktemp -d)
+trap 'rm -rf "$staging_dir"' EXIT
+
+if [[ $bg_arg =~ ^[0-9a-fA-F]{6}$ ]]; then
+  bg_path="$staging_dir/gdm-background.png"
+  convert -size 3840x2160 "xc:#$bg_arg" "$bg_path"
+else
+  bg_path="$1"
+  if [[ ! -f $bg_path ]]; then
+    echo "Background file not found: $bg_path" >&2
+    exit 1
+  fi
 fi
 
 if [[ ! -f $logo_path ]]; then
