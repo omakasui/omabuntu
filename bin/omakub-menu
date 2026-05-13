@@ -685,11 +685,11 @@ go_to_menu() {
   *learn*) show_learn_menu ;;
   *trigger*) show_trigger_menu ;;
   *toggle*) show_toggle_menu ;;
-  *style*) show_style_menu ;;
   *share*) show_share_menu ;;
   *reminder-set*) show_custom_reminder_input ;;
   *reminder*) show_reminder_menu ;;
   *background*) show_background_menu ;;
+  *style*) show_style_menu ;;
   *theme*) show_theme_menu ;;
   *setup*) show_setup_menu ;;
   *install*) show_install_menu ;;
