@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Install Arch packages if they are missing
+# omakub:summary=Install APT packages with apt-get if they are missing.
 # omakub:group=install
 # omakub:name=package
 # omakub:args=<packages...>
