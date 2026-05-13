@@ -79,8 +79,9 @@ remove_font() {
 }
 
 show_learn_menu() {
-  case $(menu "Learn" "  Keybindings\n  Omabuntu\n  Ubuntu\n󰊬  GNOME\n  Neovim\n󱆃  Bash") in
+  case $(menu "Learn" "  Keybindings\n  Tmux keybindings\n  Omabuntu\n  Ubuntu\n󰊬  GNOME\n  Neovim\n󱆃  Bash") in
   *Keybindings*) omakub-launch-webapp "https://omabuntu.omakasui.org/manual/essentials/hotkeys" "Omabuntu Keybindings" ;;
+  *Tmux*) omakub-menu-tmux-keybindings ;;
   *Omabuntu*) omakub-launch-webapp "https://omabuntu.omakasui.org/manual" "Omabuntu" ;;
   *Ubuntu*) omakub-launch-webapp "https://help.ubuntu.com/" "Ubuntu" ;;
   *GNOME*) omakub-launch-webapp "https://help.gnome.org/" "GNOME" ;;
