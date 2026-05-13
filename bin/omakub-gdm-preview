@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# omakub:summary=Preview a GDM login screen with a background and logo
+# omakub:args=<background-hex-or-path> <logo-path> <output-path>
+# omakub:examples=omakub gdm preview '#1e1e2e' ~/.local/share/omakub/default/gdm/logo.png /tmp/gdm-preview.png | omakub gdm preview /tmp/bg.png ~/.local/share/omakub/default/gdm/logo.png /tmp/gdm-preview.png
+
+# Render a GDM login-screen preview PNG by compositing the logo centered over
+# the background, scaled to a 1920x1080 canvas.
+# The background can be a #RRGGBB hex color (generates a solid-color canvas)
+# or a path to an existing image file.
+
+if [[ $# -ne 3 ]]; then
+  echo "Usage: omakub-gdm-preview <background-hex-or-path> <logo-path> <output-path>" >&2
+  exit 1
+fi
+
+bg_arg="${1#\#}"
+logo_path="$2"
+output_path="$3"
+
+staging_dir=$(mktemp -d)
+trap 'rm -rf "$staging_dir"' EXIT
+
+if [[ $bg_arg =~ ^[0-9a-fA-F]{6}$ ]]; then
+  bg_path="$staging_dir/bg.png"
+  convert -size 3840x2160 "xc:#$bg_arg" "$bg_path"
+else
+  bg_path="$1"
+  if [[ ! -f $bg_path ]]; then
+    echo "Background file not found: $bg_path" >&2
+    exit 1
+  fi
+fi
+
+if [[ ! -f $logo_path ]]; then
+  echo "Logo file not found: $logo_path" >&2
+  exit 1
+fi
+
+canvas_w=1920
+canvas_h=1080
+
+logo_w=$(identify -format '%w' "$logo_path")
+logo_h=$(identify -format '%h' "$logo_path")
+
+logo_x=$(( (canvas_w - logo_w) / 2 ))
+logo_y=$(( canvas_h - logo_h - 48 ))
+
+convert "$bg_path" -resize ${canvas_w}x${canvas_h}^ -gravity Center -extent ${canvas_w}x${canvas_h} \
+  "$logo_path" -gravity NorthWest -geometry +${logo_x}+${logo_y} -composite \
+  "$output_path"
+
+imv -f "$output_path"

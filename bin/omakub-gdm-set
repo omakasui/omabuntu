@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# omakub:summary=Set the GDM login screen background and logo
+# omakub:args=<background-path> <logo-path>
+# omakub:examples=omakub gdm set /tmp/bg.png ~/.local/share/omakub/default/gdm/logo.png
+# omakub:requires-sudo=true
+
+# Copy a background image and logo to /usr/share/pixmaps/omakub/ and write
+# /etc/dconf/db/gdm.d/96-omakub-theme (priority 96 > 95-gdm-settings) so GDM
+# picks them up on the next login.
+
+if [[ $# -ne 2 ]]; then
+  echo "Usage: omakub-gdm-set <background-path> <logo-path>" >&2
+  exit 1
+fi
+
+bg_path="$1"
+logo_path="$2"
+
+if [[ ! -f $bg_path ]]; then
+  echo "Background file not found: $bg_path" >&2
+  exit 1
+fi
+
+if [[ ! -f $logo_path ]]; then
+  echo "Logo file not found: $logo_path" >&2
+  exit 1
+fi
+
+sudo mkdir -p /usr/share/pixmaps/omakub
+sudo cp "$bg_path" /usr/share/pixmaps/omakub/gdm-background.png
+sudo cp "$logo_path" /usr/share/pixmaps/omakub/gdm-logo.png
+
+sudo tee /etc/dconf/db/gdm.d/96-omakub-theme > /dev/null << 'EOF'
+[org/gnome/login-screen]
+logo='/usr/share/pixmaps/omakub/gdm-logo.png'
+
+[com/ubuntu/login-screen]
+background-picture-uri='file:///usr/share/pixmaps/omakub/gdm-background.png'
+background-picture-uri-dark='file:///usr/share/pixmaps/omakub/gdm-background.png'
+background-size='zoom'
+EOF
+
+sudo dconf update
