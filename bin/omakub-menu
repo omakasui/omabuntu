@@ -54,7 +54,7 @@ present_terminal() {
 }
 
 open_in_editor() {
-  omakub-notification-send "󰂮" "Editing config file" "$1" -u low
+  omakub-notification-send -g "󰂮" -u low "Editing config file" "$1"
   omakub-launch-editor "$1"
 }
 
@@ -116,7 +116,7 @@ show_custom_reminder_input() {
   if [[ $minutes =~ ^[0-9]+$ ]] && ((minutes > 0)); then
     show_reminder_message_input "$minutes"
   elif [[ -n $minutes ]]; then
-    omakub-notification-send "󰔛" "Invalid reminder" "Enter the number of minutes" -u critical
+    omakub-notification-send -g "󰔛" "Invalid reminder" "Enter the number of minutes" -u critical
     show_custom_reminder_input
   else
     back_to show_reminder_menu
@@ -136,7 +136,8 @@ show_reminder_message_input() {
 }
 
 show_share_menu() {
-  case $(menu "Share" "  Clipboard\n  File \n  Folder") in
+  case $(menu "Share" "  Clipboard\n  File \n  Folder\n󰥦  Receive") in
+  *Receive*) localsend_app ;;
   *Clipboard*) omakub-menu-share clipboard ;;
   *File*) terminal bash -c "omakub-menu-share file" ;;
   *Folder*) terminal bash -c "omakub-menu-share folder" ;;
@@ -598,7 +599,7 @@ show_remove_gaming_menu() {
 }
 
 show_update_menu() {
-  local brand_name=$(omakub-brand)
+  local brand_name=$(omakub-branding-name)
 
   case $(menu "Update" "󰟢  $brand_name\n󰔫  Channel\n  Config\n󰸌  Themes\n  Process\n󰇅  Hardware\n  Firmware\n  Password") in
   *$brand_name*) present_terminal omakub-update ;;
