@@ -4,7 +4,7 @@ description: >
   REQUIRED for end-user customization of Linux desktop, window manager, or system config.
   Use when editing ~/.config/alacritty/, ~/.config/kitty/, , ~/.config/ghostty/, ~/.config/walker/,
   ~/.config/omakub/, or working with GNOME settings. Triggers: GNOME extensions,
-  keybindings, themes, wallpaper, terminal config, night light, dock settings,
+  keybindings, themes, background, terminal config, night light, dock settings,
   settings, display config, and user-facing omabuntu commands. Excludes Omabuntu
   source development in ~/.local/share/omakub/ and omakub-dev-* workflows.
 ---
@@ -24,7 +24,7 @@ It is not for contributing to Omabuntu source code.
 - Editing terminal configs (alacritty, kitty, ghostty)
 - Working with GNOME settings (gsettings)
 - GNOME extensions, dock, keybindings, appearance
-- Themes, wallpapers, fonts, appearance changes
+- Themes, backgrounds, fonts, appearance changes
 - User-facing `omakub-*` commands (`omakub-theme-*`, `omakub-refresh-*`, `omakub-restart-*`, etc.)
 - Night light, workspace settings, display configuration
 - Application installation or removal
@@ -253,7 +253,7 @@ omakub-refresh-walker
 omakub-theme-list              # Show available themes
 omakub-theme-current           # Show current theme
 omakub-theme-set <name>        # Apply theme (use "Tokyo Night" not "tokyo-night")
-omakub-theme-bg-next           # Cycle wallpaper
+omakub-theme-bg-next           # Cycle backgrounds
 omakub-theme-install <url>     # Install from git repo
 ```
 

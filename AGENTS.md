@@ -31,7 +31,7 @@ Common prefixes include:
 
 Other current prefixes include:
 
-- `branch-`, `brightness-`, `channel-`, `config-`, `debug-`, `dev-`, `first-`, `font-`, `hook-`, `gnome-`, `menu-`, `migrate-`, `notification-`, `npx-`, `reinstall-`, `remove-`, `show-`, `state-`, `sudo-`, `system-`, `transcode-`, `tui-`, `version-`, `webapp-`
+- `branch-`, `brightness-`, `channel-`, `config-`, `debug-`, `dev-`, `first-`, `font-`, `hook-`, `gnome-`, `menu-`, `migrate-`, `notification-`, `npm-`, `reinstall-`, `remove-`, `show-`, `state-`, `sudo-`, `system-`, `transcode-`, `tui-`, `version-`, `webapp-`
 
 # Command Metadata
 
@@ -81,7 +81,8 @@ Use these instead of raw shell commands:
 
 - `omakub-cmd-missing` / `omakub-cmd-present` - check for commands
 - `omakub-pkg-missing` / `omakub-pkg-present` - check for packages
-- `omakub-pkg-add` - install packages (handles both pacman and AUR)
+- `omakub-pkg-add` - install packages with apt
+- `omakub-notification-send` - send desktop notifications; do not call `notify-send` directly
 
 Exceptions are allowed for bootstrap, preflight, migration, and package-helper scripts where the helper may not be available yet, where the helper itself is being implemented, or where direct package-manager behavior is required.
 
