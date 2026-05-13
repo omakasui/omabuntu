@@ -23,7 +23,7 @@ chrome) desktop_id="google-chrome.desktop"; name="Chrome"; glyph="󰊯" ;;
 brave) desktop_id="brave-browser.desktop"; name="Brave"; glyph="󰖟" ;;
 edge) desktop_id="microsoft-edge.desktop"; name="Edge"; glyph="󰇩" ;;
 firefox) desktop_id="firefox.desktop"; name="Firefox"; glyph="󰈹" ;;
-zen) desktop_id="zen.desktop"; name="Zen"; glyph="󰰷" ;;
+zen) desktop_id="zen.desktop"; name="Zen"; glyph="󰖟" ;;
 *)
   echo "Usage: omakub-default-browser <chromium|chrome|brave|edge|firefox|zen>"
   exit 1
