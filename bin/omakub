@@ -949,13 +949,13 @@ dispatch_fast_or_help() {
   fi
 
   if (( $# == 1 )) && group_has_binary_commands "$1"; then
-    load_group_commands "$1"
+    load_commands
     show_group_help "$1"
     return 0
   fi
 
   if (( $# >= 2 )) && [[ $2 == "--help" || $2 == "-h" ]] && group_has_binary_commands "$1"; then
-    load_group_commands "$1"
+    load_commands
     show_group_help "$1"
     return 0
   fi

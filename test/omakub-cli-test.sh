@@ -69,7 +69,7 @@ pass "dev commands are discoverable and documented"
 "$CLI" commands --all --json | jq -e '.commands[] | select(.route == "omakub dev benchmark")' >/dev/null
 pass "benchmark command is discoverable in all commands"
 
-"$CLI" commands --json | jq -e '.commands[] | select(.binary == "omakub-pkg-add" and .route == "omakub pkg add" and .filename_route == "omakub pkg add" and (.routes | index("omakub pkg add")))' >/dev/null
+"$CLI" commands --json | jq -e '.commands[] | select(.binary == "omakub-pkg-add" and .route == "omakub install package" and .filename_route == "omakub pkg add" and (.routes | index("omakub pkg add")))' >/dev/null
 pass "JSON exposes direct pkg add route"
 
 "$CLI" commands --json | jq -e '.commands[] | select(.binary == "omakub-refresh-apt" and .requires_sudo == true)' >/dev/null
@@ -92,7 +92,7 @@ assert_output_contains "bare root command with children renders help" "$output" 
 assert_output_contains "bare toggle help includes child route" "$output" "omakub toggle nightlight"
 
 output=$("$CLI" pkg --help)
-assert_output_contains "pkg add help resolves" "$output" "omakub-pkg-add"
+assert_output_contains "pkg add help resolves" "$output" "omakub pkg add"
 assert_output_contains "pkg add help shows direct route" "$output" "omakub pkg add <packages...>"
 
 output=$("$CLI" restart --help)

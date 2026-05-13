@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # omakub:summary=Install Arch packages if they are missing
+# omakub:group=install
+# omakub:name=package
 # omakub:args=<packages...>
 # omakub:examples=omakub pkg add jq ripgrep
 # omakub:requires-sudo=true
