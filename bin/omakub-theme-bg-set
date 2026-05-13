@@ -2,7 +2,7 @@
 
 # omakub:summary=Set the current background image.
 # omakub:args=<path-to-image> [zoom|center|stretch|fill|fit|spanned]
-# omakub:examples=omakub theme bg set ~/Pictures/wallpaper.png
+# omakub:examples=omakub theme bg set ~/Pictures/background.png
 
 if [[ -z $1 ]]; then
   echo "Usage: omakub-theme-bg-set <path-to-image> [zoom|center|stretch|fill|fit|spanned]" >&2
