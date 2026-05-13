@@ -23,7 +23,7 @@ if [[ -n $font_name && $font_name != "CNCLD" ]]; then
     fi
 
     if pgrep -x ghostty; then
-      omakub-notification-send  "" "You must restart Ghostty to see font change" -u low
+      omakub-notification-send -g "" -u low "You must restart Ghostty to see font change"
     fi
 
     omakub-hook font-set "$font_name"

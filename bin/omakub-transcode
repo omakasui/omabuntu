@@ -4,7 +4,7 @@
 # omakub:name=
 # omakub:summary=Transcode pictures and videos for sharing
 # omakub:args=[--path path] [input] [format] [resolution]
-# omakub:examples=omakub transcode|omakub transcode --path ~/Downloads|omakub transcode ~/Videos/demo.mov mp4 1080p|omakub transcode ~/Pictures/wallpaper.heic jpg medium
+# omakub:examples=omakub transcode|omakub transcode --path ~/Downloads|omakub transcode ~/Videos/demo.mov mp4 1080p|omakub transcode ~/Pictures/background.heic jpg medium
 
 set -euo pipefail
 
@@ -193,14 +193,14 @@ main() {
   output=$(output_path "$input" "$format" "$resolution")
 
   if [[ $type == "video" ]]; then
-    omakub-notification-send "" "Transcoding video…" "$(basename -- "$input") to $format ($resolution)"
+    omakub-notification-send -g  "Transcoding video…" "$(basename -- "$input") to $format ($resolution)"
     transcode_video "$input" "$format" "$resolution" "$output"
     copy_to_clipboard "$output"
-    omakub-notification-send "" "Transcoded to $resolution $format" "Saved and copied to clipboard."
+    omakub-notification-send -g  "Transcoded to $resolution $format" "Saved and copied to clipboard."
   else
     transcode_picture "$input" "$format" "$resolution" "$output"
     copy_to_clipboard "$output"
-    omakub-notification-send "" "Transcoded to $resolution $format" "Saved and copied to clipboard."
+    omakub-notification-send -g  "Transcoded to $resolution $format" "Saved and copied to clipboard."
   fi
 }
 

@@ -35,4 +35,4 @@ xdg-mime default "$desktop_id" x-scheme-handler/http
 xdg-mime default "$desktop_id" x-scheme-handler/https
 xdg-mime default "$desktop_id" text/html
 
-omakub-notification-send "$glyph" "$name is now the default browser" -u low
+omakub-notification-send -g "$glyph" -u low "$name is now the default browser"
