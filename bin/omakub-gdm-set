@@ -42,6 +42,7 @@ sudo mkdir -p /usr/share/pixmaps/omakub
 sudo cp "$bg_path" /usr/share/pixmaps/omakub/gdm-background.png
 sudo cp "$logo_path" /usr/share/pixmaps/omakub/gdm-logo.png
 
+sudo mkdir -p /etc/dconf/db/gdm.d
 sudo tee /etc/dconf/db/gdm.d/96-omakub-theme > /dev/null << 'EOF'
 [org/gnome/login-screen]
 logo='/usr/share/pixmaps/omakub/gdm-logo.png'

@@ -12,6 +12,7 @@ sudo cp "$OMAKUB_PATH/default/gdm/background.png" /usr/share/pixmaps/omakub/gdm-
 # Write initial GDM theme to /etc/dconf/db/gdm.d/96-omakub-theme.
 # On Ubuntu 24.04+ the dconf profile uses system-db:gdm (compiled from gdm.d/),
 # so greeter.dconf-defaults is not read directly.
+sudo mkdir -p /etc/dconf/db/gdm.d
 sudo tee /etc/dconf/db/gdm.d/96-omakub-theme > /dev/null << 'EOF'
 [org/gnome/login-screen]
 logo='/usr/share/pixmaps/omakub/gdm-logo.png'
