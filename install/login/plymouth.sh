@@ -18,7 +18,7 @@ apply_plymouth() {
   fi
 
   # Install and configure Omabuntu Plymouth theme
-  THEME_SOURCE_DIR="$(dirname "$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)")")/default/plymouth"
+  THEME_SOURCE_DIR="$OMAKUB_PATH/themes/plymouth"
 
   if [[ -d $THEME_SOURCE_DIR ]]; then
     sudo mkdir -p /usr/share/plymouth/themes/omakub/
