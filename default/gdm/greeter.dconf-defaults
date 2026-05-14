@@ -1,5 +1,3 @@
-# Omabuntu GDM default configuration reference.
-
 [org/gnome/login-screen]
 logo='/usr/share/pixmaps/omakub/gdm-logo.png'
 

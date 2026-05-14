@@ -9,18 +9,23 @@ sudo mkdir -p /usr/share/pixmaps/omakub/
 sudo cp "$OMAKUB_PATH/default/gdm/logo.png" /usr/share/pixmaps/omakub/gdm-logo.png
 sudo cp "$OMAKUB_PATH/default/gdm/background.png" /usr/share/pixmaps/omakub/gdm-background.png
 
-# Write initial GDM theme to /etc/dconf/db/gdm.d/96-omakub-theme.
-# On Ubuntu 24.04+ the dconf profile uses system-db:gdm (compiled from gdm.d/),
-# so greeter.dconf-defaults is not read directly.
-sudo mkdir -p /etc/dconf/db/gdm.d
-sudo tee /etc/dconf/db/gdm.d/96-omakub-theme > /dev/null << 'EOF'
-[org/gnome/login-screen]
-logo='/usr/share/pixmaps/omakub/gdm-logo.png'
+# Apply GDM theme via dconf system-db (higher priority than file-db)
+sudo mkdir -p /etc/dconf/db/gdm.d/locks
+sudo cp "$OMAKUB_PATH/default/gdm/greeter.dconf-defaults" /etc/dconf/db/gdm.d/96-omakub-theme
 
-[com/ubuntu/login-screen]
-background-picture-uri='file:///usr/share/pixmaps/omakub/gdm-background.png'
-background-picture-uri-dark='file:///usr/share/pixmaps/omakub/gdm-background.png'
-background-size='zoom'
+sudo tee /etc/dconf/db/gdm.d/locks/96-omakub-theme > /dev/null << 'EOF'
+/org/gnome/login-screen/logo
+/com/ubuntu/login-screen/background-picture-uri
+/com/ubuntu/login-screen/background-picture-uri-dark
+/com/ubuntu/login-screen/background-size
 EOF
+
+# Also copy the same settings to the GDM file-db as a fallback (GDM compiles this into the file-db on startup)
+sudo cp "$OMAKUB_PATH/default/gdm/greeter.dconf-defaults" /etc/gdm3/greeter.dconf-defaults
+
+# Ensure the GDM dconf profile includes system-db:gdm
+if [[ -f /etc/dconf/profile/gdm ]] && ! grep -q "^system-db:gdm" /etc/dconf/profile/gdm; then
+  sudo sed -i '/^user-db:user/a system-db:gdm' /etc/dconf/profile/gdm
+fi
 
 sudo dconf update
