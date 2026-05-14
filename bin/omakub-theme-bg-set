@@ -17,6 +17,6 @@ CURRENT_BACKGROUND_LINK="$HOME/.config/omakub/current/background"
 # Create symlink to the new background
 ln -nsf "$BACKGROUND" "$CURRENT_BACKGROUND_LINK"
 
-gsettings set org.gnome.desktop.background picture-uri $BACKGROUND_LINK
-gsettings set org.gnome.desktop.background picture-uri-dark $BACKGROUND_LINK
+gsettings set org.gnome.desktop.background picture-uri $CURRENT_BACKGROUND_LINK
+gsettings set org.gnome.desktop.background picture-uri-dark $CURRENT_BACKGROUND_LINK
 gsettings set org.gnome.desktop.background picture-options $ZOOM_FLAG
