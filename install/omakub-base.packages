@@ -62,7 +62,6 @@ nautilus-open-any-terminal
 
 omakub-nvim
 omakub-walker
-omakub-zellij
 
 pinta
 pipx
@@ -92,6 +91,5 @@ wl-clipboard
 xdg-terminal-exec
 xournalpp
 
-zellij
 zlib1g-dev
 zoxide
