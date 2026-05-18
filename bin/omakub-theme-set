@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Apply an Omabuntutu theme.
+# omakub:summary=Apply an Omabuntu theme.
 # omakub:args=<theme-name>
 # omakub:examples=omakub theme list | omakub theme set "Tokyo Night"
 

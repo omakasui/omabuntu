@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Update Omabuntutu and system packages.
+# omakub:summary=Update Omabuntu and system packages.
 # omakub:args=[-y]
 # omakub:examples=omakub update | omakub update -y
 # omakub:requires-sudo=true

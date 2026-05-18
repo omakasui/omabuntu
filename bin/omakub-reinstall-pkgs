@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Reinstall all default Omabuntutu packages from the stable channel.
+# omakub:summary=Reinstall all default Omabuntu packages from the stable channel.
 # omakub:requires-sudo=true
 
 set -e
