@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Turn off default Ubuntu extensions
 gnome-extensions disable tiling-assistant@ubuntu.com
 gnome-extensions disable ubuntu-appindicators@ubuntu.com
@@ -17,17 +15,26 @@ gext install AlphabeticalAppGrid@stuarthayhurst
 gext install gnome-ui-tune@itstime.tech
 gext install quick-settings-tweaks@qwreey
 gext install icon-launcher@omakasui.org
+gext install rounded-window-corners@fxgn
 
 # Compile gsettings schemas in order to be able to set them
 sudo cp ~/.local/share/gnome-shell/extensions/tactile@lundal.io/schemas/org.gnome.shell.extensions.tactile.gschema.xml /usr/share/glib-2.0/schemas/
 sudo cp ~/.local/share/gnome-shell/extensions/just-perfection-desktop\@just-perfection/schemas/org.gnome.shell.extensions.just-perfection.gschema.xml /usr/share/glib-2.0/schemas/
 sudo cp ~/.local/share/gnome-shell/extensions/blur-my-shell\@aunetx/schemas/org.gnome.shell.extensions.blur-my-shell.gschema.xml /usr/share/glib-2.0/schemas/
-sudo cp ~/.local/share/gnome-shell/extensions/space-bar\@luchrioh/schemas/org.gnome.shell.extensions.space-bar.gschema.xml /usr/share/glib-2.0/schemas/
+if [ -f ~/.local/share/gnome-shell/extensions/space-bar\@luchrioh/schemas/org.gnome.shell.extensions.space-bar.gschema.xml ]; then
+  sudo cp ~/.local/share/gnome-shell/extensions/space-bar\@luchrioh/schemas/org.gnome.shell.extensions.space-bar.gschema.xml /usr/share/glib-2.0/schemas/
+else
+  sudo cp ~/.local/share/gnome-shell/extensions/space-bar\@luchrioh/schemas/org.gnome.shell.extensions.space-bar.appearance.gschema.xml /usr/share/glib-2.0/schemas/
+  sudo cp ~/.local/share/gnome-shell/extensions/space-bar\@luchrioh/schemas/org.gnome.shell.extensions.space-bar.behavior.gschema.xml /usr/share/glib-2.0/schemas/
+  sudo cp ~/.local/share/gnome-shell/extensions/space-bar\@luchrioh/schemas/org.gnome.shell.extensions.space-bar.shortcuts.gschema.xml /usr/share/glib-2.0/schemas/
+  sudo cp ~/.local/share/gnome-shell/extensions/space-bar\@luchrioh/schemas/org.gnome.shell.extensions.space-bar.state.gschema.xml /usr/share/glib-2.0/schemas/
+fi
 sudo cp ~/.local/share/gnome-shell/extensions/tophat@fflewddur.github.io/schemas/org.gnome.shell.extensions.tophat.gschema.xml /usr/share/glib-2.0/schemas/
 sudo cp ~/.local/share/gnome-shell/extensions/AlphabeticalAppGrid\@stuarthayhurst/schemas/org.gnome.shell.extensions.AlphabeticalAppGrid.gschema.xml /usr/share/glib-2.0/schemas/
 sudo cp ~/.local/share/gnome-shell/extensions/gnome-ui-tune\@itstime.tech/schemas/org.gnome.shell.extensions.gnome-ui-tune.gschema.xml /usr/share/glib-2.0/schemas/
 sudo cp ~/.local/share/gnome-shell/extensions/quick-settings-tweaks\@qwreey/schemas/org.gnome.shell.extensions.quick-settings-tweaks.gschema.xml /usr/share/glib-2.0/schemas/
 sudo cp ~/.local/share/gnome-shell/extensions/icon-launcher\@omakasui.org/schemas/org.gnome.shell.extensions.icon-launcher.gschema.xml /usr/share/glib-2.0/schemas/
+sudo cp ~/.local/share/gnome-shell/extensions/rounded-window-corners\@fxgn/schemas/org.gnome.shell.extensions.rounded-window-corners-reborn.gschema.xml /usr/share/glib-2.0/schemas/
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 
 # Configure Tactile
@@ -80,3 +87,10 @@ gsettings set org.gnome.shell.extensions.alphabetical-app-grid folder-order-posi
 ICON_PATH="$HOME/.config/omakub/branding/icon-launcher.png"
 gsettings set org.gnome.shell.extensions.icon-launcher custom-icon-path "$ICON_PATH"
 gsettings set org.gnome.shell.extensions.icon-launcher custom-command 'omakub-menu'
+
+# Configure Rounded Window Corners Reborn
+gsettings set org.gnome.shell.extensions.rounded-window-corners-reborn border-width 2
+gsettings set org.gnome.shell.extensions.rounded-window-corners-reborn skip-libadwaita-app false
+gsettings set org.gnome.shell.extensions.rounded-window-corners-reborn skip-libhandy-app false
+gsettings set org.gnome.shell.extensions.rounded-window-corners-reborn tweak-kitty-terminal true
+gsettings set org.gnome.shell.extensions.rounded-window-corners-reborn blacklist "['dev.benz.walker']"

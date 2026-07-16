@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Overwrite the APT sources list to point to the correct Omakasui package channel, then update.
-# This is used after switching between release channels to ensure the right packages are available.
+# omakub:summary=Overwrite the APT sources list to the Omakasui package channel, then update.
+# omakub:args=[stable|dev]
+# omakub:requires-sudo=true
 
 channel="${1:-stable}"
 
@@ -20,8 +21,12 @@ fi
 
 echo "Setting APT channel to $channel ($suite)"
 
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/omakasui-core.gpg] \
+  https://core.omakasui.org $suite main" \
+  | sudo tee /etc/apt/sources.list.d/omakasui-core.list
+
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/omakasui-packages.gpg] \
   https://packages.omakasui.org $suite main" \
-  | sudo tee /etc/apt/sources.list.d/omakasui.list > /dev/null
+  | sudo tee /etc/apt/sources.list.d/omakasui.list
 
 sudo apt-get update

@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# Refresh the Alacritty configuration to ensure it's up to date.
-
-omakub-refresh-config alacritty/alacritty.toml
-alacritty migrate 2>/dev/null || true

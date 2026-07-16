@@ -47,5 +47,5 @@ if command -v alacritty > /dev/null 2>&1; then
 fi
 
 # Update Hotkeys to use xdg-terminal-exec
-omakub-keybinding-remove 'New Terminal Window'
-omakub-keybinding-add 'New Terminal Window' 'xdg-terminal-exec' '<Primary><Alt>t'
+omakub-gnome-keybinding-drop 'New Terminal Window'
+omakub-gnome-keybinding-add 'New Terminal Window' 'xdg-terminal-exec' '<Primary><Alt>t'

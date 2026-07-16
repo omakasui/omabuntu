@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# omakub:summary=Restore the default Omabuntu Plymouth boot themen
+# omakub:requires-sudo=true
+
+theme_dir="/usr/share/plymouth/themes/omakub"
+
+sudo find ~/.local/share/omakub/default/plymouth -maxdepth 1 -type f -exec cp -t "$theme_dir/" {} +
+sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/omakub/omakub.plymouth 100
+sudo update-alternatives --set default.plymouth /usr/share/plymouth/themes/omakub/omakub.plymouth
+sudo update-initramfs -u

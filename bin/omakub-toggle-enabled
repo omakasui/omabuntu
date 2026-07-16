@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# omakub:summary=Check if a toggle is enabled (flag file exists).
+# omakub:args=<flag-name>
+
+[[ -f "$HOME/.local/state/omakub/toggles/$1" ]]

@@ -4,7 +4,7 @@ description: >
   REQUIRED for end-user customization of Linux desktop, window manager, or system config.
   Use when editing ~/.config/alacritty/, ~/.config/kitty/, , ~/.config/ghostty/, ~/.config/walker/,
   ~/.config/omakub/, or working with GNOME settings. Triggers: GNOME extensions,
-  keybindings, themes, wallpaper, terminal config, night light, dock settings,
+  keybindings, themes, background, terminal config, night light, dock settings,
   settings, display config, and user-facing omabuntu commands. Excludes Omabuntu
   source development in ~/.local/share/omakub/ and omakub-dev-* workflows.
 ---
@@ -24,7 +24,7 @@ It is not for contributing to Omabuntu source code.
 - Editing terminal configs (alacritty, kitty, ghostty)
 - Working with GNOME settings (gsettings)
 - GNOME extensions, dock, keybindings, appearance
-- Themes, wallpapers, fonts, appearance changes
+- Themes, backgrounds, fonts, appearance changes
 - User-facing `omakub-*` commands (`omakub-theme-*`, `omakub-refresh-*`, `omakub-restart-*`, etc.)
 - Night light, workspace settings, display configuration
 - Application installation or removal
@@ -101,19 +101,18 @@ cat $(which omakub-theme-set)
 
 ### Command Categories
 
-| Prefix                | Purpose                                   | Example                     |
-| --------------------- | ----------------------------------------- | --------------------------- |
-| `omakub-refresh-*`    | Reset config to defaults (backs up first) | `omakub-refresh-gnome`      |
-| `omakub-restart-*`    | Restart a service/app                     | `omakub-restart-terminal`   |
-| `omakub-toggle-*`     | Toggle feature on/off                     | `omakub-toggle-nightlight`  |
-| `omakub-theme-*`      | Theme management                          | `omakub-theme-set <name>`   |
-| `omakub-install-*`    | Install optional software                 | `omakub-install-docker-dbs` |
-| `omakub-launch-*`     | Launch apps                               | `omakub-launch-browser`     |
-| `omakub-cmd-*`        | System commands                           | `omakub-system-shutdown`    |
-| `omakub-app-*`        | Application management                    | `omakub-app-install <name>` |
-| `omakub-font-*`       | Font management                           | `omakub-font-set <name>`    |
-| `omakub-keybinding-*` | Keybinding management                     | `omakub-keybinding-add`     |
-| `omakub-update`       | System update                             | `omakub-update`             |
+| Prefix                      | Purpose                                   | Example                       |
+| --------------------------- | ----------------------------------------- | ----------------------------- |
+| `omakub-refresh-*`          | Reset config to defaults (backs up first) | `omakub-refresh-gnome`        |
+| `omakub-restart-*`          | Restart a service/app                     | `omakub-restart-terminal`     |
+| `omakub-toggle-*`           | Toggle feature on/off                     | `omakub-toggle-nightlight`    |
+| `omakub-theme-*`            | Theme management                          | `omakub-theme-set <name>`     |
+| `omakub-install-*`          | Install optional software                 | `omakub-install-docker-dbs`   |
+| `omakub-launch-*`           | Launch apps                               | `omakub-launch-browser`       |
+| `omakub-cmd-*`              | System commands                           | `omakub-system-shutdown`      |
+| `omakub-font-*`             | Font management                           | `omakub-font-set <name>`      |
+| `omakub-gnome-keybinding-*` | Keybinding management                     | `omakub-gnome-keybinding-add` |
+| `omakub-update`             | System update                             | `omakub-update`               |
 
 ## Configuration Locations
 
@@ -163,7 +162,7 @@ gsettings set org.gnome.desktop.wm.keybindings close "['<Super>w']"
 ├── config.toml      # Main configuration
 ```
 
-**Commands:** `omakub-apps` (launches walker), `omakub-refresh-walker`
+**Commands:** `omakub-menu-app` (launches walker), `omakub-refresh-walker`
 
 ### Other Configs
 
@@ -238,7 +237,6 @@ When customizations go wrong:
 ```bash
 # Reset specific config (creates backup automatically)
 omakub-refresh-gnome
-omakub-refresh-alacritty
 omakub-refresh-walker
 
 # The refresh command:
@@ -255,7 +253,7 @@ omakub-refresh-walker
 omakub-theme-list              # Show available themes
 omakub-theme-current           # Show current theme
 omakub-theme-set <name>        # Apply theme (use "Tokyo Night" not "tokyo-night")
-omakub-theme-bg-next           # Cycle wallpaper
+omakub-theme-bg-next           # Cycle backgrounds
 omakub-theme-install <url>     # Install from git repo
 ```
 
@@ -268,14 +266,14 @@ Theme files affect:
 
 ### Keybindings
 
-Use `omakub-keybinding-add` and `omakub-keybinding-remove` commands:
+Use `omakub-gnome-keybinding-add` and `omakub-gnome-keybinding-drop` commands:
 
 ```bash
 # Add a custom keybinding
-omakub-keybinding-add "Open Terminal" "xdg-terminal-exec" "<Primary><Alt>t"
+omakub-gnome-keybinding-add "Open Terminal" "xdg-terminal-exec" "<Primary><Alt>t"
 
 # Remove a keybinding
-omakub-keybinding-remove "Open Terminal"
+omakub-gnome-keybinding-drop "Open Terminal"
 
 # View current custom keybindings
 gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings
@@ -306,7 +304,7 @@ Default font: **CaskaydiaMono Nerd Font**
 
 ```bash
 # Install applications
-omakub-app-install <name>      # Install a single app
+omakub-pkg-add <package-name> # Install via apt
 omakub-install-terminal <name> # Install and set default terminal
 
 # Available applications (in ~/.local/share/omakub/applications/install/):
@@ -317,8 +315,8 @@ omakub-install-terminal <name> # Install and set default terminal
 # And many more...
 
 # Application folder management (for GNOME app grid)
-omakub-app-folder-add <app.desktop> <folder-name>
-omakub-app-folder-remove <app.desktop> <folder-name>
+omakub-gnome-grid-folder-add <app.desktop> <folder-name>
+omakub-gnome-grid-folder-drop <app.desktop> <folder-name>
 ```
 
 ### Night Light
@@ -340,7 +338,7 @@ omakub-state                   # Show Omabuntu state/version
 omakub-system-shutdown            # Shutdown
 omakub-system-reboot              # Reboot
 omakub-system-logout              # Logout
-omakub-system-lock-screen         # Lock screen
+omakub-system-lock         # Lock screen
 ```
 
 ## Troubleshooting
@@ -370,7 +368,7 @@ When user requests system changes:
 3. **Is it a config edit?** Edit in `~/.config/`, never `~/.local/share/omakub/`
 4. **Is it a theme customization?** Create a NEW custom theme directory
 5. **Is it automation?** Use hooks in `~/.config/omakub/hooks/`
-6. **Is it a package install?** Check if available via `omakub-app-install`, otherwise use `omakub-pkg-add`
+6. **Is it a package install?** Check if available via `omakub-install-*`, otherwise use `omakub-pkg-add`
 7. **Unsure if command exists?** Search with `compgen -c | grep omakub`
 
 ## Out of Scope
@@ -384,8 +382,8 @@ This skill intentionally does not cover Omabuntu source development. Do not use 
 ## Example Requests
 
 - "Change my theme to catppuccin" -> `omakub-theme-set catppuccin`
-- "Add a keybinding for Ctrl+Alt+E to open file manager" -> `omakub-keybinding-add "File Manager" "nautilus" "<Primary><Alt>e"`
-- "Install Visual Studio Code" -> `omakub-app-install visual-studio-code`
+- "Add a keybinding for Ctrl+Alt+E to open file manager" -> `omakub-gnome-keybinding-add "File Manager" "nautilus" "<Primary><Alt>e"`
+- "Install Visual Studio Code" -> `omakub-install-vscode`
 - "Make the terminal font bigger" -> `omakub-font-size-set 12`
 - "Set up night light to turn on automatically" -> `gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true; gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true`
 - "Customize the tokyo-night theme colors" -> Create `~/.config/omakub/themes/tokyo-night-custom/` by copying from stock, then edit

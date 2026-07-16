@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# omakub-env-set: Set an environment variable for Omabuntu in bashrc.
-# Usage: omakub-env-set <VAR_NAME> <VAR_VALUE>
+# omakub:summary=Set an environment variable for Omabuntu in bashrc.
+# omakub:args=<VAR_NAME> <VAR_VALUE>
 
 
 if (($# != 2)); then

@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# Update all installed Omabuntu themes by pulling the latest changes from their git repositories.
-
-omakub-refresh-theme
+# omakub:summary=Update user-installed git themes.
 
 for dir in ~/.config/omakub/themes/*/; do
   if [[ -d $dir ]] && [[ ! -L ${dir%/} ]] && [[ -d $dir/.git ]]; then

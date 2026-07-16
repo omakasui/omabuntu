@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# omakub:summary=Set the default browser for Omabuntu and XDG handlers
+# omakub:args=[chromium|chrome|brave|edge|firefox|zen]
+# omakub:examples=omakub default browser firefox | omakub default browser brave
+
+if (($# == 0)); then
+  case "$(xdg-settings get default-web-browser)" in
+  chromium.desktop) echo "chromium" ;;
+  google-chrome.desktop) echo "chrome" ;;
+  brave-browser.desktop) echo "brave" ;;
+  microsoft-edge.desktop) echo "edge" ;;
+  firefox.desktop) echo "firefox" ;;
+  zen.desktop) echo "zen" ;;
+  *) xdg-settings get default-web-browser ;;
+  esac
+  exit 0
+fi
+
+case "$1" in
+chromium) desktop_id="chromium.desktop"; name="Chromium"; glyph="" ;;
+chrome) desktop_id="google-chrome.desktop"; name="Chrome"; glyph="󰊯" ;;
+brave) desktop_id="brave-browser.desktop"; name="Brave"; glyph="󰖟" ;;
+edge) desktop_id="microsoft-edge.desktop"; name="Edge"; glyph="󰇩" ;;
+firefox) desktop_id="firefox.desktop"; name="Firefox"; glyph="󰈹" ;;
+zen) desktop_id="zen.desktop"; name="Zen"; glyph="󰖟" ;;
+*)
+  echo "Usage: omakub-default-browser <chromium|chrome|brave|edge|firefox|zen>"
+  exit 1
+  ;;
+esac
+
+xdg-settings set default-web-browser "$desktop_id"
+xdg-mime default "$desktop_id" x-scheme-handler/http
+xdg-mime default "$desktop_id" x-scheme-handler/https
+xdg-mime default "$desktop_id" text/html
+
+omakub-notification-send -g "$glyph" -u low "$name is now the default browser"

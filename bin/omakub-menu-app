@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# omakub:summary=Launch Walker as an application launcher.
+
+# Launch an application using omakub-launch-walker.
+
+omakub-launch-walker -p "Launch..."

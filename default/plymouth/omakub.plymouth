@@ -7,3 +7,5 @@ ModuleName=script
 ImageDir=/usr/share/plymouth/themes/omakub
 ScriptFile=/usr/share/plymouth/themes/omakub/omakub.script
 ConsoleLogBackgroundColor=0x1a1b26
+MonospaceFont=Cantarell 11
+Font=Cantarell 11

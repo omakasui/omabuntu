@@ -1,3 +1,5 @@
 #!/bin/bash
 
+# omakub:summary=Print the current Omabuntu git branch.
+
 echo $(git -C "$OMAKUB_PATH" rev-parse --abbrev-ref HEAD)

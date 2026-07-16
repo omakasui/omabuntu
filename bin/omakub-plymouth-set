@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# omakub:summary=Set the Plymouth boot theme colors and logo
+# omakub:args=<background-hex> <text-hex> <path-to-logo.png>
+# omakub:examples=omakub plymouth set '#1d2021' '#ebdbb2' ~/.config/omakub/current/theme/plymouth/logo.png
+# omakub:requires-sudo=true
+
+# Configure the Plymouth boot theme with a custom background color, text color, and logo.
+# Stages the change in a temp dir, then commits the staged files to /usr/share and
+# rebuilds the initramfs. Also syncs the GDM3 login screen with the same colors
+# and logo for visual consistency.
+
+if [[ $# -ne 3 ]]; then
+  echo "Usage: omakub-plymouth-set <background-hex> <text-hex> <path-to-logo.png>" >&2
+  exit 1
+fi
+
+bg_hex="${1#\#}"
+text_hex="${2#\#}"
+logo_path="$3"
+
+if ! [[ $bg_hex =~ ^[0-9a-fA-F]{6}$ ]]; then
+  echo "Invalid background color: $1 (expected #RRGGBB)" >&2
+  exit 1
+fi
+
+if ! [[ $text_hex =~ ^[0-9a-fA-F]{6}$ ]]; then
+  echo "Invalid text color: $2 (expected #RRGGBB)" >&2
+  exit 1
+fi
+
+if [[ ! -f $logo_path ]]; then
+  echo "Logo file not found: $logo_path" >&2
+  exit 1
+fi
+
+bg_r=$(awk -v n=$((16#${bg_hex:0:2})) 'BEGIN{printf "%.3f", n/255}')
+bg_g=$(awk -v n=$((16#${bg_hex:2:2})) 'BEGIN{printf "%.3f", n/255}')
+bg_b=$(awk -v n=$((16#${bg_hex:4:2})) 'BEGIN{printf "%.3f", n/255}')
+
+theme_dir="/usr/share/plymouth/themes/omakub"
+staging_dir=$(mktemp -d)
+trap 'rm -rf "$staging_dir"' EXIT
+
+find ~/.local/share/omakub/default/plymouth -maxdepth 1 -type f -exec cp -t "$staging_dir/" {} +
+cp "$logo_path" "$staging_dir/logo.png"
+
+sed -i \
+  -e "s/^Window.SetBackgroundTopColor.*/Window.SetBackgroundTopColor($bg_r, $bg_g, $bg_b);/" \
+  -e "s/^Window.SetBackgroundBottomColor.*/Window.SetBackgroundBottomColor($bg_r, $bg_g, $bg_b);/" \
+  "$staging_dir/omakub.script"
+
+for asset in progress_bar.png; do
+  convert "$staging_dir/$asset" -channel RGB +level-colors "#$text_hex","#$text_hex" "$staging_dir/$asset"
+done
+
+sudo cp -a "$staging_dir/." "$theme_dir/"
+
+sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/omakub/omakub.plymouth 100
+sudo update-alternatives --set default.plymouth /usr/share/plymouth/themes/omakub/omakub.plymouth
+sudo update-initramfs -u
+
+# Sync the GDM3 login screen with the same colors and logo for visual consistency.
+omakub-gdm-set "#$bg_hex" "$logo_path"

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Switch Omabuntu branches and update from the selected branch.
+# omakub:args=<branch>
+
 set -e
 
 if (($# == 0)); then

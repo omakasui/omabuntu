@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# omakub:summary=Restore the default Omabuntu GDM login screen
+# omakub:requires-sudo=true
+
+OMAKUB_PATH="${OMAKUB_PATH:-$HOME/.local/share/omakub}"
+
+exec omakub-gdm-set \
+  "$OMAKUB_PATH/default/gdm/background.png" \
+  "$OMAKUB_PATH/default/gdm/logo.png"

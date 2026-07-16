@@ -25,6 +25,7 @@ flatpak
 fonts-cascadia-mono-nf
 fzf
 
+gh
 gir1.2-clutter-1.0
 gir1.2-gtop-2.0
 gnome-shell-extension-manager
@@ -61,7 +62,6 @@ nautilus-open-any-terminal
 
 omakub-nvim
 omakub-walker
-omakub-zellij
 
 pinta
 pipx
@@ -91,6 +91,5 @@ wl-clipboard
 xdg-terminal-exec
 xournalpp
 
-zellij
 zlib1g-dev
 zoxide

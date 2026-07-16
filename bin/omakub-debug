@@ -1,0 +1,117 @@
+#!/bin/bash
+
+# omakub:summary=Print debugging information
+# omakub:args=[--no-sudo] [--print]
+# omakub:examples=omakub debug --print --no-sudo
+# omakub:requires-sudo=true
+
+NO_SUDO=false
+PRINT_ONLY=false
+
+while (( $# > 0 )); do
+  case "$1" in
+    --no-sudo)
+      NO_SUDO=true
+      shift
+      ;;
+    --print)
+      PRINT_ONLY=true
+      shift
+      ;;
+    *)
+      echo "Unknown option: $1"
+      echo "Usage: omakub-debug [--no-sudo] [--print]"
+      exit 1
+      ;;
+  esac
+done
+
+LOG_FILE="/tmp/omakub-debug.log"
+
+if [[ $NO_SUDO = "true" ]]; then
+  DMESG_OUTPUT="(skipped - --no-sudo flag used)"
+else
+  DMESG_OUTPUT="$(sudo dmesg)"
+fi
+
+cat > "$LOG_FILE" <<EOF
+Date: $(date)
+Hostname: $(hostname)
+Omabuntu Branch: $(git -C "$OMAKUB_PATH" branch --show-current 2>/dev/null || echo "unknown")
+
+=========================================
+SYSTEM INFORMATION
+=========================================
+--- OS ---
+$(lsb_release -a 2>/dev/null)
+
+--- Kernel ---
+$(uname -a)
+
+--- CPU ---
+$(lscpu)
+
+--- Memory ---
+$(free -h)
+
+--- Disks ---
+$(lsblk -o NAME,SIZE,TYPE,MOUNTPOINT)
+
+--- Disk Usage ---
+$(df -h --output=source,size,used,avail,pcent,target -x tmpfs -x devtmpfs)
+
+--- PCI Devices ---
+$(lspci 2>/dev/null)
+
+=========================================
+DMESG
+=========================================
+$DMESG_OUTPUT
+
+=========================================
+JOURNALCTL (CURRENT BOOT, WARNINGS+ERRORS)
+=========================================
+$(journalctl -b -p 4..1)
+
+=========================================
+INSTALLED PACKAGES
+=========================================
+$(apt-mark showmanual | sort | xargs -r dpkg-query -W -f='${Package} ${Version} (manual)\n' 2>/dev/null)
+EOF
+
+if [[ $PRINT_ONLY = "true" ]]; then
+  cat "$LOG_FILE"
+  exit 0
+fi
+
+OPTIONS=("View log" "Save in current directory")
+if ping -c 1 8.8.8.8 >/dev/null 2>&1; then
+  OPTIONS=("Upload log" "${OPTIONS[@]}")
+fi
+
+ACTION=$(gum choose "${OPTIONS[@]}")
+
+case "$ACTION" in
+  "Upload log")
+    echo "Uploading debug log to 0x0.st..."
+    URL=$(curl -sF "file=@$LOG_FILE" -Fexpires=24 https://0x0.st)
+    if (( $? == 0 )) && [[ -n $URL ]]; then
+      echo "✓ Log uploaded successfully!"
+      echo "Share this URL:"
+      echo ""
+      echo "  $URL"
+      echo ""
+      echo "This link will expire in 24 hours."
+    else
+      echo "Error: Failed to upload log file"
+      exit 1
+    fi
+    ;;
+  "View log")
+    less "$LOG_FILE"
+    ;;
+  "Save in current directory")
+    cp "$LOG_FILE" "./omakub-debug.log"
+    echo "✓ Log saved to $(pwd)/omakub-debug.log"
+    ;;
+esac

@@ -1,5 +1,3 @@
-#!/bin/bash
-
 omakub_migrations_state_path=~/.local/state/omakub/migrations
 mkdir -p $omakub_migrations_state_path
 

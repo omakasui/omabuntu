@@ -1,5 +1,3 @@
-#!/bin/bash
-
 packages=(
   google-chrome-stable
   tldr

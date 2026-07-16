@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Generate themed configuration files from templates for the next theme.
+# omakub:summary=Generate themed config files from Omabuntu templates.
+# omakub:hidden=true
 
 TEMPLATES_DIR="$OMAKUB_PATH/default/themed"
 USER_TEMPLATES_DIR="$HOME/.config/omakub/themed"
@@ -17,7 +18,7 @@ hex_to_rgb() {
 if [[ -f $COLORS_FILE ]]; then
   sed_script=$(mktemp)
 
-  while IFS='=' read -r key value; do
+  while IFS='=' read -r key value || [[ -n $key ]]; do
     key="${key//[\"\' ]/}"                # strip quotes and spaces from key
     [[ $key && $key != \#* ]] || continue # skip empty lines and comments
     value="${value#*[\"\']}"

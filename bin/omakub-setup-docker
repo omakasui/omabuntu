@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Configure Docker with appropriate log limits, DNS, and on-demand socket activation.
+# omakub:requires-sudo=true
+
 # Configure Docker daemon:
 # - limit log size to avoid running out of disk
 # - use host's DNS resolver

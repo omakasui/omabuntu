@@ -5,6 +5,10 @@ export SUDO_EDITOR="$EDITOR"
 # Fix BAT theme
 export BAT_THEME=ansi
 
+# Color man pages with bat
+export MANROFFOPT="-c"
+export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+
 # Fix Alacritty cursor display issues
 export XCURSOR_THEME="Yaru"
 
@@ -12,11 +16,9 @@ export XCURSOR_THEME="Yaru"
 export TERMINAL=xdg-terminal-exec
 
 # Gum
-export GUM_CONFIRM_PROMPT_FOREGROUND=6       # Cyan
-export GUM_CONFIRM_SELECTED_FOREGROUND=0     # Black
-export GUM_CONFIRM_SELECTED_BACKGROUND=2     # Green
-export GUM_CONFIRM_UNSELECTED_FOREGROUND=7   # White
-export GUM_CONFIRM_UNSELECTED_BACKGROUND=8   # Dark grey
+if [ -f "$HOME/.config/omakub/current/theme/gum.env" ]; then
+  source $HOME/.config/omakub/current/theme/gum.env
+fi
 
 # Omabuntu
 export OMAKUB_PATH=$HOME/.local/share/omakub

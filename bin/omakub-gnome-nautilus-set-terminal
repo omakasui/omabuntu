@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# omakub:summary=Set the terminal emulator to open from Nautilus.
+# omakub:args=<terminal-emulator>
+# omakub:examples=omakub-gnome-nautilus-set-terminal gnome-terminal
+
+if [[ -z $1 ]]; then
+  echo "Usage: omakub-gnome-nautilus-set-terminal [terminal-emulator]"
+  exit 1
+fi
+
+# Check if the specified terminal emulator is installed
+if ! command -v "$1" &> /dev/null; then
+  echo "Terminal emulator '$1' not found. Please install it first."
+  exit 1
+fi
+
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal "$1"
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal keybindings '<Ctrl><Alt>t'
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal new-tab true
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal flatpak system

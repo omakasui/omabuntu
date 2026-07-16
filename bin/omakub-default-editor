@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# omakub:summary=Set the default editor for $EDITOR
+# omakub:args=[code|cursor|zed|vim|emacs|nvim]
+# omakub:examples=omakub default editor | omakub default editor code | omakub default editor helix
+
+if (($# == 0)); then
+  sed -n 's/^export EDITOR=//p' ~/.bashrc
+  exit 0
+fi
+
+case "$1" in
+code) editor="code"; name="VSCode"; glyph="" ;;
+cursor) editor="cursor"; name="Cursor"; glyph="" ;;
+zed | zeditor) editor="zeditor"; name="Zed"; glyph="" ;;
+vim) editor="vim"; name="Vim"; glyph="" ;;
+emacs) editor="emacs"; name="Emacs"; glyph="" ;;
+nvim) editor="nvim"; name="Neovim"; glyph="" ;;
+*)
+  echo "Usage: omakub-default-editor <code|cursor|zed|vim|emacs|nvim>"
+  exit 1
+  ;;
+esac
+
+omakub-env-set EDITOR "$editor" >/dev/null 2>&1
+
+export EDITOR="$editor"
+omakub-notification-send -g "$glyph" -u low "$name is now the default editor" "You may need to restart your terminal for changes to take effect"

@@ -1,9 +1,6 @@
 #!/bin/bash
 
-OMAKUB_PATH="$HOME/.local/share/omakub"
+# omakub:summary=Overwrite the GDM theme with the Omabuntu default.
+# omakub:requires-sudo=true
 
-sudo mkdir -p /usr/share/pixmaps/omakub
-sudo cp "$OMAKUB_PATH/default/gdm/logo.png" /usr/share/pixmaps/omakub/gdm-logo.png
-sudo cp "$OMAKUB_PATH/default/gdm/background.png" /usr/share/pixmaps/omakub/gdm-background.png
-sudo cp "$OMAKUB_PATH/default/gdm/greeter.dconf-defaults" /etc/gdm3/greeter.dconf-defaults
-sudo dconf update
+exec omakub-gdm-reset

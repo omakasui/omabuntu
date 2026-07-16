@@ -1,6 +1,11 @@
 #!/bin/bash
 
-# Add the named packages to the system if they're missing. Returns false if it couldn't be done.
+# omakub:summary=Install APT packages with apt-get if they are missing.
+# omakub:group=install
+# omakub:name=package
+# omakub:args=<packages...>
+# omakub:examples=omakub pkg add jq ripgrep
+# omakub:requires-sudo=true
 
 if omakub-pkg-missing "$@"; then
   sudo apt-get -y install "$@" || exit 1

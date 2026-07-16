@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Refresh applications .desktop files
 omakub-refresh-applications
 update-desktop-database ~/.local/share/applications

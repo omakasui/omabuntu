@@ -1,0 +1,89 @@
+#!/bin/bash
+
+# omakub:summary=Show Omabuntu bin metadata fields and defaults
+# omakub:args=[--json]
+
+set -euo pipefail
+
+show_json() {
+  jq -n '{
+    ok: true,
+    defaults: {
+      group: "first filename segment after omakub-",
+      name: "remaining filename segments with dashes converted to spaces",
+      route: "omakub <group> <name>",
+      binary: "filename",
+      requires_sudo: false
+    },
+    fields: [
+      {name: "summary", required: true, type: "string", note: "One-line human and agent-facing description."},
+      {name: "group", required: false, type: "string", note: "Only set when the route group should differ from the filename-derived group."},
+      {name: "name", required: false, type: "string", note: "Only set when the route name should differ from the filename-derived name. May be empty for root commands."},
+      {name: "args", required: false, type: "string", note: "Only set when the command accepts arguments."},
+      {name: "examples", required: false, type: "string", note: "Pipe-separated examples."},
+      {name: "aliases", required: false, type: "string", note: "Pipe-separated alternate routes, e.g. omakub screenshot."},
+      {name: "requires-sudo", required: false, type: "true", default: false, note: "Only include when true."},
+      {name: "hidden", required: false, type: "true", default: false, note: "Hide from default command listings; visible with --all."}
+    ]
+  }'
+}
+
+show_help() {
+  cat <<'EOF'
+Omabuntu bin metadata
+
+Metadata lives in the top comment block of each executable bin/omakub-* file.
+Keep it slim: define only fields that are required or override defaults.
+
+Required:
+  # omakub:summary=<one-line description>
+
+Inferred defaults:
+  group         first filename segment after omakub-
+  name          remaining filename segments, with dashes converted to spaces
+  route         omakub <group> <name>
+  binary        filename
+  requires-sudo false
+  hidden        false
+
+Optional fields:
+  # omakub:group=<group>                  route override only
+  # omakub:name=<name>                    route override only; may be empty
+  # omakub:args=<args>                    only if the command accepts args
+  # omakub:examples=<cmd> | <cmd>         pipe-separated examples
+  # omakub:aliases=<route> | <route>      pipe-separated alternate routes
+  # omakub:requires-sudo=true             only when true
+  # omakub:hidden=true                    hide from default command listings
+
+Do not define:
+  binary      inferred from filename
+  usage       derived from route + args
+  false flags or empty args
+
+Examples:
+  # omakub:summary=Restart Walker and related user services
+
+  # omakub:summary=Take a screenshot
+  # omakub:group=capture
+  # omakub:args=[smart|region|windows|fullscreen] [slurp|copy] [--editor=<name>]
+  # omakub:examples=omakub screenshot | omakub capture screenshot region
+  # omakub:aliases=omakub screenshot
+EOF
+}
+
+case "${1:-}" in
+--json)
+  show_json
+  ;;
+--help | -h)
+  show_help
+  ;;
+"")
+  show_help
+  ;;
+*)
+  echo "Unknown option: $1" >&2
+  show_help >&2
+  exit 2
+  ;;
+esac

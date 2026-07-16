@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# omakub:summary=Edit, set, or reset About branding
+# omakub:group=branding
+# omakub:name=about
+# omakub:args=<image|text|reset>
+# omakub:examples=omakub branding about image | omakub branding about text | omakub branding about reset
+
+set -euo pipefail
+
+SOURCE_DIR="${XDG_PICTURES_DIR:-$HOME/Pictures}"
+
+case "${1:-}" in
+image)
+  image=$(omakub-menu-file "Pick png/svg from $SOURCE_DIR" "${SOURCE_DIR}" "svg png")
+  if [[ -n $image ]] && omakub-transcode-ascii "$image" ~/.config/omakub/branding/about.txt --width 54 --height 26; then
+    omakub-launch-about >/dev/null 2>&1
+  fi
+  ;;
+text)
+  omakub-launch-editor ~/.config/omakub/branding/about.txt >/dev/null 2>&1 && omakub-launch-about >/dev/null 2>&1
+  ;;
+reset)
+  cp "$OMAKUB_PATH/icon.txt" ~/.config/omakub/branding/about.txt && omakub-launch-about >/dev/null 2>&1
+  ;;
+*)
+  echo "Usage: omakub-branding-about <image|text|reset>" >&2
+  exit 1
+  ;;
+esac

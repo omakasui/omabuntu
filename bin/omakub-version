@@ -1,2 +1,5 @@
 #!/bin/bash
+
+# omakub:summary=Print the installed Omabuntu version.
+
 cat $OMAKUB_PATH/version

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Set the branch for Omabuntu's git repository.
+# omakub:summary=Set the branch for Omabuntu's git repository.
+# omakub:args=<main|dev>
 
 if (($# == 0)); then
   echo "Usage: omakub-branch-set [main|dev]"

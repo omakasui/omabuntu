@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Alt+F4 is very cumbersome
 gsettings set org.gnome.desktop.wm.keybindings close "['<Super>w']"
 
@@ -57,45 +55,56 @@ gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "['<Shift><
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[]"
 
 # Menus
-omakub-keybinding-add 'Launch apps' 'omakub-apps' '<Super>space'
-omakub-keybinding-add 'Omabuntu menu' 'omakub-menu' '<Alt><Super>space'
-omakub-keybinding-add 'System menu' 'omakub-menu system' '<Super>Escape'
+omakub-gnome-keybinding-add 'Launch apps' 'omakub-menu-app' '<Super>space'
+omakub-gnome-keybinding-add 'Omabuntu menu' 'omakub-menu' '<Alt><Super>space'
+omakub-gnome-keybinding-add 'System menu' 'omakub-menu system' '<Super>Escape'
 
 # Aesthetics
-omakub-keybinding-add 'Theme menu' 'omakub-menu theme' '<Super><Shift><Control>space'
-omakub-keybinding-add 'Background menu' 'omakub-menu background' '<Super><Control>space'
-
-# Control panels
-omakub-keybinding-add 'Activity' 'omakub-launch-tui btop' '<Super><Shift>t'
-
-# Control Apple Display brightness
-omakub-keybinding-add 'Apple Brightness down' "omakub-brightness-apple-display -5000" '<Control>F1'
-omakub-keybinding-add 'Apple Brightness up' "omakub-brightness-apple-display +5000" '<Control>F2'
-omakub-keybinding-add 'Apple Brightness max' "omakub-brightness-apple-display +60000" '<Control><Shift>F2'
+omakub-gnome-keybinding-add 'Theme menu' 'omakub-menu theme' '<Super><Shift><Control>space'
+omakub-gnome-keybinding-add 'Background menu' 'omakub-menu background' '<Super><Control>space'
 
 # Toggles
-omakub-keybinding-add 'Nightlight toggle' 'omakub-toggle-nightlight' '<Super><Control>n'
+omakub-gnome-keybinding-add 'Nightlight toggle' 'omakub-toggle-nightlight' '<Super><Control>n'
 
 # Screenshots
-omakub-keybinding-add 'Flameshot' 'sh -c -- "flameshot gui"' '<Control>Print'
+omakub-gnome-keybinding-add 'Flameshot' 'sh -c -- "flameshot gui"' '<Control>Print'
+
+# File sharing
+omakub-gnome-keybinding-add 'Share menu' 'omakub-menu share' '<Super><Control>s'
+
+# Transcoding
+omakub-gnome-keybinding-add 'Transcode' 'omakub-transcode' '<Super><Control>period'
+
+# Reminders
+omakub-gnome-keybinding-add 'Set reminder' 'omakub-menu reminder-set' '<Super><Control>r'
+omakub-gnome-keybinding-add 'Show reminders' 'omakub-reminder show' '<Super><Control><Alt>r'
+omakub-gnome-keybinding-add 'Clear reminders' 'omakub-reminder clear' '<Super><Shift><Control>r'
+
+# Control panels
+omakub-gnome-keybinding-add 'Activity' 'omakub-launch-tui btop' '<Super><Shift>t'
+
+# Control Apple Display brightness
+omakub-gnome-keybinding-add 'Apple Brightness down' "omakub-brightness-apple-display -5000" '<Control>F1'
+omakub-gnome-keybinding-add 'Apple Brightness up' "omakub-brightness-apple-display +5000" '<Control>F2'
+omakub-gnome-keybinding-add 'Apple Brightness max' "omakub-brightness-apple-display +60000" '<Control><Shift>F2'
 
 # Application bindings
-omakub-keybinding-add 'Terminal' 'xdg-terminal-exec' '<Super>Return'
-omakub-keybinding-add 'Terminal' 'xdg-terminal-exec' '<Control><Alt>t'
-omakub-keybinding-add 'Tmux' 'xdg-terminal-exec bash -c "tmux attach || tmux new -s Work"' '<Super><Alt>Return'
-omakub-keybinding-add 'Browser' 'omakub-launch-browser --new-window' '<Shift><Super>b'
-omakub-keybinding-add 'Browser' 'omakub-launch-browser --new-window' '<Shift><Super>Return'
-omakub-keybinding-add 'Browser (private)' 'omakub-launch-browser --private' '<Shift><Alt><Super>b'
-omakub-keybinding-add 'File manager' 'nautilus --new-window' '<Shift><Super>f'
-omakub-keybinding-add 'Docker' 'omakub-launch-tui lazydocker' '<Super><Shift>d'
-omakub-keybinding-add 'Music' 'spotify' '<Super><Shift>m'
-omakub-keybinding-add 'Editor' 'omakub-launch-editor' '<Super><Shift>n'
+omakub-gnome-keybinding-add 'Terminal' 'xdg-terminal-exec' '<Super>Return'
+omakub-gnome-keybinding-add 'Terminal' 'xdg-terminal-exec' '<Control><Alt>t'
+omakub-gnome-keybinding-add 'Tmux' 'xdg-terminal-exec bash -c "tmux attach || tmux new -s Work"' '<Super><Alt>Return'
+omakub-gnome-keybinding-add 'Browser' 'omakub-launch-browser --new-window' '<Shift><Super>b'
+omakub-gnome-keybinding-add 'Browser' 'omakub-launch-browser --new-window' '<Shift><Super>Return'
+omakub-gnome-keybinding-add 'Browser (private)' 'omakub-launch-browser --private' '<Shift><Alt><Super>b'
+omakub-gnome-keybinding-add 'File manager' 'nautilus --new-window' '<Shift><Super>f'
+omakub-gnome-keybinding-add 'Docker' 'omakub-launch-tui lazydocker' '<Super><Shift>d'
+omakub-gnome-keybinding-add 'Music' 'spotify' '<Super><Shift>m'
+omakub-gnome-keybinding-add 'Editor' 'omakub-launch-editor' '<Super><Shift>n'
 
 # Set webapps hotkeys
-omakub-keybinding-add 'ChatGPT' 'omakub-launch-webapp "https://chatgpt.com" "ChatGPT"' '<Super><Shift>a'
-omakub-keybinding-add 'WhatsApp' 'omakub-launch-webapp "WhatsApp" "https://web.whatsapp.com/" "WhatsApp"' '<Super><Shift><Alt>g'
-omakub-keybinding-add 'YouTube' 'omakub-launch-webapp "https://youtube.com/" "YouTube"' '<Super><Shift>y'
-omakub-keybinding-add 'GitHub' 'omakub-launch-webapp "https://github.com/" "GitHub"' '<Super><Shift>h'
+omakub-gnome-keybinding-add 'ChatGPT' 'omakub-launch-webapp "https://chatgpt.com" "ChatGPT"' '<Super><Shift>a'
+omakub-gnome-keybinding-add 'WhatsApp' 'omakub-launch-webapp "WhatsApp" "https://web.whatsapp.com/" "WhatsApp"' '<Super><Shift><Alt>g'
+omakub-gnome-keybinding-add 'YouTube' 'omakub-launch-webapp "https://youtube.com/" "YouTube"' '<Super><Shift>y'
+omakub-gnome-keybinding-add 'GitHub' 'omakub-launch-webapp "https://github.com/" "GitHub"' '<Super><Shift>h'
 
 # Enable Compose key on Caps Lock
 gsettings set org.gnome.desktop.input-sources xkb-options "['compose:caps']"

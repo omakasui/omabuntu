@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# omakub:summary=Set the default terminal used by xdg-terminal-exec
+# omakub:args=[alacritty|ghostty|kitty]
+# omakub:examples=omakub default terminal ghostty | omakub default terminal kitty
+
+if (($# == 0)); then
+  desktop_id=$(grep -vE '^($|#)' ~/.config/ubuntu-xdg-terminals.list 2>/dev/null | head -n 1)
+  case "$desktop_id" in
+  Alacritty.desktop) echo "alacritty" ;;
+  com.mitchellh.ghostty.desktop) echo "ghostty" ;;
+  kitty.desktop) echo "kitty" ;;
+  *) echo "$desktop_id" ;;
+  esac
+  exit 0
+fi
+
+case "$1" in
+alacritty) desktop_id="Alacritty.desktop"; name="Alacritty"; glyph="" ;;
+ghostty) desktop_id="com.mitchellh.ghostty.desktop"; name="Ghostty"; glyph="" ;;
+kitty) desktop_id="kitty.desktop"; name="Kitty"; glyph="" ;;
+*)
+  echo "Usage: omakub-default-terminal <alacritty|ghostty|kitty>"
+  exit 1
+  ;;
+esac
+
+cat >~/.config/ubuntu-xdg-terminals.list <<EOF
+# Terminal emulator preference order for xdg-terminal-exec
+# The first found and valid terminal will be used
+$desktop_id
+EOF
+
+omakub-notification-send -g "$glyph" -u low "$name is now the default terminal" "You may need to restart your terminal for changes to take effect"

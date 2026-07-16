@@ -1,7 +1,9 @@
 #!/bin/bash
-set -e
 
-# Attempt to reinstall all default Omabuntu packages and reset all the default configs.
+# omakub:summary=Reinstall Omabuntu packages and reset default configs.
+# omakub:requires-sudo=true
+
+set -e
 
 echo -e "This will reinstall all the default Omabuntu packages and reset all default configs.\nWarning: All user changes to configs will be lost.\n"
 

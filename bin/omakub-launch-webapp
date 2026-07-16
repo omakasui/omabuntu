@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Launch a URL as a web app in the default supported browser.
+# omakub:args=<app-url> <app-name>
+
 # omakub-launch-webapp: Launch a web application as a standalone window.
 # Usage: omakub-launch-webapp <app-url> <app-name>
 

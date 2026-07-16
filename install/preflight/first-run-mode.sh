@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Set first-run mode marker so we can install stuff post-installation
 mkdir -p ~/.local/state/omakub
 touch ~/.local/state/omakub/first-run.mode
@@ -15,7 +13,7 @@ After=default.target
 Type=oneshot
 Environment=DISPLAY=:0
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/bus
-ExecStart=/bin/bash $OMAKUB_PATH/bin/omakub-cmd-first-run
+ExecStart=/bin/bash $OMAKUB_PATH/bin/omakub-first-run
 ExecStartPost=systemctl --user disable omakub-first-run.service
 RemainAfterExit=no
 

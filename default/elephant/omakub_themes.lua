@@ -1,8 +1,8 @@
 --
--- Dynamic Omakub Theme Menu for Elephant/Walker
+-- Dynamic Omabuntu Theme Menu for Elephant/Walker
 --
 Name = "omakubthemes"
-NamePretty = "Omakub Themes"
+NamePretty = "Omabuntu Themes"
 HideFromProviderlist = true
 
 -- Check if file exists using Lua (no subprocess)

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# omakub:summary=Apply the current theme to GNOME extensions (TopHat, Rounded Window Corners).
+# omakub:hidden=true
+
+# Change TopHat meter color
+GNOME_TOPHAT_THEME=~/.config/omakub/current/theme/tophat.theme
+if [[ -f $GNOME_TOPHAT_THEME ]]; then
+  gsettings set org.gnome.shell.extensions.tophat meter-fg-color "$(<$GNOME_TOPHAT_THEME)"
+else
+  if [[ -f ~/.config/omakub/current/theme/light.mode ]]; then
+    gsettings set org.gnome.shell.extensions.tophat meter-fg-color "#e92020"
+  else
+    gsettings set org.gnome.shell.extensions.tophat meter-fg-color "#33ccff"
+  fi
+fi
+
+# Change Rounded Window Corners Reborn border color
+GNOME_ROUNDED_WINDOW_CORNERS_THEME=~/.config/omakub/current/theme/rounded-window-corners-reborn.theme
+
+if [[ -f $GNOME_ROUNDED_WINDOW_CORNERS_THEME ]]; then
+  rwc_color=$(<$GNOME_ROUNDED_WINDOW_CORNERS_THEME)
+elif [[ -f ~/.config/omakub/current/theme/light.mode ]]; then
+  rwc_color="#e92020"
+else
+  rwc_color="#33ccff"
+fi
+
+hex=${rwc_color#'#'}
+r_f=$(awk "BEGIN {printf \"%.15f\", $(( 16#${hex:0:2} ))/255.0}")
+g_f=$(awk "BEGIN {printf \"%.15f\", $(( 16#${hex:2:2} ))/255.0}")
+b_f=$(awk "BEGIN {printf \"%.15f\", $(( 16#${hex:4:2} ))/255.0}")
+
+current=$(gsettings get org.gnome.shell.extensions.rounded-window-corners-reborn global-rounded-corner-settings)
+new=$(sed "s/'borderColor': <([^)]*)>/'borderColor': <($r_f, $g_f, $b_f, 1.0)>/" <<< "$current")
+gsettings set org.gnome.shell.extensions.rounded-window-corners-reborn global-rounded-corner-settings "$new"

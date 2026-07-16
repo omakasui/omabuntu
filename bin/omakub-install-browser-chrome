@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# omakub:summary=Install the Google Chrome web browser
+# omakub:requires-sudo=true
+
+echo "Installing Google Chrome..."
+
+if [[ ! -f /etc/apt/sources.list.d/google-chrome.sources ]]; then
+  [[ -f /usr/share/keyrings/google-chrome.gpg ]] && sudo rm /usr/share/keyrings/google-chrome.gpg
+  curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes -o /usr/share/keyrings/google-chrome.gpg
+  sudo tee /etc/apt/sources.list.d/google-chrome.sources > /dev/null <<EOF
+Types: deb
+URIs: https://dl.google.com/linux/chrome/deb/
+Suites: stable
+Components: main
+Architectures: $(arch)
+Signed-By: /usr/share/keyrings/google-chrome.gpg
+EOF
+fi
+
+sudo apt-get update
+omakub-pkg-add google-chrome-stable

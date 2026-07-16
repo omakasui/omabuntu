@@ -1,5 +1,3 @@
-#!/bin/bash
-
 headline "Initializing Gnome Extensions configuration..."
 
 # Pause to assure user is ready to accept confirmations

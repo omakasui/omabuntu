@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Toggle Omakub features between enabled and disabled
+# omakub:summary=Toggle Omabuntu features between enabled and disabled.
+# omakub:args=[--enabled-notification <text>] [--disabled-notification <text>] <flag-name>
 
 ENABLED_NOTIFICATION=""
 DISABLED_NOTIFICATION=""
@@ -20,9 +21,9 @@ FLAG="$HOME/.local/state/omakub/toggles/$FLAG_NAME"
 
 if [[ -f $FLAG ]]; then
   rm $FLAG
-  [[ -n $DISABLED_NOTIFICATION ]] && omakub-notify "$NOTIFICATION_SUMMARY" "$DISABLED_NOTIFICATION"
+  [[ -n $DISABLED_NOTIFICATION ]] && omakub-notification-send -g "󰂛" "$NOTIFICATION_SUMMARY" "$DISABLED_NOTIFICATION"
 else
   mkdir -p "$(dirname $FLAG)"
   touch $FLAG
-  [[ -n $ENABLED_NOTIFICATION ]] && omakub-notify "$NOTIFICATION_SUMMARY" "$ENABLED_NOTIFICATION"
+  [[ -n $ENABLED_NOTIFICATION ]] && omakub-notification-send -g "󰂚" "$NOTIFICATION_SUMMARY" "$ENABLED_NOTIFICATION"
 fi

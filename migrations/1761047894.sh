@@ -12,9 +12,9 @@ echo "Install Omabuntu theme on Obsidian vaults"
 omakub-theme-set-obsidian
 
 echo "Copy over updated application icons"
-cp -f $OMAKUB_PATH/applications/desktop/icons/GitHub.png ~/.local/share/applications/icons/
-cp -f $OMAKUB_PATH/applications/desktop/icons/ChatGPT.png ~/.local/share/applications/icons/
-cp -f $OMAKUB_PATH/applications/desktop/icons/X.png ~/.local/share/applications/icons/
+cp -f $OMAKUB_PATH/applications/icons/GitHub.png ~/.local/share/applications/icons/
+cp -f $OMAKUB_PATH/applications/icons/ChatGPT.png ~/.local/share/applications/icons/
+cp -f $OMAKUB_PATH/applications/icons/X.png ~/.local/share/applications/icons/
 
 echo "Remove any active eza theme"
 rm -f ~/.config/eza/theme.yml

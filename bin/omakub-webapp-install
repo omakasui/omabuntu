@@ -1,9 +1,9 @@
 #!/bin/bash
 
-set -e
+# omakub:summary=Create a desktop launcher for a web app.
+# omakub:args=[name url icon [custom-exec] [mime-types]]
 
-# omakub-webapp-add: Create a .desktop file for a web app and add it to the "Web Apps" folder.
-# Usage: omakub-webapp-add <app_name> <app_url> <icon_url_or_path> [custom_exec] [mime_types]
+set -e
 
 ICON_DIR="$HOME/.local/share/applications/icons"
 
@@ -90,7 +90,7 @@ fi
 chmod +x "$DESKTOP_FILE"
 
 # Add to Web Apps folder in app grid
-omakub-app-folder-add "$APP_NAME.desktop" "Web Apps"
+omakub-gnome-grid-folder-add "$APP_NAME.desktop" "Web Apps"
 
 if [[ $INTERACTIVE_MODE == true ]]; then
   echo -e "You can now find $APP_NAME using the app launcher (SUPER + SPACE)\n"

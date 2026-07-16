@@ -1,3 +1,3 @@
-echo "Disabling ESP4, ESP6, and RXRPC kernel modules to mitigate Dirty Frag exploit"
+echo "Mitigate Copy Fail exploit and Dirty Frag vulnerability by blacklisting vulnerable kernel modules"
 
 source "$OMAKUB_PATH/install/config/modprobe.sh"

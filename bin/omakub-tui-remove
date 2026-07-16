@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Remove terminal UI desktop launchers.
+# omakub:args=[name...]
+
 set -e
 
 ICON_DIR="$HOME/.local/share/applications/icons"

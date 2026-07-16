@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# omakub:summary=Install the Steam desktop app.
+
+echo "Installing Steam..."
+
+flatpak install -y flathub com.valvesoftware.Steam

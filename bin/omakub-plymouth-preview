@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# omakub:summary=Preview a Plymouth boot screen with custom colors and logo
+# omakub:args=<background-hex> <text-hex> <path-to-logo.png> <output-path>
+# omakub:examples=omakub plymouth preview '#1d2021' '#ebdbb2' ~/.config/omakub/current/theme/plymouth/logo.png /tmp/plymouth-preview.png
+
+# Render a Plymouth login-screen preview PNG by compositing the staged omakub
+# theme assets (recolored with the given text color) onto the background.
+
+if [[ $# -ne 4 ]]; then
+  echo "Usage: omakub-plymouth-preview <background-hex> <text-hex> <path-to-logo.png> <output-path>" >&2
+  exit 1
+fi
+
+bg_hex="${1#\#}"
+text_hex="${2#\#}"
+logo_path="$3"
+output_path="$4"
+
+if ! [[ $bg_hex =~ ^[0-9a-fA-F]{6}$ ]]; then
+  echo "Invalid background color: $1 (expected #RRGGBB)" >&2
+  exit 1
+fi
+
+if ! [[ $text_hex =~ ^[0-9a-fA-F]{6}$ ]]; then
+  echo "Invalid text color: $2 (expected #RRGGBB)" >&2
+  exit 1
+fi
+
+if [[ ! -f $logo_path ]]; then
+  echo "Logo file not found: $logo_path" >&2
+  exit 1
+fi
+
+staging_dir=$(mktemp -d)
+trap 'rm -rf "$staging_dir"' EXIT
+
+find ~/.local/share/omakub/default/plymouth -maxdepth 1 -type f -exec cp -t "$staging_dir/" {} +
+cp "$logo_path" "$staging_dir/logo.png"
+
+canvas_w=1920
+canvas_h=1080
+
+logo_w=$(identify -format '%w' "$staging_dir/logo.png")
+logo_h=$(identify -format '%h' "$staging_dir/logo.png")
+
+logo_x=$(( (canvas_w - logo_w) / 2 ))
+logo_y=$(( (canvas_h - logo_h) / 2 ))
+
+convert -size ${canvas_w}x${canvas_h} "xc:#$bg_hex" \
+  "$staging_dir/logo.png" -geometry +${logo_x}+${logo_y} -composite \
+  "$output_path"
+
+imv -f "$output_path"

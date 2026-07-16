@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# Launch an application using omakub-launch-walker.
-
-omakub-launch-walker -p "Launch..."

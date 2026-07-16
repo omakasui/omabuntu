@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Ensure Walker service is started automatically on boot
 mkdir -p ~/.config/autostart/
 cp $OMAKUB_PATH/default/walker/walker.desktop ~/.config/autostart/
@@ -20,3 +18,4 @@ EOF
 mkdir -p ~/.config/elephant/menus
 ln -snf $OMAKUB_PATH/default/elephant/omakub_themes.lua ~/.config/elephant/menus/omakub_themes.lua
 ln -snf $OMAKUB_PATH/default/elephant/omakub_background_selector.lua ~/.config/elephant/menus/omakub_background_selector.lua
+ln -snf $OMAKUB_PATH/default/elephant/omakub_unlocks.lua ~/.config/elephant/menus/omakub_unlocks.lua

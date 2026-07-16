@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# omakub:summary=Remove a supported browser and clean up Omabuntu browser defaults
+# omakub:args=<chrome|brave|edge|firefox|zen>
+# omakub:examples=omakub remove browser firefox | omakub remove browser brave
+# omakub:requires-sudo=true
+
+set_fallback_default_browser() {
+  local current_browser
+  current_browser=$(xdg-settings get default-web-browser)
+
+  if [[ $current_browser != "$1" ]]; then
+    return
+  fi
+
+  if omakub-cmd-present chromium; then
+    xdg-settings set default-web-browser chromium.desktop
+    xdg-mime default chromium.desktop x-scheme-handler/http
+    xdg-mime default chromium.desktop x-scheme-handler/https
+    xdg-mime default chromium.desktop text/html
+  fi
+}
+
+case $1 in
+chrome)
+  echo "Removing Chrome..."
+  set_fallback_default_browser google-chrome.desktop
+  omakub-pkg-drop google-chrome-stable
+  rm -f ~/.config/chrome-flags.conf
+  sudo rm -f /etc/opt/chrome/policies/managed/color.json
+  ;;
+edge)
+  echo "Removing Edge..."
+  set_fallback_default_browser microsoft-edge.desktop
+  omakub-pkg-drop microsoft-edge-stable
+  rm -f ~/.config/microsoft-edge-stable-flags.conf
+  sudo rm -f /etc/opt/edge/policies/managed/color.json
+  ;;
+brave)
+  echo "Removing Brave..."
+  set_fallback_default_browser brave-browser.desktop
+  omakub-pkg-drop brave-browser
+  rm -f ~/.config/brave-flags.conf
+
+  if omakub-pkg-missing brave-origin-beta-bin; then
+    sudo rm -rf /etc/brave
+  fi
+  ;;
+firefox)
+  echo "Removing Firefox..."
+  set_fallback_default_browser firefox.desktop
+  omakub-pkg-drop firefox
+  ;;
+zen)
+  echo "Removing Zen..."
+  set_fallback_default_browser zen.desktop
+  omakub-pkg-drop zen-browser
+  ;;
+*)
+  echo "Usage: omakub-remove-browser <chrome|brave|edge|firefox|zen>"
+  exit 1
+  ;;
+esac

@@ -1,113 +1,105 @@
-# Omabuntu Plymouth Theme Script - Boot loading only
+# Omabuntu Plymouth Theme Script
 
 Window.SetBackgroundTopColor(0.101, 0.105, 0.149);
 Window.SetBackgroundBottomColor(0.101, 0.105, 0.149);
 
 logo.image = Image("logo.png");
 logo.sprite = Sprite(logo.image);
-logo.sprite.SetX (Window.GetWidth()  / 2 - logo.image.GetWidth()  / 2);
-logo.sprite.SetY (Window.GetHeight() / 2 - logo.image.GetHeight() / 2);
-logo.sprite.SetOpacity (1);
+logo.sprite.SetX(Window.GetWidth() / 2 - logo.image.GetWidth() / 2);
+logo.sprite.SetY(Window.GetHeight() / 2 - logo.image.GetHeight() / 2);
+logo.sprite.SetOpacity(1);
+
+# Use these to adjust the progress bar timing
+global.fake_progress_limit = 0.7;  # Target percentage for fake progress (0.0 to 1.0)
+global.fake_progress_duration = 15.0;  # Duration in seconds to reach limit
 
 # Progress bar animation variables
+global.animation_frame = 0;
 global.fake_progress = 0.0;
 global.real_progress = 0.0;
 global.fake_progress_active = 0;
-global.animation_frame = 0;
-global.max_progress = 0.0;
+global.fake_progress_start_time = 0.0;  # Track when fake progress started
+global.max_progress = 0.0;  # Track the maximum progress reached to prevent backwards movement
 
-# Use these to adjust the progress bar timing
-global.fake_progress_limit = 0.7;
-global.fake_progress_duration = 15.0;
+fun refresh_callback() {
+  global.animation_frame++;
 
-fun refresh_callback ()
-  {
-    global.animation_frame++;
+  # Animate fake progress to limit over time with easing
+  if (global.fake_progress_active == 1) {
+    # Calculate elapsed time since start
+    elapsed_time = global.animation_frame / 50.0;  # Convert frames to seconds (50 FPS)
 
-    # Animate fake progress to limit over time with easing
-    if (global.fake_progress_active == 1)
-      {
-        # Calculate elapsed time since start
-        elapsed_time = global.animation_frame / 50.0;  # Convert frames to seconds (50 FPS)
+    # Calculate linear progress ratio (0 to 1) based on time
+    time_ratio = elapsed_time / global.fake_progress_duration;
+    if (time_ratio > 1.0) time_ratio = 1.0;
 
-        # Calculate linear progress ratio (0 to 1) based on time
-        time_ratio = elapsed_time / global.fake_progress_duration;
-        if (time_ratio > 1.0)
-          time_ratio = 1.0;
+    # Apply easing curve: ease-out quadratic
+    # Formula: 1 - (1 - x)^2
+    eased_ratio = 1 - ((1 - time_ratio) * (1 - time_ratio));
 
-        # Apply easing curve: ease-out quadratic
-        eased_ratio = 1 - ((1 - time_ratio) * (1 - time_ratio));
+    # Calculate fake progress based on eased ratio
+    global.fake_progress = eased_ratio * global.fake_progress_limit;
 
-        # Calculate fake progress based on eased ratio
-        global.fake_progress = eased_ratio * global.fake_progress_limit;
-
-        # Update progress bar with fake progress
-        update_progress_bar(global.fake_progress);
-      }
+    # Update progress bar with fake progress
+    update_progress_bar(global.fake_progress);
   }
+}
 
-Plymouth.SetRefreshFunction (refresh_callback);
+Plymouth.SetRefreshFunction(refresh_callback);
 
 #----------------------------------------- Helper Functions --------------------------------
 
-fun update_progress_bar(progress)
-  {
-    # Only update if progress is moving forward
-    if (progress > global.max_progress)
-      {
-        global.max_progress = progress;
-        width = Math.Int(progress_bar.original_image.GetWidth() * progress);
-        if (width < 1) width = 1;
+fun update_progress_bar(progress) {
+  # Only update if progress is moving forward
+  if (progress > global.max_progress) {
+    global.max_progress = progress;
 
-        progress_bar.image = progress_bar.original_image.Scale(width, progress_bar.original_image.GetHeight());
-        progress_bar.sprite.SetImage(progress_bar.image);
-      }
+    width = Math.Int(progress_bar.original_image.GetWidth() * progress);
+    if (width < 1) width = 1;  # Ensure minimum width of 1 pixel
+
+    progress_bar.image = progress_bar.original_image.Scale(width, progress_bar.original_image.GetHeight());
+    progress_bar.sprite.SetImage(progress_bar.image);
   }
+}
 
-fun show_progress_bar()
-  {
-    progress_box.sprite.SetOpacity(1);
-    progress_bar.sprite.SetOpacity(1);
+fun show_progress_bar() {
+  progress_box.sprite.SetOpacity(1);
+  progress_bar.sprite.SetOpacity(1);
+}
+
+fun hide_progress_bar() {
+  progress_box.sprite.SetOpacity(0);
+  progress_bar.sprite.SetOpacity(0);
+}
+
+fun start_fake_progress() {
+  global.fake_progress_active = 1;
+
+  # Reset fake progress
+  global.animation_frame = 0;
+  global.max_progress = 0.0;
+  global.fake_progress = 0.0;
+  global.fake_progress_start_time = 0.0;
+}
+
+fun stop_fake_progress() {
+  global.fake_progress_active = 0;
+}
+
+#----------------------------------------- Dialogue --------------------------------
+
+fun display_normal_callback() {
+  # Get current mode
+  mode = Plymouth.GetMode();
+
+  # Only show progress bar for boot and resume modes
+  if (mode == "boot" || mode == "resume") {
+    show_progress_bar();
+    start_fake_progress();
   }
-
-fun start_fake_progress()
-  {
-    if (global.max_progress == 0.0)
-      {
-        global.fake_progress = 0.0;
-        global.real_progress = 0.0;
-        update_progress_bar(0.0);
-      }
-    global.fake_progress_active = 1;
-    global.animation_frame = 0;
-  }
-
-fun stop_fake_progress()
-  {
-    global.fake_progress_active = 0;
-  }
-
-#----------------------------------------- Display Functions --------------------------------
-
-fun display_normal_callback ()
-  {
-    # Show progress bar immediately for boot/resume modes
-    mode = Plymouth.GetMode();
-    if (mode == "boot" || mode == "resume")
-      {
-        show_progress_bar();
-        start_fake_progress();
-      }
-  }
-
-# No password dialog - we go straight to GDM
-fun display_password_callback (prompt, bullets)
-  {
-    # Do nothing - let GDM handle authentication
-  }
+}
 
 Plymouth.SetDisplayNormalFunction(display_normal_callback);
-Plymouth.SetDisplayPasswordFunction(display_password_callback);
 
 #----------------------------------------- Progress Bar --------------------------------
 
@@ -128,47 +120,38 @@ progress_bar.y = progress_box.y + (progress_box.image.GetHeight() - progress_bar
 progress_bar.sprite.SetPosition(progress_bar.x, progress_bar.y, 1);
 progress_bar.sprite.SetOpacity(0);
 
-fun progress_callback (duration, progress)
-  {
-    global.real_progress = progress;
-
-    # If real progress is above limit, stop fake progress and use real progress
-    if (progress > global.fake_progress_limit)
-      {
-        stop_fake_progress();
-        update_progress_bar(progress);
-      }
+fun progress_callback(duration, progress) {
+  # Track when fake progress starts
+  # Needed because duration and progress freeze during drive decryption
+  if (global.fake_progress_start_time == 0.0) {
+    global.fake_progress_start_time = duration;
   }
 
-Plymouth.SetBootProgressFunction(progress_callback);
+  global.real_progress = progress;
 
-#----------------------------------------- Quit --------------------------------
-
-fun quit_callback ()
-{
-  # Keep logo visible until GDM takes over
-  logo.sprite.SetOpacity (1);
+  # Use real progress once its unfrozen and exceeds fake progress
+  if (duration > global.fake_progress_start_time && progress > global.fake_progress) {
+    stop_fake_progress();
+    update_progress_bar(progress);
+  }
 }
 
-Plymouth.SetQuitFunction(quit_callback);
+Plymouth.SetBootProgressFunction(progress_callback);
 
 #----------------------------------------- Message --------------------------------
 
 message_sprite = Sprite();
 message_sprite.SetPosition(10, 10, 10000);
 
-fun display_message_callback (text)
-{
-  # Show messages in white text at top-left
-  my_image = Image.Text(text, 1, 1, 1);
-  message_sprite.SetImage(my_image);
+fun display_message_callback(text) {
+  message = Image.Text(text, 1, 1, 1);
+  message_sprite.SetImage(message);
   message_sprite.SetOpacity(1);
 }
 
-fun hide_message_callback (text)
-{
+fun hide_message_callback(text) {
   message_sprite.SetOpacity(0);
 }
 
-Plymouth.SetDisplayMessageFunction (display_message_callback);
-Plymouth.SetHideMessageFunction (hide_message_callback);
+Plymouth.SetDisplayMessageFunction(display_message_callback);
+Plymouth.SetHideMessageFunction(hide_message_callback);

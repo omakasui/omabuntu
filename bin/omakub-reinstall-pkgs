@@ -1,7 +1,12 @@
 #!/bin/bash
+
+# omakub:summary=Reinstall all default Omabuntu packages from the stable channel.
+# omakub:requires-sudo=true
+
 set -e
 
-# Reinstall all default Omabuntu packages from the stable channel and downgrade any packages that are too new.
+# Set the package repository to the stable mirrors
+omakub-refresh-apt
 
 # Ensure all packages are installed
 mapfile -t packages < <(grep -v '^#' "$OMAKUB_PATH/install/omakub-base.packages" | grep -v '^$')

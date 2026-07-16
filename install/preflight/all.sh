@@ -1,5 +1,3 @@
-#!/bin/bash
-
 source $OMAKUB_INSTALL/preflight/guard.sh
 source $OMAKUB_INSTALL/preflight/begin.sh
 source $OMAKUB_INSTALL/preflight/no-sleep.sh

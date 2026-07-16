@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=List available themes.
+# omakub:examples=omakub theme list | omakub theme set "Tokyo Night"
+
 {
   find ~/.config/omakub/themes/ -mindepth 1 -maxdepth 1 \( -type d -o -type l \) -printf '%f\n'
   find "$OMAKUB_PATH/themes/" -mindepth 1 -maxdepth 1 -type d -printf '%f\n'

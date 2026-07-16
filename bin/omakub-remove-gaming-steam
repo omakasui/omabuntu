@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# omakub:summary=Remove Steam via Flatpak.
+
+echo "Removing Steam..."
+
+flatpak uninstall -y com.valvesoftware.Steam

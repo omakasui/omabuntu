@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# omakub:summary=Set the GDM login screen background and logo
+# omakub:args=<background-hex-or-path> <logo-path>
+# omakub:examples=omakub gdm set '#1e1e2e' ~/.local/share/omakub/default/gdm/logo.png | omakub gdm set /tmp/bg.png ~/.local/share/omakub/default/gdm/logo.png
+# omakub:requires-sudo=true
+
+# Copy a background image and logo to /usr/share/pixmaps/omakub/ and apply
+# GDM settings via dconf system-db (higher priority than file-db) and greeter.dconf-defaults.
+# The background can be a #RRGGBB hex color (generates a solid-color image)
+# or a path to an existing image file.
+
+if [[ $# -ne 2 ]]; then
+  echo "Usage: omakub-gdm-set <background-hex-or-path> <logo-path>" >&2
+  exit 1
+fi
+
+bg_arg="${1#\#}"
+logo_path="$2"
+
+staging_dir=$(mktemp -d)
+trap 'rm -rf "$staging_dir"' EXIT
+
+if [[ $bg_arg =~ ^[0-9a-fA-F]{6}$ ]]; then
+  bg_path="$staging_dir/gdm-background.png"
+  convert -size 3840x2160 "xc:#$bg_arg" "$bg_path"
+else
+  bg_path="$1"
+  if [[ ! -f $bg_path ]]; then
+    echo "Background file not found: $bg_path" >&2
+    exit 1
+  fi
+fi
+
+if [[ ! -f $logo_path ]]; then
+  echo "Logo file not found: $logo_path" >&2
+  exit 1
+fi
+
+sudo mkdir -p /usr/share/pixmaps/omakub
+sudo cp "$bg_path" /usr/share/pixmaps/omakub/gdm-background.png
+sudo cp "$logo_path" /usr/share/pixmaps/omakub/gdm-logo.png
+
+# Apply GDM theme via dconf system-db (higher priority than file-db)
+sudo mkdir -p /etc/dconf/db/gdm.d/locks
+sudo cp "$OMAKUB_PATH/default/gdm/greeter.dconf-defaults" /etc/dconf/db/gdm.d/96-omakub-theme
+
+sudo tee /etc/dconf/db/gdm.d/locks/96-omakub-theme > /dev/null << 'EOF'
+/org/gnome/login-screen/logo
+/com/ubuntu/login-screen/background-picture-uri
+/com/ubuntu/login-screen/background-picture-uri-dark
+/com/ubuntu/login-screen/background-size
+EOF
+
+# Also copy the same settings to the GDM file-db as a fallback (GDM compiles this into the file-db on startup)
+sudo cp "$OMAKUB_PATH/default/gdm/greeter.dconf-defaults" /etc/gdm3/greeter.dconf-defaults
+
+# Ensure the GDM dconf profile includes system-db:gdm
+if [[ -f /etc/dconf/profile/gdm ]] && ! grep -q "^system-db:gdm" /etc/dconf/profile/gdm; then
+  sudo sed -i '/^user-db:user/a system-db:gdm' /etc/dconf/profile/gdm
+fi
+
+sudo dconf update

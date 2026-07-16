@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Run the full Omabuntu update pipeline.
+# omakub:requires-sudo=true
+
 set -e
 
 # Capture update logs (CLICOLOR_FORCE keeps gum styled when stdout is piped through tee)

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# omakub:summary=Install the Discord desktop app.
+# omakub:requires-sudo=true
+
+echo "Installing Discord..."
+
+cd /tmp
+wget https://discord.com/api/download?platform=linux -O discord.deb
+sudo apt install ./discord.deb -y
+rm discord.deb
+cd -

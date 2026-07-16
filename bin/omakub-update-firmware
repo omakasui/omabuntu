@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Update system firmware using fwupd.
+# omakub:requires-sudo=true
+
 set -e
 
 echo -e "\e[32mUpdate Firmware\e[0m"

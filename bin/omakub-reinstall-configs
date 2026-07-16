@@ -1,7 +1,9 @@
 #!/bin/bash
-set -e
 
-# Overwrite all user configs with the Omabuntu defaults.
+# omakub:summary=Reset all Omabuntu user configs to the defaults.
+# omakub:requires-sudo=true
+
+set -e
 
 if (( EUID == 0 )); then
   echo "Error: This script should not be run as root"

@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Set the system-wide monospace font that should be used by the terminal/console.
-# The font name must be one of the ones returned by omakub-font-list.
+# omakub:summary=Set the system monospace font
+# omakub:args=<font-name>
+# omakub:examples=omakub font list | omakub font set "CaskaydiaMono Nerd Font"
 
 font_name="$1"
 
@@ -22,7 +23,7 @@ if [[ -n $font_name && $font_name != "CNCLD" ]]; then
     fi
 
     if pgrep -x ghostty; then
-      omakub-notify -u low "    You must restart Ghostty to see font change"
+      omakub-notification-send -g "" -u low "You must restart Ghostty to see font change"
     fi
 
     omakub-hook font-set "$font_name"

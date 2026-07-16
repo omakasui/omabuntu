@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# omakub:summary=Remove the Minecraft launcher and its packages.
+
+echo "Removing Minecraft..."
+
+omakub-pkg-drop openjdk-8-jdk minecraft-launcher

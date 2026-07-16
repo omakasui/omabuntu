@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# omakub:summary=Install the Ollama desktop app.
+
+echo "Installing Ollama..."
+
+curl -fsSL https://ollama.com/install.sh | sh

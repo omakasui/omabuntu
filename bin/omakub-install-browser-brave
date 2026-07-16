@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# omakub:summary=Install the Brave web browser
+# omakub:requires-sudo=true
+
+echo "Installing Brave browser..."
+
+if [[ ! -f /etc/apt/sources.list.d/brave-browser-release.list ]]; then
+  [[ -f /usr/share/keyrings/brave-browser-archive-keyring.gpg ]] && sudo rm /usr/share/keyrings/brave-browser-archive-keyring.gpg
+  sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+  echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+fi
+
+sudo apt-get update
+omakub-pkg-add brave-browser

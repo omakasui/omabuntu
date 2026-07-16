@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# omakub:summary=Set the GDM login screen from an Omabuntu theme
+# omakub:args=<theme-name>
+# omakub:examples=omakub gdm set-by-theme gruvbox
+# omakub:requires-sudo=true
+
+# Resolve a theme by name and pass its background color and unlock.png to
+# omakub-gdm-set, which handles solid-color generation and installation.
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage: omakub-gdm-set-by-theme <theme-name>" >&2
+  exit 1
+fi
+
+theme=$1
+
+if [[ -d ~/.config/omakub/themes/$theme ]]; then
+  theme_dir=~/.config/omakub/themes/$theme
+elif [[ -d "$OMAKUB_PATH/themes/$theme" ]]; then
+  theme_dir="$OMAKUB_PATH/themes/$theme"
+else
+  echo "Theme '$theme' not found" >&2
+  exit 1
+fi
+
+logo_path="$theme_dir/unlock.png"
+if [[ ! -f $logo_path ]]; then
+  echo "Logo not found for theme '$theme': $logo_path" >&2
+  exit 1
+fi
+
+bg_color=$(awk -F'"' '/^background/{print $2}' "$theme_dir/colors.toml")
+if [[ -z $bg_color ]]; then
+  echo "No background color found in $theme_dir/colors.toml" >&2
+  exit 1
+fi
+
+omakub-gdm-set "$bg_color" "$logo_path"

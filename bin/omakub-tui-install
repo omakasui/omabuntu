@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omakub:summary=Create a desktop launcher for a terminal UI app.
+# omakub:args=[name command icon-url]
+
 set -e
 
 if (( $# != 3 )); then

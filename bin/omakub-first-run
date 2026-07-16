@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# omakub:summary=Finish the installation of Omabuntu with items that can only be done after logging in.
+# omakub:requires-sudo=true
+
+set -e
+
+OMAKUB_PATH="$HOME/.local/share/omakub"
+FIRST_RUN_MODE=~/.local/state/omakub/first-run.mode
+
+if [[ -f $FIRST_RUN_MODE ]]; then
+  bash "$OMAKUB_PATH/install/first-run/firewall.sh"
+  bash "$OMAKUB_PATH/install/first-run/elephant.sh"
+  sudo rm -f /etc/sudoers.d/first-run
+
+  bash "$OMAKUB_PATH/install/first-run/welcome.sh"
+  rm -f "$FIRST_RUN_MODE"
+fi

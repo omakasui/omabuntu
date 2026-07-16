@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# omakub:summary=Display the current Omabuntu branding.
+
+cat $HOME/.config/omakub/branding/brand

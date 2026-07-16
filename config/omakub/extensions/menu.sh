@@ -9,7 +9,7 @@
 #
 # show_system_menu() {
 #   case $(menu "System" "  Lock\n󰐥  Shutdown") in
-#   *Lock*) omakub-lock-screen ;;
+#   *Lock*) omakub-system-lock ;;
 #   *Shutdown*) omakub-system-shutdown ;;
 #   *) back_to show_main_menu ;;
 #   esac

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# omakub:summary=Check whether a newer Omabuntu version is available.
+
 # Get remote tag
 latest_tag=$(git -C "$OMAKUB_PATH" ls-remote --tags origin | grep -v "{}" | awk '{print $2}' | sed 's#refs/tags/##' | sort -V | tail -n 1)
 if [[ -z $latest_tag ]]; then
