@@ -9,7 +9,6 @@ bison
 btop
 build-essential
 
-cargo
 clang
 cmake
 curl
@@ -43,17 +42,13 @@ lazydocker
 lazygit
 libffi-dev
 libgdbm-dev
-libjemalloc2
 libmagickwand-dev
-libmysqlclient-dev
 libncurses-dev
-libpq-dev
 libreadline-dev
 libreoffice
 libsqlite3-0
 libssl-dev
 libvips42t64
-libyaml-dev
 localsend
 
 mpv
@@ -67,13 +62,9 @@ pinta
 pipx
 pkg-config
 plocate
-postgresql-client
-postgresql-client-common
 python3-nautilus
-python3-pip
 
 ripgrep
-rustc
 
 sqlite3
 starship
