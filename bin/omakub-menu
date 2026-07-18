@@ -383,11 +383,10 @@ show_install_browser_menu() {
 }
 
 show_install_utility_menu() {
-  case $(menu "Install" "  Flameshot\n  Pinta\n  Starship\n  Xournalpp") in
+  case $(menu "Install" "  Flameshot\n  Pinta\n  Starship") in
   *Flameshot*) install "Flameshot" "flameshot" ;;
   *Pinta*) install "Pinta" "pinta" ;;
   *Starship*) install "Starship" "starship" ;;
-  *Xournalpp*) install "Xournalpp" "xournalpp" ;;
   *) show_install_menu ;;
   esac
 }
