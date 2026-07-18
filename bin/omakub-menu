@@ -344,7 +344,7 @@ show_setup_config_menu() {
 }
 
 show_install_menu() {
-  case $(menu "Install" "  Package\n  Web App\n  TUI\n  Service\n  Browser\n  Utility\n  Style\n󰵮  Development\n  Editor\n  Terminal\n󱚤  AI\n  Gaming") in
+  case $(menu "Install" "  Package\n  Web App\n  TUI\n  Service\n  Browser\n  Utility\n  Style\n󰵮  Development\n  Editor\n  Terminal\n󱚤  AI") in
   *Package*) terminal omakub-pkg-install ;;
   *Web*) present_terminal omakub-webapp-install ;;
   *TUI*) present_terminal omakub-tui-install ;;
@@ -356,7 +356,6 @@ show_install_menu() {
   *Editor*) show_install_editor_menu ;;
   *Terminal*) show_install_terminal_menu ;;
   *AI*) show_install_ai_menu ;;
-  *Gaming*) show_install_gaming_menu ;;
   *) show_main_menu ;;
   esac
 }
@@ -494,17 +493,8 @@ show_install_ai_menu() {
   esac
 }
 
-show_install_gaming_menu() {
-  case $(menu "Install" "  Steam\n  RetroArch\n󰍳  Minecraft") in
-  *Steam*) present_terminal "omakub-install-gaming-steam" ;;
-  *RetroArch*) present_terminal "omakub-install-gaming-retroarch" ;;
-  *Minecraft*) present_terminal "omakub-install-gaming-minecraft" ;;
-  *) show_install_menu ;;
-  esac
-}
-
 show_remove_menu() {
-  case $(menu "Remove" "  Package\n  Web App\n  TUI\n  Style\n  Browser\n󰵮  Development\n󱚤  AI\n  Gaming\n󰏓  Preinstalls") in
+  case $(menu "Remove" "  Package\n  Web App\n  TUI\n  Style\n  Browser\n󰵮  Development\n󱚤  AI\n󰏓  Preinstalls") in
   *Package*) terminal omakub-pkg-remove ;;
   *Web*) present_terminal omakub-webapp-remove ;;
   *TUI*) present_terminal omakub-tui-remove ;;
@@ -512,7 +502,6 @@ show_remove_menu() {
   *Browser*) show_remove_browser_menu ;;
   *Development*) show_remove_development_menu ;;
   *AI*) show_remove_ai_menu ;;
-  *Gaming*) show_remove_gaming_menu ;;
   *Preinstalls*) present_terminal omakub-remove-preinstalls ;;
   *) show_main_menu ;;
   esac
@@ -586,15 +575,6 @@ show_remove_elixir_menu() {
 show_remove_ai_menu() {
   case $(menu "Remove AI" "󱚤  Ollama") in
   *Ollama*) present_terminal "omakub-remove-ollama" ;;
-  *) show_remove_menu ;;
-  esac
-}
-
-show_remove_gaming_menu() {
-  case $(menu "Remove Gaming" "  Steam\n  RetroArch\n󰍳  Minecraft") in
-  *Steam*) present_terminal "omakub-remove-gaming-steam" ;;
-  *RetroArch*) present_terminal "omakub-remove-gaming-retroarch" ;;
-  *Minecraft*) present_terminal "omakub-remove-gaming-minecraft" ;;
   *) show_remove_menu ;;
   esac
 }
