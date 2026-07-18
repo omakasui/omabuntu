@@ -2,4 +2,8 @@
 
 # omakub:summary=Display the current Omabuntu branding.
 
-cat $HOME/.config/omakub/branding/brand
+if -f "$HOME/.config/omakub/branding/brand"; then
+  cat "$HOME/.config/omakub/branding/brand"
+else
+  cat $OMAKUB_PATH/brand
+fi
