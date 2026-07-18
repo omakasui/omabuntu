@@ -80,7 +80,6 @@ wget
 wl-clipboard
 
 xdg-terminal-exec
-xournalpp
 
 zlib1g-dev
 zoxide
