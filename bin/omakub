@@ -61,7 +61,6 @@ GROUP_DESCRIPTIONS[transcode]="Image and video transcoding"
 GROUP_DESCRIPTIONS[tui]="Terminal UI launchers"
 GROUP_DESCRIPTIONS[update]="Omabuntu and system updates"
 GROUP_DESCRIPTIONS[version]="Version and channel information"
-GROUP_DESCRIPTIONS[webapp]="Web app launchers"
 
 join_words() {
   local separator="$1"

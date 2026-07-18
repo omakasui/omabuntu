@@ -80,13 +80,13 @@ remove_font() {
 
 show_learn_menu() {
   case $(menu "Learn" "  Keybindings\n  Tmux keybindings\n  Omabuntu\n  Ubuntu\n󰊬  GNOME\n  Neovim\n󱆃  Bash") in
-  *Keybindings*) omakub-launch-webapp "https://omabuntu.omakasui.org/manual/essentials/hotkeys" "Omabuntu Keybindings" ;;
+  *Keybindings*) omakub-launch-browser "https://omabuntu.omakasui.org/manual/essentials/hotkeys" ;;
   *Tmux*) omakub-menu-tmux-keybindings ;;
-  *Omabuntu*) omakub-launch-webapp "https://omabuntu.omakasui.org/manual" "Omabuntu" ;;
-  *Ubuntu*) omakub-launch-webapp "https://help.ubuntu.com/" "Ubuntu" ;;
-  *GNOME*) omakub-launch-webapp "https://help.gnome.org/" "GNOME" ;;
-  *Bash*) omakub-launch-webapp "https://devhints.io/bash" "Bash" ;;
-  *Neovim*) omakub-launch-webapp "https://www.lazyvim.org/keymaps" "Neovim" ;;
+  *Omabuntu*) omakub-launch-browser "https://omabuntu.omakasui.org/manual" ;;
+  *Ubuntu*) omakub-launch-browser "https://help.ubuntu.com/" ;;
+  *GNOME*) omakub-launch-browser "https://help.gnome.org/" ;;
+  *Bash*) omakub-launch-browser "https://devhints.io/bash" ;;
+  *Neovim*) omakub-launch-browser "https://www.lazyvim.org/keymaps" ;;
   *) show_main_menu ;;
   esac
 }
@@ -344,9 +344,8 @@ show_setup_config_menu() {
 }
 
 show_install_menu() {
-  case $(menu "Install" "  Package\n  Web App\n  TUI\n  Service\n  Browser\n  Utility\n  Style\n󰵮  Development\n  Editor\n  Terminal\n󱚤  AI") in
+  case $(menu "Install" "  Package\n  TUI\n  Service\n  Browser\n  Utility\n  Style\n󰵮  Development\n  Editor\n  Terminal\n󱚤  AI") in
   *Package*) terminal omakub-pkg-install ;;
-  *Web*) present_terminal omakub-webapp-install ;;
   *TUI*) present_terminal omakub-tui-install ;;
   *Service*) show_install_service_menu ;;
   *Browser*) show_install_browser_menu ;;
@@ -361,7 +360,7 @@ show_install_menu() {
 }
 
 show_install_service_menu() {
-  case $(menu "Install" "  1password\n  Bitwarden\n  Discord\n  Dropbox\n  LibreOffice\n  LocalSend\n  ObsStudio\n  Obsidian\n  Signal\n  Spotify\n  Typora\n  Tailscale") in
+  case $(menu "Install" "  1password\n  Bitwarden\n  Discord\n  Dropbox\n  LibreOffice\n  LocalSend\n  ObsStudio\n  Obsidian\n  Signal\n  Spotify\n  Typora") in
   *1password*) present_terminal omakub-install-1password ;;
   *Bitwarden*) install "Bitwarden" "bitwarden" ;;
   *Discord*) present_terminal omakub-install-discord ;;
@@ -373,7 +372,6 @@ show_install_service_menu() {
   *Signal*) present_terminal omakub-install-signal ;;
   *Spotify*) present_terminal omakub-install-spotify ;;
   *Typora*) present_terminal omakub-install-typora ;;
-  *Tailscale*) present_terminal omakub-install-tailscale ;;
   *) show_install_menu ;;
   esac
 }
@@ -494,9 +492,8 @@ show_install_ai_menu() {
 }
 
 show_remove_menu() {
-  case $(menu "Remove" "  Package\n  Web App\n  TUI\n  Style\n  Browser\n󰵮  Development\n󱚤  AI\n󰏓  Preinstalls") in
+  case $(menu "Remove" "  Package\n  TUI\n  Style\n  Browser\n󰵮  Development\n󱚤  AI\n󰏓  Preinstalls") in
   *Package*) terminal omakub-pkg-remove ;;
-  *Web*) present_terminal omakub-webapp-remove ;;
   *TUI*) present_terminal omakub-tui-remove ;;
   *Style*) show_remove_style_menu ;;
   *Browser*) show_remove_browser_menu ;;
