@@ -359,9 +359,7 @@ show_install_menu() {
 }
 
 show_install_service_menu() {
-  case $(menu "Install" "  1password\n  Bitwarden\n  Discord\n  Dropbox\n  LibreOffice\n  LocalSend\n  ObsStudio\n  Obsidian\n  Signal\n  Spotify\n  Typora") in
-  *1password*) present_terminal omakub-install-1password ;;
-  *Bitwarden*) install "Bitwarden" "bitwarden" ;;
+  case $(menu "Install" "  Discord\n  Dropbox\n  LibreOffice\n  LocalSend\n  ObsStudio\n  Obsidian\n  Signal\n  Spotify\n  Typora") in
   *Discord*) present_terminal omakub-install-discord ;;
   *Dropbox*) install "Dropbox" "nautilus-dropbox" ;;
   *LibreOffice*) install "LibreOffice" "libreoffice" ;;
