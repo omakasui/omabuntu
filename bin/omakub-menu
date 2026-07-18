@@ -344,7 +344,7 @@ show_setup_config_menu() {
 }
 
 show_install_menu() {
-  case $(menu "Install" "  Package\n  TUI\n  Service\n  Browser\n  Utility\n  Style\n󰵮  Development\n  Editor\n  Terminal\n󱚤  AI") in
+  case $(menu "Install" "  Package\n  TUI\n  Service\n  Browser\n  Utility\n  Style\n󰵮  Development\n  Editor\n  Terminal") in
   *Package*) terminal omakub-pkg-install ;;
   *TUI*) present_terminal omakub-tui-install ;;
   *Service*) show_install_service_menu ;;
@@ -354,7 +354,6 @@ show_install_menu() {
   *Development*) show_install_development_menu ;;
   *Editor*) show_install_editor_menu ;;
   *Terminal*) show_install_terminal_menu ;;
-  *AI*) show_install_ai_menu ;;
   *) show_main_menu ;;
   esac
 }
@@ -484,21 +483,13 @@ show_install_terminal_menu() {
   esac
 }
 
-show_install_ai_menu() {
-  case $(menu "Install" "󱚤  Ollama") in
-  *Ollama*) present_terminal "omakub-install-ollama" ;;
-  *) show_install_menu ;;
-  esac
-}
-
 show_remove_menu() {
-  case $(menu "Remove" "  Package\n  TUI\n  Style\n  Browser\n󰵮  Development\n󱚤  AI\n󰏓  Preinstalls") in
+  case $(menu "Remove" "  Package\n  TUI\n  Style\n  Browser\n󰵮  Development\n󰏓  Preinstalls") in
   *Package*) terminal omakub-pkg-remove ;;
   *TUI*) present_terminal omakub-tui-remove ;;
   *Style*) show_remove_style_menu ;;
   *Browser*) show_remove_browser_menu ;;
   *Development*) show_remove_development_menu ;;
-  *AI*) show_remove_ai_menu ;;
   *Preinstalls*) present_terminal omakub-remove-preinstalls ;;
   *) show_main_menu ;;
   esac
@@ -566,13 +557,6 @@ show_remove_elixir_menu() {
   *Elixir*) present_terminal "omakub-remove-dev-env elixir" ;;
   *Phoenix*) present_terminal "omakub-remove-dev-env phoenix" ;;
   *) show_remove_development_menu ;;
-  esac
-}
-
-show_remove_ai_menu() {
-  case $(menu "Remove AI" "󱚤  Ollama") in
-  *Ollama*) present_terminal "omakub-remove-ollama" ;;
-  *) show_remove_menu ;;
   esac
 }
 
