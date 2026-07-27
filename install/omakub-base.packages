@@ -63,6 +63,7 @@ pipx
 pkg-config
 plocate
 python3-nautilus
+python3-terminaltexteffects
 
 ripgrep
 
