@@ -213,7 +213,7 @@ show_setup_menu() {
 show_setup_system_menu() {
   local options=""
 
- if omakub-toggle-enable suspend-off; then
+ if omakub-toggle-enabled suspend-off; then
     options="$options󰒲  Enable Suspend"
   else
     options="$options󰒲  Disable Suspend"

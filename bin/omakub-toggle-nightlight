@@ -9,7 +9,7 @@ omakub-toggle \
   --disabled-notification "   Daylight screen temperature" \
   night-light
 
-if omakub-toggle-enable night-light; then
+if omakub-toggle-enabled night-light; then
   gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 else
   gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled false
