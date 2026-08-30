@@ -10,7 +10,7 @@ abort() {
 . /etc/os-release
 
 # Check if running on Ubuntu
-SUPPORTED_VERSIONS=("24.04")
+SUPPORTED_VERSIONS=("24.04", "26.04")
 [[ $ID != "ubuntu" ]] && abort "Ubuntu LTS"
 if [[ ! " ${SUPPORTED_VERSIONS[@]} " =~ " ${VERSION_ID} " ]]; then
   abort "Only Ubuntu LTS versions are supported. Supported versions: ${SUPPORTED_VERSIONS[*]}"
