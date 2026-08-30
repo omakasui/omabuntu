@@ -3,7 +3,7 @@
 
 # Omabuntu
 
-Omabuntu is a fork of [Omakub](https://omakub.org), the one-liner tool that turns a fresh Ubuntu install into a modern development environment. It builds on Omakub with targeted tweaks for a more streamlined and opinionated Linux setup. Likewise, Omabuntu keeps tabs on the evolving [Omarchy](https://omarchy.org) project, selectively adopting useful changes while staying grounded on a stable, proven base.
+Omabuntu is a fork of [Omakub](https://omarchy.org/omakub), the one-liner tool that turns a fresh Ubuntu install into a modern development environment. It builds on Omakub with targeted tweaks for a more streamlined and opinionated Linux setup. Likewise, Omabuntu keeps tabs on the evolving [Omarchy](https://omarchy.org) project, selectively adopting useful changes while staying grounded on a stable, proven base.
 
 ## Documentation
 
@@ -18,4 +18,4 @@ Omabuntu is released under the [MIT License](https://opensource.org/licenses/MIT
 
 As the continuation of Omakub, Omabuntu welcomes contributions that extend existing functionality while keeping a strong focus on compatibility, stability and long term maintainability.
 If you want to contribute to improving the manual, here is the [repository with the docs](https://github.com/omakasui/omabuntu.omakasui.org).
-The original Omakub repository remains available for reference at the [official repository](https://github.com/basecamp/omakub).
+The original Omakub repository remains available for reference at the [official repository](https://github.com/omacom/omakub).
