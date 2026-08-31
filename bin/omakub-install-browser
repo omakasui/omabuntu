@@ -37,7 +37,6 @@ chrome)
 
   setup_policy_directory /etc/opt/chrome/policies/managed
   copy_chromium_flags ~/.config/chrome-flags.conf
-  omakub-theme-set-browser
   announce_browser_installed "Chrome"
   ;;
 edge)
@@ -45,7 +44,6 @@ edge)
 
   setup_policy_directory /etc/opt/edge/policies/managed
   copy_chromium_flags ~/.config/microsoft-edge-stable-flags.conf
-  omakub-theme-set-browser
   announce_browser_installed "Edge"
   ;;
 brave)
@@ -53,7 +51,6 @@ brave)
 
   setup_policy_directory /etc/brave/policies/managed
   copy_chromium_flags ~/.config/brave-flags.conf
-  omakub-theme-set-browser
   announce_browser_installed "Brave"
   ;;
 firefox)
