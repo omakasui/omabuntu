@@ -31,7 +31,7 @@ Common prefixes include:
 
 Other current prefixes include:
 
-- `branch-`, `brightness-`, `channel-`, `config-`, `debug-`, `dev-`, `first-`, `font-`, `hook-`, `gnome-`, `menu-`, `migrate-`, `notification-`, `npm-`, `reinstall-`, `remove-`, `show-`, `state-`, `sudo-`, `system-`, `transcode-`, `tui-`, `version-`, `webapp-`
+- `branch-`, `brightness-`, `channel-`, `config-`, `debug-`, `dev-`, `first-`, `font-`, `hook-`, `gnome-`, `menu-`, `migrate-`, `notification-`, `npm-`, `reinstall-`, `remove-`, `show-`, `state-`, `sudo-`, `system-`, `transcode-`, `tui-`, `version-`
 
 # Command Metadata
 
