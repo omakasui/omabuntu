@@ -62,6 +62,7 @@ omakub-theme-set-gnome
 omakub-theme-set-gnome-extensions
 omakub-theme-set-vscode
 omakub-theme-set-obsidian
+omakub-theme-set-browser
 
 # Call hook on theme set
 omakub-hook theme-set "$THEME_NAME" >/dev/null
