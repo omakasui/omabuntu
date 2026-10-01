@@ -21,7 +21,7 @@ else
 fi
 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/omakasui-core.gpg] \
-  https://core.omakasui.org $suite main" \
+  https://core.omakasui.org/omabuntu $suite main" \
   | sudo tee /etc/apt/sources.list.d/omakasui-core.list
 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/omakasui-packages.gpg] \
@@ -29,3 +29,6 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/omaka
   | sudo tee /etc/apt/sources.list.d/omakasui.list
 
 sudo apt-get update
+
+# Keyring packages take over the keys installed above and keep them up to date
+omakub-pkg-add omakasui-archive-keyring omakasui-core-archive-keyring

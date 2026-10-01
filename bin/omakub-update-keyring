@@ -18,8 +18,12 @@ _ensure_keyring() {
   local keyring_path="$2"
   local sources_path="$3"
   local repo_url="$4"
+  local keyring_package="$5"
 
-  if [[ ! -f $keyring_path ]]; then
+  if omakub-pkg-present "$keyring_package"; then
+    # The keyring package owns the key and apt keeps it up to date.
+    _keyrings_up_to_date=$((_keyrings_up_to_date + 1))
+  elif [[ ! -f $keyring_path ]]; then
     curl -fsSL "$keyring_url" | gpg --dearmor 2>/dev/null | sudo tee "$keyring_path" > /dev/null
   else
     remote_hash=$(curl -fsSL "$keyring_url" | gpg --dearmor 2>/dev/null | sha256sum | cut -d' ' -f1)
@@ -53,13 +57,15 @@ _ensure_keyring \
   "https://keyrings.omakasui.org/omakasui-core.gpg.key" \
   "/usr/share/keyrings/omakasui-core.gpg" \
   "/etc/apt/sources.list.d/omakasui-core.list" \
-  "https://core.omakasui.org"
+  "https://core.omakasui.org/omabuntu" \
+  "omakasui-core-archive-keyring"
 
 _ensure_keyring \
   "https://keyrings.omakasui.org/omakasui-packages.gpg.key" \
   "/usr/share/keyrings/omakasui-packages.gpg" \
   "/etc/apt/sources.list.d/omakasui.list" \
-  "https://packages.omakasui.org"
+  "https://packages.omakasui.org" \
+  "omakasui-archive-keyring"
 
 if [[ $_keyrings_up_to_date -gt 0 ]]; then
   echo "Keyrings up to date, skipping."
