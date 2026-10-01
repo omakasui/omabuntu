@@ -5,7 +5,6 @@
 if gum confirm "Are you sure you want to remove all preinstalled web apps, TUI wrappers, and desktop applications?"; then
   echo -e "Removing preinstalled Omabuntu applications...\n"
 
-  omakub-webapp-remove-all
   omakub-tui-remove-all
 
   # Remove npm stubs
@@ -15,7 +14,6 @@ if gum confirm "Are you sure you want to remove all preinstalled web apps, TUI w
   omakub-pkg-drop \
     spotify \
     libreoffice \
-    xournalpp \
     pinta \
     lazydocker
 fi

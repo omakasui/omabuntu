@@ -8,6 +8,5 @@ run_logged $OMAKUB_INSTALL/packaging/docker.sh
 run_logged $OMAKUB_INSTALL/packaging/mise.sh
 run_logged $OMAKUB_INSTALL/packaging/icons.sh
 run_logged $OMAKUB_INSTALL/packaging/chromium.sh
-run_logged $OMAKUB_INSTALL/packaging/webapps.sh
 run_logged $OMAKUB_INSTALL/packaging/tuis.sh
 run_logged $OMAKUB_INSTALL/packaging/npm.sh
