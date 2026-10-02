@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omakub:summary=Overwrite the APT sources list to the Omakasui package channel, then update.
+# omakub:summary=Switch the Omakasui APT sources to the given package channel, then update.
 # omakub:args=[stable|dev]
 # omakub:requires-sudo=true
 
@@ -19,14 +19,21 @@ else
   suite="$codename"
 fi
 
+# The sources are shipped by the keyring packages: make sure they are installed.
+omakub-update-keyring
+
+if omakub-pkg-missing omakasui-archive-keyring omakasui-core-archive-keyring; then
+  echo "Error: the Omakasui keyring packages are not installed"
+  exit 1
+fi
+
 echo "Setting APT channel to $channel ($suite)"
 
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/omakasui-core.gpg] \
-  https://core.omakasui.org/omabuntu $suite main" \
-  | sudo tee /etc/apt/sources.list.d/omakasui-core.list
+for sources in /etc/apt/sources.list.d/omakasui.sources /etc/apt/sources.list.d/omakasui-core.sources; do
+  sudo sed -i -E "s/^Suites:.*/Suites: $suite/" "$sources"
+done
 
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/omakasui-packages.gpg] \
-  https://packages.omakasui.org $suite main" \
-  | sudo tee /etc/apt/sources.list.d/omakasui.list
+# One-line sources from the old setup would duplicate the ones above.
+sudo rm -f /etc/apt/sources.list.d/omakasui.list /etc/apt/sources.list.d/omakasui-core.list
 
 sudo apt-get update

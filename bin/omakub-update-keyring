@@ -1,72 +1,26 @@
 #!/bin/bash
 
-# omakub:summary=Ensure the Omakasui APT repository keyrings are installed and up to date.
+# omakub:summary=Ensure the Omakasui keyring packages, which provide the APT signing keys and sources, are installed.
 # omakub:requires-sudo=true
-
-# Before updating the system, we need to make sure the Omakasui APT repository keyrings are up to date.
-
-codename=$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
-channel=$(omakub-version-channel)
-if [[ $channel == "dev" ]]; then
-  suite="${codename}-dev"
-else
-  suite="$codename"
-fi
-
-_ensure_keyring() {
-  local keyring_url="$1"
-  local keyring_path="$2"
-  local sources_path="$3"
-  local repo_url="$4"
-  local keyring_package="$5"
-
-  if omakub-pkg-present "$keyring_package"; then
-    # The keyring package owns the key and apt keeps it up to date.
-    _keyrings_up_to_date=$((_keyrings_up_to_date + 1))
-  elif [[ ! -f $keyring_path ]]; then
-    curl -fsSL "$keyring_url" | gpg --dearmor 2>/dev/null | sudo tee "$keyring_path" > /dev/null
-  else
-    remote_hash=$(curl -fsSL "$keyring_url" | gpg --dearmor 2>/dev/null | sha256sum | cut -d' ' -f1)
-
-    if [[ -z $remote_hash ]]; then
-      echo "Warning: failed to fetch remote keyring for $keyring_path, skipping update."
-    else
-      local_hash=$(sha256sum "$keyring_path" | cut -d' ' -f1)
-
-      if [[ $remote_hash != $local_hash ]]; then
-        echo "Keyring updated: $keyring_path"
-        curl -fsSL "$keyring_url" | gpg --dearmor 2>/dev/null | sudo tee "$keyring_path" > /dev/null
-      else
-        _keyrings_up_to_date=$((_keyrings_up_to_date + 1))
-      fi
-    fi
-  fi
-
-  if [[ ! -f $sources_path ]]; then
-    echo "Sources list missing, installing: $sources_path"
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=$keyring_path] $repo_url $suite main" \
-      | sudo tee "$sources_path" > /dev/null
-  fi
-}
 
 echo -e "\e[32m\nUpdate Omakasui signing keys\e[0m"
 
-_keyrings_up_to_date=0
-
-_ensure_keyring \
-  "https://keyrings.omakasui.org/omakasui-core.gpg.key" \
-  "/usr/share/keyrings/omakasui-core.gpg" \
-  "/etc/apt/sources.list.d/omakasui-core.list" \
-  "https://core.omakasui.org/omabuntu" \
-  "omakasui-core-archive-keyring"
-
-_ensure_keyring \
-  "https://keyrings.omakasui.org/omakasui-packages.gpg.key" \
-  "/usr/share/keyrings/omakasui-packages.gpg" \
-  "/etc/apt/sources.list.d/omakasui.list" \
-  "https://packages.omakasui.org" \
-  "omakasui-archive-keyring"
-
-if [[ $_keyrings_up_to_date -gt 0 ]]; then
+if omakub-pkg-present omakasui-archive-keyring omakasui-core-archive-keyring; then
   echo "Keyrings up to date, skipping."
+  exit 0
 fi
+
+codename=$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+tmp_dir=$(mktemp -d)
+chmod 755 "$tmp_dir"
+trap 'rm -rf "$tmp_dir"' EXIT
+
+if ! curl -fsSL -o "$tmp_dir/omakasui-archive-keyring.deb" \
+    "https://packages.omakasui.org/omakasui-archive-keyring/$codename.deb" ||
+  ! curl -fsSL -o "$tmp_dir/omakasui-core-archive-keyring.deb" \
+    "https://core.omakasui.org/omakasui-core-archive-keyring/$codename.deb"; then
+  echo "Warning: failed to download the Omakasui keyring packages, skipping."
+  exit 0
+fi
+
+sudo apt-get install -y "$tmp_dir/omakasui-archive-keyring.deb" "$tmp_dir/omakasui-core-archive-keyring.deb"

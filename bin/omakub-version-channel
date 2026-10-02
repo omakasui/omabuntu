@@ -2,8 +2,12 @@
 
 # omakub:summary=Print the active Omabuntu APT package channel.
 
-pkgs_suite=$(grep -oP 'https://packages\.omakasui\.org\s+\K\S+' /etc/apt/sources.list.d/omakasui.list 2>/dev/null)
-core_suite=$(grep -oP 'https://core\.omakasui\.org(/[^\s/]+)?\s+\K\S+' /etc/apt/sources.list.d/omakasui-core.list 2>/dev/null)
+_suite() {
+  awk '$1 == "Suites:" { print $2; exit }' "/etc/apt/sources.list.d/$1.sources" 2>/dev/null
+}
+
+pkgs_suite=$(_suite omakasui)
+core_suite=$(_suite omakasui-core)
 
 if [[ $pkgs_suite == $core_suite ]]; then
   if [[ $pkgs_suite == *-dev ]]; then
