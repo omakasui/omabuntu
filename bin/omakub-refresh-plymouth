@@ -3,11 +3,8 @@
 # omakub:summary=Overwrite the user config for Plymouth boot sequence with the Omabuntu default and rebuild it.
 # omakub:requires-sudo=true
 
-sudo cp ~/.local/share/omakub/default/plymouth/* /usr/share/plymouth/themes/omakub/
+sudo mkdir -p /usr/share/plymouth/themes/omakub
+sudo find ~/.local/share/omakub/default/plymouth -maxdepth 1 -type f -exec cp -t /usr/share/plymouth/themes/omakub/ {} +
 sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/omakub/omakub.plymouth 100
 sudo update-alternatives --set default.plymouth /usr/share/plymouth/themes/omakub/omakub.plymouth
-if omakub-cmd-present dracut; then
-  sudo dracut --regenerate-all --force
-else
-  sudo update-initramfs -u
-fi
+sudo update-initramfs -u

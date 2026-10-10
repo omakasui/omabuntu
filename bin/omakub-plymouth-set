@@ -54,15 +54,12 @@ for asset in progress_bar.png; do
   convert "$staging_dir/$asset" -channel RGB +level-colors "#$text_hex","#$text_hex" "$staging_dir/$asset"
 done
 
+sudo mkdir -p "$theme_dir"
 sudo cp -a "$staging_dir/." "$theme_dir/"
 
 sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/omakub/omakub.plymouth 100
 sudo update-alternatives --set default.plymouth /usr/share/plymouth/themes/omakub/omakub.plymouth
-if omakub-cmd-present dracut; then
-  sudo dracut --regenerate-all --force
-else
-  sudo update-initramfs -u
-fi
+sudo update-initramfs -u
 
 # Sync the GDM3 login screen with the same colors and logo for visual consistency.
 omakub-gdm-set "#$bg_hex" "$logo_path"

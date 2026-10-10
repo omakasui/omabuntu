@@ -11,14 +11,6 @@ fi
 # ==============================================================================
 
 apply_plymouth() {
-  # Ubuntu 24.04 uses initramfs-tools, 26.04 uses dracut (which ignores this file)
-  # Check if plymouth is already in initramfs modules
-  if omakub-cmd-missing dracut && [[ -d /etc/initramfs-tools ]]; then
-    if ! grep -q "plymouth" /etc/initramfs-tools/modules 2>/dev/null; then
-      echo "plymouth" | sudo tee -a /etc/initramfs-tools/modules
-    fi
-  fi
-
   # Install and configure Omabuntu Plymouth theme
   THEME_SOURCE_DIR="$OMAKUB_PATH/default/plymouth"
 
@@ -53,11 +45,7 @@ EOF
   fi
 
   # Final initramfs update to ensure all Plymouth changes are applied
-  if omakub-cmd-present dracut; then
-    sudo dracut --regenerate-all --force
-  else
-    sudo update-initramfs -u
-  fi
+  sudo update-initramfs -u
 }
 
 if [[ $LVM_DETECTED == true ]]; then
