@@ -6,4 +6,8 @@
 sudo cp ~/.local/share/omakub/default/plymouth/* /usr/share/plymouth/themes/omakub/
 sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/omakub/omakub.plymouth 100
 sudo update-alternatives --set default.plymouth /usr/share/plymouth/themes/omakub/omakub.plymouth
-sudo update-initramfs -u
+if omakub-cmd-present dracut; then
+  sudo dracut --regenerate-all --force
+else
+  sudo update-initramfs -u
+fi
