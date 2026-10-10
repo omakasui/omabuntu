@@ -4,7 +4,6 @@ apps=(
 	"Alacritty.desktop"
 	"nvim.desktop"
 	"code.desktop"
-	"WhatsApp.desktop"
 	"spotify.desktop"
 	"pinta_pinta.desktop"
 	"docker.desktop"

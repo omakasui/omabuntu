@@ -311,7 +311,7 @@ omakub-install-terminal <name> # Install and set default terminal
 # - Browsers: brave, chromium, firefox, zen
 # - Dev tools: docker, neovim, visual-studio-code, cursor, zed, github-cli
 # - Terminals: alacritty, kitty
-# - Utilities: 1password, obsidian, signal, discord, spotify, obs-studio
+# - Utilities: obsidian, discord, spotify, obs-studio
 # And many more...
 
 # Application folder management (for GNOME app grid)

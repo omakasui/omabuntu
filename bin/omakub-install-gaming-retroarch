@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# omakub:summary=Install the RetroArch gaming emulator.
-
-echo "Installing RetroArch..."
-
-flatpak install -y flathub org.libretro.RetroArch

@@ -5,10 +5,5 @@
 # omakub:name=lock
 # omakub:examples=omakub system lock
 
-# Ensure 1password is locked
-if pgrep -x "1password" >/dev/null; then
-  1password --lock &
-fi
-
 # Lock the screen
 loginctl lock-session
