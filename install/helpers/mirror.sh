@@ -3,6 +3,5 @@ if ! command -v curl &> /dev/null; then
   omakub-pkg-add curl
 fi
 
-# Add Omakasui APT repositories: the keyring packages install the signing keys
-# and the sources, then the channel is selected.
+# Add Omakasui APT repositories
 omakub-refresh-apt "${OMAKUB_CHANNEL:-stable}"
