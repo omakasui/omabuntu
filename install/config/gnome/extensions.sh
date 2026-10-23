@@ -64,7 +64,9 @@ gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock blur true
 gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock brightness 0.6
 gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock sigma 30
 gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock static-blur true
-gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock style-dash-to-dock 0
+gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock style-dash-to-dock 0\
+gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock override-background true
+gsettings set org.gnome.shell.extensions.blur-my-shell.panel override-background true
 
 # Configure Space Bar
 gsettings set org.gnome.shell.extensions.space-bar.behavior smart-workspace-names false
