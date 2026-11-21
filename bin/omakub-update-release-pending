@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# omakub:summary=Print the previous Ubuntu codename when Omabuntu still has to finish a release upgrade.
+# omakub:hidden=true
+
+# do-release-upgrade leaves the Omakasui sources on the old suite, so a codename
+# different from the running release means the post-upgrade repair is pending.
+# The state file keeps the answer stable once the repair has started rewriting the sources.
+state_file="$HOME/.local/state/omakub/release-upgrade/from"
+sources_file=/etc/apt/sources.list.d/omakasui.sources
+
+if [[ -f $state_file ]]; then
+  previous_codename=$(<"$state_file")
+elif [[ -f $sources_file ]]; then
+  suite=$(awk '$1 == "Suites:" { print $2; exit }' "$sources_file")
+  previous_codename=${suite%-dev}
+fi
+
+if [[ -z $previous_codename || $previous_codename == $(omakub-version-codename) ]]; then
+  exit 1
+fi
+
+echo "$previous_codename"

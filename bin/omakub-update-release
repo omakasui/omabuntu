@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# omakub:summary=Upgrade Ubuntu to the next LTS release and bring Omabuntu along.
+# omakub:examples=omakub update release
+# omakub:requires-sudo=true
+
+set -e
+
+# In-place upgrade paths supported by Omabuntu and the Omakasui repositories
+declare -A NEXT_RELEASE=(
+  [noble]=resolute
+)
+
+omakasui_suite_available() {
+  local codename="$1"
+
+  curl -fsI "https://packages.omakasui.org/dists/$codename/InRelease" >/dev/null &&
+    curl -fsI "https://core.omakasui.org/dists/$codename/InRelease" >/dev/null
+}
+
+# Put back the guard that keeps Ubuntu from offering release upgrades on its own.
+restore_upgrade_guard() {
+  bash "$OMAKUB_PATH/install/config/release-upgrades.sh"
+}
+
+# Ubuntu is already on the new release: the rest happens in the update pipeline.
+if omakub-update-release-pending >/dev/null; then
+  echo "Ubuntu has already been upgraded, finishing the Omabuntu side with an update."
+  exec omakub-update -y
+fi
+
+current_codename=$(omakub-version-codename)
+target_codename=${NEXT_RELEASE[$current_codename]}
+
+if [[ -z $target_codename ]]; then
+  echo "No supported release upgrade from Ubuntu $current_codename."
+  exit 1
+fi
+
+if ! omakasui_suite_available "$target_codename"; then
+  echo "The Omakasui repositories do not provide packages for $target_codename yet."
+  exit 1
+fi
+
+gum style --border normal --border-foreground 6 --padding "1 2" \
+  "Ready to upgrade Ubuntu from $current_codename to $target_codename?" \
+  "" \
+  "• Make sure you're connected to power or have a full battery" \
+  "• Back up your data first: a release upgrade cannot be undone" \
+  "• Packages the upgrade removes as obsolete are reinstalled afterwards" \
+  "• After the reboot, a terminal opens to finish the Omabuntu side"
+
+echo
+
+if ! gum confirm "Continue with the release upgrade?"; then
+  echo "Release upgrade cancelled"
+  exit 1
+fi
+
+# do-release-upgrade refuses to start on a system with pending updates.
+omakub-update-system-pkgs
+omakub-migrate
+
+bash "$OMAKUB_PATH/install/release-upgrade/prepare.sh"
+
+trap restore_upgrade_guard EXIT
+sudo sed -i "s/^Prompt=.*/Prompt=lts/" /etc/update-manager/release-upgrades
+
+if ! sudo do-release-upgrade; then
+  rm -f "$HOME/.config/autostart/omakub-release-upgrade.desktop"
+  sudo apt-mark hold snapd >/dev/null 2>&1 || true
+  echo "The release upgrade did not complete."
+  exit 1
+fi
+
+echo
+echo "Reboot to finish the upgrade: Omabuntu completes the setup at the next login."
