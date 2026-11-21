@@ -1,16 +1,24 @@
 #!/bin/bash
 
 # omakub:summary=Ensure the Omakasui keyring packages, which provide the APT signing keys and sources, are installed.
+# omakub:args=[--force]
 # omakub:requires-sudo=true
 
 echo -e "\e[32m\nUpdate Omakasui signing keys\e[0m"
 
-if omakub-pkg-present omakasui-archive-keyring omakasui-core-archive-keyring; then
+# --force reinstalls the keyrings built for the running release, e.g. after a release upgrade.
+force=false
+
+if [[ $1 == "--force" ]]; then
+  force=true
+fi
+
+if [[ $force == false ]] && omakub-pkg-present omakasui-archive-keyring omakasui-core-archive-keyring; then
   echo "Keyrings up to date, skipping."
   exit 0
 fi
 
-codename=$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+codename=$(omakub-version-codename)
 tmp_dir=$(mktemp -d)
 chmod 755 "$tmp_dir"
 trap 'rm -rf "$tmp_dir"' EXIT
@@ -23,4 +31,12 @@ if ! curl -fsSL -o "$tmp_dir/omakasui-archive-keyring.deb" \
   exit 0
 fi
 
-sudo apt-get install -y "$tmp_dir/omakasui-archive-keyring.deb" "$tmp_dir/omakasui-core-archive-keyring.deb"
+install_options=()
+
+# The shipped sources are conffiles already edited by omakub-refresh-apt: take the
+# release's version without prompting, omakub-refresh-apt sets the channel again.
+if [[ $force == true ]]; then
+  install_options=(--reinstall -o Dpkg::Options::=--force-confnew)
+fi
+
+sudo apt-get install -y "${install_options[@]}" "$tmp_dir/omakasui-archive-keyring.deb" "$tmp_dir/omakasui-core-archive-keyring.deb"
