@@ -52,3 +52,13 @@ run_logged() {
 
   unset CURRENT_SCRIPT
 }
+
+# Run a script only on the given Ubuntu codename (e.g. noble, resolute).
+run_logged_on() {
+  local codename="$1"
+  shift
+
+  if [[ $(omakub-version-codename) == "$codename" ]]; then
+    run_logged "$@"
+  fi
+}

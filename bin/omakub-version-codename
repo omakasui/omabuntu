@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# omakub:summary=Print the Omabuntu codename, based on the Ubuntu one
+
+echo $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
