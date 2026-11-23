@@ -15,6 +15,7 @@ run_logged $OMAKUB_INSTALL/config/walker-elephant.sh
 run_logged $OMAKUB_INSTALL/config/fast-shutdown.sh
 run_logged $OMAKUB_INSTALL/config/sudoless-asdcontrol.sh
 run_logged $OMAKUB_INSTALL/config/omakub-ai-skill.sh
+run_logged $OMAKUB_INSTALL/config/release-upgrades.sh
 
 run_logged $OMAKUB_INSTALL/config/hardware/fix-fkeys.sh
 run_logged $OMAKUB_INSTALL/config/hardware/fix-framework-text-scaling.sh

@@ -11,7 +11,7 @@ if [[ $channel != "stable" && $channel != "dev" ]]; then
   exit 1
 fi
 
-codename=$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+codename=$(omakub-version-codename)
 
 if [[ $channel == "dev" ]]; then
   suite="${codename}-dev"
